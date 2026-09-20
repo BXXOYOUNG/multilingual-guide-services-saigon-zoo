@@ -55,7 +55,8 @@ E4. Nếu hệ thống không lấy được audio của POI, hệ thống thôn
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Diagram: 
 
-<img width="1399" height="1920" alt="US1(3) drawio" src="https://github.com/user-attachments/assets/3988662d-a6d5-4145-9812-8468052330e5" />
+<img width="1399" height="1920" alt="US1(4) drawio" src="https://github.com/user-attachments/assets/50e03c0c-5837-477a-90a3-06d4e78262b4" />
+
 
 
 
