@@ -11,9 +11,9 @@ Summary: Hệ thống cung cấp dịch vụ thuyết minh tự động đa ngô
 |                        | **1. Visitor mở phần mềm.**                        |                                                                                                                   |
 |                        |                                                    | **2. Hệ thống yêu cầu Visitor nhập số điện thoại.**                                                               |
 |                        | **3. Visitor nhập số điện thoại.**                 |                                                                                                                   |
-|                        |                                                    | **4. Hệ thống kiểm tra tài khoản theo số điện thoại và yêu cầu nhập mã OTP.**                                     |
-|                        | **5. Visitor nhập mã OTP.**                        |                                                                                                                   |
-|                        |                                                    | **6. Hệ thống xác thực mã OTP và đăng nhập Visitor. E1**                                                          |
+|                        |                                                    | **4. Hệ thống kiểm tra tài khoản theo số điện thoại và yêu cầu nhập mật khẩu.**                                   |
+|                        | **5. Visitor nhập mật khẩu.**                      |                                                                                                                   |
+|                        |                                                    | **6. Hệ thống xác thực mật khẩu và đăng nhập Visitor. E1**                                                        |
 |                        |                                                    | **7. Hệ thống hiển thị trang chủ của phần mềm.**                                                                  |
 |                        | **8. Visitor lựa chọn ngôn ngữ sử dụng.**          |                                                                                                                   |
 |                        |                                                    | **9. Hệ thống cập nhật ngôn ngữ audio được lựa chọn.**                                                            |
@@ -44,7 +44,7 @@ A5. Audio hiện tại kết thúc, hệ thống phát audio đang có trong hà
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Exception Paths:
 
-E1. Nếu số điện thoại hoặc mã OTP không hợp lệ, hệ thống thông báo thông tin đăng nhập không hợp lệ và yêu cầu Visitor nhập lại mã OTP.
+E1. Nếu số điện thoại hoặc mật khẩu không hợp lệ, hệ thống thông báo thông tin đăng nhập không hợp lệ và yêu cầu Visitor nhập lại mật khẩu.
 
 E2. Nếu Visitor từ chối quyền truy cập GPS, hệ thống thông báo chức năng thuyết minh tự động không thể hoạt động và cung cấp lựa chọn tải audio để Visitor chủ động nghe.
 
@@ -55,7 +55,8 @@ E4. Nếu hệ thống không lấy được audio của POI, hệ thống thôn
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Diagram: 
 
-<img width="1399" height="1920" alt="US1" src="https://github.com/user-attachments/assets/786a802b-b100-4742-8eb6-735476868aac" />
+<img width="1399" height="1920" alt="US1(3) drawio" src="https://github.com/user-attachments/assets/3988662d-a6d5-4145-9812-8468052330e5" />
+
 
 
 
