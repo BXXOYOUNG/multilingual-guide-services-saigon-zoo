@@ -24,7 +24,7 @@ Summary: Hệ thống cung cấp dịch vụ thuyết minh tự động đa ngô
 |                        | **14. Visitor di chuyển trong khu vực tham quan.** |                                                                                                                   |
 |                        |                                                    | **15. Hệ thống phát hiện Visitor đi vào Domain của một POI.**                                                     |
 |                        |                                                    | **16. Hệ thống xác định POI tương ứng với Domain.**                                                               |
-|                        |                                                    | **17. Hệ thống phát audio thuyết minh của POI và hiển thị thông tin, hình ảnh tương ứng. A1, A2, A3, A4, A5, E4** |
+|                        |                                                    | **17. Hệ thống phát audio thuyết minh của POI và hiển thị thông tin, hình ảnh tương ứng. A1, A2, A3, A4, E4**     |
 |                        | **18. Visitor tiếp tục tham quan.**                |                                                                                                                   |
 |                        |                                                    | **19. Hệ thống tiếp tục theo dõi vị trí và xử lý các POI tiếp theo.**                                             |
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -37,9 +37,7 @@ A2. Visitor di chuyển vào Domain của POI đã có trong hàng chờ, hệ t
 
 A3. Visitor chủ động bỏ qua audio hiện tại, hệ thống phát audio đang có trong hàng chờ.
 
-A4. Visitor quay lại Domain của một POI đã từng được phát, hệ thống phát lại audio của POI đó.
-
-A5. Audio hiện tại kết thúc, hệ thống phát audio đang có trong hàng chờ.
+A4. Audio hiện tại kết thúc, hệ thống phát audio đang có trong hàng chờ.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Exception Paths:
