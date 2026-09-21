@@ -9,6 +9,20 @@
 ## Summary
 Người tham quan sử dụng chức năng bản đồ để xem vị trí của mình và các điểm thuyết minh (POI) trong hệ thống. Hệ thống hiển thị các POI trên bản đồ và có thể làm nổi bật POI gần vị trí hiện tại của người tham quan.
 
+## Basic Course of Events
+
+| Step | User | System |
+|------|------|--------|
+| 1 | Người tham quan mở chức năng bản đồ. | Hệ thống hiển thị bản đồ và kiểm tra khả năng lấy dữ liệu POI từ máy chủ. |
+| 2 | — | Hệ thống kiểm tra dữ liệu POI từ máy chủ.<br>**Nếu dữ liệu POI từ máy chủ khả dụng → tiếp tục bước 3.**<br>**Nếu không khả dụng → (A2)** |
+| 3 | — | Hệ thống nhận dữ liệu POI từ máy chủ. |
+| 4 | — | Hệ thống hiển thị các POI trên bản đồ. |
+| 5 | — | Hệ thống kiểm tra khả năng lấy vị trí GPS của người tham quan.<br>**Nếu GPS không khả dụng → (A1)** |
+| 6 | — | Hệ thống lấy vị trí hiện tại của người tham quan. |
+| 7 | — | Hệ thống hiển thị vị trí hiện tại của người tham quan trên bản đồ. |
+| 8 | — | Hệ thống xác định và highlight POI gần nhất. |
+| 9 | — | Use Case kết thúc. |
+
 ## Alternative Path
 
 ### A1 — Không có vị trí GPS

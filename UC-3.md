@@ -9,6 +9,24 @@
 ## Summary
 Khi người tham quan cho phép hệ thống sử dụng vị trí, hệ thống theo dõi vị trí hiện tại và kiểm tra vị trí đó với các vùng kích hoạt của các điểm thuyết minh (POI). Khi người tham quan đi vào vùng của một POI, hệ thống xác định POI tương ứng và tự động xử lý nội dung thuyết minh để phát cho người tham quan.
 
+## Basic Course of Events
+
+| Step | User | System |
+|------|------|--------|
+| 1 | Người tham quan cho phép hệ thống sử dụng vị trí. | Hệ thống bắt đầu theo dõi vị trí hiện tại của người tham quan. |
+| 2 | — | Hệ thống kiểm tra dữ liệu vị trí có hợp lệ hay không.<br>**Nếu không nhận được vị trí hợp lệ → (E1)** |
+| 3 | — | Hệ thống kiểm tra vị trí hiện tại với các vùng kích hoạt của các POI. |
+| 4 | — | Hệ thống kiểm tra người tham quan có đi vào vùng của một POI hay không.<br>**Nếu chưa đi vào vùng POI → tiếp tục theo dõi vị trí.** |
+| 5 | — | Hệ thống xác định POI tương ứng khi người tham quan đi vào vùng kích hoạt. |
+| 6 | — | Hệ thống kiểm tra trạng thái/lịch sử phát thuyết minh của POI.<br>**Nếu POI đã được phát gần đây → (E3)** |
+| 7 | — | Hệ thống lấy nội dung thuyết minh của POI.<br>**Nếu không thể lấy nội dung → (E2)** |
+| 8 | — | Hệ thống kiểm tra POI có audio thuyết minh sẵn hay không. |
+| 9 | — | **Nếu có audio → (A1):** Hệ thống sử dụng audio có sẵn và phát cho người tham quan.<br>**Nếu không có audio → (A2):** Hệ thống sử dụng nội dung văn bản để tạo/phát thuyết minh bằng TTS. |
+| 10 | — | Hệ thống ghi nhận trạng thái/lịch sử phát thuyết minh. |
+| 11 | — | Hệ thống tiếp tục theo dõi vị trí và kiểm tra người tham quan có rời khỏi vùng POI hay không.<br>**Nếu người tham quan rời vùng POI → (A3)** |
+| 12 | — | Hệ thống cập nhật trạng thái POI sau khi người tham quan rời khỏi vùng. |
+| 13 | — | Hệ thống tiếp tục theo dõi vị trí để phát hiện các POI tiếp theo. |
+
 ## Alternative Path
 
 ### A1 — POI có sẵn audio thuyết minh
