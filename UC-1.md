@@ -9,6 +9,18 @@
 ## Summary
 Khi người tham quan mở ứng dụng lần đầu, hệ thống hiển thị màn hình lựa chọn ngôn ngữ. Người tham quan chọn một ngôn ngữ được hệ thống hỗ trợ, sau đó hệ thống lưu lựa chọn và sử dụng ngôn ngữ này làm ngôn ngữ cho nội dung thuyết minh.
 
+## Basic Course of Events
+
+| Step | User | System |
+|------|------|--------|
+| 1 | Người tham quan mở ứng dụng. | Hệ thống khởi động ứng dụng và kiểm tra ngôn ngữ đã được lưu trên thiết bị. |
+| 2 | — | Hệ thống kiểm tra ngôn ngữ đã được lưu.<br>**Nếu đã có ngôn ngữ → (A1)** |
+| 3 | — | Hệ thống hiển thị màn hình lựa chọn ngôn ngữ. |
+| 4 | Người tham quan chọn một ngôn ngữ. | Hệ thống tiếp nhận ngôn ngữ được chọn. |
+| 5 | — | Hệ thống lưu ngôn ngữ đã chọn.<br>**Nếu không thể lưu → (E1)** |
+| 6 | — | Hệ thống thiết lập ngôn ngữ đã chọn làm ngôn ngữ thuyết minh. |
+| 7 | — | Use Case kết thúc. |
+
 ## Alternative Path
 
 ### A1 — Người dùng đã có ngôn ngữ được lưu trước đó
