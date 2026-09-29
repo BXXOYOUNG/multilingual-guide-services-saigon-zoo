@@ -3,48 +3,57 @@
 ```mermaid
 flowchart TB
 
-    %% =========================================================
-    %% VISITOR DEVICE
-    %% =========================================================
+    %% =====================================================
+    %% 1. VISITOR DEVICE
+    %% =====================================================
 
-    subgraph VISITOR_NODE["<<device>> Visitor Mobile Device"]
+    subgraph VISITOR["<<device>> Visitor Mobile Device"]
+
         direction TB
 
-        VISITOR_APP["<<component>><br/>Visitor App"]
+        V_APP["<<component>><br/>Visitor App"]
 
-        VISITOR_HARDWARE["GPS<br/>Camera / QR Scanner<br/>Audio Player"]
+        V_GPS["GPS"]
 
-        VISITOR_STORAGE[("Local Storage")]
+        V_CAMERA["Camera / QR Scanner"]
 
-        VISITOR_APP --- VISITOR_HARDWARE
-        VISITOR_APP --- VISITOR_STORAGE
+        V_AUDIO["Audio Player"]
+
+        V_STORAGE[("Local Storage")]
+
+        V_APP --- V_GPS
+        V_APP --- V_CAMERA
+        V_APP --- V_AUDIO
+        V_APP --- V_STORAGE
     end
 
 
-    %% =========================================================
-    %% ADMIN DEVICE
-    %% =========================================================
+    %% =====================================================
+    %% 2. ADMIN DEVICE
+    %% =====================================================
 
-    subgraph ADMIN_NODE["<<device>> Admin Workstation"]
-        direction TB
+    subgraph ADMIN["<<device>> Admin Workstation"]
 
-        ADMIN_CMS["<<component>><br/>Admin CMS"]
+        A_CMS["<<component>><br/>Admin CMS"]
+
     end
 
 
-    %% =========================================================
-    %% APPLICATION SERVER
-    %% =========================================================
+    %% =====================================================
+    %% 3. APPLICATION SERVER
+    %% =====================================================
 
-    subgraph APP_NODE["<<node>> Application Server"]
+    subgraph APP["<<node>> Application Server"]
+
         direction TB
 
-        %% -------------------------
-        %% Main Components
-        %% -------------------------
+        %% -------------------------------------------------
+        %% Core Components
+        %% -------------------------------------------------
 
-        subgraph CORE_SERVICES["Core Services"]
-            direction LR
+        subgraph CORE["Core Components"]
+
+            direction TB
 
             POI["<<component>><br/>POI Service"]
 
@@ -53,11 +62,17 @@ flowchart TB
             QR["<<component>><br/>QR Service"]
 
             AUTH["<<component>><br/>Authentication"]
+
         end
 
 
-        subgraph CONTENT_SERVICES["Narration & Content Services"]
-            direction LR
+        %% -------------------------------------------------
+        %% Narration Components
+        %% -------------------------------------------------
+
+        subgraph NARRATION_GROUP["Narration Components"]
+
+            direction TB
 
             NARRATION["<<component>><br/>Narration Service"]
 
@@ -65,139 +80,127 @@ flowchart TB
 
             AUDIO["<<component>><br/>Audio Service"]
 
-            ANALYTICS["<<component>><br/>Analytics Service"]
         end
 
 
-        %% -------------------------
-        %% Component Interfaces
-        %% -------------------------
+        %% -------------------------------------------------
+        %% Analytics
+        %% -------------------------------------------------
 
-        LOCATION_BRIDGE((Narration<br/>Trigger))
-
-        NARRATION_BRIDGE((Content<br/>Access))
-
-        QR_BRIDGE((POI<br/>Access))
-
-        AUDIO_BRIDGE((Audio<br/>Access))
-
-        ANALYTICS_BRIDGE((Analytics<br/>Event))
+        ANALYTICS["<<component>><br/>Analytics Service"]
 
 
-        %% -------------------------
-        %% Component Communication
-        %% ②
-        %% -------------------------
+        %% =================================================
+        %% COMPONENT INTERFACES - ②
+        %% =================================================
 
-        LOCATION -.-> LOCATION_BRIDGE
-        LOCATION_BRIDGE -.-> NARRATION
+        NARRATION_TRIGGER(("②<br/>Narration Trigger"))
 
-        NARRATION -.-> NARRATION_BRIDGE
-        NARRATION_BRIDGE -.-> POI
+        CONTENT_ACCESS(("②<br/>Content Access"))
 
-        NARRATION -.-> LOCALIZATION
+        AUDIO_ACCESS(("②<br/>Audio Access"))
 
-        NARRATION -.-> AUDIO_BRIDGE
-        AUDIO_BRIDGE -.-> AUDIO
+        ANALYTICS_EVENT(("②<br/>Analytics Event"))
 
-        QR -.-> QR_BRIDGE
-        QR_BRIDGE -.-> POI
 
-        LOCATION -.-> ANALYTICS_BRIDGE
-        POI -.-> ANALYTICS_BRIDGE
-        AUDIO -.-> ANALYTICS_BRIDGE
+        %% =================================================
+        %% COMPONENT COMMUNICATION
+        %% =================================================
 
-        ANALYTICS_BRIDGE -.-> ANALYTICS
+        LOCATION -.-> NARRATION_TRIGGER
+        NARRATION_TRIGGER -.-> NARRATION
+
+        NARRATION -.-> CONTENT_ACCESS
+        CONTENT_ACCESS -.-> POI
+        CONTENT_ACCESS -.-> LOCALIZATION
+
+        NARRATION -.-> AUDIO_ACCESS
+        AUDIO_ACCESS -.-> AUDIO
+
+        QR -.-> CONTENT_ACCESS
+
+        LOCATION -.-> ANALYTICS_EVENT
+        POI -.-> ANALYTICS_EVENT
+        AUDIO -.-> ANALYTICS_EVENT
+
+        ANALYTICS_EVENT -.-> ANALYTICS
 
     end
 
 
-    %% =========================================================
-    %% DATA STORAGE NODE
-    %% =========================================================
+    %% =====================================================
+    %% 4. DATA SERVER
+    %% =====================================================
 
-    subgraph DATA_NODE["<<node>> Data & Storage Server"]
+    subgraph DATA["<<node>> Data & Storage Server"]
+
         direction TB
 
         DATABASE[("Application Database")]
 
         AUDIO_STORAGE[("Audio Storage")]
+
     end
 
 
-    %% =========================================================
-    %% TTS NODE
-    %% =========================================================
+    %% =====================================================
+    %% 5. TTS SERVICE
+    %% =====================================================
 
     subgraph TTS_NODE["<<node>> TTS Service"]
-        direction TB
 
         TTS["<<component>><br/>TTS Provider"]
+
     end
 
 
-    %% =========================================================
-    %% COMMUNICATION BRIDGES BETWEEN NODES
-    %% ①
-    %% =========================================================
+    %% =====================================================
+    %% NODE COMMUNICATION - ①
+    %% =====================================================
 
-    VISITOR_LINK(("① HTTPS / Network"))
-    ADMIN_LINK(("① HTTPS / Network"))
+    VISITOR ==>|"① HTTPS / Network"| APP
 
-    DATA_LINK(("① Data / Storage Connection"))
-    TTS_LINK(("① HTTPS / Network"))
+    ADMIN ==>|"① HTTPS / Network"| APP
 
+    APP ==>|"① Data Connection"| DATA
 
-    %% Visitor -> Application Server
-    VISITOR_NODE ==>|"① HTTPS / Network"| APP_NODE
-
-    %% Admin -> Application Server
-    ADMIN_NODE ==>|"① HTTPS / Network"| APP_NODE
-
-    %% Application Server -> Data Server
-    APP_NODE ==>|"① Data / Storage Connection"| DATA_NODE
-
-    %% Application Server -> TTS
-    APP_NODE ==>|"① HTTPS / Network"| TTS_NODE
+    APP ==>|"① HTTPS / Network"| TTS_NODE
 
 
-    %% =========================================================
-    %% DATA ACCESS INSIDE DEPLOYMENT
-    %% =========================================================
+    %% =====================================================
+    %% COMPONENT -> DATA
+    %% =====================================================
 
     POI -.-> DATABASE
+
     LOCATION -.-> DATABASE
+
     AUTH -.-> DATABASE
+
     LOCALIZATION -.-> DATABASE
+
     ANALYTICS -.-> DATABASE
 
     AUDIO -.-> AUDIO_STORAGE
+
     AUDIO -.-> TTS
 
 
-    %% =========================================================
-    %% LEGEND
-    %% =========================================================
-
-    LEGEND_TITLE["Legend"]
-
-    LEGEND_NODE["① Solid / thick line = Communication between nodes"]
-    LEGEND_COMPONENT["② Dashed line = Communication between components"]
-
-    LEGEND_TITLE ~~~ LEGEND_NODE
-    LEGEND_NODE ~~~ LEGEND_COMPONENT
-
-
-    %% =========================================================
+    %% =====================================================
     %% STYLING
-    %% =========================================================
+    %% =====================================================
 
     classDef component fill:#ffffff,stroke:#333333,stroke-width:2px,color:#111111;
-    classDef storage fill:#f3f3f3,stroke:#444444,stroke-width:2px,color:#111111;
-    classDef bridge fill:#ffffff,stroke:#666666,stroke-width:2px,color:#111111;
 
-    class VISITOR_APP,VISITOR_HARDWARE,ADMIN_CMS,POI,LOCATION,QR,AUTH,NARRATION,LOCALIZATION,AUDIO,ANALYTICS,TTS component;
+    classDef node fill:#fafafa,stroke:#333333,stroke-width:2px,color:#111111;
 
-    class DATABASE,AUDIO_STORAGE,VISITOR_STORAGE storage;
+    classDef storage fill:#f2f2f2,stroke:#555555,stroke-width:2px,color:#111111;
 
-    class LOCATION_BRIDGE,NARRATION_BRIDGE,QR_BRIDGE,AUDIO_BRIDGE,ANALYTICS_BRIDGE,VISITOR_LINK,ADMIN_LINK,DATA_LINK,TTS_LINK bridge;
+    classDef interface fill:#ffffff,stroke:#555555,stroke-width:2px,color:#111111;
+
+
+    class V_APP,V_GPS,V_CAMERA,V_AUDIO,A_CMS,POI,LOCATION,QR,AUTH,NARRATION,LOCALIZATION,AUDIO,ANALYTICS,TTS component;
+
+    class DATABASE,AUDIO_STORAGE,V_STORAGE storage;
+
+    class NARRATION_TRIGGER,CONTENT_ACCESS,AUDIO_ACCESS,ANALYTICS_EVENT interface;
