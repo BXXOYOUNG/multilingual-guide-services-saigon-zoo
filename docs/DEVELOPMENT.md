@@ -13,4 +13,15 @@ This repository is being built as one web client and one FastAPI backend, follow
 
 ## Bootstrap status
 
-T01 establishes and preserves repository structure only. The runnable React/Vite shell and FastAPI application/health endpoint are separate dependent tasks (T02 and T03) in `IMPLEMENTATION_PLAN.md`; no feature or database behavior belongs in this bootstrap task.
+T01 establishes and preserves repository structure only. T02 provides the React/Vite shell, and T03 provides the FastAPI application and process health endpoint; no feature or database behavior belongs in these bootstrap tasks.
+
+## Backend
+
+From the repository root, install the backend dependencies and start the development server:
+
+```sh
+python -m pip install -r backend/requirements.txt
+python -m uvicorn backend.main:app --reload
+```
+
+The `GET /health` endpoint returns `{"status":"healthy"}` when the application is running.
