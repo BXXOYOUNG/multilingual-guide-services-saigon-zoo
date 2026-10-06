@@ -165,7 +165,25 @@ Logical ERD hiện tại gồm các nhóm collection sau.
 3. Không tạo public `users` collection chỉ vì cần `user_id` cho analytics/location nếu PRD chưa yêu cầu tài khoản người tham quan.
 4. `admin_users` phục vụ khu vực quản trị; visitor-side tracking phải tuân thủ mô hình ẩn danh/thiết bị/session đã được thiết kế.
 
-### 5.6. Pre-coding consistency check
+### 5.6. Audio data mapping (không thay đổi ERD)
+
+Giữ nguyên các collection và field trong Logical ERD. Ánh xạ triển khai thống nhất như sau:
+
+- `audio_tasks` ghi nhận yêu cầu/trạng thái xử lý audio cho POI và ngôn ngữ; task không phải audio có thể phát.
+- Khi audio sẵn sàng, `audio_assets` là bản ghi asset có thể phát, gồm tham chiếu POI/ngôn ngữ, vị trí file và metadata theo ERD.
+- `poi_localizations.audio_url` là URL/đường dẫn phát của audio sẵn sàng cho đúng POI và ngôn ngữ. Audio Service chịu trách nhiệm duy trì giá trị này theo asset tương ứng; không dùng URL của task hoặc URL của gói thay cho audio của localization.
+- `audio_packages` mô tả gói phân phối offline theo ngôn ngữ; `audio_assets` thuộc gói qua `package_id` theo quan hệ ERD. Gói tập hợp các asset để tải offline, không thay thế `poi_localizations.audio_url`.
+- API/repository phải phân biệt trạng thái task, asset sẵn sàng và trạng thái gói offline. Không thêm field/collection hoặc đổi quan hệ ERD để thực hiện ánh xạ này.
+
+### 5.7. Required data-contract decisions before implementation
+
+ERD có `user_id` trong dữ liệu visitor tracking/playback nhưng không có Use Case xác thực visitor. Trước khi triển khai các repository/API đụng tới `user_id` trong `location_events`, `playback_history`, `analytics_sessions` (hoặc collection visitor-side tương ứng), cần chốt và ghi nhận quyết định kiến trúc/data-contract về ý nghĩa, nguồn tạo và vòng đời của định danh đó.
+
+- Không được mặc định `user_id` là tài khoản đã đăng nhập.
+- Không tạo visitor authentication hoặc `users` collection nếu chưa có yêu cầu được phê duyệt.
+- Nếu không thể xác định semantics mà không đổi yêu cầu/ERD, dừng phần repository/API bị ảnh hưởng và xin quyết định; không tự suy diễn.
+
+### 5.8. Pre-coding consistency check
 
 Trước khi code data access layer phải xác nhận cách hiểu của `user_id` xuất hiện trong các collection như `location_events`, `playback_history`, `analytics_sessions`:
 
@@ -191,18 +209,22 @@ Không code theo thứ tự “vẽ diagram nào trước thì code module đó 
         ↓
 4. Language + POI/content read flow
         ↓
-5. Audio + package + offline storage
+5. Audio domain foundation + shared QR scan/package resolution
         ↓
-6. QR flow
+6. UC-05 package download + UC-06 offline playback
         ↓
-7. Map + GPS + geofence + auto narration
+7. UC-04 QR narration (reuse shared scanner/payload validation)
         ↓
-8. Admin authentication + POI/content management
+8. Map + GPS + geofence + auto narration
         ↓
-9. Analytics
+9. Admin authentication + POI/content management
         ↓
-10. Integration testing + offline/error hardening
+10. Analytics
+        ↓
+11. Integration testing + offline/error hardening
 ```
+
+UC-05 bắt đầu bằng việc quét QR để nhận diện gói audio. Vì vậy, scanner và payload validation/resolution đủ dùng cho QR gói phải sẵn sàng trước khi tải gói; đây là entry mechanism được UC-05 phê duyệt, không phải entry method mới. UC-04 sau đó bổ sung việc resolve QR sang POI/nội dung thuyết minh và tái sử dụng scanner/validation đã có.
 
 ---
 
@@ -214,7 +236,9 @@ Tạo codebase sạch, chạy được frontend và backend độc lập; chưa 
 
 ## Tasks
 
-- Khởi tạo monorepo hoặc cấu trúc repo thống nhất.
+- Mở rộng repository hiện có; giữ và dùng lại `backend/api/`, `backend/models/`, `backend/services/`, `docs/`, và `tests/`.
+- Chỉ tạo các thư mục/file còn thiếu theo cấu trúc được duyệt; không thay thế, xóa, hoặc di chuyển cấu trúc hiện hữu trong T01.
+- Đặt frontend và backend entry/configuration vào cấu trúc thống nhất mà không làm mất các thư mục hiện có.
 - Khởi tạo React + Vite frontend.
 - Khởi tạo FastAPI backend.
 - Thiết lập environment variables.
@@ -364,12 +388,18 @@ Implement:
 - Audio package manifest
 - Package integrity/status handling
 
-## 11.2. UC-05 — Download Audio Package
+Áp dụng ánh xạ tại mục 5.6: `audio_tasks` theo dõi xử lý; `audio_assets` là audio sẵn sàng; `poi_localizations.audio_url` tham chiếu audio theo POI/ngôn ngữ; `audio_packages` gom asset để phân phối offline. Giữ nguyên schema/quan hệ Logical ERD.
+
+## 11.2. UC-05 QR entry prerequisite
+
+Trước khi triển khai download UC-05, hoàn thành scanner, đọc/validate payload và resolve QR tải gói audio đúng theo Use Case. Payload chỉ nhận diện gói audio hiện có. Không đưa package download vào trước scanner/package resolution, và không thay QR entry bằng URL, nút, hay cơ chế khác.
+
+## 11.3. UC-05 — Download Audio Package
 
 ### Flow
 
 ```text
-QR / package entry
+Scan approved audio-package QR
     ↓
 Resolve audio package
     ↓
@@ -392,13 +422,13 @@ Mark package ready
 - Không đánh dấu package hoàn tất nếu download thất bại hoặc dữ liệu chưa đầy đủ.
 - Có thể retry khi lỗi download.
 
-## 11.3. Offline storage
+## 11.4. Offline storage
 
 - IndexedDB: metadata/POI/package state.
 - Cache Storage hoặc cơ chế local phù hợp: audio/static resources.
 - Service Worker: phục vụ asset đã cache.
 
-## 11.4. UC-06 — Explore + Offline Playback
+## 11.5. UC-06 — Explore + Offline Playback
 
 ### Flow
 
@@ -433,9 +463,7 @@ Hoàn chỉnh QR-based narration.
 
 ## Tasks
 
-- QR scanner UI.
-- QR payload parser.
-- QR validation.
+- Reuse QR scanner, payload parser, and validation implemented for the UC-05 package QR entry.
 - Resolve POI từ QR.
 - Resolve localization theo selected language.
 - Resolve audio asset.
@@ -538,7 +566,9 @@ Implement:
 
 ### Decision pending
 
-PRD xác định **admin authentication/session/RBAC**, nhưng chưa khóa cơ chế token/session cụ thể. Implementation phải chọn một cơ chế bảo mật cụ thể trong phạm vi kiến trúc, ghi lại decision, và không làm thay đổi ERD nếu không cần.
+PRD xác định **admin authentication/session/RBAC**, nhưng chưa khóa cơ chế token/session cụ thể. Đây là quyết định bắt buộc trước khi bắt đầu UC-07: chốt token hay server-managed session, cách lưu/refresh/expire và cách bảo vệ session phù hợp với Deployment Diagram; ghi nhận quyết định trước implementation. Cơ chế phải dùng `admin_users`/`roles` theo ERD, không tạo visitor auth, không làm thay đổi ERD hoặc Deployment Diagram.
+
+Không coi authentication/RBAC foundation ở Phase 1 là lựa chọn cơ chế đã được phê duyệt. Phase 1 chỉ được dựng điểm tích hợp/shared middleware cần thiết; không khóa session mechanism thay cho quyết định này.
 
 ## UC-08 — POI Management
 
@@ -855,10 +885,10 @@ Nếu task kéo theo nhiều module và agent bắt đầu tự thiết kế l�
 | T08 | POI API + client repository | T04, T05 | P0 |
 | T09 | MapLibre + POI rendering (UC-02) | T08 | P0 |
 | T10 | Audio asset/package backend model + APIs | T04, T05 | P0 |
-| T11 | Audio package local download/storage (UC-05) | T06, T10 | P0 |
+| T13 | Shared QR scanner/payload validation and audio-package QR resolution for UC-05 | T06, T10 | P0; prerequisite to T11 |
+| T11 | Audio package local download/storage (UC-05) | T06, T10, T13 | P0 |
 | T12 | Explore + offline playback (UC-06) | T09, T11 | P0 |
-| T13 | QR scanning + POI resolution (UC-04) | T08 | P1 |
-| T14 | Audio/TTS resolution flow | T10, T13 | P1 |
+| T14 | UC-04 POI QR resolution + localized audio/TTS narration | T08, T10, T13 | P1 |
 | T15 | Geolocation + geofence detection | T09, T14 | P1 |
 | T16 | Automatic narration + playback history (UC-03) | T15 | P1 |
 | T17 | Admin auth/RBAC (UC-07) | T04, T05 | P1 |
@@ -867,8 +897,10 @@ Nếu task kéo theo nhiều module và agent bắt đầu tự thiết kế l�
 | T20 | Audio management from admin | T19 | P1 |
 | T21 | Analytics event collection | T16, T12 | P2 |
 | T22 | Analytics aggregation/dashboard (UC-10) | T21 | P2 |
-| T23 | End-to-end integration tests | T07–T22 | P0 |
-| T24 | Offline/error hardening | T23 | P0 |
+| T23 | End-to-end integration tests (final integration gate) | T07–T22 | P0 (gate) |
+| T24 | Offline/error hardening (final hardening gate) | T23 | P0 (gate) |
+
+> T23/T24 retain P0 as completion/release gates, not as early implementation work. Schedule T23 only after T07–T22 are implemented; schedule T24 only after T23 passes. Their priority does not override these dependencies.
 
 ---
 
@@ -925,12 +957,14 @@ Trước khi yêu cầu agent viết code task T01–T06, xác nhận:
 
 **Không code toàn hệ thống ngay.**
 
-Bước tiếp theo là thực hiện **T01 — Initialize Repository Structure**, sau đó T02–T06 để tạo skeleton đầy đủ.
+Bước tiếp theo là thực hiện **T01 — Extend Existing Repository Structure**: bổ sung skeleton còn thiếu và giữ nguyên `backend/api/`, `backend/models/`, `backend/services/`, `docs/`, và `tests/`. Sau đó thực hiện T02–T06.
+
+Trước khi bắt đầu các repository/API visitor-side có `user_id`, phải hoàn tất quyết định tại mục 5.7. Trước khi bắt đầu T17/UC-07, phải chốt cơ chế admin authentication/session tại Phase 7.
 
 Khi skeleton ổn định, bắt đầu vertical slice:
 
 ```text
-T07 → T08 → T09 → T10 → T11 → T12
+T07 → T08 → T09 → T10 → T13 → T11 → T12
 ```
 
 Đây là đường đi ngắn nhất để có một phiên bản chạy được của sản phẩm trước khi mở rộng các chức năng phức tạp hơn.

@@ -14,3 +14,18 @@ PROJECT RULES
    - what was implemented
    - assumptions made
    - remaining issues
+
+## Change Control
+
+Any change to one of the following must be explicitly approved before implementation:
+
+- Functional requirements
+- Use Cases
+- Database schema / ERD
+- Component architecture
+- Deployment architecture
+- Public API contract
+- Technology stack
+- Core project structure
+
+The agent must stop and request approval instead of silently changing them.
