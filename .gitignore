@@ -1,12 +1,14 @@
-# Byte-compiled / optimized / DLL files
+
+# Python bytecode and cache
 __pycache__/
+**/__pycache__/
 *.py[cod]
 *$py.class
 
 # C extensions
 *.so
 
-# Distribution / packaging
+# Python distribution and packaging
 .Python
 build/
 develop-eggs/
@@ -24,14 +26,25 @@ wheels/
 .installed.cfg
 *.egg
 
-# Virtual environments
+# Python virtual environments
 venv/
 .venv/
 env/
-.env
+ENV/
+**/.venv/
+**/venv/
+**/ENV/
 
-# Node / Frontend
+# Python test, lint and coverage artifacts
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+.coverage
+/htmlcov/
+
+# Node.js and frontend
 node_modules/
+**/node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -39,17 +52,23 @@ yarn-error.log*
 dist/
 dist-ssr/
 *.local
+/frontend/dist/
 
-# IDE / Editor
+# Environment variables and secrets
+.env
+**/.env
+**/.env.*
+!**/.env.example
+
+# IDE and editor
 .idea/
 .vscode/
 *.swp
 *.swo
 
-# OS
+# Operating system files
 .DS_Store
 Thumbs.db
 
-# Storage / Uploads
+# Storage and uploads
 uploads/
-
