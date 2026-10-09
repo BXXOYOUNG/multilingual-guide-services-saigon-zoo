@@ -1,0 +1,10 @@
+{
+  "name": "Hệ thống Thuyết minh Thảo Cầm Viên",
+  "short_name": "Saigon Zoo Guide",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2e7d32",
+  "description": "Hệ thống thuyết minh tự động đa ngôn ngữ Thảo Cầm Viên TP.HCM"
+}
+
