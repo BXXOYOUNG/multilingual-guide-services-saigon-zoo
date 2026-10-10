@@ -4,6 +4,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 from backend.config import MongoSettings, RedisSettings, load_settings
 from backend.database import mongodb, redis_client
 
+from backend.config import Settings
+from backend.main import app, lifespan
 
 class SettingsTests(unittest.TestCase):
     def test_services_are_optional_when_unconfigured(self):
@@ -159,6 +161,48 @@ class RedisConnectionTests(unittest.IsolatedAsyncioTestCase):
         with self.assertRaisesRegex(RuntimeError, "not configured"):
             redis_client.get_redis_client()
 
+
+class LifespanTests(unittest.IsolatedAsyncioTestCase):
+    async def test_redis_startup_failure_closes_mongodb(self):
+        settings = Settings(
+            mongodb=MongoSettings(
+                uri="mongodb://localhost:27017",
+                database="saigon_zoo",
+            ),
+            redis=RedisSettings(url="redis://localhost:6379/0"),
+        )
+
+        with (
+            patch("backend.main.load_settings", return_value=settings),
+            patch(
+                "backend.main.connect_mongodb",
+                new_callable=AsyncMock,
+            ) as connect_mongo,
+            patch(
+                "backend.main.close_mongodb",
+                new_callable=AsyncMock,
+            ) as close_mongo,
+            patch(
+                "backend.main.connect_redis",
+                new_callable=AsyncMock,
+                side_effect=ConnectionError("redis unavailable"),
+            ) as connect_redis,
+            patch(
+                "backend.main.close_redis",
+                new_callable=AsyncMock,
+            ) as close_redis,
+        ):
+            with self.assertRaisesRegex(
+                ConnectionError,
+                "redis unavailable",
+            ):
+                async with lifespan(app):
+                    self.fail("Startup should not complete")
+
+            connect_mongo.assert_awaited_once_with(settings.mongodb)
+            connect_redis.assert_awaited_once_with(settings.redis)
+            close_mongo.assert_awaited_once()
+            close_redis.assert_not_awaited()
 
 if __name__ == "__main__":
     unittest.main()
