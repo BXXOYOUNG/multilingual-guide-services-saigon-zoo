@@ -8,6 +8,7 @@ from backend.config import load_settings
 from backend.database.mongodb import close_mongodb, connect_mongodb
 from backend.database.redis_client import close_redis, connect_redis
 
+from backend.core.exception_handlers import register_exception_handlers
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
@@ -23,4 +24,6 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
 
 
 app = FastAPI(lifespan=lifespan)
+register_exception_handlers(app)
+
 app.include_router(health_router)
