@@ -25,3 +25,23 @@ python -m uvicorn backend.main:app --reload
 ```
 
 The `GET /health` endpoint returns `{"status":"healthy"}` when the application is running.
+
+### MongoDB and Redis
+
+Set these environment variables to enable the corresponding connections:
+
+- `MONGODB_URI` — MongoDB connection URI.
+- `MONGODB_DATABASE` — database name; required together with `MONGODB_URI`.
+- `REDIS_URL` — Redis connection URL (`redis://` or `rediss://`).
+
+Both services are optional for local development. When a service is configured, the backend connects and pings it during startup; an invalid configuration or failed connection stops startup with an error. The clients are closed when the application shuts down. The `/health` endpoint remains a process-only check and does not check either service.
+
+Example values (replace the hosts and database with your local setup):
+
+```text
+MONGODB_URI=mongodb://localhost:27017
+MONGODB_DATABASE=saigon_zoo
+REDIS_URL=redis://localhost:6379/0
+```
+
+The backend reads variables from its process environment. Do not commit real credentials or a `.env` file.
