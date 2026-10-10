@@ -203,6 +203,43 @@ class LifespanTests(unittest.IsolatedAsyncioTestCase):
             connect_redis.assert_awaited_once_with(settings.redis)
             close_mongo.assert_awaited_once()
             close_redis.assert_not_awaited()
+    async def test_shutdown_closes_mongodb_and_redis(self):
+        settings = Settings(
+            mongodb=MongoSettings(
+                uri="mongodb://localhost:27017",
+                database="saigon_zoo",
+            ),
+            redis=RedisSettings(url="redis://localhost:6379/0"),
+        )
+
+        with (
+            patch("backend.main.load_settings", return_value=settings),
+            patch(
+                "backend.main.connect_mongodb",
+                new_callable=AsyncMock,
+            ) as connect_mongo,
+            patch(
+                "backend.main.close_mongodb",
+                new_callable=AsyncMock,
+            ) as close_mongo,
+            patch(
+                "backend.main.connect_redis",
+                new_callable=AsyncMock,
+            ) as connect_redis,
+            patch(
+                "backend.main.close_redis",
+                new_callable=AsyncMock,
+            ) as close_redis,
+        ):
+            async with lifespan(app):
+                connect_mongo.assert_awaited_once_with(settings.mongodb)
+                connect_redis.assert_awaited_once_with(settings.redis)
+
+                close_mongo.assert_not_awaited()
+                close_redis.assert_not_awaited()
+
+            close_mongo.assert_awaited_once()
+            close_redis.assert_awaited_once()
 
 if __name__ == "__main__":
     unittest.main()
