@@ -30,8 +30,10 @@ export default function PublicLayout() {
       <nav className="app-bottom-nav">
         <NavLink
           to="/"
-          className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
           end
+          className={({ isActive }) =>
+            `nav-item ${isActive ? 'active' : ''}`
+          }
         >
           <span className="nav-icon">🏠</span>
           <span>Trang chủ</span>
@@ -39,7 +41,9 @@ export default function PublicLayout() {
 
         <NavLink
           to="/map"
-          className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
+          className={({ isActive }) =>
+            `nav-item ${isActive ? 'active' : ''}`
+          }
         >
           <span className="nav-icon">🗺️</span>
           <span>Bản đồ</span>
@@ -47,7 +51,9 @@ export default function PublicLayout() {
 
         <NavLink
           to="/explore"
-          className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
+          className={({ isActive }) =>
+            `nav-item ${isActive ? 'active' : ''}`
+          }
         >
           <span className="nav-icon">🧭</span>
           <span>Khám phá</span>
@@ -55,7 +61,9 @@ export default function PublicLayout() {
 
         <NavLink
           to="/admin"
-          className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
+          className={({ isActive }) =>
+            `nav-item ${isActive ? 'active' : ''}`
+          }
         >
           <span className="nav-icon">⚙️</span>
           <span>Quản trị</span>
@@ -64,4 +72,3 @@ export default function PublicLayout() {
     </div>
   );
 }
-

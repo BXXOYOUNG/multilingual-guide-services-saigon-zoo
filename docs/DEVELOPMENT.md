@@ -13,4 +13,35 @@ This repository is being built as one web client and one FastAPI backend, follow
 
 ## Bootstrap status
 
-T01 establishes and preserves repository structure only. The runnable React/Vite shell and FastAPI application/health endpoint are separate dependent tasks (T02 and T03) in `IMPLEMENTATION_PLAN.md`; no feature or database behavior belongs in this bootstrap task.
+T01 establishes and preserves repository structure only. T02 provides the React/Vite shell, and T03 provides the FastAPI application and process health endpoint; no feature or database behavior belongs in these bootstrap tasks.
+
+## Backend
+
+From the repository root, install the backend dependencies and start the development server:
+
+```sh
+python -m pip install -r backend/requirements.txt
+python -m uvicorn backend.main:app --reload
+```
+
+The `GET /health` endpoint returns `{"status":"healthy"}` when the application is running.
+
+### MongoDB and Redis
+
+Set these environment variables to enable the corresponding connections:
+
+- `MONGODB_URI` — MongoDB connection URI.
+- `MONGODB_DATABASE` — database name; required together with `MONGODB_URI`.
+- `REDIS_URL` — Redis connection URL (`redis://` or `rediss://`).
+
+Both services are optional for local development. When a service is configured, the backend connects and pings it during startup; an invalid configuration or failed connection stops startup with an error. The clients are closed when the application shuts down. The `/health` endpoint remains a process-only check and does not check either service.
+
+Example values (replace the hosts and database with your local setup):
+
+```text
+MONGODB_URI=mongodb://localhost:27017
+MONGODB_DATABASE=saigon_zoo
+REDIS_URL=redis://localhost:6379/0
+```
+
+The backend reads variables from its process environment. Do not commit real credentials or a `.env` file.
