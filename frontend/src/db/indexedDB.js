@@ -69,27 +69,81 @@ export async function getItem(storeName, key) {
   });
 }
 
+async function runWriteOperation(storeName, operation, fallbackMessage) {
+  const db = await openDatabase();
+
+  return new Promise((resolve, reject) => {
+    let transaction;
+
+    try {
+      transaction = db.transaction(storeName, 'readwrite');
+      const store = transaction.objectStore(storeName);
+
+      transaction.oncomplete = () => resolve();
+
+      transaction.onerror = () => {
+        reject(transaction.error || new Error(fallbackMessage));
+      };
+
+      transaction.onabort = () => {
+        reject(transaction.error || new Error(fallbackMessage));
+      };
+
+      const request = operation(store);
+
+      request.onerror = () => {
+        reject(request.error || new Error(fallbackMessage));
+      };
+    } catch (error) {
+      if (transaction) {
+        try {
+          transaction.abort();
+        } catch {
+          // Transaction may already have completed or aborted.
+        }
+      }
+
+      reject(error);
+    }
+  });
+}
+
 /**
- * Sets a value in a store.
+ * Stores a value in IndexedDB.
+ * Stores with keyPath use the key inside the value.
+ * Stores without keyPath require a separate key unless autoIncrement is enabled.
+ *
  * @param {string} storeName
  * @param {any} value
- * @param {IDBValidKey} [key] Optional key if store has keyPath or out-of-line keys
+ * @param {IDBValidKey} [key]
  * @returns {Promise<void>}
  */
 export async function setItem(storeName, value, key) {
-  const db = await openDatabase();
-  return new Promise((resolve, reject) => {
-    try {
-      const transaction = db.transaction(storeName, 'readwrite');
-      const store = transaction.objectStore(storeName);
-      const request = key !== undefined ? store.put(value, key) : store.put(value);
+  return runWriteOperation(
+    storeName,
+    (store) => {
+      if (store.keyPath !== null) {
+        if (key !== undefined) {
+          throw new TypeError(
+            `Store "${storeName}" uses an inline key path; do not pass a separate key.`,
+          );
+        }
 
-      request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error || new Error(`Failed to set item in ${storeName}`));
-    } catch (err) {
-      reject(err);
-    }
-  });
+        return store.put(value);
+      }
+
+      if (key === undefined && !store.autoIncrement) {
+        throw new TypeError(
+          `Store "${storeName}" requires an explicit key.`,
+        );
+      }
+
+      return key === undefined
+        ? store.put(value)
+        : store.put(value, key);
+    },
+    `Failed to set item in ${storeName}.`,
+  );
 }
 
 /**
@@ -99,19 +153,24 @@ export async function setItem(storeName, value, key) {
  * @returns {Promise<void>}
  */
 export async function deleteItem(storeName, key) {
-  const db = await openDatabase();
-  return new Promise((resolve, reject) => {
-    try {
-      const transaction = db.transaction(storeName, 'readwrite');
-      const store = transaction.objectStore(storeName);
-      const request = store.delete(key);
+  return runWriteOperation(
+    storeName,
+    (store) => store.delete(key),
+    `Failed to delete item from ${storeName}.`,
+  );
+}
 
-      request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error || new Error(`Failed to delete item from ${storeName}`));
-    } catch (err) {
-      reject(err);
-    }
-  });
+/**
+ * Clears all items from a store.
+ * @param {string} storeName
+ * @returns {Promise<void>}
+ */
+export async function clearStore(storeName) {
+  return runWriteOperation(
+    storeName,
+    (store) => store.clear(),
+    `Failed to clear store ${storeName}.`,
+  );
 }
 
 /**
@@ -129,27 +188,6 @@ export async function getAllItems(storeName) {
 
       request.onsuccess = () => resolve(request.result || []);
       request.onerror = () => reject(request.error || new Error(`Failed to get all items from ${storeName}`));
-    } catch (err) {
-      reject(err);
-    }
-  });
-}
-
-/**
- * Clears all items in a store.
- * @param {string} storeName
- * @returns {Promise<void>}
- */
-export async function clearStore(storeName) {
-  const db = await openDatabase();
-  return new Promise((resolve, reject) => {
-    try {
-      const transaction = db.transaction(storeName, 'readwrite');
-      const store = transaction.objectStore(storeName);
-      const request = store.clear();
-
-      request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error || new Error(`Failed to clear store ${storeName}`));
     } catch (err) {
       reject(err);
     }

@@ -10,16 +10,22 @@ const PRECACHE_URLS = [
   '/manifest.json',
 ];
 
-// Install: Cache initial App Shell assets
+// Install: Cache initial App Shell assets.
+// If precaching fails, reject installation instead of accepting
+// an incomplete offline shell.
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(PRECACHE_URLS);
-    }).then(() => {
-      return self.skipWaiting();
-    }).catch((err) => {
-      console.warn('[SW] Precache failed during install:', err);
-    })
+    caches
+      .open(CACHE_NAME)
+      .then((cache) => cache.addAll(PRECACHE_URLS))
+      .then(() => self.skipWaiting())
+      .catch((error) => {
+        console.error(
+          '[SW] Precache failed; installation aborted:',
+          error,
+        );
+        throw error;
+      }),
   );
 });
 
@@ -40,55 +46,93 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch: Strategy for navigation and static assets
+
 self.addEventListener('fetch', (event) => {
   const request = event.request;
 
-  // Ignore non-GET requests
+  // Ignore non-GET requests.
   if (request.method !== 'GET') {
     return;
   }
 
-  // Handle SPA navigation requests: Network-first, fallback to cached /index.html
+  const requestUrl = new URL(request.url);
+
+  // Do not intercept cross-origin requests.
+  if (requestUrl.origin !== self.location.origin) {
+    return;
+  }
+
+  // Navigation: network first, then cached app shell.
   if (request.mode === 'navigate') {
     event.respondWith(
-      fetch(request).catch(() => {
-        return caches.match('/index.html').then((response) => {
-          return response || new Response('Offline - Không có kết nối mạng', {
+      (async () => {
+        try {
+          return await fetch(request);
+        } catch {
+          const cache = await caches.open(CACHE_NAME);
+          const fallback = await cache.match('/index.html');
+
+          if (fallback) {
+            return fallback;
+          }
+
+          return new Response('Offline - Không có kết nối mạng', {
             status: 503,
-            headers: { 'Content-Type': 'text/html; charset=utf-8' },
+            headers: {
+              'Content-Type': 'text/html; charset=utf-8',
+            },
           });
-        });
-      })
+        }
+      })(),
     );
     return;
   }
 
-  // Handle static assets: Cache-first, fallback to network and update cache
+  // Cache static assets only. Requests without a static destination,
+  // such as ordinary API fetches, are left to the browser.
+  const cacheableDestinations = [
+    'script',
+    'style',
+    'image',
+    'font',
+    'worker',
+    'manifest',
+  ];
+
+  const isStaticAsset =
+    cacheableDestinations.includes(request.destination) ||
+    requestUrl.pathname.startsWith('/assets/') ||
+    requestUrl.pathname === '/manifest.json';
+
+  if (!isStaticAsset) {
+    return;
+  }
+
   event.respondWith(
-    caches.match(request).then((cachedResponse) => {
+    (async () => {
+      const cache = await caches.open(CACHE_NAME);
+      const cachedResponse = await cache.match(request);
+
       if (cachedResponse) {
         return cachedResponse;
       }
 
-      return fetch(request).then((networkResponse) => {
-        // Cache valid same-origin responses
-        if (
-          networkResponse &&
-          networkResponse.status === 200 &&
-          networkResponse.type === 'basic'
-        ) {
-          const responseToCache = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(request, responseToCache);
-          });
+      const networkResponse = await fetch(request);
+
+      // Cache successful same-origin responses only.
+      if (
+        networkResponse.ok &&
+        networkResponse.type === 'basic'
+      ) {
+        try {
+          await cache.put(request, networkResponse.clone());
+        } catch (error) {
+          // Cache failure should not discard a valid network response.
+          console.warn('[SW] Failed to cache static asset:', error);
         }
-        return networkResponse;
-      }).catch((err) => {
-        // Return fallback if needed or let browser handle it
-        return cachedResponse || Promise.reject(err);
-      });
-    })
+      }
+
+      return networkResponse;
+    })(),
   );
 });
-
