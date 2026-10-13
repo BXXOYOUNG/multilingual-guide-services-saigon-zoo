@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import { useLanguage } from '../../features/localization/LanguageContext';
+import {
+  isOnline,
+  subscribeNetworkStatus,
+} from '../../services/networkStatus';
 
 export default function PublicLayout() {
   const {
@@ -8,6 +12,14 @@ export default function PublicLayout() {
     isLoadingLanguage,
     openLanguageSelector,
   } = useLanguage();
+
+  const [online, setOnline] = useState(isOnline());
+
+  useEffect(() => {
+    return subscribeNetworkStatus(({ online: newStatus }) => {
+      setOnline(newStatus);
+    });
+  }, []);
 
   return (
     <div className="app-container">
@@ -24,6 +36,12 @@ export default function PublicLayout() {
             ? '...'
             : `${currentLanguageInfo?.flag || ''} ${currentLanguageInfo?.nativeName || 'Ngôn ngữ'}`}
         </button>
+        <span
+          className="app-badge"
+          style={{ backgroundColor: online ? 'rgba(255, 255, 255, 0.2)' : '#d32f2f' }}
+        >
+          {online ? 'Online' : 'Offline'}
+        </span>
       </header>
 
       <main className="app-main">
