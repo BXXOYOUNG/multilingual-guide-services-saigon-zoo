@@ -1,8 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
-import { isOnline, subscribeNetworkStatus } from '../../services/networkStatus';
+import { useLanguage } from '../../features/localization/LanguageContext';
+import {
+  isOnline,
+  subscribeNetworkStatus,
+} from '../../services/networkStatus';
 
 export default function PublicLayout() {
+  const {
+    currentLanguageInfo,
+    isLoadingLanguage,
+    openLanguageSelector,
+  } = useLanguage();
+
   const [online, setOnline] = useState(isOnline());
 
   useEffect(() => {
@@ -15,6 +25,17 @@ export default function PublicLayout() {
     <div className="app-container">
       <header className="app-header">
         <h1>Thảo Cầm Viên</h1>
+        <button
+          type="button"
+          className="app-badge app-language-button"
+          onClick={openLanguageSelector}
+          disabled={isLoadingLanguage}
+          aria-label="Chọn ngôn ngữ thuyết minh"
+        >
+          {isLoadingLanguage
+            ? '...'
+            : `${currentLanguageInfo?.flag || ''} ${currentLanguageInfo?.nativeName || 'Ngôn ngữ'}`}
+        </button>
         <span
           className="app-badge"
           style={{ backgroundColor: online ? 'rgba(255, 255, 255, 0.2)' : '#d32f2f' }}

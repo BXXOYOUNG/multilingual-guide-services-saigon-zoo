@@ -25,4 +25,3 @@ export function subscribeNetworkStatus(callback) {
     window.removeEventListener('offline', handleOffline);
   };
 }
-

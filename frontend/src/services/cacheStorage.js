@@ -128,4 +128,3 @@ export async function verifyCacheStorage() {
     return { success: false, message: error.message || 'CacheStorage verification failed.' };
   }
 }
-
