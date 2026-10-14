@@ -3,6 +3,7 @@ from typing import AsyncIterator
 
 from fastapi import FastAPI
 
+from backend.api.audio import router as audio_router
 from backend.api.health import router as health_router
 from backend.config import load_settings
 from backend.database.mongodb import close_mongodb, connect_mongodb
@@ -27,3 +28,4 @@ app = FastAPI(lifespan=lifespan)
 register_exception_handlers(app)
 
 app.include_router(health_router)
+app.include_router(audio_router)
