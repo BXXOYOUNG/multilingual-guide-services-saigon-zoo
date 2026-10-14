@@ -128,3 +128,26 @@ Check the working diff with:
 ```powershell
 git diff --check
 ```
+
+## 7. POI Read API
+
+`GET /api/pois?language=<language-code>` returns an unwrapped JSON array. The
+language query parameter is required. Only active POIs with an exact-language
+localization are returned; no fallback language is selected. Results are not
+paginated, filtered, or sorted by request parameters.
+
+Each POI has this response shape:
+
+```json
+{
+  "id": "MongoDB ObjectId as a string",
+  "name": "Localized POI name",
+  "description": "Localized POI description",
+  "latitude": 10.78,
+  "longitude": 106.7
+}
+```
+
+The backend reads from the existing `poi` and `poi_localizations` collections,
+associating localization records through `poi_localizations.poi_id`. It does
+not create or update POI data.

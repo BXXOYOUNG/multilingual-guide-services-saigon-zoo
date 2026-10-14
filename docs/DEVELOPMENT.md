@@ -25,6 +25,17 @@ python -m uvicorn backend.main:app --reload
 ```
 
 The `GET /health` endpoint returns `{"status":"healthy"}` when the application is running.
+The `GET /api/pois?language=<language-code>` endpoint returns active POIs that
+have an exact-language localization. Configure `VITE_API_BASE_URL` in the
+frontend environment when the API is hosted on a different origin; leave it
+unset to request the same origin.
+
+Run the frontend repository tests and production build from `frontend/`:
+
+```sh
+npm test
+npm run build
+```
 
 ### MongoDB and Redis
 
