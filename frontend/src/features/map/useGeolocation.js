@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 /**
  * Hook to manage GPS geolocation tracking.
  * Implements UC-02 Step 5-7, and Alternative Path A1 (GPS not available/denied).
- *
+ * 
  * @param {object} [options]
  * @param {boolean} [options.enableHighAccuracy=true]
  * @param {number} [options.timeout=10000]
@@ -96,3 +96,4 @@ export function useGeolocation(options = {}) {
 
   return { coords, error, isSupported, isLoading };
 }
+

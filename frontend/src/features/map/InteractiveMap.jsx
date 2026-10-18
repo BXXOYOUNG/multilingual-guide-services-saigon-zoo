@@ -33,7 +33,7 @@ export const OSM_STYLE = {
 
 /**
  * Interactive Map Component using MapLibre GL (UC-02 / Task T09)
- *
+ * 
  * Features:
  * - MapLibre initialization with zoom/navigation controls
  * - POI rendering as markers with popup details

@@ -70,3 +70,4 @@ export function findNearestPoi(visitorCoords, pois) {
 
   return { poi: nearestPoi, distanceMeters: minDistance };
 }
+

@@ -4,7 +4,7 @@ import { getAllItems, setItem, STORES } from '../../db/indexedDB';
 /**
  * Loads POIs for a language, attempting server first then local storage fallback.
  * Follows UC-02 Main Flow (Steps 1-4), Alternative Path A2, and Exception Path E1.
- *
+ * 
  * @param {string} language
  * @param {(lang: string) => Promise<any[]>} [fetchImpl]
  * @returns {Promise<{ pois: any[], source: 'server' | 'offline' }>}
@@ -13,7 +13,7 @@ export async function loadPoisWithFallback(language, fetchImpl = fetchPois) {
   try {
     // Main Flow Step 2 & 3: Attempt to fetch from server
     const serverPois = await fetchImpl(language);
-
+    
     // Cache the retrieved POIs locally for offline use (A2 support)
     try {
       await Promise.all(
@@ -54,3 +54,4 @@ export async function loadPoisWithFallback(language, fetchImpl = fetchPois) {
     throw error;
   }
 }
+

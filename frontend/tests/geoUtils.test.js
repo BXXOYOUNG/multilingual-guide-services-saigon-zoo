@@ -49,3 +49,4 @@ test('findNearestPoi handles empty POIs or missing visitor coordinates (UC-02 Pa
   assert.equal(emptyPoisResult.poi, null);
   assert.equal(emptyPoisResult.distanceMeters, Infinity);
 });
+
