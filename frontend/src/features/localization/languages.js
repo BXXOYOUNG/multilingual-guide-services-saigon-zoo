@@ -30,4 +30,3 @@ export function isLanguageSupported(code) {
 export function getLanguageByCode(code) {
   return SUPPORTED_LANGUAGES.find((lang) => lang.code === code);
 }
-
