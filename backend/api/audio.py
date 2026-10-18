@@ -1,3 +1,5 @@
+import os
+from functools import lru_cache
 from typing import Optional
 
 from fastapi import APIRouter, Depends, Query, status
@@ -15,18 +17,86 @@ from backend.schemas.audio import (
     AudioTaskStatusUpdate,
 )
 from backend.services.audio import AudioService
-from backend.services.audio_storage import AudioStorageProvider
+from backend.services.audio_storage import (
+    AudioStorageProvider,
+    S3CompatibleAudioStorageProvider,
+    UnconfiguredAudioStorageProvider,
+)
 
 router = APIRouter(prefix="/audio", tags=["audio"])
+
+# Optional override for tests or explicit dependency injection.
 _storage_provider: Optional[AudioStorageProvider] = None
 
 
-def get_audio_storage_provider() -> AudioStorageProvider:
-    if _storage_provider is None:
-        from backend.services.audio_storage import UnconfiguredAudioStorageProvider
+@lru_cache(maxsize=8)
+def _build_s3_storage_provider(
+    endpoint_url: str,
+    bucket: str,
+    access_key_id: str,
+    secret_access_key: str,
+    region_name: str,
+    expires_in: int,
+) -> S3CompatibleAudioStorageProvider:
+    return S3CompatibleAudioStorageProvider(
+        endpoint_url=endpoint_url,
+        bucket=bucket,
+        access_key_id=access_key_id,
+        secret_access_key=secret_access_key,
+        region_name=region_name,
+        presigned_url_expires_in=expires_in,
+    )
 
+
+def get_audio_storage_provider() -> AudioStorageProvider:
+    if _storage_provider is not None:
+        return _storage_provider
+
+    endpoint_url = os.getenv("AUDIO_STORAGE_ENDPOINT_URL", "").strip()
+    bucket = os.getenv("AUDIO_STORAGE_BUCKET", "").strip()
+    access_key_id = os.getenv("AUDIO_STORAGE_ACCESS_KEY_ID", "").strip()
+    secret_access_key = os.getenv(
+        "AUDIO_STORAGE_SECRET_ACCESS_KEY", ""
+    ).strip()
+
+    configured_values = {
+        "AUDIO_STORAGE_ENDPOINT_URL": endpoint_url,
+        "AUDIO_STORAGE_BUCKET": bucket,
+        "AUDIO_STORAGE_ACCESS_KEY_ID": access_key_id,
+        "AUDIO_STORAGE_SECRET_ACCESS_KEY": secret_access_key,
+    }
+
+    # Keep existing behavior when storage has not been configured.
+    if not any(configured_values.values()):
         return UnconfiguredAudioStorageProvider()
-    return _storage_provider
+
+    missing = [
+        name for name, value in configured_values.items() if not value
+    ]
+    if missing:
+        raise RuntimeError(
+            "Incomplete audio storage configuration; missing: "
+            + ", ".join(missing)
+        )
+
+    region_name = os.getenv("AUDIO_STORAGE_REGION", "us-east-1").strip()
+    try:
+        expires_in = int(
+            os.getenv("AUDIO_STORAGE_PRESIGNED_URL_EXPIRES_IN", "300")
+        )
+    except ValueError as error:
+        raise RuntimeError(
+            "AUDIO_STORAGE_PRESIGNED_URL_EXPIRES_IN must be an integer"
+        ) from error
+
+    return _build_s3_storage_provider(
+        endpoint_url,
+        bucket,
+        access_key_id,
+        secret_access_key,
+        region_name,
+        expires_in,
+    )
 
 
 def get_audio_service(

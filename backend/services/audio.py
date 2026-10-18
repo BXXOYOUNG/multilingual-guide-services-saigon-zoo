@@ -273,7 +273,11 @@ class AudioService:
             if inspect.isawaitable(session):
                 session = await session
             async with session:
-                async with session.start_transaction():
+                transaction = session.start_transaction()
+                if inspect.isawaitable(transaction):
+                    transaction = await transaction
+
+                async with transaction:
                     return await self._register_asset_in_transaction(
                         document,
                         session,
