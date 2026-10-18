@@ -1,9 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Map, NavigationControl, Marker, Popup } from 'maplibre-gl';
+import {
+  Map,
+  NavigationControl,
+  Marker,
+  Popup,
+  setWorkerUrl,
+} from 'maplibre-gl';
+import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import 'maplibre-gl/dist/maplibre-gl.css';
+
 import { useGeolocation } from './useGeolocation';
 import { findNearestPoi } from './geoUtils';
 import { loadPoisWithFallback } from './poiLoader';
+
+setWorkerUrl(maplibreWorkerUrl);
 
 // Saigon Zoo coordinates: ~10.7875° N, 106.7053° E
 export const DEFAULT_CENTER = [106.7053, 10.7875];

@@ -10,6 +10,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </React.StrictMode>
 );
 
-// Register PWA Service Worker
-registerServiceWorker();
-
+// Register Service Worker only in production.
+// Vite development needs its own client and HMR connection.
+if (import.meta.env.PROD) {
+  registerServiceWorker();
+}
