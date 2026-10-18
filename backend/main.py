@@ -1,15 +1,16 @@
-from contextlib import AsyncExitStack, asynccontextmanager
+﻿from contextlib import AsyncExitStack, asynccontextmanager
 from typing import AsyncIterator
 
 from fastapi import FastAPI
 
-from backend.api.pois import router as pois_router
+from backend.api.audio import router as audio_router
 from backend.api.health import router as health_router
+from backend.api.pois import router as pois_router
 from backend.config import load_settings
+from backend.core.exception_handlers import register_exception_handlers
 from backend.database.mongodb import close_mongodb, connect_mongodb
 from backend.database.redis_client import close_redis, connect_redis
 
-from backend.core.exception_handlers import register_exception_handlers
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
@@ -29,3 +30,4 @@ register_exception_handlers(app)
 
 app.include_router(health_router)
 app.include_router(pois_router)
+app.include_router(audio_router)
