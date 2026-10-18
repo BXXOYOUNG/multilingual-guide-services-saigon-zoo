@@ -183,3 +183,269 @@ body {
   color: var(--text-main);
 }
 
+
+/* Map View Styles (UC-02 / T09) */
+.map-view-page {
+  height: calc(100vh - 128px);
+  position: relative;
+  margin: -16px;
+}
+
+.map-view-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.map-canvas-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.map-status-bar {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.status-item {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  pointer-events: auto;
+}
+
+.status-item.loading {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text-main);
+}
+
+.status-item.offline-badge {
+  background: #ff9800;
+  color: #ffffff;
+}
+
+.status-item.error-badge {
+  background: #d32f2f;
+  color: #ffffff;
+}
+
+.status-item.gps-warning {
+  background: rgba(245, 124, 0, 0.9);
+  color: #ffffff;
+}
+
+/* POI Markers */
+.map-poi-marker {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -100%);
+}
+
+.marker-pin {
+  width: 32px;
+  height: 32px;
+  border-radius: 50% 50% 50% 0;
+  background: var(--primary-color);
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 50%;
+  top: 50%;
+  margin: -16px 0 0 -16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.marker-icon {
+  transform: rotate(45deg);
+  font-size: 14px;
+}
+
+.map-poi-marker.nearest .marker-pin {
+  background: #f57c00;
+  width: 38px;
+  height: 38px;
+  margin: -19px 0 0 -19px;
+  animation: pulse-nearest 1.5s infinite;
+}
+
+@keyframes pulse-nearest {
+  0% {
+    box-shadow: 0 0 0 0 rgba(245, 124, 0, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(245, 124, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 124, 0, 0);
+  }
+}
+
+/* Visitor location marker */
+.visitor-location-marker {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.visitor-dot {
+  width: 14px;
+  height: 14px;
+  background: #2196f3;
+  border: 2px solid white;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.4);
+}
+
+.visitor-pulse {
+  width: 30px;
+  height: 30px;
+  background: rgba(33, 150, 243, 0.3);
+  border-radius: 50%;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  animation: visitor-pulse-anim 2s infinite;
+}
+
+@keyframes visitor-pulse-anim {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Overlay controls */
+.map-overlay-controls {
+  position: absolute;
+  bottom: 80px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10;
+}
+
+.map-control-btn {
+  background: white;
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.map-control-btn.nearest-btn {
+  background: #fff3e0;
+  border-color: #f57c00;
+  color: #e65100;
+}
+
+/* Nearest POI Card */
+.nearest-poi-card {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  background: white;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border-left: 4px solid #f57c00;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 10;
+  cursor: pointer;
+}
+
+.nearest-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.nearest-header .badge {
+  background: #f57c00;
+  color: white;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.nearest-header h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.nearest-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Selected POI Drawer */
+.poi-detail-drawer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 16px;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.2);
+  z-index: 20;
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.drawer-header h3 {
+  font-size: 1.1rem;
+  color: var(--primary-dark);
+}
+
+.drawer-header .close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.drawer-desc {
+  font-size: 0.85rem;
+  color: var(--text-main);
+  margin-bottom: 12px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.drawer-actions {
+  display: flex;
+  justify-content: flex-end;
+}

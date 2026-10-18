@@ -1,11 +1,13 @@
 import React from 'react';
+import { useLanguage } from '../../features/localization/LanguageContext';
+import InteractiveMap from '../../features/map/InteractiveMap';
 
 export default function MapView() {
+  const { currentLanguage } = useLanguage();
+
   return (
-    <div className="card">
-      <h2>Bản đồ điểm thuyết minh</h2>
-      <p>Khu vực bản đồ tương tác (Sẽ được triển khai trong UC-02 / Task T09).</p>
+    <div className="map-view-page">
+      <InteractiveMap language={currentLanguage} />
     </div>
   );
 }
-
