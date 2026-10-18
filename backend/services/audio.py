@@ -307,17 +307,13 @@ class AudioService:
         )
         if duplicate is not None:
             self._validate_duplicate(document, duplicate)
-            if not await self.repository.set_localization_audio(
-                document["poi_id"],
-                document["language_code"],
-                document["file_url"],
-                localization.get("audio_url"),
-                "audio_url" in localization,
-                session=session,
-            ):
+
+            if localization.get("audio_url") != document["file_url"]:
                 raise HTTPException(
                     status_code=409,
-                    detail="POI localization changed during audio registration",
+                    detail=(
+                        "POI localization points to a different audio asset"
+                    ),
                 )
             return False
 
@@ -360,28 +356,15 @@ class AudioService:
         )
         if duplicate is not None:
             self._validate_duplicate(document, duplicate)
-            matched = await self.repository.set_localization_audio(
-                poi_id,
-                language_code,
-                document["file_url"],
-                localization.get("audio_url"),
-                "audio_url" in localization,
-            )
-            if not matched:
-                current = await self.repository.get_localization(
-                    poi_id,
-                    language_code,
+
+            if localization.get("audio_url") != document["file_url"]:
+                raise HTTPException(
+                    status_code=409,
+                    detail=(
+                        "POI localization points to a different audio asset"
+                    ),
                 )
-                if current is None:
-                    raise HTTPException(
-                        status_code=404,
-                        detail="POI localization not found for the requested language",
-                    )
-                if current.get("audio_url") != document["file_url"]:
-                    raise HTTPException(
-                        status_code=409,
-                        detail="POI localization changed during audio registration",
-                    )
+
             document.clear()
             document.update(duplicate)
             return False
@@ -398,8 +381,8 @@ class AudioService:
         except Exception as error:
             raise RuntimeError(
                 "POI localization update outcome is unknown; the audio asset "
-                "was retained to avoid breaking a concurrent localization "
-                "update. Retry registration with the same checksum to reconcile."
+                "was retained. Inspect the localization before retrying or "
+                "cleaning up the asset."
             ) from error
 
         if not matched:

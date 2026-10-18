@@ -684,6 +684,81 @@ class AudioAPITests(unittest.TestCase):
         self.assert_standard_error(self, conflicting, 409, "CONFLICT")
         self.assertEqual(len(self.database["audio_assets"].documents), 1)
 
+    def test_duplicate_registration_does_not_overwrite_newer_audio_url(self):
+        self.add_localization(self.poi_id, "en")
+
+        request = {
+            "poi_id": str(self.poi_id),
+            "language_code": "en",
+            "file_url": "audio/old.mp3",
+            "duration": 2,
+            "checksum": "retry-stale-checksum",
+        }
+
+        first = self.client.post("/audio/assets", json=request)
+        self.assertEqual(first.status_code, 201)
+
+        localization = self.database["poi_localizations"].documents[0]
+        localization["audio_url"] = "audio/newer.mp3"
+
+        second = self.client.post("/audio/assets", json=request)
+
+        self.assert_standard_error(self, second, 409, "CONFLICT")
+        self.assertEqual(localization["audio_url"], "audio/newer.mp3")
+        self.assertEqual(len(self.database["audio_assets"].documents), 1)
+
+    def test_transactional_duplicate_registration_does_not_overwrite_newer_audio_url(self):
+        self.add_localization(self.poi_id, "en")
+        client = FakeMongoClient()
+        self.database.client = client
+
+        request = {
+            "poi_id": str(self.poi_id),
+            "language_code": "en",
+            "file_url": "audio/old.mp3",
+            "duration": 2,
+            "checksum": "transaction-stale-checksum",
+        }
+
+        first = self.client.post("/audio/assets", json=request)
+        self.assertEqual(first.status_code, 201)
+
+        localization = self.database["poi_localizations"].documents[0]
+        localization["audio_url"] = "audio/newer.mp3"
+
+        second = self.client.post("/audio/assets", json=request)
+
+        self.assert_standard_error(self, second, 409, "CONFLICT")
+        self.assertEqual(localization["audio_url"], "audio/newer.mp3")
+        self.assertEqual(len(self.database["audio_assets"].documents), 1)
+        self.assertEqual(client.transaction_count, 2)
+
+    def test_identical_asset_registration_is_idempotent_with_transactions(self):
+        self.add_localization(self.poi_id, "en")
+        client = FakeMongoClient()
+        self.database.client = client
+
+        request = {
+            "poi_id": str(self.poi_id),
+            "language_code": "en",
+            "file_url": "audio/transaction-duplicate.mp3",
+            "duration": 2,
+            "checksum": "transaction-duplicate-checksum",
+        }
+
+        first = self.client.post("/audio/assets", json=request)
+        second = self.client.post("/audio/assets", json=request)
+
+        self.assertEqual(first.status_code, 201)
+        self.assertEqual(second.status_code, 201)
+        self.assertEqual(first.json()["_id"], second.json()["_id"])
+        self.assertEqual(client.transaction_count, 2)
+        self.assertEqual(len(self.database["audio_assets"].documents), 1)
+        self.assertEqual(
+            self.database["poi_localizations"].documents[0]["audio_url"],
+            request["file_url"],
+        )
+
     def test_concurrent_identical_asset_registration_is_idempotent(self):
         self.add_localization(self.poi_id, "en")
         request = AudioAssetCreate(
