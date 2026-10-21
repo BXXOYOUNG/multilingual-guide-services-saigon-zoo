@@ -10,6 +10,7 @@ from fastapi.testclient import TestClient
 from backend.api.audio import get_audio_storage_provider
 from backend.database.mongodb import get_database
 from backend.main import app
+from backend.services.admin_auth import require_admin
 from backend.schemas.audio import AudioAssetCreate
 from backend.services.audio import AudioService
 from backend.services.audio_storage import StorageObjectMetadata
@@ -187,6 +188,7 @@ class FakeStorageProvider:
 
 class AudioAPITests(unittest.TestCase):
     def setUp(self):
+        app.dependency_overrides[require_admin] = lambda: {"permissions": ["audio:write"]}
         self.database = FakeDatabase()
         self.storage = None
         app.dependency_overrides[get_database] = lambda: self.database
@@ -307,7 +309,7 @@ class AudioAPITests(unittest.TestCase):
                 "type": "Manual",
             },
         )
-        task_id = created.json()["_id"]
+        task_id = created.json()["id"]
         self.assertEqual(created.json()["status"], "Pending")
         self.assertIsNone(created.json()["file_url"])
 
@@ -476,8 +478,8 @@ class AudioAPITests(unittest.TestCase):
         self.assertEqual(
             self.client.get(
                 f"/audio/assets/resolve?poi_id={self.poi_id}&language_code=vi"
-            ).json()["file_url"],
-            "audio/vi.mp3",
+            ).status_code,
+            404,
         )
 
     def test_asset_requires_a_matching_existing_localization_and_package(self):
@@ -674,7 +676,7 @@ class AudioAPITests(unittest.TestCase):
         second = self.client.post("/audio/assets", json=request)
         self.assertEqual(first.status_code, 201)
         self.assertEqual(second.status_code, 201)
-        self.assertEqual(first.json()["_id"], second.json()["_id"])
+        self.assertEqual(first.json()["id"], second.json()["id"])
         self.assertEqual(len(self.database["audio_assets"].documents), 1)
 
         conflicting = self.client.post(
@@ -751,7 +753,7 @@ class AudioAPITests(unittest.TestCase):
 
         self.assertEqual(first.status_code, 201)
         self.assertEqual(second.status_code, 201)
-        self.assertEqual(first.json()["_id"], second.json()["_id"])
+        self.assertEqual(first.json()["id"], second.json()["id"])
         self.assertEqual(client.transaction_count, 2)
         self.assertEqual(len(self.database["audio_assets"].documents), 1)
         self.assertEqual(
@@ -865,9 +867,9 @@ class AudioAPITests(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 200)
         manifest = response.json()
-        self.assertEqual(manifest["package"]["_id"], str(package["_id"]))
+        self.assertEqual(manifest["package"]["id"], str(package["_id"]))
         self.assertEqual(
-            [asset["_id"] for asset in manifest["assets"]],
+            [asset["id"] for asset in manifest["assets"]],
             [str(member["_id"])],
         )
         self.assertEqual(manifest["integrity_status"], "unverified")
@@ -915,6 +917,7 @@ class AudioAPITests(unittest.TestCase):
             file_url="asset.mp3",
             checksum="expected",
         )
+        asset["size_bytes"] = 20
         self.storage = FakeStorageProvider(
             {
                 "packages/en.zip": StorageObjectMetadata(size=100),

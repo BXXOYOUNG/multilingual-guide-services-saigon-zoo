@@ -3,6 +3,7 @@ from functools import lru_cache
 from typing import Optional
 
 from fastapi import APIRouter, Depends, Query, status
+from fastapi.responses import Response
 from pymongo.asynchronous.database import AsyncDatabase
 
 from backend.database.mongodb import get_database
@@ -22,6 +23,7 @@ from backend.services.audio_storage import (
     S3CompatibleAudioStorageProvider,
     UnconfiguredAudioStorageProvider,
 )
+from backend.services.admin_auth import require_permission
 
 router = APIRouter(prefix="/audio", tags=["audio"])
 
@@ -113,6 +115,7 @@ def get_audio_service(
 )
 async def create_audio_task(
     request: AudioTaskCreate,
+    _admin=Depends(require_permission("audio:write")),
     service: AudioService = Depends(get_audio_service),
 ) -> AudioTaskResponse:
     return await service.create_task(request)
@@ -121,6 +124,7 @@ async def create_audio_task(
 @router.get("/tasks/{task_id}", response_model=AudioTaskResponse)
 async def get_audio_task(
     task_id: str,
+    _admin=Depends(require_permission("audio:write")),
     service: AudioService = Depends(get_audio_service),
 ) -> AudioTaskResponse:
     return await service.get_task(task_id)
@@ -130,6 +134,7 @@ async def get_audio_task(
 async def update_audio_task_status(
     task_id: str,
     request: AudioTaskStatusUpdate,
+    _admin=Depends(require_permission("audio:write")),
     service: AudioService = Depends(get_audio_service),
 ) -> AudioTaskResponse:
     return await service.update_task(
@@ -147,6 +152,7 @@ async def update_audio_task_status(
 )
 async def create_audio_package(
     request: AudioPackageCreate,
+    _admin=Depends(require_permission("audio:write")),
     service: AudioService = Depends(get_audio_service),
 ) -> AudioPackageResponse:
     return await service.create_package(request)
@@ -170,6 +176,7 @@ async def get_audio_package_manifest(
 async def assign_asset_to_audio_package(
     package_id: str,
     asset_id: str,
+    _admin=Depends(require_permission("audio:write")),
     service: AudioService = Depends(get_audio_service),
 ) -> AudioPackageManifest:
     return await service.assign_asset(package_id, asset_id)
@@ -196,6 +203,7 @@ async def assign_asset_to_audio_package(
 )
 async def create_audio_asset(
     request: AudioAssetCreate,
+    _admin=Depends(require_permission("audio:write")),
     service: AudioService = Depends(get_audio_service),
 ) -> AudioAssetResponse:
     return await service.create_asset(request)
@@ -208,3 +216,16 @@ async def resolve_ready_audio_asset(
     service: AudioService = Depends(get_audio_service),
 ) -> AudioAssetResponse:
     return await service.get_ready_asset(poi_id, language_code)
+
+
+@router.get("/assets/{asset_id}/content")
+async def stream_audio_asset(
+    asset_id: str,
+    service: AudioService = Depends(get_audio_service),
+) -> Response:
+    content, media_type = await service.read_asset(asset_id)
+    return Response(
+        content=content,
+        media_type=media_type,
+        headers={"Cache-Control": "public, max-age=86400"},
+    )

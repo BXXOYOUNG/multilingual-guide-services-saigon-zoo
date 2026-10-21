@@ -1,0 +1,129 @@
+#!/usr/bin/env python3
+"""Reconcile the dev MongoDB catalog with the source-reviewed CSV dataset.
+
+Dry-run by default. The apply mode removes prototype-only coordinates from POI
+records and retains only coordinates explicitly sourced to an OSM map feature.
+It does not delete localizations or activate geofences.
+"""
+from __future__ import annotations
+
+import argparse
+import csv
+from pathlib import Path
+
+from bson import ObjectId
+from pymongo import MongoClient
+
+ROOT = Path(__file__).resolve().parents[1]
+DATASET = ROOT / "data" / "dataset"
+DATABASE = "saigon_zoo_tcv_dataset_dev"
+MONGO_URI = "mongodb://127.0.0.1:27018/?replicaSet=rs0"
+MAP_REFERENCE_CODES = {"TCV-AN-005", "TCV-AN-011"}
+
+
+def read_rows(name: str) -> list[dict[str, str]]:
+    with (DATASET / name).open(encoding="utf-8-sig", newline="") as handle:
+        return list(csv.DictReader(handle))
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--apply", action="store_true", help="write changes to the dev database")
+    parser.add_argument("--database", default=DATABASE)
+    parser.add_argument("--mongo-uri", default=MONGO_URI)
+    args = parser.parse_args()
+    if args.database != DATABASE:
+        parser.error(f"This preparation script is restricted to {DATABASE!r}.")
+
+    candidates = {row["candidate_code"]: row for row in read_rows("poi_candidates.csv")}
+    localizations = read_rows("poi_localizations_multilingual_v2.csv")
+    if len(candidates) != 11 or len(localizations) != 66:
+        parser.error("Expected 11 source catalog entries and 66 locale records.")
+
+    client = MongoClient(args.mongo_uri, serverSelectionTimeoutMS=3000)
+    try:
+        database = client[args.database]
+        titles = {
+            row["title"]: row["poi_id"]
+            for row in database["poi_localizations"].find(
+                {"language_code": "vi"}, {"poi_id": 1, "title": 1}
+            )
+        }
+        id_by_code: dict[str, ObjectId] = {}
+        for code, candidate in candidates.items():
+            poi_id = titles.get(candidate["name_vi"])
+            if poi_id is None:
+                parser.error(f"No existing Vietnamese localization for {code} ({candidate['name_vi']}).")
+            id_by_code[code] = poi_id
+
+        print(f"database: {args.database}")
+        print("source catalog: 11 species, 66 locale rows")
+        print("map reference pins: 2 (OpenStreetMap; field verification still required)")
+        print("prototype coordinates to remove: 9")
+        print("geofences: disabled")
+        if not args.apply:
+            print("dry run only; pass --apply to reconcile MongoDB")
+            return 0
+
+        for code, candidate in candidates.items():
+            poi_id = id_by_code[code]
+            is_map_reference = code in MAP_REFERENCE_CODES
+            fields = {
+                "candidate_code": code,
+                "scientific_name": candidate["scientific_name"],
+                "source_url": candidate["species_source_url"],
+                "data_status": candidate["data_status"],
+                "coordinate_status": (
+                    "OSM_REFERENCE_NOT_FIELD_VERIFIED" if is_map_reference else "NOT_VERIFIED"
+                ),
+                "geofence_enabled": False,
+                "is_active": is_map_reference,
+            }
+            if is_map_reference:
+                fields["coordinate_source"] = "OpenStreetMap"
+                fields["coordinate_source_url"] = candidate["coordinate_source_url"]
+                fields["latitude"] = float(candidate["latitude"])
+                fields["longitude"] = float(candidate["longitude"])
+            else:
+                database["poi"].update_one(
+                    {"_id": poi_id},
+                    {"$unset": {
+                        "latitude": "", "longitude": "", "coordinate_source": "",
+                        "coordinate_source_url": "",
+                    }},
+                )
+            database["poi"].update_one({"_id": poi_id}, {"$set": fields})
+
+        review_by_language = {
+            "vi": "VI_EDITOR_REVIEW_REQUIRED",
+            "en": "ENGLISH_EDITOR_REVIEW_REQUIRED",
+            "fr": "FRENCH_EDITOR_REVIEW_REQUIRED",
+            "zh-Hans": "NATIVE_REVIEW_REQUIRED",
+            "ja": "NATIVE_REVIEW_REQUIRED",
+            "ko": "NATIVE_REVIEW_REQUIRED",
+        }
+        for row in localizations:
+            database["poi_localizations"].update_one(
+                {"poi_id": id_by_code[row["candidate_code"]], "language_code": row["language_code"]},
+                {"$set": {
+                    "content_status": row["content_status"],
+                    "fact_review_status": row["fact_review_status"],
+                    "translation_review_status": review_by_language[row["language_code"]],
+                    "audio_status": row["audio_status"],
+                    "source_url": row["source_url"],
+                    "source_checked_date": row["source_checked_date"],
+                }},
+            )
+
+        print({
+            "source_catalog_entries": database["poi"].count_documents({"source_url": {"$type": "string"}}),
+            "map_reference_pins": database["poi"].count_documents({"is_active": True}),
+            "locale_records": database["poi_localizations"].count_documents({}),
+        })
+        return 0
+    finally:
+        client.close()
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

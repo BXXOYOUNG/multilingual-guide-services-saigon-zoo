@@ -1,6 +1,6 @@
 # IMPLEMENTATION PLAN — Hệ thống Thuyết minh Tự động Đa ngôn ngữ Thảo Cầm Viên TP.HCM
 
-> **Status:** Implementation planning
+> **Status:** Kế hoạch mục tiêu; trạng thái demo được đối chiếu ngày 21/10/2026 tại [CURRENT_ARCHITECTURE](docs/CURRENT_ARCHITECTURE.md) và [REQUIREMENTS_TRACEABILITY](docs/REQUIREMENTS_TRACEABILITY.md). Không coi mọi mục trong kế hoạch là tính năng đã hoàn tất. Ba sơ đồ PNG gốc đã được lưu trữ trong `docs/archive/pre-audit-2026-10-21/`.
 > 
 > **Purpose:** Chuyển bộ PRD/thiết kế hiện tại thành kế hoạch triển khai có thể dùng trực tiếp cho coding agent/vibe coding.
 > 
@@ -28,6 +28,30 @@ Các tài liệu sau là cơ sở để triển khai:
 4. **Logical ERD** — các MongoDB collections phục vụ admin, POI/localization, audio, location/playback và analytics.
 
 > **Rule:** Nếu implementation mâu thuẫn với một trong các tài liệu trên, không tự ý sửa architecture. Phải dừng và xác định nguyên nhân trước.
+
+### 1.1. Development data/runtime baseline (cập nhật 2026-10-20)
+
+Database dev đã được tạo và có dataset tại `saigon_zoo_tcv_dataset_dev`. Không tạo database mới hoặc chạy seed lại như một bước mặc định của task. Trước task có đọc/ghi dữ liệu, phải xác nhận cấu hình kết nối đang trỏ đúng database này và kiểm tra collection/field hiện hữu bằng thao tác chỉ đọc.
+
+Runtime Docker đã được kiểm tra tại workspace:
+
+| Container | Vai trò | Endpoint từ máy host |
+|---|---|---|
+| `saigon-zoo-t10-replset` (`mongo:6.0`) | MongoDB replica set | `mongodb://127.0.0.1:27018/?replicaSet=rs0` |
+| `saigon-zoo-t10-seaweedfs` (`chrislusf/seaweedfs`) | Object/file storage | `http://127.0.0.1:8333` |
+
+Lần kiểm tra đầu thấy hai container MongoDB và SeaweedFS; kiểm tra cập nhật 2026-10-20 đã xác nhận Redis container `saigon-zoo-redis` đang chạy tại `127.0.0.1:6379`. `docker/docker-compose.yml` mô tả MongoDB standalone ở `27017`, nên không dùng file đó làm bằng chứng runtime hoặc khởi động stack song song theo mặc định. SeaweedFS S3 API và bucket đã được kiểm tra bằng thao tác đọc; storage credentials chỉ lấy lúc chạy từ container, không ghi vào `.env`/repo.
+
+Quy ước cấu hình backend hiện tại theo `backend/config.py`:
+
+- MongoDB: `MONGODB_URI` và `MONGODB_DATABASE` phải được đặt cùng nhau; database dev là `saigon_zoo_tcv_dataset_dev`.
+- Redis: backend đọc `REDIS_URL` (không đọc `REDIS_HOST`/`REDIS_PORT`).
+- `.env.example` đã dùng đúng tên biến backend đọc. Backend nhận biến môi trường của tiến trình; file `.env` không được tự nạp.
+- Các script dataset mặc định dùng MongoDB host `27018`, replica set `rs0`, database dev trên. Seed chỉ chạy khi task yêu cầu rõ, luôn dry-run trước và giữ nguyên quy tắc bảo vệ dữ liệu trong `README_SEED_DATASET.md`.
+
+Chi tiết luồng task có checkpoint database nằm tại [`docs/DATABASE_TASK_SCENARIOS.md`](docs/DATABASE_TASK_SCENARIOS.md).
+
+Lộ trình bám trạng thái code hiện tại, các gate và blocker cho phần còn lại nằm tại [`docs/ROADMAP_CURRENT_STATE.md`](docs/ROADMAP_CURRENT_STATE.md). Mở tài liệu này trước khi sinh task triển khai tiếp theo.
 
 ---
 
@@ -177,7 +201,7 @@ Giữ nguyên các collection và field trong Logical ERD. Ánh xạ triển kha
 
 ### 5.7. Required data-contract decisions before implementation
 
-ERD có `user_id` trong dữ liệu visitor tracking/playback nhưng không có Use Case xác thực visitor. Trước khi triển khai các repository/API đụng tới `user_id` trong `location_events`, `playback_history`, `analytics_sessions` (hoặc collection visitor-side tương ứng), cần chốt và ghi nhận quyết định kiến trúc/data-contract về ý nghĩa, nguồn tạo và vòng đời của định danh đó.
+ERD có `user_id` trong dữ liệu visitor tracking/playback nhưng không có Use Case xác thực visitor. Quyết định đã chốt ngày 2026-10-20: dùng định danh ẩn danh theo cài đặt thiết bị/phiên, không phải tài khoản và không chứa PII. Client tạo/lưu visitor ID ngẫu nhiên dạng 24 ký tự hex; session ID riêng được tạo cho mỗi phiên app. Khi ghi ERD fields có BSON ObjectId, API chuyển visitor ID về ObjectId; ở `analytics_sessions.user_id` dạng string giữ representation hex của cùng ID. Không thêm visitor login hoặc collection `users`.
 
 - Không được mặc định `user_id` là tài khoản đã đăng nhập.
 - Không tạo visitor authentication hoặc `users` collection nếu chưa có yêu cầu được phê duyệt.
@@ -185,12 +209,13 @@ ERD có `user_id` trong dữ liệu visitor tracking/playback nhưng không có 
 
 ### 5.8. Pre-coding consistency check
 
-Trước khi code data access layer phải xác nhận cách hiểu của `user_id` xuất hiện trong các collection như `location_events`, `playback_history`, `analytics_sessions`:
+Contract visitor `user_id` đã được chốt và implementation bắt đầu theo đúng mapping tại mục 5.7:
 
-- Nếu là định danh ẩn danh của visitor/device/session → ghi rõ trong data contract.
-- Nếu là tài khoản người dùng → phải có requirement/ERD tương ứng trước khi triển khai.
+- Định danh ẩn danh cài đặt/visitor: 24 ký tự hex ngẫu nhiên, giữ cục bộ trên thiết bị.
+- Session ID riêng theo lần sử dụng; không coi visitor ID là tài khoản.
+- Ánh xạ theo kiểu dữ liệu từng collection như mô tả mục 5.7; không tự đổi kiểu field ERD.
 
-**Không tự suy diễn.**
+Không tạo visitor account hay PII. Thống nhất `poi_id` là BSON `ObjectId` trong các collection có quan hệ tới POI, gồm `audio_tasks`, `audio_assets`, `playback_history`, `analytics_events` và `geofence_zones`; API tiếp tục nhận/trả chuỗi hex ở biên HTTP. ERD hiện hành được mô tả trong `docs/CURRENT_ARCHITECTURE.md`; ảnh ERD lịch sử được lưu trữ để tránh dùng nhầm.
 
 ---
 
@@ -265,7 +290,8 @@ Kết nối MongoDB/Redis và tạo backend foundation trước khi xây các us
 
 ## Tasks
 
-- Database connection lifecycle.
+- Xác nhận kết nối MongoDB tới database dev đã có; không bootstrap/drop/seed lại dữ liệu hiện hữu trong task connection lifecycle.
+- Database connection lifecycle theo `MONGODB_URI` + `MONGODB_DATABASE`.
 - Collection/index initialization cần thiết.
 - Repository/data-access abstraction.
 - API error model thống nhất.
@@ -280,8 +306,9 @@ Domain module không truy cập database một cách tùy tiện từ nhiều ch
 
 ## Exit Criteria
 
-- Backend kết nối được MongoDB.
-- Redis connection/cache path có thể kiểm tra độc lập.
+- Backend kết nối đúng `saigon_zoo_tcv_dataset_dev` trên MongoDB replica set hiện hữu.
+- Không ghi/xóa dữ liệu POI/localization chỉ để chứng minh kết nối.
+- Redis connection/cache path dùng Redis dev đang chạy tại `127.0.0.1:6379`; không xem SeaweedFS là Redis.
 - Repository mẫu chạy được.
 - Có error response nhất quán.
 - Có cấu trúc để thêm các domain module mà không sửa `main.py` quá nhiều.
@@ -564,11 +591,11 @@ Implement:
 - Logout.
 - Invalid credential handling.
 
-### Decision pending
+### Decision accepted (2026-10-20)
 
-PRD xác định **admin authentication/session/RBAC**, nhưng chưa khóa cơ chế token/session cụ thể. Đây là quyết định bắt buộc trước khi bắt đầu UC-07: chốt token hay server-managed session, cách lưu/refresh/expire và cách bảo vệ session phù hợp với Deployment Diagram; ghi nhận quyết định trước implementation. Cơ chế phải dùng `admin_users`/`roles` theo ERD, không tạo visitor auth, không làm thay đổi ERD hoặc Deployment Diagram.
+Admin dùng opaque **HTTP-only cookie + server-managed session trong Redis**, TTL/expiry hữu hạn, `SameSite=Lax`, `Secure` bật khi chạy qua HTTPS. Chỉ dùng `admin_users`/`roles` theo ERD, hash password, kiểm tra quyền ở backend; không tạo visitor auth và không đổi ERD/Deployment Diagram. Redis dev endpoint hiện chạy cục bộ tại `127.0.0.1:6379`.
 
-Không coi authentication/RBAC foundation ở Phase 1 là lựa chọn cơ chế đã được phê duyệt. Phase 1 chỉ được dựng điểm tích hợp/shared middleware cần thiết; không khóa session mechanism thay cho quyết định này.
+Demo dùng TTS sinh từ dataset draft đã được người dùng cho phép ngày 2026-10-20. Những audio này phải được đánh dấu/ghi rõ là demo, không được trình bày là nội dung đã duyệt để phát hành.
 
 ## UC-08 — POI Management
 
@@ -875,10 +902,11 @@ Nếu task kéo theo nhiều module và agent bắt đầu tự thiết kế l�
 
 | ID | Task | Depends on | Priority |
 |---|---|---|---|
-| T01 | Initialize repository structure | — | P0 |
+| T00 | Read-only development/runtime + data-source baseline decision; no compose startup or database mutation | — | P0 prerequisite |
+| T01 | Audit/extend existing repository structure; no reset or duplicate scaffold | T00 | P0 |
 | T02 | Frontend React/Vite shell | T01 | P0 |
 | T03 | FastAPI backend shell + health endpoint | T01 | P0 |
-| T04 | MongoDB/Redis configuration + connection layer | T03 | P0 |
+| T04 | Align `.env.example` with backend config + MongoDB connection (`saigon_zoo_tcv_dataset_dev`) and local Redis endpoint | T00, T03 | P0 |
 | T05 | Define API/error/schema conventions | T03 | P0 |
 | T06 | PWA/service-worker/indexedDB foundation | T02 | P0 |
 | T07 | Language selection + persistence (UC-01) | T02, T06 | P0 |
@@ -901,6 +929,8 @@ Nếu task kéo theo nhiều module và agent bắt đầu tự thiết kế l�
 | T24 | Offline/error hardening (final hardening gate) | T23 | P0 (gate) |
 
 > T23/T24 retain P0 as completion/release gates, not as early implementation work. Schedule T23 only after T07–T22 are implemented; schedule T24 only after T23 passes. Their priority does not override these dependencies.
+
+> **Áp dụng cho repository hiện tại:** đây là thứ tự phụ thuộc của feature, không phải lệnh chạy lại T01 từ đầu. T00 là checkpoint môi trường; T04 mới thực hiện đồng bộ cấu hình. Trước khi chọn task, đối chiếu code/config hiện hữu và [`docs/DATABASE_TASK_SCENARIOS.md`](docs/DATABASE_TASK_SCENARIOS.md) cùng [`docs/ROADMAP_CURRENT_STATE.md`](docs/ROADMAP_CURRENT_STATE.md); giữ nguyên database dev đã có. Không coi việc có dữ liệu trong MongoDB là lý do để tạo lại schema/ERD hoặc seed lặp lại.
 
 ---
 
@@ -947,21 +977,17 @@ Trước khi yêu cầu agent viết code task T01–T06, xác nhận:
 [ ] Offline: Service Worker + IndexedDB + Cache Storage
 [ ] Không dùng microservices độc lập
 [ ] ERD không đổi
-[ ] user_id semantics đã được xác nhận
-[ ] Auth mechanism đã được quyết định trước khi implement UC-07
+[x] user_id semantics đã được xác nhận (anonymous device ID + per-app session)
+[x] Auth mechanism đã được quyết định trước khi implement UC-07 (HTTP-only Redis session)
 ```
 
 ---
 
 # 24. Immediate Next Step
 
-**Không code toàn hệ thống ngay.**
+Foundation T01–T10 đã được người dùng xác nhận hoàn thành. Các quyết định visitor ID/admin auth đã chốt; tiếp tục audit/hoàn thiện T11–T24 theo dependency, lưu ý release gate T23–T24 chưa nghiệm thu.
 
-Bước tiếp theo là thực hiện **T01 — Extend Existing Repository Structure**: bổ sung skeleton còn thiếu và giữ nguyên `backend/api/`, `backend/models/`, `backend/services/`, `docs/`, và `tests/`. Sau đó thực hiện T02–T06.
-
-Trước khi bắt đầu các repository/API visitor-side có `user_id`, phải hoàn tất quyết định tại mục 5.7. Trước khi bắt đầu T17/UC-07, phải chốt cơ chế admin authentication/session tại Phase 7.
-
-Khi skeleton ổn định, bắt đầu vertical slice:
+Vertical slice hiện tại:
 
 ```text
 T07 → T08 → T09 → T10 → T13 → T11 → T12

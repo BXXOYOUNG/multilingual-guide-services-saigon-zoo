@@ -20,6 +20,12 @@ class AudioStorageProvider(Protocol):
     async def inspect(self, file_url: str) -> Optional[StorageObjectMetadata]:
         """Return stored object metadata when the provider can inspect it."""
 
+    async def read(self, file_url: str) -> Optional[tuple[bytes, str]]:
+        """Read an audio object for same-origin visitor playback/download."""
+
+    async def put(self, file_url: str, content: bytes, media_type: str, checksum: str) -> None:
+        """Store an audio object and checksum metadata."""
+
 
 class UnconfiguredAudioStorageProvider:
     async def get_access_url(self, file_url: str) -> Optional[str]:
@@ -27,6 +33,12 @@ class UnconfiguredAudioStorageProvider:
 
     async def inspect(self, file_url: str) -> Optional[StorageObjectMetadata]:
         return None
+
+    async def read(self, file_url: str) -> Optional[tuple[bytes, str]]:
+        return None
+
+    async def put(self, file_url: str, content: bytes, media_type: str, checksum: str) -> None:
+        raise RuntimeError("Audio storage is not configured")
 
 
 class S3CompatibleAudioStorageProvider:
@@ -151,4 +163,30 @@ class S3CompatibleAudioStorageProvider:
         return StorageObjectMetadata(
             size=int(size) if size is not None else None,
             checksum=checksum,
+        )
+
+    async def read(self, file_url: str) -> Optional[tuple[bytes, str]]:
+        key = self._object_key(file_url)
+
+        def _read_object():
+            response = self._client.get_object(Bucket=self.bucket, Key=key)
+            body = response["Body"]
+            try:
+                return body.read(), response.get("ContentType", "audio/mpeg")
+            finally:
+                body.close()
+
+        try:
+            return await asyncio.to_thread(_read_object)
+        except ClientError as error:
+            code = str(error.response.get("Error", {}).get("Code", ""))
+            if code in {"404", "NoSuchKey", "NotFound"}:
+                return None
+            raise
+
+    async def put(self, file_url: str, content: bytes, media_type: str, checksum: str) -> None:
+        key = self._object_key(file_url)
+        await asyncio.to_thread(
+            self._client.put_object, Bucket=self.bucket, Key=key, Body=content,
+            ContentType=media_type, Metadata={"sha256": checksum},
         )

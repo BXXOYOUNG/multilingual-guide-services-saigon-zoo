@@ -56,8 +56,11 @@ class AudioRepository:
         poi_id: ObjectId,
         language_code: str,
     ) -> Optional[dict[str, Any]]:
+        localization = await self.get_localization(poi_id, language_code)
+        if not localization or not localization.get("audio_url"):
+            return None
         return await self.database["audio_assets"].find_one(
-            {"poi_id": poi_id, "language_code": language_code},
+            {"poi_id": poi_id, "language_code": language_code, "file_url": localization["audio_url"]},
             sort=[("created_at", -1)],
         )
 

@@ -1,5 +1,5 @@
 import { fetchPois } from '../../services/poiRepository';
-import { getAllItems, setItem, STORES } from '../../db/indexedDB';
+import { getAllItems, getItem, setItem, STORES } from '../../db/indexedDB';
 
 /**
  * Loads POIs for a language, attempting server first then local storage fallback.
@@ -16,15 +16,9 @@ export async function loadPoisWithFallback(language, fetchImpl = fetchPois) {
     
     // Cache the retrieved POIs locally for offline use (A2 support)
     try {
-      await Promise.all(
-        serverPois.map((poi) =>
-          setItem(STORES.POIS, {
-            ...poi,
-            language,
-            cachedAt: Date.now(),
-          }),
-        ),
-      );
+      // One snapshot per language: switching language must not overwrite another.
+      await setItem(STORES.APP_STATE, { pois: serverPois, cachedAt: Date.now() }, `pois:${language}`);
+
     } catch (cacheError) {
       console.warn('[poiLoader] Failed to cache POIs to local IndexedDB:', cacheError);
     }
@@ -35,9 +29,11 @@ export async function loadPoisWithFallback(language, fetchImpl = fetchPois) {
 
     // Alternative Path A2: Retrieve stored offline POIs
     try {
+      const snapshot = await getItem(STORES.APP_STATE, `pois:${language}`);
+      if (snapshot && Array.isArray(snapshot.pois)) return { pois: snapshot.pois, source: 'offline' };
       const storedPois = await getAllItems(STORES.POIS);
       const filteredPois = (storedPois || []).filter(
-        (p) => !p.language || p.language === language,
+        (p) => p.language === language,
       );
 
       if (filteredPois.length > 0) {

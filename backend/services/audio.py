@@ -179,12 +179,9 @@ class AudioService:
             )
 
         errors: list[str] = []
+        # Audio packages are logical manifests assembled from their stored assets;
+        # package.file_url is metadata, not a second archive to download.
         unverified = False
-        package_info = await self.storage.inspect(package["file_url"])
-        if package_info is None or package_info.size is None:
-            unverified = True
-        elif package_info.size != package["file_size"]:
-            errors.append("Package file size does not match stored metadata")
 
         assets: list[AudioAssetResponse] = []
         for asset in documents:
@@ -195,6 +192,8 @@ class AudioService:
                 errors.append(
                     f"Audio asset {asset['_id']} checksum does not match"
                 )
+            if info is not None and asset.get("size_bytes") is not None and info.size != asset["size_bytes"]:
+                errors.append(f"Audio asset {asset['_id']} size does not match")
             assets.append(await self._asset_response(asset))
 
         integrity_status = (
@@ -463,6 +462,16 @@ class AudioService:
             raise HTTPException(status_code=404, detail="Ready audio asset not found")
         return await self._asset_response(document)
 
+    async def read_asset(self, asset_id: str) -> tuple[bytes, str]:
+        object_id = parse_object_id(asset_id, "audio asset")
+        document = await self.repository.get_asset(object_id)
+        if document is None:
+            raise HTTPException(status_code=404, detail="Audio asset not found")
+        result = await self.storage.read(document["file_url"])
+        if result is None:
+            raise HTTPException(status_code=404, detail="Audio object not found")
+        return result
+
     async def assign_asset(
         self,
         package_id: str,
@@ -508,6 +517,7 @@ class AudioService:
         self,
         document: dict[str, Any],
     ) -> AudioAssetResponse:
+        metadata = await self.storage.inspect(document["file_url"])
         return AudioAssetResponse(
             id=str(document["_id"]),
             package_id=(
@@ -519,6 +529,7 @@ class AudioService:
             language_code=document["language_code"],
             file_url=document["file_url"],
             playback_url=await self.storage.get_access_url(document["file_url"]),
+            size_bytes=metadata.size if metadata else None,
             duration=document["duration"],
             checksum=document["checksum"],
             created_at=document["created_at"],

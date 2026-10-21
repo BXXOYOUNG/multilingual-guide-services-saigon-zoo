@@ -1,3 +1,15 @@
+# Hệ thống thuyết minh đa ngôn ngữ Thảo Cầm Viên
+
+Bản hiện tại là demo mô phỏng với 11 POI, 6 ngôn ngữ, 66 bản thu và 6 gói audio ngoại tuyến.
+
+- [Cài đặt, bật/tắt và bàn giao máy mới](HUONG_DAN_CAI_DAT_VA_BAN_GIAO.md)
+- [Kiến trúc và dữ liệu đang triển khai](docs/CURRENT_ARCHITECTURE.md)
+- [Đối chiếu yêu cầu với implementation](docs/REQUIREMENTS_TRACEABILITY.md)
+- [File cũ đã dọn/lưu trữ và thành phần cần giữ](docs/CLEANUP_REVIEW.md)
+- [Kết quả audit và kiểm thử](docs/AUDIT_REPORT_2026-10-21.md)
+
+Các use case dưới đây là **yêu cầu mục tiêu gốc**. Những nhánh như TTS fallback trực tiếp chưa được triển khai đầy đủ; xem bảng đối chiếu trước khi dùng README làm bằng chứng nghiệm thu. Sơ đồ PNG lịch sử đã chuyển vào `docs/archive/pre-audit-2026-10-21/`; sơ đồ hiện tại nằm trong tài liệu kiến trúc ở trên.
+
 # UC-01 — Thiết lập ngôn ngữ thuyết minh
 
 ## Use Case

@@ -38,6 +38,10 @@ export function LanguageProvider({ children }) {
     initLanguage();
   }, []);
 
+  useEffect(() => {
+    document.documentElement.lang = currentLanguage;
+  }, [currentLanguage]);
+
   /**
    * Selects and persists language (UC-01 Steps 4, 5, 6).
    * Handles Exception Path E1 if saving fails.
