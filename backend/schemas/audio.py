@@ -59,7 +59,7 @@ class AudioTaskStatusUpdate(BaseModel):
 class AudioTaskResponse(BaseModel):
     model_config = ConfigDict(populate_by_name=True)
 
-    id: str = Field(alias="_id")
+    id: str
     poi_id: str
     language_code: str
     type: AudioTaskType
@@ -89,12 +89,13 @@ class AudioAssetCreate(BaseModel):
 class AudioAssetResponse(BaseModel):
     model_config = ConfigDict(populate_by_name=True)
 
-    id: str = Field(alias="_id")
+    id: str
     package_id: Optional[str]
     poi_id: str
     language_code: str
     file_url: str
     playback_url: Optional[str]
+    size_bytes: Optional[int] = None
     duration: float
     checksum: str
     created_at: datetime
@@ -117,7 +118,7 @@ class AudioPackageCreate(BaseModel):
 class AudioPackageResponse(BaseModel):
     model_config = ConfigDict(populate_by_name=True)
 
-    id: str = Field(alias="_id")
+    id: str
     name: str
     language_code: str
     description: str

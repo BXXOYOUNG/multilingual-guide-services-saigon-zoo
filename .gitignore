@@ -72,3 +72,13 @@ Thumbs.db
 
 # Storage and uploads
 uploads/
+/.demo-run/
+
+# Private handoff backups and storage credentials
+/handoff/
+/backups/
+**/seaweed.env
+*.archive.gz
+*.tar
+*.tar.gz
+*.zip.part*

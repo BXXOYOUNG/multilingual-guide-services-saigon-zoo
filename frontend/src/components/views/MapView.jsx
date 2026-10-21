@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { useLanguage } from '../../features/localization/LanguageContext';
-import InteractiveMap from '../../features/map/InteractiveMap';
+import { useTranslation } from '../../features/localization/useTranslation';
+const InteractiveMap = lazy(() => import('../../features/map/InteractiveMap'));
 
 export default function MapView() {
   const { currentLanguage } = useLanguage();
+  const { t } = useTranslation();
 
   return (
     <div className="map-view-page">
-      <InteractiveMap language={currentLanguage} />
+      <Suspense fallback={<div className="map-canvas-wrapper">{t('map.loading')}</div>}><InteractiveMap language={currentLanguage} /></Suspense>
     </div>
   );
 }

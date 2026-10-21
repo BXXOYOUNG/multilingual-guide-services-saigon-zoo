@@ -1,0 +1,7 @@
+﻿language_code,language_name,native_name,script,standard,status,runtime_integration_note,localization_records,human_review_complete
+vi,Vietnamese,Tiếng Việt,Latin,ISO 639-1,Draft content; editorial review required,Current app support not assumed; frontend selector must use exact code and should be tested,11,No
+en,English,English,Latin,ISO 639-1,Draft translation; fluent English review required,Current app support not assumed; frontend selector must use exact code and should be tested,11,No
+fr,French,Français,Latin,ISO 639-1,Database localization imported; editorial and French terminology review required,Local API verification on 2026-10-20: GET /api/pois?language=fr returned 11 POIs. Browser selector flow should still be checked.,11,No
+zh-Hans,Chinese (Simplified),简体中文,Simplified Han,BCP 47 language tag,AI-assisted draft; native-speaker and terminology review required,Current app support not assumed; frontend selector must use exact code and should be tested,11,No
+ja,Japanese,日本語,Japanese scripts,ISO 639-1 / BCP 47,AI-assisted draft; native-speaker and terminology review required,Current app support not assumed; frontend selector must use exact code and should be tested,11,No
+ko,Korean,한국어,Hangul,ISO 639-1 / BCP 47,AI-assisted draft; native-speaker and terminology review required,Current app support not assumed; frontend selector must use exact code and should be tested,11,No

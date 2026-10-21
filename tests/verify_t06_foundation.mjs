@@ -10,7 +10,7 @@ console.log('--- Verifying Task T06: PWA / Service Worker / IndexedDB Foundation
 
 // 1. Verify files exist
 const requiredFiles = [
-  'frontend/public/sw.js',
+  'frontend/dist/sw.js',
   'frontend/public/manifest.json',
   'frontend/src/sw/registerServiceWorker.js',
   'frontend/src/db/indexedDB.js',
@@ -34,7 +34,7 @@ if (!allFilesExist) {
 }
 
 // 2. Verify Service Worker content
-const swContent = fs.readFileSync(path.join(projectRoot, 'frontend/public/sw.js'), 'utf8');
+const swContent = fs.readFileSync(path.join(projectRoot, 'frontend/dist/sw.js'), 'utf8');
 const swChecks = [
   { desc: 'Install listener', pattern: /addEventListener\(\s*['"]install['"]/ },
   { desc: 'Activate listener', pattern: /addEventListener\(\s*['"]activate['"]/ },

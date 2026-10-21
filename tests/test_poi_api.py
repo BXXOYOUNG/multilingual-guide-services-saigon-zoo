@@ -110,7 +110,7 @@ class POIRepositoryTests(unittest.IsolatedAsyncioTestCase):
         )
         self.assertEqual(
             database["poi"].find_calls[0][0],
-            {"is_active": True},
+            {"is_active": True, "latitude": {"$type": "number"}, "longitude": {"$type": "number"}},
         )
         self.assertEqual(
             database["poi_localizations"].find_calls[0][0],
@@ -126,6 +126,7 @@ class POIRepositoryTests(unittest.IsolatedAsyncioTestCase):
                 "poi_id": 1,
                 "title": 1,
                 "description": 1,
+                "translation_review_status": 1,
             },
         )
 
@@ -144,6 +145,9 @@ class POIRepositoryTests(unittest.IsolatedAsyncioTestCase):
                     "is_active": True,
                     "latitude": 10.78,
                     "longitude": 106.7,
+                    "image_url": None, "image_source_url": None, "source_url": None,
+                    "coordinate_source_url": None, "coordinate_status": None,
+                    "translation_review_status": None,
                 }
             ],
             [],
@@ -192,6 +196,8 @@ class POIAPITests(unittest.TestCase):
                     "description": "Main entrance",
                     "latitude": 10.78,
                     "longitude": 106.7,
+                    "image_url": None, "image_source_url": None, "source_url": None,
+                    "coordinate_source_url": None, "coordinate_status": None, "translation_review_status": None,
                 }
             ],
         )
