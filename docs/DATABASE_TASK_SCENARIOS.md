@@ -47,7 +47,7 @@ Backend settings được đọc từ `backend/config.py`: `MONGODB_URI`, `MONGO
 - Nội dung text được định danh theo POI + language như model hiện hành.
 - Giữ đúng quan hệ đã ghi trong IMPLEMENTATION_PLAN: `audio_tasks` là trạng thái xử lý, `audio_assets` là audio sẵn sàng, `poi_localizations.audio_url` tham chiếu audio phát được và `audio_packages` gom asset offline.
 - Không thay `audio_url` bằng URL task hoặc URL package; không thêm collection/field để né việc đọc ERD.
-- Chỉ task storage/audio sử dụng SeaweedFS, thông qua adapter. Không suy ra API/credential/bucket từ việc container đang chạy; đọc cấu hình và adapter trước.
+- Audio và ảnh POI upload sử dụng SeaweedFS thông qua adapter hiện có. Không suy ra API/credential/bucket từ việc container đang chạy; đọc cấu hình và adapter trước. Luồng admin mới: [ADMIN_POI_WORKFLOW.md](ADMIN_POI_WORKFLOW.md).
 
 ### D. Ghi dữ liệu quản trị hoặc cập nhật dataset
 

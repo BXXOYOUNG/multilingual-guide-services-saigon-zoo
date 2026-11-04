@@ -27,6 +27,17 @@ from backend.services.admin_auth import require_permission
 
 router = APIRouter(prefix="/audio", tags=["audio"])
 
+
+@router.get('/packages')
+async def list_available_packages(database: AsyncDatabase = Depends(get_database)):
+    packages = await database['audio_packages'].find({'is_offline': True}).sort('created_at', -1).to_list(length=200)
+    rows = []
+    for pack in packages:
+        count = await database['audio_assets'].count_documents({'package_id': pack['_id']})
+        if count:
+            rows.append({'id': str(pack['_id']), 'name': pack['name'], 'language_code': pack['language_code'], 'asset_count': count})
+    return rows
+
 # Optional override for tests or explicit dependency injection.
 _storage_provider: Optional[AudioStorageProvider] = None
 

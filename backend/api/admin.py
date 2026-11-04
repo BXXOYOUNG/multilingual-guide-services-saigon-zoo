@@ -2,7 +2,8 @@ from datetime import datetime, timedelta, timezone
 
 from bson import ObjectId
 from fastapi import APIRouter, Depends, HTTPException, Query
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
+from urllib.parse import urlparse
 from pymongo.asynchronous.database import AsyncDatabase
 
 from backend.database.mongodb import get_database
@@ -21,13 +22,42 @@ class PoiInput(BaseModel):
     latitude: float = Field(ge=-90, le=90)
     longitude: float = Field(ge=-180, le=180)
     image_url: str = ""
+    scientific_name: str = Field(default='', max_length=180)
     is_active: bool = True
+
+    @field_validator('image_url')
+    @classmethod
+    def validate_image_url(cls, value):
+        if not value or value.startswith(('/images/', '/api/media/pois/')):
+            return value
+        parsed = urlparse(value)
+        if parsed.scheme != 'https' or not parsed.netloc or parsed.username:
+            raise ValueError('Use an HTTPS image URL or an uploaded image')
+        return value
 
 
 class LocalizationInput(BaseModel):
     title: str = Field(min_length=1, max_length=180)
     description: str = Field(min_length=1, max_length=10000)
     tts_status: str = "draft"
+
+
+class InitialLocalization(BaseModel):
+    language_code: str
+    title: str = Field(min_length=1, max_length=180)
+    description: str = Field(min_length=1, max_length=10000)
+
+    @field_validator('language_code')
+    @classmethod
+    def supported_language(cls, value):
+        if value not in LANGUAGES:
+            raise ValueError('Unsupported language')
+        return value
+
+
+class PoiCreateInput(PoiInput):
+    is_active: bool = False
+    initial_localization: InitialLocalization | None = None
 
 
 @router.get("/geofences")
@@ -43,6 +73,8 @@ async def list_pois(language: str = Query("vi"), _=Depends(require_permission("p
     pois = await db["poi"].find({}).sort("name", 1).to_list(length=None)
     localizations = await db["poi_localizations"].find({"poi_id": {"$in": [poi["_id"] for poi in pois]}, "language_code": language}).to_list(length=None)
     localized = {item["poi_id"]: item for item in localizations}
+    zones = await db['geofence_zones'].find({'zone_type': 'circle'}).to_list(length=None)
+    zone_by_poi = {zone['poi_id']: zone for zone in zones}
     return [{
         "id": str(poi["_id"]), "name": poi.get("name", ""), "category": poi.get("category", ""),
         "system_description": poi.get("description", ""),
@@ -50,18 +82,33 @@ async def list_pois(language: str = Query("vi"), _=Depends(require_permission("p
         "title": localized.get(poi["_id"], {}).get("title", poi.get("name", "")),
         "latitude": poi.get("latitude"), "longitude": poi.get("longitude"),
         "image_url": poi.get("image_url", ""), "is_active": poi.get("is_active", False),
+        "scientific_name": poi.get('scientific_name', ''),
+        "geofence_radius": zone_by_poi.get(poi['_id'], {}).get('radius', 35),
+        "geofence_active": zone_by_poi.get(poi['_id'], {}).get('is_active', False),
         "has_localization": poi["_id"] in localized,
         "audio_url": localized.get(poi["_id"], {}).get("audio_url"),
         "tts_status": localized.get(poi["_id"], {}).get("tts_status", "draft"),
+        "tts_task_id": str(localized[poi['_id']]['tts_task_id']) if localized.get(poi['_id'], {}).get('tts_task_id') else None,
     } for poi in pois]
 
 
 @router.post("/pois", status_code=201)
-async def create_poi(data: PoiInput, _=Depends(require_permission("poi:write")), db: AsyncDatabase = Depends(get_database)):
+async def create_poi(data: PoiCreateInput, user=Depends(require_permission("poi:write")), db: AsyncDatabase = Depends(get_database)):
+    if data.initial_localization and 'content:write' not in user.get('permissions', []):
+        raise HTTPException(403, 'Content write permission is required to create a localization')
     now = datetime.now(timezone.utc)
-    doc = data.model_dump() | {"created_at": now, "updated_at": now,
+    doc = data.model_dump(exclude={'initial_localization'}) | {"created_at": now, "updated_at": now,
+        "is_demo": True, "coordinate_status": "DEMO_APPROXIMATE_NOT_VERIFIED",
         "geometry": {"type": "Point", "coordinates": [data.longitude, data.latitude]}}
     result = await db["poi"].insert_one(doc)
+    if data.initial_localization:
+        loc = data.initial_localization
+        try:
+            await db['poi_localizations'].insert_one({'poi_id': result.inserted_id, 'language_code': loc.language_code,
+                'title': loc.title, 'description': loc.description, 'audio_url': None, 'tts_status': 'draft', 'updated_at': now})
+        except Exception:
+            await db['poi'].delete_one({'_id': result.inserted_id})
+            raise
     return {"id": str(result.inserted_id)}
 
 
@@ -100,7 +147,9 @@ async def save_localization(poi_id: str, language: str, data: LocalizationInput,
     values = data.model_dump() | {"updated_at": datetime.now(timezone.utc)}
     changed = previous is None or any(previous.get(key) != values[key] for key in ("title", "description"))
     if changed:
-        values.update({"audio_url": None, "tts_status": "draft", "audio_status": "STALE_REQUIRES_REGENERATION"})
+        values.update({"audio_url": None, "tts_status": "draft", "tts_task_id": None, "audio_status": "STALE_REQUIRES_REGENERATION"})
+    else:
+        values.pop('tts_status', None)
     await db["poi_localizations"].update_one(
         {"poi_id": oid, "language_code": language},
         {"$set": values, "$setOnInsert": {"poi_id": oid, "language_code": language}},

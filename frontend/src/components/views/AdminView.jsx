@@ -1,16 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { Link } from 'react-router-dom';
+import { adminApi as api } from '../../services/adminApi';
+import { PoiWorkflowEditor, LocalizationWorkflowEditor } from './AdminPoiWorkflow';
 import { useTranslation } from '../../features/localization/useTranslation';
 
-async function api(url, options = {}) {
-  const response = await fetch(url, { credentials: 'same-origin', ...options, headers: { 'Content-Type': 'application/json', ...(options.headers || {}) } });
-  if (!response.ok) {
-    const body = await response.json().catch(() => ({}));
-    throw new Error(body.error?.message || body.detail || `Request failed (${response.status})`);
-  }
-  return response.status === 204 ? null : response.json();
-}
 
 const LANGS = ['vi', 'en', 'fr', 'zh-Hans', 'ja', 'ko'];
 const LANGUAGE_NAMES = { vi: 'Tiếng Việt', en: 'English', fr: 'Français', 'zh-Hans': '中文', ja: '日本語', ko: '한국어' };
@@ -26,7 +20,7 @@ export default function AdminView() {
   const [password, setPassword] = useState('');
   const [language, setLanguage] = useState(appLanguage);
   const [pois, setPois] = useState([]);
-  const [assets, setAssets] = useState([]);
+  const [packageList, setPackageList] = useState([]);
   const [selected, setSelected] = useState(null);
   const [editingPoi, setEditingPoi] = useState(null);
   const [message, setMessage] = useState('');
@@ -36,18 +30,18 @@ export default function AdminView() {
   const [showNewPoi, setShowNewPoi] = useState(false);
   const [showPasswordForm, setShowPasswordForm] = useState(false);
 
-  const load = useCallback(async () => {
-    setLoading(true);
-    try { const [poiRows, assetRows] = await Promise.all([
+  const load = useCallback(async (silent = false) => {
+    if (!silent) setLoading(true);
+    try { const [poiRows, packageRows] = await Promise.all([
       api(`/api/admin/pois?language=${language}`),
-      api(`/api/admin/audio-assets?language=${language}`),
+      api('/audio/packages'),
     ]);
     setPois(poiRows);
-    setAssets(assetRows); } finally { setLoading(false); }
+    setPackageList(packageRows.filter((pack) => pack.language_code === language)); } finally { setLoading(false); }
   }, [language]);
 
   useEffect(() => { api('/api/admin/auth/session').then(setUser).catch(() => setUser(null)).finally(() => setSessionLoading(false)); }, []);
-  useEffect(() => { setLanguage(appLanguage); }, [appLanguage]);
+  useEffect(() => { setLanguage(appLanguage); setSelected(null); setEditingPoi(null); setShowNewPoi(false); }, [appLanguage]);
   useEffect(() => { if (user) load().catch((error) => setMessage(error.message)); }, [user, load]);
 
   async function signIn(event) {
@@ -65,19 +59,11 @@ export default function AdminView() {
   }
 
   async function createPackage() {
-    const selectedAssets = assets.filter((asset) => !asset.package_id);
-    if (!selectedAssets.length) { setMessage(t('admin.packageNoAssets')); return; }
     setWorking(true);
     try {
-      const totalBytes = selectedAssets.reduce((sum, asset) => sum + (asset.file_size || Math.max(0, asset.duration) * 7000), 0);
-      const pack = await api('/audio/packages', { method: 'POST', body: JSON.stringify({
-        name: `Audio guide (${language.toUpperCase()})`, language_code: language,
-        description: 'Offline audio package.',
-        file_url: `packages/${language}/${Date.now()}.manifest.json`, file_size: totalBytes, is_offline: true,
-      }) });
-      for (const asset of selectedAssets) await api(`/audio/packages/${pack.id}/assets/${asset.id}`, { method: 'POST' });
+      const pack = await api('/api/admin/audio-packages', { method: 'POST', body: JSON.stringify({ name: `Audio guide (${language.toUpperCase()})`, language_code: language }) });
       setPackageQr({ id: pack.id, name: pack.name });
-      setMessage(t('admin.packageDone', { count: selectedAssets.length }));
+      setMessage(t('admin.packageDone', { count: pack.asset_count }));
       await load();
     } catch (error) { setMessage(error.message); }
     finally { setWorking(false); }
@@ -124,14 +110,14 @@ export default function AdminView() {
           <div className="admin-actions"><button className="btn btn-secondary" onClick={() => setSelected(poi)}>{t('admin.editTranslation')}</button><button className="btn btn-secondary" onClick={() => setEditingPoi(poi)}>{t('admin.editPoi')}</button><button className="btn btn-secondary" onClick={() => setPoiQr(poi)}>{t('admin.qrPoi')}</button>{poi.is_active && <button className="btn admin-danger" onClick={() => deactivate(poi)}>{t('admin.hidePoi')}</button>}</div>
         </article>)}
       </>}
-      {showNewPoi && <AdminDialog onClose={() => setShowNewPoi(false)} label={t('admin.addPoi')}><div className="card"><h2>{t('admin.addPoi')}</h2><NewPoiForm language={language} onSaved={async () => { setShowNewPoi(false); await load(); setMessage(t('admin.savedPoi')); }} /></div></AdminDialog>}
+      {showNewPoi && <AdminDialog onClose={() => setShowNewPoi(false)} label={t('admin.addPoi')}><PoiWorkflowEditor language={language} onClose={() => setShowNewPoi(false)} onSaved={async () => { await load(true); }} /></AdminDialog>}
     </div>
-    <div className="card admin-package"><span className="eyebrow">OFFLINE AUDIO</span><h2>{t('admin.package')}</h2><p>{t('admin.packageReady', { count: assets.filter((asset) => !asset.package_id).length, language: language.toUpperCase() })}</p><button className="btn" disabled={working} onClick={createPackage}>{t('admin.createPackage')}</button>
+    <div className="card admin-package"><span className="eyebrow">OFFLINE AUDIO</span><h2>{t('admin.package')}</h2><p>{t('workflow.packageHint')}</p><button className="btn" disabled={working} onClick={createPackage}>{t('workflow.packagePublish')}</button>{packageList.map((pack) => <div key={pack.id} className="offline-package-row"><div><strong>{pack.name}</strong><p>{pack.asset_count} audio</p></div><button type="button" className="btn btn-secondary" onClick={() => setPackageQr(pack)}>{t('admin.qrPoi')}</button></div>)}
       {packageQr && <div className="package-qr"><QRCodeSVG value={`TCV-PACKAGE:${packageQr.id}`} size={220} /><p>{packageQr.name}</p><code>TCV-PACKAGE:{packageQr.id}</code><p>{t('admin.packageQrInstruction')}</p></div>}
     </div>
     {poiQr && <AdminDialog onClose={() => setPoiQr(null)} label={t('admin.qrPoi')}><div className="card package-qr"><h2>{t('admin.poiQrTitle', { name: poiQr.title })}</h2><QRCodeSVG value={`TCV-POI:${poiQr.id}`} size={220} /><code>TCV-POI:{poiQr.id}</code><p>{t('admin.poiQrInstruction')}</p><button className="btn btn-secondary" onClick={() => setPoiQr(null)}>{t('admin.close')}</button></div></AdminDialog>}
-    {selected && <AdminDialog onClose={() => setSelected(null)} label={t('admin.editTranslation')}><LocalizationEditor key={`${selected.id}-${language}`} poi={selected} language={language} onClose={() => setSelected(null)} onSaved={async () => { setSelected(null); await load(); setMessage(t('admin.translationSaved')); }} /></AdminDialog>}
-    {editingPoi && <AdminDialog onClose={() => setEditingPoi(null)} label={t('admin.editPoi')}><PoiEditor key={editingPoi.id} poi={editingPoi} onClose={() => setEditingPoi(null)} onSaved={async () => { setEditingPoi(null); await load(); setMessage(t('admin.poiUpdated')); }} /></AdminDialog>}
+    {selected && <AdminDialog onClose={() => setSelected(null)} label={t('admin.editTranslation')}><LocalizationWorkflowEditor key={`${selected.id}-${language}`} poi={selected} language={language} onClose={() => setSelected(null)} onSaved={() => load(true)} /></AdminDialog>}
+    {editingPoi && <AdminDialog onClose={() => setEditingPoi(null)} label={t('admin.editPoi')}><PoiWorkflowEditor key={editingPoi.id} poi={editingPoi} language={language} onClose={() => setEditingPoi(null)} onSaved={() => load(true)} /></AdminDialog>}
   </section>;
 }
 
@@ -155,61 +141,4 @@ function PasswordForm({ onClose, onSaved }) {
     catch (cause) { setError(cause.message); }
   }
   return <div className="card"><h2>{t('admin.changePassword')}</h2><form className="admin-form" onSubmit={submit}><label>{t('admin.passwordCurrent')}<input type="password" autoComplete="current-password" value={current} onChange={(event) => setCurrent(event.target.value)} required /></label><label>{t('admin.passwordNew')}<input type="password" autoComplete="new-password" minLength={12} value={next} onChange={(event) => setNext(event.target.value)} required /></label><div><button className="btn">{t('admin.update')}</button> <button type="button" className="btn btn-secondary" onClick={onClose}>{t('admin.close')}</button></div>{error && <p role="alert">{error}</p>}</form></div>;
-}
-
-function PoiEditor({ poi, onClose, onSaved }) {
-  const { t } = useTranslation();
-  const [form, setForm] = useState({ name: poi.name || '', category: poi.category || '', description: poi.system_description ?? poi.description ?? '', latitude: poi.latitude, longitude: poi.longitude, image_url: poi.image_url || '', is_active: poi.is_active });
-  const [error, setError] = useState('');
-  const update = (key) => (event) => setForm((current) => ({ ...current, [key]: event.target.value }));
-  async function save(event) {
-    event.preventDefault(); setError('');
-    try { await api(`/api/admin/pois/${poi.id}`, { method: 'PUT', body: JSON.stringify({ ...form, latitude: Number(form.latitude), longitude: Number(form.longitude) }) }); await onSaved(); }
-    catch (cause) { setError(cause.message); }
-  }
-  return <div className="card"><h2>{t('admin.poiUpdate', { name: poi.name })}</h2><form className="admin-form" onSubmit={save}>
-    <label>{t('admin.systemName')}<input value={form.name} onChange={update('name')} required /></label><label>{t('admin.category')}<input value={form.category} onChange={update('category')} required /></label>
-    <label>{t('admin.systemDescription')}<textarea rows={4} value={form.description} onChange={update('description')} required /></label>
-    <label>{t('admin.latitude')}<input type="number" step="any" min="-90" max="90" value={form.latitude} onChange={update('latitude')} required /></label><label>{t('admin.longitude')}<input type="number" step="any" min="-180" max="180" value={form.longitude} onChange={update('longitude')} required /></label>
-    <label><span>{t('admin.visibility')}</span><input type="checkbox" checked={form.is_active} onChange={(event) => setForm((current) => ({ ...current, is_active: event.target.checked }))} /></label>
-    <p>{t('admin.locationReview')}</p><div><button className="btn">{t('admin.save')}</button> <button type="button" className="btn btn-secondary" onClick={onClose}>{t('admin.close')}</button></div>{error && <p role="alert">{error}</p>}
-  </form></div>;
-}
-
-function NewPoiForm({ language, onSaved }) {
-  const { t } = useTranslation();
-  const [form, setForm] = useState({ name: '', title: '', category: '', description: '', latitude: '', longitude: '' });
-  const [error, setError] = useState('');
-  const update = (key) => (event) => setForm((current) => ({ ...current, [key]: event.target.value }));
-  async function save(event) {
-    event.preventDefault(); setError('');
-    try {
-      const created = await api('/api/admin/pois', { method: 'POST', body: JSON.stringify({ name: form.name, category: form.category, description: form.description, latitude: Number(form.latitude), longitude: Number(form.longitude), image_url: '', is_active: false }) });
-      await api(`/api/admin/pois/${created.id}/localizations/${language}`, { method: 'PUT', body: JSON.stringify({ title: form.title, description: form.description, tts_status: 'draft' }) });
-      await onSaved();
-    } catch (cause) { setError(cause.message); }
-  }
-  return <form className="admin-form" onSubmit={save}>
-    <label>{t('admin.systemName')}<input value={form.name} onChange={update('name')} required /></label>
-    <label>{t('admin.newPoiTitle')}<input value={form.title} onChange={update('title')} required /></label>
-    <label>{t('admin.category')}<input value={form.category} onChange={update('category')} required /></label>
-    <label>{t('admin.descriptionDraft')}<textarea rows={4} value={form.description} onChange={update('description')} required /></label>
-    <label>{t('admin.latitude')}<input type="number" step="any" min="-90" max="90" value={form.latitude} onChange={update('latitude')} required /></label>
-    <label>{t('admin.longitude')}<input type="number" step="any" min="-180" max="180" value={form.longitude} onChange={update('longitude')} required /></label>
-    <p>{t('admin.locationHidden')}</p>
-    <button className="btn">{t('admin.createPoi')}</button>{error && <p role="alert">{error}</p>}
-  </form>;
-}
-
-function LocalizationEditor({ poi, language, onClose, onSaved }) {
-  const { t } = useTranslation();
-  const [title, setTitle] = useState(poi.title || '');
-  const [description, setDescription] = useState(poi.description || '');
-  const [error, setError] = useState('');
-  async function save(event) {
-    event.preventDefault(); setError('');
-    try { await api(`/api/admin/pois/${poi.id}/localizations/${language}`, { method: 'PUT', body: JSON.stringify({ title, description, tts_status: 'draft' }) }); await onSaved(); }
-    catch (cause) { setError(cause.message); }
-  }
-  return <div className="card"><h2>{t('admin.translationTitle', { name: poi.name, language })}</h2><form className="admin-form" onSubmit={save}><label>{t('admin.newPoiTitle')}<input value={title} onChange={(event) => setTitle(event.target.value)} required /></label><label>{t('admin.content')}<textarea rows={8} value={description} onChange={(event) => setDescription(event.target.value)} required /></label><div><button className="btn">{t('admin.saveDraft')}</button> <button type="button" className="btn btn-secondary" onClick={onClose}>{t('admin.close')}</button></div>{error && <p role="alert">{error}</p>}</form><p>{t('admin.translationReview')}</p></div>;
 }

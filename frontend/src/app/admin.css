@@ -78,6 +78,18 @@
 .admin-dialog h2 { padding-right: 32px; }
 .admin-dialog-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border: 1px solid #dbe4d5; border-radius: 50%; background: #f4f7ee; color: #33543a; font-size: 1.35rem; cursor: pointer; }
 .admin-form { gap: 18px; }
+.admin-workflow-form fieldset { display: grid; gap: 16px; min-width: 0; padding: 18px; border: 1px solid #dde6d8; border-radius: 14px; }
+.admin-workflow-form legend { padding: 0 8px; color: #245d46; font-size: .85rem; font-weight: 700; }
+.admin-form-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.admin-image-preview { width: 100%; max-height: 250px; object-fit: contain; border-radius: 12px; background: #eef2e8; }
+.admin-container .admin-checkbox { display: flex; align-items: center; gap: 10px; }
+.admin-narration-panel { display: grid; gap: 12px; padding: 18px; border: 1px solid #cdddc7; border-radius: 14px; background: #f4f8ee; }
+.admin-narration-panel h3 { font-size: .9rem; }.admin-narration-panel audio { width: 100%; }
+.admin-narration-panel [role=alert] { color: #a1472f; }
+.admin-job-state { padding: 9px 12px; border-radius: 8px; background: #e6eddf; }
+.admin-job-state.state-failed { background: #fff0e7; color: #984c31; }.admin-job-state.state-completed { color: #24633c; }
+.admin-workflow-actions { display: flex; flex-wrap: wrap; gap: 9px; }
+@media (max-width: 480px) { .admin-form-columns { grid-template-columns: 1fr; }.admin-workflow-form fieldset { padding: 13px; } }
 .admin-form p, .admin-dialog .card > p { font-size: .8rem; line-height: 1.7; color: #77846f; }
 .admin-form input[type=checkbox] { width: 20px; height: 20px; accent-color: #245d46; }
 .admin-form [role=alert] { color: #ad4536; }

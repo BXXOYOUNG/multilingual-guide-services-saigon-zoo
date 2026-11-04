@@ -22,6 +22,8 @@ $env:MONGODB_DATABASE = 'saigon_zoo_tcv_dataset_dev'
 
 Admin uses an HTTP-only cookie and Redis session. Use your individually provisioned account; do not put admin passwords into this document. In `/admin`, select a content language, inspect POIs and generated audio, create a QR code for a POI or offline package, or inspect analytics.
 
+The admin workflow now supports image upload, circular geofence configuration, saved-text TTS with voice selection/job status/preview, and publication of immutable audio snapshots. Follow [ADMIN_POI_WORKFLOW.md](ADMIN_POI_WORKFLOW.md). TTS runs in the API process and needs Internet; Redis supplies a per-POI/language lease, not a durable worker queue. Install updated `backend/requirements.txt` before restarting an older checkout.
+
 ## Local development
 
 Backend dependencies and API (set MongoDB, Redis and S3 process environment first as shown in the handoff guide):
@@ -65,3 +67,5 @@ node tests/verify_t06_foundation.mjs
 ```
 
 The runtime audit is read-only and requires the local backend and dependencies. For browser audit, install `playwright` in the development venv and its Chromium browser, then run `python tests/e2e_audit.py`. It creates/removes a temporary admin and intercepts visitor analytics; it does not use a real account password. See `AUDIT_REPORT_2026-10-21.md` for limitations.
+
+Run `python tests/e2e_admin_workflow.py` separately for the new live workflow, including real Edge TTS, uploaded image, snapshot QR, offline playback and regeneration. It needs Docker/Internet and creates/removes disposable records and storage objects. Run these browser audits sequentially against an idle demo. Expected counts are read from the current database; adding a POI with only one localization is valid and does not require six translations/audio files immediately.
