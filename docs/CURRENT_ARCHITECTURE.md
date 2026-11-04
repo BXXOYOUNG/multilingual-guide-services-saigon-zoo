@@ -1,6 +1,6 @@
 # Kiến trúc và mô hình dữ liệu đang triển khai
 
-Cập nhật qua audit ngày 21/10/2026. Đây là mô tả **as-built** của bản demo, không phải đề xuất đổi kiến trúc.
+Cập nhật luồng admin ngày 04/11/2026; audit nền ngày 21/10/2026. Đây là mô tả **as-built** của bản demo, không phải đề xuất đổi kiến trúc. Hướng dẫn thao tác: [ADMIN_POI_WORKFLOW.md](ADMIN_POI_WORKFLOW.md).
 
 ## Thứ tự đọc và giải quyết khác biệt
 
@@ -33,24 +33,32 @@ flowchart LR
     Auth[Cookie session + kiểm tra permission]
     Repos[Repository và truy cập MongoDB]
     Storage[S3 audio storage adapter]
+    TTS[Admin narration: FastAPI BackgroundTasks]
     Routes --> Repos
     Routes --> Storage
+    Routes --> TTS
+    TTS --> Repos
+    TTS --> Storage
     Auth --> Routes
   end
   Visitor --> Routes
   Admin --> Auth
-  Auth --> Redis[(Redis: session và rate limit)]
+  Auth --> Redis[(Redis: session, rate limit, khóa TTS có TTL)]
+  TTS --> Redis
+  TTS --> Edge[Edge TTS online]
   Repos --> Mongo[(MongoDB rs0)]
-  Storage --> S3[(SeaweedFS: MP3)]
+  Storage --> S3[(SeaweedFS: MP3 và ảnh POI tải lên)]
   Seed[Script tạo dữ liệu và Edge TTS] --> Mongo
   Seed --> S3
-  Seed --> Edge[Edge TTS online]
+  Seed --> Edge
   Visitor --> OSM[OpenStreetMap raster tiles online]
 ```
 
 - Chỉ có **một backend**, không phải các microservice triển khai độc lập.
 - Admin và visitor là các route của cùng frontend, không có frontend offline riêng.
-- TTS hiện chạy bằng script chuẩn bị dữ liệu. API audio task quản lý metadata/trạng thái, chưa có worker tự tạo TTS khi khách gặp audio thiếu.
+- Admin có thể lưu nội dung rồi yêu cầu tạo TTS cho từng ngôn ngữ; tác vụ chạy trong process FastAPI bằng `BackgroundTasks`, dùng Redis khóa trùng 5 phút. Không có worker/queue bền vững và không tự tạo TTS khi khách gặp audio thiếu. Script seed vẫn có thể chuẩn bị dữ liệu ban đầu.
+- Ảnh JPEG/PNG/WebP được kiểm tra phía server, tối đa 5 MB/16 megapixel, lưu SeaweedFS và phục vụ qua `/api/media/pois/...`; không lưu binary ảnh trong MongoDB.
+- Admin lưu vùng geofence tròn với bán kính 5–500 m. Gói tạo qua giao diện admin mới là snapshot các bản thu sẵn sàng của POI đang hiển thị, một ngôn ngữ/gói; tạo lại TTS không sửa membership/file của snapshot cũ.
 - Chưa có adapter dịch tự động; nội dung 6 ngôn ngữ được nạp trước và sửa qua admin.
 - Geofence được xét ở browser từ tọa độ GPS và vòng tròn server cung cấp. Không có dịch vụ theo dõi vị trí liên tục ở backend.
 - Không có background sync/push notification hoặc PMTiles trong bản hiện tại.
@@ -107,13 +115,21 @@ erDiagram
 | `playback_history` | bản ghi khi nghe hoàn tất có POI và audio ID; visitor `user_id` là định danh, không trỏ `admin_users` |
 | `location_events` | sự kiện geofence, vị trí và visitor ID, không phải tuyến đường liên tục |
 
+### Mở rộng cho luồng admin 04/11/2026
+
+- Không thêm collection hay đổi kiểu khóa. `poi.scientific_name` là tên khoa học; `image_url` có thể trỏ ảnh upload. POI tạo từ admin mặc định `is_active=false`.
+- `poi_localizations.tts_task_id` tham chiếu ObjectId của tác vụ hiện tại; thay title/description sẽ bỏ liên kết audio/task cũ. Chỉ tác vụ khớp task ID và nội dung hiện tại mới được gắn audio mới.
+- `audio_tasks` có thêm `voice`, `source_title`, `source_text`, `error_message`. Trạng thái: Pending → Processing → Completed/Failed. Tác vụ gián đoạn được nhận diện khi admin truy vấn trạng thái sau 5 phút; phải yêu cầu tạo lại.
+- `audio_assets.source_task_id` tham chiếu tác vụ TTS; bản thu gốc có `package_id=null`. Gói snapshot sao chép metadata asset với ObjectId riêng, cùng file bất biến, `is_snapshot=true`; `audio_packages.is_snapshot=true` chặn gán lại membership qua API cũ.
+- Snapshot cố định **audio**, không đóng băng toàn bộ tên/mô tả/ảnh POI; client tải metadata POI tại thời điểm tải gói. Gói legacy vẫn được đọc bình thường.
+
 Không có collection visitor `users`. `user_id` ẩn danh không phải foreign key tới tài khoản quản trị. `audit_logs`, `analytics_metrics`, `runtime_location`, collection `languages` trong thiết kế gốc chưa có đường ghi/sử dụng runtime đầy đủ; không mô tả chúng như đã triển khai.
 
 ## 4. Quy tắc nhất quán đã kiểm tra/sửa
 
 - POI chuyển vị trí: cập nhật cả GeoJSON của POI và tâm các geofence hình tròn của POI.
-- Sửa nội dung dịch: audio cũ không còn được resolve như audio khớp nội dung mới. Phải tạo/đăng ký audio mới; hiện chưa có nút tái sinh TTS tự động trong admin.
-- Gói offline đã tạo/tải là snapshot. Nó không tự cập nhật theo bản dịch mới; muốn phát hành bản mới phải chuẩn bị/gán lại audio và tải lại. Không xóa các MP3 cũ chỉ vì sửa bản dịch.
+- Sửa nội dung dịch: audio cũ không còn được resolve như audio khớp nội dung mới. Dùng nút lưu và tạo audio trong admin để tạo lại, chờ Completed rồi nghe thử.
+- Gói snapshot đã phát hành/tải không tự cập nhật theo bản dịch mới; phát hành gói mới và tải lại để nhận audio mới. Gói legacy vẫn được giữ và có API gán asset cũ. Không xóa các MP3 cũ chỉ vì sửa bản dịch.
 - POI cache được tách theo ngôn ngữ, không lấy bản dịch ngôn ngữ khác làm fallback ngầm.
 - Tải gói phải đủ asset; kiểm tra byte size và SHA-256 của file tải về. Lỗi/hủy thì khôi phục các record trước đó.
 - Analytics theo ngôn ngữ lấy từ **sự kiện**, không từ ngôn ngữ khởi đầu phiên.

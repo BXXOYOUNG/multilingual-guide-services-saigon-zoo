@@ -482,9 +482,13 @@ class AudioService:
         package = await self.repository.get_package(package_object_id)
         if package is None:
             raise HTTPException(status_code=404, detail="Audio package not found")
+        if package.get('is_snapshot'):
+            raise HTTPException(status_code=409, detail='Published snapshot packages are immutable; create a new package')
         asset = await self.repository.get_asset(asset_object_id)
         if asset is None:
             raise HTTPException(status_code=404, detail="Audio asset not found")
+        if asset.get('is_snapshot'):
+            raise HTTPException(status_code=409, detail='Published snapshot assets cannot be reassigned')
         if asset["language_code"] != package["language_code"]:
             raise HTTPException(
                 status_code=409,

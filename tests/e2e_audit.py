@@ -24,6 +24,12 @@ def main():
     base = 'http://localhost:3000'
     mongo = MongoClient('mongodb://127.0.0.1:27018/?replicaSet=rs0')
     db = mongo['saigon_zoo_tcv_dataset_dev']
+    admin_count = db.poi.count_documents({})
+    active_ids = [p['_id'] for p in db.poi.find({'is_active': True}, {'_id': 1})]
+    codes = ['vi', 'en', 'fr', 'zh-Hans', 'ja', 'ko']
+    poi_counts = {lang: db.poi_localizations.count_documents({'poi_id': {'$in': active_ids}, 'language_code': lang}) for lang in codes}
+    packs = list(db.audio_packages.find({'is_offline': True}))
+    recording_counts = {lang: len({str(a['poi_id']) for a in db.audio_assets.find({'language_code': lang, 'package_id': {'$in': [p['_id'] for p in packs]}})}) for lang in codes}
     username, password = 'audit-' + secrets.token_hex(6), secrets.token_urlsafe(24)
     role = db.roles.find_one({'name': 'administrator'})
     uid = db.admin_users.insert_one({'username': username, 'email': username + '@localhost.invalid', 'password_hash': hash_password(password), 'role_id': role['_id'], 'is_active': True, 'created_at': datetime.now(timezone.utc)}).inserted_id
@@ -42,10 +48,10 @@ def main():
             page.set_default_navigation_timeout(15000)
             page.on('pageerror', lambda error: page_errors.append(str(error)))
             page.goto(base)
-            expect(page.locator('.species-gallery .species-row')).to_have_count(11)
+            expect(page.locator('.species-gallery .species-row')).to_have_count(poi_counts['vi'])
             page.locator('.species-gallery').scroll_into_view_if_needed()
             page.wait_for_function("Array.from(document.querySelectorAll('.species-photo img')).every(i => i.complete && i.naturalWidth > 0)")
-            checks.append('11 catalog images load')
+            checks.append('All supplied catalog images load')
             print('PASS catalog images', flush=True)
             page.screenshot(path=str(out / 'home-desktop.png'), full_page=True)
             for size in [(390,844), (768,1024), (1440,1000)]:
@@ -62,7 +68,7 @@ def main():
             page.locator('input[autocomplete=username]').fill(username)
             page.locator('input[autocomplete=current-password]').fill(password)
             page.locator('.admin-login button[type=submit], .admin-login form button').click()
-            expect(page.locator('.admin-poi-row')).to_have_count(11, timeout=30000)
+            expect(page.locator('.admin-poi-row')).to_have_count(admin_count, timeout=30000)
             page.locator('.admin-search input').fill('no-such-animal-123')
             expect(page.locator('.admin-poi-row')).to_have_count(0)
             page.locator('.admin-search input').fill('')
@@ -94,13 +100,13 @@ def main():
             checks.append('Admin API create, localize, update and hide a disposable POI')
             print('PASS admin UI and temporary CRUD', flush=True)
             # All six packages must survive offline navigation and language changes.
-            for pack in db.audio_packages.find({}):
+            for pack in packs:
                 page.goto(base+f"/explore?package={pack['_id']}")
                 page.wait_for_function("!location.search", timeout=90000)
-            expect(page.locator('.explore-page .card').nth(1).locator('.offline-package-row')).to_have_count(6)
+            expect(page.locator('.explore-page .card').nth(1).locator('.offline-package-row')).to_have_count(len(packs))
             page.evaluate('navigator.serviceWorker.ready')
             page.goto(base+'/map')  # load lazy map chunk before going offline
-            expect(page.locator('.map-poi-marker')).to_have_count(11)
+            expect(page.locator('.map-poi-marker')).to_have_count(poi_counts['vi'])
             page.locator('.map-demo-geofence button').click()
             page.locator('.map-poi-marker').first.click()
             expect(page.locator('.poi-audio-player')).to_be_visible()
@@ -110,20 +116,20 @@ def main():
             checks.append('Map simulation opens and starts audio')
             print('PASS packages and map simulation', flush=True)
             context.set_offline(True)
-            for language in ['Tiếng Việt', 'English', 'Français', '简体中文', '日本語', '한국어']:
+            for code, language in zip(codes, ['Tiếng Việt', 'English', 'Français', '简体中文', '日本語', '한국어']):
                 page.goto(base+'/explore')
                 page.locator('.language-chip').click()
                 page.locator('.language-option').filter(has=page.get_by_text(language, exact=True)).click()
                 rows = page.locator('.explore-page .card').nth(2).locator('.offline-package-row')
-                expect(rows).to_have_count(11)
+                expect(rows).to_have_count(recording_counts[code])
                 rows.first.locator('button').click()
                 page.wait_for_function("document.querySelector('audio').currentTime > 0", timeout=20000)
                 page.goto(base+'/map')
-                expect(page.locator('.map-poi-marker')).to_have_count(11)
+                expect(page.locator('.map-poi-marker')).to_have_count(poi_counts[code])
                 page.locator('.map-poi-marker').first.click()
                 expect(page.locator('.poi-audio-player')).to_be_visible()
                 print('PASS offline language', ascii(language), flush=True)
-            checks.append('6 packages, 66 recordings, offline playback and POI map in 6 languages')
+            checks.append(f'{len(packs)} packages, offline playback and localized POI map in 6 languages')
             context.set_offline(False)
             page.goto(base+'/admin')
             # Explicit logout removes the temporary account's Redis session.

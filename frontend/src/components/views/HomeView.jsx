@@ -2,6 +2,7 @@
 import AnimalImageCredit from '../AnimalImageCredit';
 import { Link } from 'react-router-dom';
 import { QRCodeSVG } from 'qrcode.react';
+import { getItem, setItem, STORES } from '../../db/indexedDB';
 import { useTranslation } from '../../features/localization/useTranslation';
 
 const animals = [
@@ -10,18 +11,12 @@ const animals = [
   { nameKey: 'animal.giraffe', noteKey: 'animal.giraffe.note', candidateCode: 'TCV-AN-011', image: '/images/animals/tcv-an-011.jpg', source: 'Byrdyak / CC BY-SA 4.0' },
   { nameKey: 'animal.hippo', noteKey: 'animal.hippo.note', candidateCode: 'TCV-AN-001', image: '/images/animals/tcv-an-001.jpg', source: 'Giles Laurent / CC BY-SA 4.0' },
 ];
-const offlinePackages = [
-  { language: 'vi', label: 'Tiếng Việt', id: '6ad77ec98e1fe8641925e75e' },
-  { language: 'en', label: 'English', id: '6ad776328e1fe8641925e759' },
-  { language: 'fr', label: 'Français', id: '6ad77ece8e1fe8641925e75f' },
-  { language: 'zh-Hans', label: '中文', id: '6ad77ed48e1fe8641925e760' },
-  { language: 'ja', label: '日本語', id: '6ad77ed98e1fe8641925e761' },
-  { language: 'ko', label: '한국어', id: '6ad77edf8e1fe8641925e762' },
-];
+
 
 export default function HomeView() {
   const { t, language } = useTranslation();
   const [catalog, setCatalog] = useState(null);
+  const [offlinePackages, setOfflinePackages] = useState([]);
   const [selectedAnimal, setSelectedAnimal] = useState(null);
   const carouselRef = useRef(null);
   const selectedCatalogAnimal = selectedAnimal?.kind === 'catalog' ? selectedAnimal.animal : null;
@@ -39,6 +34,21 @@ export default function HomeView() {
     }).then((entries) => { if (mounted) setCatalog(entries); }).catch(() => { if (mounted) setCatalog(null); });
     return () => { mounted = false; };
   }, [language]);
+
+  useEffect(() => {
+    let mounted = true;
+    let fetched = false;
+    const labels = { vi: 'Tiếng Việt', en: 'English', fr: 'Français', 'zh-Hans': '简体中文', ja: '日本語', ko: '한국어' };
+    const apply = (rows) => {
+      const byLanguage = new Map();
+      for (const row of rows || []) if (!byLanguage.has(row.language_code)) byLanguage.set(row.language_code, { ...row, language: row.language_code, label: labels[row.language_code] || row.language_code });
+      if (mounted) setOfflinePackages([...byLanguage.values()]);
+    };
+    getItem(STORES.APP_STATE, 'public_audio_packages').then((rows) => { if (!fetched) apply(rows); }).catch(() => {});
+    fetch('/audio/packages').then((response) => { if (!response.ok) throw new Error('Packages unavailable'); return response.json(); })
+      .then((rows) => { fetched = true; apply(rows); return setItem(STORES.APP_STATE, rows, 'public_audio_packages'); }).catch(() => {});
+    return () => { mounted = false; };
+  }, []);
 
   const moveCarousel = (direction) => carouselRef.current?.scrollBy({ left: direction * Math.min(360, carouselRef.current.clientWidth * .78), behavior: 'smooth' });
   const mapId = (animal) => catalog?.find((entry) => animal.candidateCode && entry.candidate_code === animal.candidateCode)?.id;

@@ -1,6 +1,6 @@
 # Đối chiếu PRD / Use case / implementation
 
-Audit 21/10/2026. Không thay yêu cầu gốc để khiến code có vẻ hoàn tất. Bảng này chỉ ra phần đạt và khoảng cách cần ghi trong báo cáo/đợt triển khai tiếp theo.
+Audit nền 21/10/2026, cập nhật luồng admin 04/11/2026. Không thay yêu cầu gốc để khiến code có vẻ hoàn tất. Bảng này chỉ ra phần đạt và khoảng cách cần ghi trong báo cáo/đợt triển khai tiếp theo.
 
 | Use case | Hiện có | Giới hạn / phần chưa đạt trọn vẹn PRD |
 |---|---|---|
@@ -8,11 +8,11 @@ Audit 21/10/2026. Không thay yêu cầu gốc để khiến code có vẻ hoàn
 | UC-02 Bản đồ | MapLibre, marker, GPS, gần nhất, POI cache theo ngôn ngữ | Raster OSM online, chưa có PMTiles offline; tọa độ mô phỏng |
 | UC-03 Tự phát | Bật geofence, kiểm tra vòng tròn, phát audio, mô phỏng đến POI, sự kiện phát | Chưa có TTS fallback trực tiếp, chưa có cooldown thời gian đầy đủ; autoplay thật cần kiểm tra thiết bị, tab nền không được đảm bảo |
 | UC-04 QR POI | Scanner, kiểm tra payload ObjectId, resolve audio đúng ngôn ngữ; ưu tiên bản tải sẵn khi offline | Audio thiếu báo lỗi; chưa tự tạo TTS/bản dịch; camera thật cần nghiệm thu điện thoại |
-| UC-05 Tải gói | 6 gói, 11 bản/gói; SHA-256/size, hủy và rollback, lưu IndexedDB | Chưa có một QR chuẩn cho tất cả ngôn ngữ; mỗi QR đại diện một gói/ngôn ngữ |
+| UC-05 Tải gói | Bộ seed 6 gói, 11 bản/gói; admin phát hành thêm snapshot/QR từ audio hiện tại; SHA-256/size, hủy và rollback, lưu IndexedDB | Mỗi QR đại diện một gói/ngôn ngữ; không tự cập nhật gói đã tải khi tạo audio mới |
 | UC-06 Nghe offline | Danh sách audio đã tải theo ngôn ngữ, phát lại, xóa gói; map dùng POI/recording đã lưu | Cần mở/tải trước cùng origin; URL tunnel mới không mang theo cache cũ; không hứa có nền bản đồ đầy đủ |
 | UC-07 Admin | Cookie HTTP-only, Redis session, role/permission, đổi mật khẩu | Chưa có UI quản lý tài khoản/role; tạo admin bằng script |
-| UC-08 POI | Tạo, sửa, ẩn; search/filter, QR, cập nhật tâm geofence hiện hữu | Tạo POI chưa tự tạo geofence; cần chuẩn bị vùng riêng trước demo tự phát; admin chưa có UI vẽ geofence |
-| UC-09 Nội dung/dịch | Sửa theo ngôn ngữ; vô hiệu hóa liên kết audio khi lời mới khác lời cũ | Không có version/publish workflow riêng, dịch máy hay TTS worker runtime; trạng thái draft không phải kho nháp tách khỏi nội dung visitor |
+| UC-08 POI | Tạo, sửa, ẩn; ảnh upload/URL và nghe thử; search/filter, QR; cấu hình geofence tròn, cập nhật tâm theo POI | Chưa có UI vẽ polygon; tọa độ demo cần admin kiểm tra; thêm POI không tự tạo 6 bản dịch |
+| UC-09 Nội dung/dịch | Sửa theo ngôn ngữ; lưu và tạo TTS, chọn giọng, trạng thái/retry; lời mới vô hiệu hóa audio cũ; phát hành snapshot audio | Không dịch máy; TTS cần mạng, chạy trong process API, chưa có durable worker; draft không phải kho nháp tách khỏi nội dung visitor |
 | UC-10 Analytics | Thu sự kiện, thiết bị 5 phút, visits, page/QR/audio, ngôn ngữ, xếp hạng POI | Không có heatmap/lịch sử tuyến đường; chưa có queue đồng bộ analytics offline hay consent UI; dashboard dùng UTC |
 
 ## Những mô tả không được dùng như “đã có”

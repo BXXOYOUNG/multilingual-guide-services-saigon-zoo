@@ -2,6 +2,8 @@
 
 Updated 2026-10-21 after the user clarified the target is a complete classroom demo with simulated content.
 
+Admin workflow updated 2026-11-04: upload POI images to SeaweedFS, configure circular trigger zones, save localized text and generate/preview Edge TTS, publish audio snapshot packages and dynamic homepage QR links. See [ADMIN_POI_WORKFLOW.md](ADMIN_POI_WORKFLOW.md). Counts below describe the seed baseline; admin additions can increase them.
+
 ## Implemented demo flows
 
 - Six-language interface and POI text: `vi`, `en`, `fr`, `zh-Hans`, `ja`, `ko`.

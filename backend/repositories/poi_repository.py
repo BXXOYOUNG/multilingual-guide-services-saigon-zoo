@@ -56,7 +56,7 @@ class POIRepository:
 
     async def list_animal_catalog(self, language: str) -> list[AnimalCatalogResponse]:
         poi_cursor = self._database["poi"].find(
-            {"source_url": {"$type": "string"}, "candidate_code": {"$type": "string"}},
+            {"is_active": True},
             {"_id": 1, "candidate_code": 1, "scientific_name": 1, "source_url": 1, "image_url": 1, "image_source_url": 1, "is_active": 1},
         )
         animals = [animal async for animal in poi_cursor]
@@ -71,11 +71,11 @@ class POIRepository:
         return [
             AnimalCatalogResponse(
                 id=str(animal["_id"]),
-                candidate_code=animal["candidate_code"],
-                scientific_name=animal["scientific_name"],
+                candidate_code=animal.get("candidate_code", str(animal['_id'])),
+                scientific_name=animal.get("scientific_name", ''),
                 name=localized[animal["_id"]]["title"],
                 description=localized[animal["_id"]]["description"],
-                source_url=animal["source_url"],
+                source_url=animal.get("source_url", ''),
                 map_available=bool(animal.get("is_active")),
                 image_url=animal.get("image_url"),
                 image_source_url=animal.get("image_source_url"),

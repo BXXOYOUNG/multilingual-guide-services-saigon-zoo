@@ -10,6 +10,7 @@ from backend.api.health import router as health_router
 from backend.api.pois import router as pois_router
 from backend.api.visitor import router as visitor_router
 from backend.api.geofences import router as geofences_router
+from backend.api.admin_workflow import router as admin_workflow_router
 from backend.config import load_settings
 from backend.core.exception_handlers import register_exception_handlers
 from backend.database.mongodb import close_mongodb, connect_mongodb
@@ -39,3 +40,4 @@ app.include_router(admin_auth_router)
 app.include_router(admin_router)
 app.include_router(visitor_router)
 app.include_router(geofences_router)
+app.include_router(admin_workflow_router)

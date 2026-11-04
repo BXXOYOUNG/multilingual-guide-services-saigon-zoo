@@ -151,3 +151,22 @@ Each POI has this response shape:
 The backend reads from the existing `poi` and `poi_localizations` collections,
 associating localization records through `poi_localizations.poi_id`. It does
 not create or update POI data.
+
+## 8. Admin content workflow (2026-11-04)
+
+All writes below require the existing HTTP-only admin cookie and permission checks.
+IDs on the wire are 24-character ObjectId strings; stored references remain BSON ObjectId.
+
+| Endpoint | Permission | Contract |
+|---|---|---|
+| `POST /api/admin/pois` | `poi:write`, plus `content:write` when initial localization is supplied | Optional `initial_localization: {language_code,title,description}`; default hidden; returns 201 `{id}` |
+| `POST /api/admin/pois/{id}/image` | `poi:write` | Raw JPEG/PNG/WebP body, max 5 MB/16 MP; returns `{image_url}` |
+| `GET /api/media/pois/{id}/{sha256.ext}` | Public | Validated uploaded image; immutable cache, nosniff |
+| `PUT /api/admin/pois/{id}/geofence` | `poi:write` | `{radius:5..500,is_active:boolean}`, center from saved POI |
+| `GET /api/admin/audio-voices` | `audio:write` | Map of language code to supported voice IDs |
+| `POST /api/admin/pois/{id}/localizations/{language}/generate-audio` | `audio:write` | `{voice:null or supported ID}`, saved text required; 202 `{id,status}`; duplicate active job 409 |
+| `GET /api/admin/audio-jobs/{id}` | `audio:write` | `{id,status,error_message,voice}`; status Pending/Processing/Completed/Failed |
+| `POST /api/admin/audio-packages` | `audio:write` | `{name,language_code}`; creates immutable audio snapshot from active POIs; 201 `{id,name,asset_count}`; invalid/missing audio 409 |
+| `GET /audio/packages` | Public | Nonempty offline packages, newest first; `{id,name,language_code,asset_count}[]` |
+
+Generation uses in-process FastAPI BackgroundTasks with a 5-minute Redis lease, not a durable job queue. Audio is published to the current localization only if task ID and source text/title still match. Jobs interrupted by a restart become Failed when queried after five minutes. New snapshot package/asset membership cannot be reassigned through the legacy assignment API. Existing legacy packages remain readable.
