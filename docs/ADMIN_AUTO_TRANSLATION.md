@@ -85,6 +85,8 @@ flowchart TD
 
 ## 5. Nghiệm thu trên máy admin
 
+Ngày 09/11/2026, người dùng xác nhận nghiệm thu luồng Chrome hoạt động ổn. Đây là xác nhận sử dụng trên môi trường đã thử, không suy rộng thành chứng nhận mọi browser/cặp ngôn ngữ. Sơ đồ và đặc tả hiện hành đã được đồng bộ tại [bộ UC/DFD](Use-case/README.md).
+
 Trong lần chuyển sang Chrome: frontend production build và backend import thành công; launcher đã mở app ở `http://localhost:3000` với MongoDB/Redis/SeaweedFS đang chạy. Kiểm tra chỉ đọc cho thấy MongoDB là `rs0`, không có nhóm trùng `(poi_id,language_code)` trong 69 localization và collection này không có validator chặn metadata mới. Chrome cài trên máy là `156.0.8078.80`. Không sửa nội dung POI hoặc tạo audio để đạt các thông tin này.
 
 Kiểm tra build/import và việc Docker đang chạy không chứng nhận mô hình native đã tải hoặc mọi cặp ngôn ngữ đã hoạt động trên profile Chrome của bạn. Cần thực hiện các bước ở mục 2 trên Chrome thực tế, nghe thử audio và kiểm tra các bản đã lưu. Các báo cáo kiểm thử trước ngày bổ sung này không bao phủ luồng Chrome. Ảnh/export diagram cũ là ảnh chụp phiên bản trước; dùng luồng ở đây và sơ đồ trong `CURRENT_ARCHITECTURE.md` cho báo cáo mới.

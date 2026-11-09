@@ -6,6 +6,7 @@ Bản hiện tại là demo mô phỏng với 11 POI, 6 ngôn ngữ, 66 bản th
 - [Kiến trúc và dữ liệu đang triển khai](docs/CURRENT_ARCHITECTURE.md)
 - [Đối chiếu yêu cầu với implementation](docs/REQUIREMENTS_TRACEABILITY.md)
 - [Dịch tự động POI: cấu hình và luồng admin UC-09](docs/ADMIN_AUTO_TRANSLATION.md)
+- [Bộ UC/DFD hiện hành và kết quả rà soát sơ đồ](docs/Use-case/README.md)
 - [File cũ đã dọn/lưu trữ và thành phần cần giữ](docs/CLEANUP_REVIEW.md)
 - [Kết quả audit và kiểm thử](docs/AUDIT_REPORT_2026-10-21.md)
 

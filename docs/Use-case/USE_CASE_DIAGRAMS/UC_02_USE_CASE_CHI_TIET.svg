@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2318" height="1080" viewBox="0 0 2318 1080" role="img">
+  <title>UC-02 — USE CASE DIAGRAM CHI TIẾT</title>
+  <desc>Hiện hành 09/11/2026 · fb1b0b8: Xem bản đồ và các điểm thuyết minh</desc>
+  <rect x="0" y="0" width="2318" height="1080" fill="white" />
+  <text x="60" y="47.5" fill="#182230" font-family="Arial, sans-serif" font-size="30" text-anchor="start" font-weight="700">
+    <tspan x="60" y="57.7">UC-02 — USE CASE DIAGRAM CHI TIẾT</tspan>
+  </text>
+  <text x="60" y="97.5" fill="#475467" font-family="Arial, sans-serif" font-size="20" text-anchor="start" font-weight="400">
+    <tspan x="60" y="104.3">Hiện hành 09/11/2026 · fb1b0b8: Xem bản đồ và các điểm thuyết minh</tspan>
+  </text>
+  <rect x="317.2539999999999" y="170" width="1935.0170000000003" height="624.7625" fill="#fcfdff" stroke="#344054" stroke-width="2" />
+  <g />
+  <text x="1284.7625" y="205.0" fill="#182230" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" font-weight="700">
+    <tspan x="1284.7625" y="212.14">HỆ THỐNG THUYẾT MINH ĐA NGÔN NGỮ THẢO CẦM VIÊN</tspan>
+  </text>
+  <text x="1284.7625" y="251.0" fill="#315f91" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" font-weight="400">
+    <tspan x="1284.7625" y="258.14">Phạm vi: UC-02 · Xem bản đồ và các điểm thuyết minh</tspan>
+  </text>
+  <polyline points="206.25,566.76 270.81,601.76 310.29,601.76 351.64,601.76 351.64,601.76" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <polyline points="798.12,544.91 925.69,503.73 1095.07,449.05 1209.09,412.25 1220.97,408.41" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1211.71,418.76 1220.97,408.41 1207.40,405.44" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="852.3375" y="435.65" width="310" height="28" fill="white" />
+  <text x="1007.3375" y="449.65" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1007.3375" y="455.42999999999995">«include»</tspan>
+  </text>
+  <polyline points="871.70,574.60 966.15,564.33 1071.59,552.86 1157.95,543.46 1170.55,542.10" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1159.37,550.35 1170.55,542.10 1157.87,536.43" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="852.3375" y="530.0375" width="310" height="28" fill="white" />
+  <text x="1007.3375" y="544.0375" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1007.3375" y="549.8175">«include»</tspan>
+  </text>
+  <polyline points="1943.25,414.39 1882.36,441.01 1815.48,470.26 1602.36,470.26 1546.11,448.01 1502.01,431.93 1454.33,414.54 1442.75,410.34" fill="none" stroke="#8a5b22" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1456.42,407.85 1442.75,410.34 1451.64,421.01" fill="none" stroke="#8a5b22" stroke-width="1.6" />
+  <rect x="1553.875" y="405.0125" width="310" height="72" fill="white" />
+  <text x="1708.875" y="441.0125" fill="#8a5b22" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1708.875" y="425.7125">«extend»</tspan>
+    <tspan x="1708.875" y="446.79249999999996">[không lấy được POI từ máy</tspan>
+    <tspan x="1708.875" y="467.87249999999995">chủ]</tspan>
+  </text>
+  <polyline points="1161.64,708.75 1111.12,717.36 1069.21,724.51 945.46,724.51 870.56,696.09 792.84,666.60 781.35,662.24" fill="none" stroke="#8a5b22" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="795.05,659.95 781.35,662.24 790.08,673.04" fill="none" stroke="#8a5b22" stroke-width="1.6" />
+  <rect x="852.3375" y="680.0125" width="310" height="50" fill="white" />
+  <text x="1007.3375" y="705.0125" fill="#8a5b22" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1007.3375" y="700.2525">«extend»</tspan>
+    <tspan x="1007.3375" y="721.3325000000001">[GPS khả dụng]</tspan>
+  </text>
+  <circle cx="164.25" cy="516.7625" r="22" fill="white" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="538.7625" x2="164.25" y2="609.7625" stroke="#182230" stroke-width="2.4" />
+  <line x1="122.25" y1="566.7625" x2="206.25" y2="566.7625" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="609.7625" x2="127.25" y2="666.7625" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="609.7625" x2="201.25" y2="666.7625" stroke="#182230" stroke-width="2.4" />
+  <text x="164.25" y="706.2625" fill="#182230" font-family="Arial, sans-serif" font-size="23" text-anchor="middle" font-weight="700">
+    <tspan x="164.25" y="714.0825000000001">Người tham quan</tspan>
+  </text>
+  <ellipse cx="620.7375" cy="601.7625" rx="268.48350000000005" ry="75.096" fill="#e9f2ff" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="23" text-anchor="middle">
+    <tspan x="620.7375" y="581.0625000000001" font-weight="700">UC-02</tspan>
+    <tspan x="620.7375" y="609.5825000000001" font-weight="400">Xem bản đồ và các điểm thuyết</tspan>
+    <tspan x="620.7375" y="638.1025000000001" font-weight="400">minh</tspan>
+  </text>
+  <ellipse cx="1335.7875" cy="371.76250000000005" rx="168.21" ry="49.5" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1335.7875" y="378.56250000000006" font-weight="700">Lấy dữ liệu POI khả dụng</tspan>
+  </text>
+  <ellipse cx="1335.7875" cy="524.2625" rx="176.51700000000002" ry="49.5" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1335.7875" y="531.0625" font-weight="700">Hiển thị bản đồ và các POI</tspan>
+  </text>
+  <ellipse cx="2042.0" cy="371.76250000000005" rx="170.27100000000002" ry="51.75899999999999" fill="#fff5e7" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="2042.0" y="366.1625000000001" font-weight="700">Sử dụng dữ liệu POI</tspan>
+    <tspan x="2042.0" y="390.9625000000001" font-weight="400">offline</tspan>
+  </text>
+  <ellipse cx="1335.7875" cy="679.2625" rx="210.33" ry="51.75899999999999" fill="#fff5e7" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1335.7875" y="673.6625" font-weight="700">Hiển thị vị trí và POI gần</tspan>
+    <tspan x="1335.7875" y="698.4625" font-weight="400">nhất</tspan>
+  </text>
+  <text x="65" y="910.0" fill="#344054" font-family="Arial, sans-serif" font-size="20" text-anchor="start" font-weight="400">
+    <tspan x="65" y="867.1999999999999">LUỒNG CHÍNH: Mở bản đồ → lấy dữ liệu POI → hiển thị POI → lấy vị trí và làm nổi bật điểm gần nhất khi có GPS.</tspan>
+    <tspan x="65" y="891.9999999999999">A1 — Không có GPS: vẫn hiển thị POI, không thực hiện phần mở</tspan>
+    <tspan x="65" y="916.8">A2 — Mở rộng việc lấy dữ liệu bằng dữ liệu POI đã lưu</tspan>
+    <tspan x="65" y="941.5999999999999">E1 — API lỗi và không có cache đúng ngôn ngữ: hiển thị lỗi</tspan>
+    <tspan x="65" y="966.4">GHI CHÚ: POI chỉ hiển thị khi active và có bản đúng ngôn ngữ. Cache tách ngôn ngữ; nền OSM online không được bảo đảm ngoại tuyến. GPS không bắt buộc để xem POI.</tspan>
+  </text>
+  <text x="65" y="1032.5" fill="#667085" font-family="Arial, sans-serif" font-size="18" text-anchor="start" font-weight="400">
+    <tspan x="65" y="1038.62">Nét đứt/mũi tên mở: «include» hoặc «extend» · Tam giác rỗng: chuyên biệt → khái quát · Phạm vi hiện hành; A/E xem đặc tả đi kèm.</tspan>
+  </text>
+</svg>

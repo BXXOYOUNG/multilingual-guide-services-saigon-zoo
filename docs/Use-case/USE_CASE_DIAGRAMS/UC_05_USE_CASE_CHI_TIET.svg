@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2226" height="1374" viewBox="0 0 2226 1374" role="img">
+  <title>UC-05 — USE CASE DIAGRAM CHI TIẾT</title>
+  <desc>Hiện hành 09/11/2026 · fb1b0b8: Tải gói audio thuyết minh offline</desc>
+  <rect x="0" y="0" width="2226" height="1374" fill="white" />
+  <text x="60" y="47.5" fill="#182230" font-family="Arial, sans-serif" font-size="30" text-anchor="start" font-weight="700">
+    <tspan x="60" y="57.7">UC-05 — USE CASE DIAGRAM CHI TIẾT</tspan>
+  </text>
+  <text x="60" y="97.5" fill="#475467" font-family="Arial, sans-serif" font-size="20" text-anchor="start" font-weight="400">
+    <tspan x="60" y="104.3">Hiện hành 09/11/2026 · fb1b0b8: Tải gói audio thuyết minh offline</tspan>
+  </text>
+  <rect x="317.2505000000001" y="170" width="1842.9325" height="918.5250000000001" fill="#fcfdff" stroke="#344054" stroke-width="2" />
+  <g />
+  <text x="1238.71675" y="205.0" fill="#182230" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" font-weight="700">
+    <tspan x="1238.71675" y="212.14">HỆ THỐNG THUYẾT MINH ĐA NGÔN NGỮ THẢO CẦM VIÊN</tspan>
+  </text>
+  <text x="1238.71675" y="251.0" fill="#315f91" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" font-weight="400">
+    <tspan x="1238.71675" y="258.14">Phạm vi: UC-05 · Tải gói audio thuyết minh offline</tspan>
+  </text>
+  <polyline points="206.25,649.26 271.25,684.26 311.14,684.26 351.79,684.26 351.79,684.26" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <polyline points="677.70,619.46 794.71,550.29 963.47,450.51 1003.46,436.05 1049.16,419.53 1060.89,415.29" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1051.98,425.95 1060.89,415.29 1047.22,412.78" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="717.45" y="460.70000000000005" width="310" height="28" fill="white" />
+  <text x="872.45" y="474.70000000000005" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="872.45" y="480.48">«include»</tspan>
+  </text>
+  <polyline points="741.74,640.36 832.54,617.41 942.62,589.58 1029.91,567.51 1042.07,564.44" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1032.16,574.17 1042.07,564.44 1028.73,560.59" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="717.45" y="578.3625000000001" width="310" height="28" fill="white" />
+  <text x="872.45" y="592.3625000000001" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="872.45" y="598.1425">«include»</tspan>
+  </text>
+  <polyline points="781.68,684.26 855.51,684.26 937.31,684.26 1007.56,684.26 1020.09,684.26" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1008.09,691.26 1020.09,684.26 1008.09,677.26" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="717.45" y="660.5125" width="310" height="28" fill="white" />
+  <text x="872.45" y="674.5125" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="872.45" y="680.2925">«include»</tspan>
+  </text>
+  <polyline points="741.74,728.16 831.19,750.78 939.35,778.12 1026.00,800.03 1038.08,803.08" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1024.73,806.92 1038.08,803.08 1028.15,793.35" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="717.45" y="728.7375000000001" width="310" height="28" fill="white" />
+  <text x="872.45" y="742.7375000000001" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="872.45" y="748.5175">«include»</tspan>
+  </text>
+  <polyline points="677.70,749.06 794.71,818.25 963.47,918.01 1004.81,932.96 1051.47,949.84 1063.42,954.16" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1049.76,956.66 1063.42,954.16 1054.52,943.50" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="717.45" y="825.2" width="310" height="28" fill="white" />
+  <text x="872.45" y="839.2" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="872.45" y="844.98">«include»</tspan>
+  </text>
+  <polyline points="1824.71,649.83 1780.48,668.21 1738.86,685.51 1682.61,729.01 1457.71,729.01 1400.76,719.71 1338.79,709.59 1326.34,707.56" fill="none" stroke="#8a5b22" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1339.31,702.58 1326.34,707.56 1337.06,716.40" fill="none" stroke="#8a5b22" stroke-width="1.6" />
+  <rect x="1415.125" y="663.7625" width="310" height="72" fill="white" />
+  <text x="1570.125" y="699.7625" fill="#8a5b22" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1570.125" y="684.4625">«extend»</tspan>
+    <tspan x="1570.125" y="705.5425">[Storage Estimate API khả</tspan>
+    <tspan x="1570.125" y="726.6225">dụng]</tspan>
+  </text>
+  <polyline points="1743.98,776.64 1708.75,779.01 1682.61,780.76 1457.71,780.76 1401.46,760.51 1353.33,743.65 1302.31,725.79 1290.36,721.61" fill="none" stroke="#8a5b22" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1304.00,718.96 1290.36,721.61 1299.38,732.18" fill="none" stroke="#8a5b22" stroke-width="1.6" />
+  <rect x="1415.125" y="736.2625" width="310" height="50" fill="white" />
+  <text x="1570.125" y="761.2625" fill="#8a5b22" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1570.125" y="756.5025">«extend»</tspan>
+    <tspan x="1570.125" y="777.5825000000001">[người dùng hủy hoặc tải lỗi]</tspan>
+  </text>
+  <circle cx="164.25" cy="599.2625" r="22" fill="white" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="621.2625" x2="164.25" y2="692.2625" stroke="#182230" stroke-width="2.4" />
+  <line x1="122.25" y1="649.2625" x2="206.25" y2="649.2625" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="692.2625" x2="127.25" y2="749.2625" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="692.2625" x2="201.25" y2="749.2625" stroke="#182230" stroke-width="2.4" />
+  <text x="164.25" y="788.7625" fill="#182230" font-family="Arial, sans-serif" font-size="23" text-anchor="middle" font-weight="700">
+    <tspan x="164.25" y="796.5825000000001">Người tham quan</tspan>
+  </text>
+  <ellipse cx="566.8375000000001" cy="684.2625" rx="214.587" ry="75.096" fill="#e9f2ff" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="23" text-anchor="middle">
+    <tspan x="566.8375000000001" y="663.5625000000001" font-weight="700">UC-05</tspan>
+    <tspan x="566.8375000000001" y="692.0825000000001" font-weight="400">Tải gói audio thuyết minh</tspan>
+    <tspan x="566.8375000000001" y="720.6025000000001" font-weight="400">offline</tspan>
+  </text>
+  <ellipse cx="1182.475" cy="371.7625000000001" rx="218.99699999999999" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1182.475" y="366.16250000000014" font-weight="700">Chọn gói bằng QR, mã hoặc</tspan>
+    <tspan x="1182.475" y="390.96250000000015" font-weight="400">liên kết</tspan>
+  </text>
+  <ellipse cx="1182.475" cy="529.2625" rx="189.1035" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1182.475" y="523.6625" font-weight="700">Lấy manifest và kiểm tra</tspan>
+    <tspan x="1182.475" y="548.4625" font-weight="400">gói</tspan>
+  </text>
+  <ellipse cx="1182.475" cy="684.2625" rx="162.0" ry="49.5" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1182.475" y="691.0625" font-weight="700">Tải các asset trong gói</tspan>
+  </text>
+  <ellipse cx="1929.5" cy="606.7625" rx="186.0075" ry="51.75899999999999" fill="#fff5e7" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1929.5" y="601.1625" font-weight="700">Ước tính dung lượng khi</tspan>
+    <tspan x="1929.5" y="625.9625" font-weight="400">browser hỗ trợ</tspan>
+  </text>
+  <ellipse cx="1182.475" cy="839.2625" rx="200.1015" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1182.475" y="833.6625" font-weight="700">Kiểm tra size và checksum</tspan>
+    <tspan x="1182.475" y="858.4625" font-weight="400">khi có</tspan>
+  </text>
+  <ellipse cx="1182.475" cy="996.7650000000001" rx="204.1065" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1182.475" y="991.1650000000001" font-weight="700">Lưu Blob audio và metadata</tspan>
+    <tspan x="1182.475" y="1015.965" font-weight="400">gói</tspan>
+  </text>
+  <ellipse cx="1929.5" cy="764.2625" rx="190.683" ry="51.75899999999999" fill="#fff5e7" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1929.5" y="758.6625" font-weight="700">Hủy tải và khôi phục dữ</tspan>
+    <tspan x="1929.5" y="783.4625" font-weight="400">liệu trước tải</tspan>
+  </text>
+  <text x="65" y="1204.0" fill="#344054" font-family="Arial, sans-serif" font-size="20" text-anchor="start" font-weight="400">
+    <tspan x="65" y="1161.2">LUỒNG CHÍNH: Chọn gói → lấy manifest → tải/kiểm tra từng bản thu → lưu IndexedDB → báo hoàn tất.</tspan>
+    <tspan x="65" y="1186.0">A1 — Gói đã tải vẫn có thể được tải lại; client giữ dữ</tspan>
+    <tspan x="65" y="1210.8">A2 — Manifest chưa xác minh toàn bộ checksum cần người dùng xác nhận</tspan>
+    <tspan x="65" y="1235.6000000000001">E1 — Thiếu dung lượng, checksum/size sai, lỗi mạng hoặc hủy: không ghi nhận</tspan>
+    <tspan x="65" y="1260.4">GHI CHÚ: Một gói/một ngôn ngữ, không phải ZIP. Chỉ kiểm tra checksum khi có SHA-256 hợp lệ; không cam kết đủ dung lượng nếu browser không cung cấp estimate. Mô hình Chrome dịch không thuộc gói audio.</tspan>
+  </text>
+  <text x="65" y="1326.5" fill="#667085" font-family="Arial, sans-serif" font-size="18" text-anchor="start" font-weight="400">
+    <tspan x="65" y="1332.62">Nét đứt/mũi tên mở: «include» hoặc «extend» · Tam giác rỗng: chuyên biệt → khái quát · Phạm vi hiện hành; A/E xem đặc tả đi kèm.</tspan>
+  </text>
+</svg>

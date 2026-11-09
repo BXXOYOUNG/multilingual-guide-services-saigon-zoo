@@ -1,0 +1,132 @@
+<mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1200" background="#ffffff" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    <mxCell id="title" value="SƠ ĐỒ NGỮ CẢNH — HIỆN HÀNH 09/11/2026" style="fontFamily=Arial;fontColor=#182230;html=0;whiteSpace=wrap;text;align=left;fontSize=28;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="50" y="30" width="1700" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="subtitle" value="Ranh giới: mã React PWA + FastAPI và các kho do đồ án quản lý. Native Chrome/GPS/camera nằm ngoài mã ứng dụng." style="fontFamily=Arial;fontColor=#182230;html=0;whiteSpace=wrap;text;align=left;fontSize=19;fontColor=#475467;" vertex="1" parent="1">
+      <mxGeometry x="50" y="90" width="1700" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="S" value="Hệ thống thuyết minh&#10;đa ngôn ngữ&#10;Thảo Cầm Viên" style="fontFamily=Arial;fontColor=#182230;html=0;whiteSpace=wrap;ellipse;fillColor=#eaf3ff;strokeColor=#245b91;strokeWidth=2;fontSize=24;align=center;" vertex="1" parent="1">
+      <mxGeometry x="560" y="395" width="340" height="340" as="geometry" />
+    </mxCell>
+    <mxCell id="E1" value="E1. Khách tham quan" style="fontFamily=Arial;fontColor=#182230;html=0;whiteSpace=wrap;fillColor=#fff7e6;strokeColor=#9a7833;fontSize=21;align=center;" vertex="1" parent="1">
+      <mxGeometry x="50" y="525" width="280" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="flow_0" value="Ngôn ngữ; yêu cầu tra cứu/nghe/QR/gói;&#10;thao tác sử dụng" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;fontColor=#64748b;strokeColor=#64748b;strokeWidth=1.4;endArrow=classic;endFill=1;startArrow=none;labelBackgroundColor=#ffffff;exitPerimeter=0;entryPerimeter=0;exitX=1;exitY=0.1875;entryX=0.010724004267530063;entryY=0.397;" edge="1" source="E1" target="S" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="450" y="540" />
+        </Array>
+        <mxPoint x="-10.23" y="-100.0" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="flow_1" value="Nội dung, bản đồ, lộ trình, audio, gói&#10;và trạng thái" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;fontColor=#64748b;strokeColor=#64748b;strokeWidth=1.4;endArrow=classic;endFill=1;startArrow=none;labelBackgroundColor=#ffffff;exitPerimeter=0;entryPerimeter=0;exitX=0.010724004267530063;exitY=0.603;entryX=1;entryY=0.8125;" edge="1" source="S" target="E1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="450" y="590" />
+        </Array>
+        <mxPoint x="-10.23" y="100.0" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="E2" value="E2. Quản trị viên" style="fontFamily=Arial;fontColor=#182230;html=0;whiteSpace=wrap;fillColor=#fff7e6;strokeColor=#9a7833;fontSize=20;align=center;" vertex="1" parent="1">
+      <mxGeometry x="1440" y="190" width="300" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="flow_2" value="Thông tin xác thực; POI/nội dung;&#10;nguồn/đích; bản sửa/xác nhận lưu; yêu&#10;cầu TTS/phát hành/dashboard" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;fontColor=#64748b;strokeColor=#64748b;strokeWidth=1.4;endArrow=classic;endFill=1;startArrow=none;labelBackgroundColor=#ffffff;exitPerimeter=0;entryPerimeter=0;exitX=0;exitY=0.25;entryX=0.8388740771118505;entryY=0.1323529411764706;" edge="1" source="E2" target="S" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1060" y="210" />
+        </Array>
+        <mxPoint x="70.09" y="-38.0" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="flow_3" value="Kết quả quản trị; preview/đối chiếu; tác&#10;vụ/audio/QR; dashboard hoặc lỗi" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;fontColor=#64748b;strokeColor=#64748b;strokeWidth=1.4;endArrow=classic;endFill=1;startArrow=none;labelBackgroundColor=#ffffff;exitPerimeter=0;entryPerimeter=0;exitX=0.9043449142608093;exitY=0.20588235294117646;entryX=0;entryY=0.75;" edge="1" source="S" target="E2" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1050" y="250" />
+        </Array>
+        <mxPoint x="66.08" y="52.0" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="E3" value="E3. Edge TTS" style="fontFamily=Arial;fontColor=#182230;html=0;whiteSpace=wrap;fillColor=#fff7e6;strokeColor=#9a7833;fontSize=20;align=center;" vertex="1" parent="1">
+      <mxGeometry x="1440" y="365" width="300" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="flow_4" value="Văn bản và mã giọng đọc" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;fontColor=#64748b;strokeColor=#64748b;strokeWidth=1.4;endArrow=classic;endFill=1;startArrow=none;labelBackgroundColor=#ffffff;exitPerimeter=0;entryPerimeter=0;exitX=0.9620081786001472;exitY=0.3088235294117647;entryX=0;entryY=0.25;" edge="1" source="S" target="E3" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1060" y="385" />
+        </Array>
+        <mxPoint x="28.52" y="-30.0" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="flow_5" value="MP3 tổng hợp hoặc kết quả lỗi" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;fontColor=#64748b;strokeColor=#64748b;strokeWidth=1.4;endArrow=classic;endFill=1;startArrow=none;labelBackgroundColor=#ffffff;exitPerimeter=0;entryPerimeter=0;exitX=0;exitY=0.75;entryX=0.9859621071134794;entryY=0.38235294117647056;" edge="1" source="E3" target="S" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1050" y="425" />
+        </Array>
+        <mxPoint x="25.14" y="42.0" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="E4" value="E4. Dịch vụ bản đồ" style="fontFamily=Arial;fontColor=#182230;html=0;whiteSpace=wrap;fillColor=#fff7e6;strokeColor=#9a7833;fontSize=20;align=center;" vertex="1" parent="1">
+      <mxGeometry x="1440" y="540" width="300" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="flow_6" value="Thông số ô bản đồ" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;fontColor=#64748b;strokeColor=#64748b;strokeWidth=1.4;endArrow=classic;endFill=1;startArrow=none;labelBackgroundColor=#ffffff;exitPerimeter=0;entryPerimeter=0;exitX=0.9997836902343067;exitY=0.4852941176470588;entryX=0;entryY=0.25;" edge="1" source="S" target="E4" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1060" y="560" />
+        </Array>
+        <mxPoint x="10.0" y="-30.0" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="flow_7" value="Ảnh nền bản đồ" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;fontColor=#64748b;strokeColor=#64748b;strokeWidth=1.4;endArrow=classic;endFill=1;startArrow=none;labelBackgroundColor=#ffffff;exitPerimeter=0;entryPerimeter=0;exitX=0;exitY=0.75;entryX=0.9965277357686508;entryY=0.5588235294117647;" edge="1" source="E4" target="S" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1050" y="600" />
+        </Array>
+        <mxPoint x="10.37" y="42.0" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="E5" value="E5. GPS và camera" style="fontFamily=Arial;fontColor=#182230;html=0;whiteSpace=wrap;fillColor=#fff7e6;strokeColor=#9a7833;fontSize=20;align=center;" vertex="1" parent="1">
+      <mxGeometry x="1440" y="715" width="300" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="flow_8" value="Yêu cầu dữ liệu vị trí hoặc camera" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;fontColor=#64748b;strokeColor=#64748b;strokeWidth=1.4;endArrow=classic;endFill=1;startArrow=none;labelBackgroundColor=#ffffff;exitPerimeter=0;entryPerimeter=0;exitX=0.973109057121924;exitY=0.6617647058823529;entryX=0;entryY=0.25;" edge="1" source="S" target="E5" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1060" y="735" />
+        </Array>
+        <mxPoint x="28.52" y="-30.0" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="flow_9" value="Tọa độ, độ chính xác, khung hình và&#10;trạng thái thiết bị" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;fontColor=#64748b;strokeColor=#64748b;strokeWidth=1.4;endArrow=classic;endFill=1;startArrow=none;labelBackgroundColor=#ffffff;exitPerimeter=0;entryPerimeter=0;exitX=0;exitY=0.75;entryX=0.9411764705882353;entryY=0.7352941176470589;" edge="1" source="E5" target="S" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1050" y="775" />
+        </Array>
+        <mxPoint x="34.25" y="42.0" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="E6" value="E6. Chrome Translator API&#10;Dịch tại máy admin" style="fontFamily=Arial;fontColor=#182230;html=0;whiteSpace=wrap;fillColor=#fff7e6;strokeColor=#9a7833;fontSize=20;align=center;" vertex="1" parent="1">
+      <mxGeometry x="1440" y="890" width="300" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="flow_10" value="Cặp ngôn ngữ; văn bản nguồn; yêu cầu tạo&#10;translator" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;fontColor=#64748b;strokeColor=#64748b;strokeWidth=1.4;endArrow=classic;endFill=1;startArrow=none;labelBackgroundColor=#ffffff;exitPerimeter=0;entryPerimeter=0;exitX=0.8682348242808503;exitY=0.8382352941176471;entryX=0;entryY=0.25;" edge="1" source="S" target="E6" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1060" y="910" />
+        </Array>
+        <mxPoint x="70.09" y="-30.0" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="flow_11" value="Bản dịch; khả năng hỗ trợ; tiến độ mô&#10;hình hoặc lỗi" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;fontColor=#64748b;strokeColor=#64748b;strokeWidth=1.4;endArrow=classic;endFill=1;startArrow=none;labelBackgroundColor=#ffffff;exitPerimeter=0;entryPerimeter=0;exitX=0;exitY=0.75;entryX=0.7836367870880281;entryY=0.9117647058823529;" edge="1" source="E6" target="S" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1050" y="950" />
+        </Array>
+        <mxPoint x="78.64" y="42.0" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="note" value="E6 là API native của Chrome, không phải Cloud Translation. Không cần API key; chỉ admin chủ động dịch.&#10;Các kho MongoDB, Redis, SeaweedFS và dữ liệu PWA nằm trong hệ thống nên không vẽ riêng ở sơ đồ ngữ cảnh." style="fontFamily=Arial;fontColor=#182230;html=0;whiteSpace=wrap;text;align=left;fontSize=18;fontColor=#475467;" vertex="1" parent="1">
+      <mxGeometry x="50" y="1120" width="1690" height="65" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>

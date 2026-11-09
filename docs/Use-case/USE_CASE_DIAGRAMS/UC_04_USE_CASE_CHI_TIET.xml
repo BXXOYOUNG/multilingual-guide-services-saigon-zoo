@@ -1,0 +1,124 @@
+<mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2232" pageHeight="1217" math="0" shadow="0" background="#ffffff">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    <mxCell id="title" value="UC-04 — USE CASE DIAGRAM CHI TIẾT" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=30;fontColor=#182230;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="60" y="25" width="2112" height="45" as="geometry" />
+    </mxCell>
+    <mxCell id="subtitle" value="Hiện hành 09/11/2026 · fb1b0b8: Kích hoạt thuyết minh bằng QR Code" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#475467;fontStyle=0;" vertex="1" parent="1">
+      <mxGeometry x="60" y="80" width="2112" height="35" as="geometry" />
+    </mxCell>
+    <mxCell id="boundary" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#fcfdff;strokeColor=#344054;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="317.2535" y="170" width="1849.6215" height="761.2625" as="geometry" />
+    </mxCell>
+    <mxCell id="system_name" value="HỆ THỐNG THUYẾT MINH ĐA NGÔN NGỮ THẢO CẦM VIÊN" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=center;verticalAlign=middle;fontSize=21;fontColor=#182230;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="337.2535" y="185" width="1809.6215" height="40" as="geometry" />
+    </mxCell>
+    <mxCell id="scope" value="Phạm vi: UC-04 · Kích hoạt thuyết minh bằng QR Code" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=center;verticalAlign=middle;fontSize=21;fontColor=#315f91;fontStyle=0;" vertex="1" parent="1">
+      <mxGeometry x="337.2535" y="232" width="1809.6215" height="38" as="geometry" />
+    </mxCell>
+    <mxCell id="actor_main" value="" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;strokeColor=#47627d;fontColor=#47627d;strokeWidth=1.6;labelBackgroundColor=#ffffff;startArrow=none;endArrow=none;endFill=0;exitPerimeter=0;entryPerimeter=0;exitX=1;exitY=0.4186046511627907;entryX=0;entryY=0.5;" edge="1" source="actor" target="main" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="206.25" y="568.25" />
+          <mxPoint x="270.75" y="603.25" />
+          <mxPoint x="310.34" y="603.25" />
+          <mxPoint x="351.77" y="603.25" />
+          <mxPoint x="351.77" y="603.25" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="r0" value="«include»" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;strokeColor=#47627d;fontColor=#47627d;strokeWidth=1.6;labelBackgroundColor=#ffffff;startArrow=none;endArrow=open;endFill=0;exitPerimeter=0;entryPerimeter=0;exitX=0.8076352576999886;exitY=0.1032578299776288;entryX=0.1961697636768503;entryY=0.9005050505050508;dashed=1;" edge="1" source="main" target="qr" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="784.57" y="543.66" />
+          <mxPoint x="896.03" y="503.03" />
+          <mxPoint x="1041.14" y="450.11" />
+          <mxPoint x="1142.04" y="413.32" />
+          <mxPoint x="1153.50" y="409.15" />
+        </Array>
+        <mxPoint x="9.526242835717994" y="-20.71534033281023" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="r1" value="«include»" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;strokeColor=#47627d;fontColor=#47627d;strokeWidth=1.6;labelBackgroundColor=#ffffff;startArrow=none;endArrow=open;endFill=0;exitPerimeter=0;entryPerimeter=0;exitX=0.9593745855073762;exitY=0.2999227655267927;entryX=0.044150451948990026;entryY=0.7082971077493772;dashed=1;" edge="1" source="main" target="language" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="865.80" y="573.20" />
+          <mxPoint x="934.90" y="564.71" />
+          <mxPoint x="1009.00" y="555.61" />
+          <mxPoint x="1074.22" y="547.60" />
+          <mxPoint x="1086.71" y="546.06" />
+        </Array>
+        <mxPoint x="2.305957840352562" y="-12.558626401446872" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="r2" value="«include»" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;strokeColor=#47627d;fontColor=#47627d;strokeWidth=1.6;labelBackgroundColor=#ffffff;startArrow=none;endArrow=open;endFill=0;exitPerimeter=0;entryPerimeter=0;exitX=0.9593745855073762;exitY=0.7000772344732074;entryX=0.039961771471150785;entryY=0.2993102648814703;dashed=1;" edge="1" source="main" target="narration" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="865.80" y="633.30" />
+          <mxPoint x="937.21" y="642.07" />
+          <mxPoint x="1013.96" y="651.50" />
+          <mxPoint x="1080.72" y="659.71" />
+          <mxPoint x="1093.08" y="661.23" />
+        </Array>
+        <mxPoint x="-0.8752689006673791" y="-12.022818037639013" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="r3" value="«include»" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;strokeColor=#47627d;fontColor=#47627d;strokeWidth=1.6;labelBackgroundColor=#ffffff;startArrow=none;endArrow=open;endFill=0;exitPerimeter=0;entryPerimeter=0;exitX=0.8060940456908646;exitY=0.8989892937040584;entryX=0.1864229339979569;entryY=0.10671091017987247;dashed=1;" edge="1" source="main" target="audio" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="783.75" y="663.17" />
+          <mxPoint x="894.65" y="704.05" />
+          <mxPoint x="1039.19" y="757.31" />
+          <mxPoint x="1140.26" y="794.55" />
+          <mxPoint x="1151.75" y="798.79" />
+        </Array>
+        <mxPoint x="10.814143496255724" y="-12.274462471889024" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="r4" value="«extend»&#10;[người dùng chọn quét camera]" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;strokeColor=#8a5b22;fontColor=#8a5b22;strokeWidth=1.6;labelBackgroundColor=#ffffff;startArrow=none;endArrow=open;endFill=0;exitPerimeter=0;entryPerimeter=0;exitX=0.17407407407407435;exitY=0.8838383838383844;entryX=0.8312502417380833;entryY=0.8803030303030307;dashed=1;" edge="1" source="camera" target="qr" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1859.28" y="407.50" />
+          <mxPoint x="1803.69" y="427.74" />
+          <mxPoint x="1746.65" y="448.50" />
+          <mxPoint x="1513.60" y="448.50" />
+          <mxPoint x="1455.45" y="430.04" />
+          <mxPoint x="1395.36" y="410.97" />
+          <mxPoint x="1383.38" y="407.15" />
+        </Array>
+        <mxPoint x="8.388281073681355" y="-19.5" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="actor" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;fillColor=#ffffff;strokeColor=#182230;strokeWidth=2.4;" vertex="1" parent="1">
+      <mxGeometry x="122.25" y="496.25" width="84" height="172" as="geometry" />
+    </mxCell>
+    <mxCell id="actor_label" value="Người tham quan" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=center;verticalAlign=middle;fontSize=23;fontColor=#182230;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="44.25" y="680.25" width="240" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="main" value="UC-04&#10;Kích hoạt thuyết minh bằng QR&#10;Code" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#e9f2ff;strokeColor=#315f91;strokeWidth=1.8;fontSize=23;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="352.2535" y="528.154" width="535.293" height="150.192" as="geometry" />
+    </mxCell>
+    <mxCell id="qr" value="Nhận và xác thực mã QR POI" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#f4f8fc;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="1082.494" y="319.99999999999994" width="361.962" height="99.0" as="geometry" />
+    </mxCell>
+    <mxCell id="language" value="Xác định ngôn ngữ đang&#10;chọn" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#f4f8fc;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="1069.5925" y="472.741" width="387.76500000000004" height="103.51799999999999" as="geometry" />
+    </mxCell>
+    <mxCell id="narration" value="Tra bản thu đã tải hoặc&#10;resolve online" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#f4f8fc;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="1078.273" y="630.241" width="370.404" height="103.51799999999999" as="geometry" />
+    </mxCell>
+    <mxCell id="audio" value="Phát audio đúng POI và&#10;ngôn ngữ" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#f4f8fc;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="1085.329" y="787.7434999999999" width="356.292" height="103.51799999999999" as="geometry" />
+    </mxCell>
+    <mxCell id="camera" value="Quét mã bằng camera" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#fff5e7;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="1802.875" y="319.99999999999994" width="324.0" height="99.0" as="geometry" />
+    </mxCell>
+    <mxCell id="notes" value="LUỒNG CHÍNH: Quét hoặc nhập TCV-POI:ObjectId → kiểm tra định dạng → tìm bản thu đúng ngôn ngữ → phát.&#10;A1 — Ưu tiên bản đã tải để nghe ngoại tuyến; nếu không có&#10;A2 — TCV-PACKAGE:ObjectId chuyển sang tải gói UC-05, không bị hiểu thành POI&#10;E1 — Mã sai/camera không có quyền/audio thiếu: thông báo; không tự gọi TTS&#10;GHI CHÚ: Không cần GPS. Camera cần secure context và quyền; nhập mã thủ công vẫn dùng được. Không tự chọn audio khác ngôn ngữ hoặc dịch máy cho khách." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#344054;fontStyle=0;" vertex="1" parent="1">
+      <mxGeometry x="65" y="967" width="2102" height="160" as="geometry" />
+    </mxCell>
+    <mxCell id="legend" value="Nét đứt/mũi tên mở: «include» hoặc «extend» · Tam giác rỗng: chuyên biệt → khái quát · Phạm vi hiện hành; A/E xem đặc tả đi kèm." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=18;fontColor=#667085;fontStyle=0;" vertex="1" parent="1">
+      <mxGeometry x="65" y="1152" width="2102" height="35" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>

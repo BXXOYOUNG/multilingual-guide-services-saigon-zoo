@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2475" height="1028" viewBox="0 0 2475 1028" role="img">
+  <title>UC-01 — USE CASE DIAGRAM CHI TIẾT</title>
+  <desc>Hiện hành 09/11/2026 · fb1b0b8: Thiết lập ngôn ngữ thuyết minh</desc>
+  <rect x="0" y="0" width="2475" height="1028" fill="white" />
+  <text x="60" y="47.5" fill="#182230" font-family="Arial, sans-serif" font-size="30" text-anchor="start" font-weight="700">
+    <tspan x="60" y="57.7">UC-01 — USE CASE DIAGRAM CHI TIẾT</tspan>
+  </text>
+  <text x="60" y="97.5" fill="#475467" font-family="Arial, sans-serif" font-size="20" text-anchor="start" font-weight="400">
+    <tspan x="60" y="104.3">Hiện hành 09/11/2026 · fb1b0b8: Thiết lập ngôn ngữ thuyết minh</tspan>
+  </text>
+  <rect x="317.2555" y="170" width="2092.3695" height="598.7625" fill="#fcfdff" stroke="#344054" stroke-width="2" />
+  <g />
+  <text x="1363.4402499999999" y="205.0" fill="#182230" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" font-weight="700">
+    <tspan x="1363.4402499999999" y="212.14">HỆ THỐNG THUYẾT MINH ĐA NGÔN NGỮ THẢO CẦM VIÊN</tspan>
+  </text>
+  <text x="1363.4402499999999" y="251.0" fill="#315f91" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" font-weight="400">
+    <tspan x="1363.4402499999999" y="258.14">Phạm vi: UC-01 · Thiết lập ngôn ngữ thuyết minh</tspan>
+  </text>
+  <polyline points="206.25,487.00 271.14,522.00 310.86,522.00 351.74,522.00 351.74,522.00" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <polyline points="761.20,478.81 859.35,454.88 979.60,425.55 1070.82,403.30 1082.93,400.35" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1072.92,409.99 1082.93,400.35 1069.61,396.39" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="749.5" y="412.875" width="310" height="28" fill="white" />
+  <text x="904.5" y="426.875" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="904.5" y="432.655">«include»</tspan>
+  </text>
+  <polyline points="813.84,522.00 880.79,522.00 953.21,522.00 1017.56,522.00 1030.33,522.00" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1018.33,529.00 1030.33,522.00 1018.33,515.00" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="749.5" y="498.25" width="310" height="28" fill="white" />
+  <text x="904.5" y="512.25" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="904.5" y="518.03">«include»</tspan>
+  </text>
+  <polyline points="759.95,565.59 849.99,587.91 958.90,614.91 1046.95,636.74 1059.22,639.78" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1045.89,643.69 1059.22,639.78 1049.26,630.10" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="749.5" y="571.0999999999999" width="310" height="28" fill="white" />
+  <text x="904.5" y="585.0999999999999" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="904.5" y="590.8799999999999">«include»</tspan>
+  </text>
+  <polyline points="1539.77,455.10 1478.08,462.44 1408.26,472.86 1348.95,483.69 1336.08,486.07" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <polygon points="1336.08,486.07 1349.55,476.46 1352.10,490.22" fill="white" stroke="#47627d" stroke-width="1.6" />
+  <polyline points="1588.11,567.33 1532.41,555.35 1463.61,543.10 1400.14,533.64 1387.50,531.79" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <polygon points="1387.50,531.79 1403.36,527.03 1401.33,540.89" fill="white" stroke="#47627d" stroke-width="1.6" />
+  <polyline points="1863.82,450.75 1917.61,450.75 1977.79,450.75 2032.50,450.75 2045.12,450.75" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="2033.12,457.75 2045.12,450.75 2033.12,443.75" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="1799.5" y="427.0" width="310" height="28" fill="white" />
+  <text x="1954.5" y="441.0" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1954.5" y="446.78">«include»</tspan>
+  </text>
+  <circle cx="164.25" cy="437.0" r="22" fill="white" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="459.0" x2="164.25" y2="530.0" stroke="#182230" stroke-width="2.4" />
+  <line x1="122.25" y1="487.0" x2="206.25" y2="487.0" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="530.0" x2="127.25" y2="587.0" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="530.0" x2="201.25" y2="587.0" stroke="#182230" stroke-width="2.4" />
+  <text x="164.25" y="626.5" fill="#182230" font-family="Arial, sans-serif" font-size="23" text-anchor="middle" font-weight="700">
+    <tspan x="164.25" y="634.32">Người tham quan</tspan>
+  </text>
+  <ellipse cx="582.8625" cy="522.0" rx="230.607" ry="67.5" fill="#e9f2ff" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="23" text-anchor="middle">
+    <tspan x="582.8625" y="515.5600000000001" font-weight="700">UC-01</tspan>
+    <tspan x="582.8625" y="544.08" font-weight="400">Thiết lập ngôn ngữ thuyết minh</tspan>
+  </text>
+  <ellipse cx="1210.65" cy="369.49999999999994" rx="162.0" ry="49.5" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1210.65" y="376.29999999999995" font-weight="700">Kiểm tra ngôn ngữ đã lưu</tspan>
+  </text>
+  <ellipse cx="1210.65" cy="522.0" rx="179.757" ry="49.5" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1210.65" y="528.8" font-weight="700">Xác định ngôn ngữ sử dụng</tspan>
+  </text>
+  <ellipse cx="1210.65" cy="677.0024999999999" rx="215.1225" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1210.65" y="671.4024999999999" font-weight="700">Áp dụng ngôn ngữ giao diện</tspan>
+    <tspan x="1210.65" y="696.2024999999999" font-weight="400">và nội dung</tspan>
+  </text>
+  <ellipse cx="1701.5" cy="450.75" rx="162.0" ry="49.5" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1701.5" y="457.55" font-weight="700">Chọn ngôn ngữ mới</tspan>
+  </text>
+  <ellipse cx="2207.625" cy="450.75" rx="162.0" ry="49.5" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="2207.625" y="457.55" font-weight="700">Lưu lựa chọn ngôn ngữ</tspan>
+  </text>
+  <ellipse cx="1701.5" cy="603.25" rx="162.0" ry="49.5" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1701.5" y="610.05" font-weight="700">Sử dụng ngôn ngữ đã lưu</tspan>
+  </text>
+  <text x="65" y="871.0" fill="#344054" font-family="Arial, sans-serif" font-size="20" text-anchor="start" font-weight="400">
+    <tspan x="65" y="840.5999999999999">LUỒNG CHÍNH: Mở ứng dụng → kiểm tra lựa chọn đã lưu → chọn và lưu nếu chưa có → áp dụng ngôn ngữ.</tspan>
+    <tspan x="65" y="865.3999999999999">A1 — Biến thể “Sử dụng ngôn ngữ đã lưu”; không yêu cầu chọn</tspan>
+    <tspan x="65" y="890.1999999999999">E1 — Không đọc/lưu được lựa chọn: báo lỗi hoặc mở chọn lại; không</tspan>
+    <tspan x="65" y="914.9999999999999">GHI CHÚ: 6 ngôn ngữ vi/en/fr/zh-Hans/ja/ko. Đây là chọn ngôn ngữ hiển thị, không phải dịch máy nội dung POI.</tspan>
+  </text>
+  <text x="65" y="980.5" fill="#667085" font-family="Arial, sans-serif" font-size="18" text-anchor="start" font-weight="400">
+    <tspan x="65" y="986.62">Nét đứt/mũi tên mở: «include» hoặc «extend» · Tam giác rỗng: chuyên biệt → khái quát · Phạm vi hiện hành; A/E xem đặc tả đi kèm.</tspan>
+  </text>
+</svg>

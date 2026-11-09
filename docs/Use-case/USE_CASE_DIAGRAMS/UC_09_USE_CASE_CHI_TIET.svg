@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2394" height="1876" viewBox="0 0 2394 1876" role="img">
+  <title>UC-09 — USE CASE DIAGRAM CHI TIẾT</title>
+  <desc>Hiện hành 09/11/2026 · fb1b0b8: Quản lý nội dung thuyết minh và bản dịch</desc>
+  <rect x="0" y="0" width="2394" height="1876" fill="white" />
+  <text x="60" y="47.5" fill="#182230" font-family="Arial, sans-serif" font-size="30" text-anchor="start" font-weight="700">
+    <tspan x="60" y="57.7">UC-09 — USE CASE DIAGRAM CHI TIẾT</tspan>
+  </text>
+  <text x="60" y="97.5" fill="#475467" font-family="Arial, sans-serif" font-size="20" text-anchor="start" font-weight="400">
+    <tspan x="60" y="104.3">Hiện hành 09/11/2026 · fb1b0b8: Quản lý nội dung thuyết minh và bản dịch</tspan>
+  </text>
+  <rect x="317.24850000000004" y="170" width="2010.8754999999996" height="1316.5125" fill="#fcfdff" stroke="#344054" stroke-width="2" />
+  <g />
+  <text x="1322.6862499999997" y="205.0" fill="#182230" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" font-weight="700">
+    <tspan x="1322.6862499999997" y="212.14">HỆ THỐNG THUYẾT MINH ĐA NGÔN NGỮ THẢO CẦM VIÊN</tspan>
+  </text>
+  <text x="1322.6862499999997" y="251.0" fill="#315f91" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" font-weight="400">
+    <tspan x="1322.6862499999997" y="258.14">Phạm vi: UC-09 · Quản lý nội dung thuyết minh và bản dịch</tspan>
+  </text>
+  <polyline points="206.25,809.26 270.69,844.26 310.34,844.26 351.89,844.26 351.89,844.26" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <polyline points="717.45,773.36 813.55,700.62 949.10,598.01 1251.94,450.51 1291.14,435.81 1335.65,419.10 1347.12,414.83" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1338.32,425.57 1347.12,414.83 1333.44,412.45" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="917.3874999999998" y="454.9750000000001" width="310" height="28" fill="white" />
+  <text x="1072.3874999999998" y="468.9750000000001" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1072.3874999999998" y="474.75500000000005">«include»</tspan>
+  </text>
+  <polyline points="782.64,783.23 865.21,751.50 949.10,719.26 1181.28,633.24 1333.16,576.95 1344.88,572.61" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1336.05,583.34 1344.88,572.61 1331.19,570.22" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="917.3874999999998" y="606.2125000000001" width="310" height="28" fill="white" />
+  <text x="1072.3874999999998" y="620.2125000000001" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1072.3874999999998" y="625.9925000000001">«include»</tspan>
+  </text>
+  <polyline points="1348.30,729.36 1298.84,747.93 1251.94,765.51 1195.69,813.26 1046.91,821.33 901.14,829.23 888.40,829.93" fill="none" stroke="#8a5b22" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="900.00,822.28 888.40,829.93 900.77,836.26" fill="none" stroke="#8a5b22" stroke-width="1.6" />
+  <rect x="917.3874999999998" y="768.7625" width="310" height="50" fill="white" />
+  <text x="1072.3874999999998" y="793.7625" fill="#8a5b22" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1072.3874999999998" y="789.0025">«extend»</tspan>
+    <tspan x="1072.3874999999998" y="810.0825000000001">[admin nhập/sửa một ngôn ngữ]</tspan>
+  </text>
+  <polyline points="1347.08,887.33 1298.06,905.71 1251.94,923.01 1195.69,1304.01 949.10,1304.01 777.10,1060.92 683.24,928.26 676.06,918.13" fill="none" stroke="#8a5b22" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="688.71,923.88 676.06,918.13 677.28,931.96" fill="none" stroke="#8a5b22" stroke-width="1.6" />
+  <rect x="917.3874999999998" y="1238.7625" width="310" height="72" fill="white" />
+  <text x="1072.3874999999998" y="1274.7625" fill="#8a5b22" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1072.3874999999998" y="1259.4625">«extend»</tspan>
+    <tspan x="1072.3874999999998" y="1280.5425">[admin chọn dịch; Chrome</tspan>
+    <tspan x="1072.3874999999998" y="1301.6225000000002">desktop hỗ trợ]</tspan>
+  </text>
+  <polyline points="1579.15,801.20 1628.15,782.81 1674.28,765.51 1856.34,608.01 1895.75,593.55 1940.80,577.02 1952.38,572.79" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1943.51,583.49 1952.38,572.79 1938.70,570.34" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="1610.25" y="635.2125" width="310" height="28" fill="white" />
+  <text x="1765.25" y="649.2125" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1765.25" y="654.9925">«include»</tspan>
+  </text>
+  <polyline points="1607.35,807.14 1702.91,782.33 1828.27,749.78 1924.54,724.78 1936.75,721.61" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1926.89,731.40 1936.75,721.61 1923.38,717.84" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="1610.25" y="737.0375" width="310" height="28" fill="white" />
+  <text x="1765.25" y="751.0375" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1765.25" y="756.8175">«include»</tspan>
+  </text>
+  <polyline points="1667.61,844.26 1724.06,844.26 1785.72,844.26 1843.47,844.26 1856.12,844.26" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1844.12,851.26 1856.12,844.26 1844.12,837.26" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="1610.25" y="820.5125" width="310" height="28" fill="white" />
+  <text x="1765.25" y="834.5125" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1765.25" y="840.2925">«include»</tspan>
+  </text>
+  <polyline points="1607.35,881.39 1701.56,905.85 1824.75,937.84 1920.46,962.69 1932.62,965.84" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1919.25,969.61 1932.62,965.84 1922.76,956.05" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="1610.25" y="889.8375000000001" width="310" height="28" fill="white" />
+  <text x="1765.25" y="903.8375000000001" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1765.25" y="909.6175000000001">«include»</tspan>
+  </text>
+  <polyline points="1357.51,1037.16 1304.83,1056.30 1251.94,1075.51 1195.69,1375.26 949.10,1375.26 767.71,1079.18 675.84,929.20 669.38,918.65" fill="none" stroke="#8a5b22" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="681.61,925.23 669.38,918.65 669.67,932.54" fill="none" stroke="#8a5b22" stroke-width="1.6" />
+  <rect x="917.3874999999998" y="1310.0125" width="310" height="72" fill="white" />
+  <text x="1072.3874999999998" y="1346.0125" fill="#8a5b22" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1072.3874999999998" y="1330.7125">«extend»</tspan>
+    <tspan x="1072.3874999999998" y="1351.7925">[admin chọn tạo audio; đã có</tspan>
+    <tspan x="1072.3874999999998" y="1372.8725000000002">lời lưu]</tspan>
+  </text>
+  <polyline points="1587.11,1031.64 1684.85,1057.43 1821.91,1093.58 1925.23,1120.83 1937.38,1124.01" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1923.99,1127.74 1937.38,1124.01 1927.54,1114.20" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="1610.25" y="1045.9375" width="310" height="28" fill="white" />
+  <text x="1765.25" y="1059.9375" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1765.25" y="1065.7175">«include»</tspan>
+  </text>
+  <polyline points="1415.80,1204.84 1339.61,1288.47 1195.69,1446.51 949.10,1446.51 759.85,1096.14 670.05,929.88 664.01,918.71" fill="none" stroke="#8a5b22" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="675.88,925.94 664.01,918.71 663.56,932.60" fill="none" stroke="#8a5b22" stroke-width="1.6" />
+  <rect x="917.3874999999998" y="1381.2625" width="310" height="72" fill="white" />
+  <text x="1072.3874999999998" y="1417.2625" fill="#8a5b22" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1072.3874999999998" y="1401.9625">«extend»</tspan>
+    <tspan x="1072.3874999999998" y="1423.0425">[admin chọn phát hành; có</tspan>
+    <tspan x="1072.3874999999998" y="1444.1225000000002">audio sẵn sàng]</tspan>
+  </text>
+  <circle cx="164.25" cy="759.2625" r="22" fill="white" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="781.2625" x2="164.25" y2="852.2625" stroke="#182230" stroke-width="2.4" />
+  <line x1="122.25" y1="809.2625" x2="206.25" y2="809.2625" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="852.2625" x2="127.25" y2="909.2625" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="852.2625" x2="201.25" y2="909.2625" stroke="#182230" stroke-width="2.4" />
+  <text x="164.25" y="948.7625" fill="#182230" font-family="Arial, sans-serif" font-size="23" text-anchor="middle" font-weight="700">
+    <tspan x="164.25" y="956.5825000000001">Quản trị viên</tspan>
+  </text>
+  <ellipse cx="622.5500000000001" cy="844.2625" rx="270.30150000000003" ry="75.096" fill="#e9f2ff" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="23" text-anchor="middle">
+    <tspan x="622.5500000000001" y="823.5625000000001" font-weight="700">UC-09</tspan>
+    <tspan x="622.5500000000001" y="852.0825000000001" font-weight="400">Quản lý nội dung thuyết minh và</tspan>
+    <tspan x="622.5500000000001" y="880.6025000000001" font-weight="400">bản dịch</tspan>
+  </text>
+  <ellipse cx="1463.125" cy="371.7625000000001" rx="206.4375" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1463.125" y="366.16250000000014" font-weight="700">Chọn POI và ngôn ngữ nội</tspan>
+    <tspan x="1463.125" y="390.96250000000015" font-weight="400">dung</tspan>
+  </text>
+  <ellipse cx="1463.125" cy="529.2625" rx="211.17150000000004" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1463.125" y="523.6625" font-weight="700">Xem nội dung và audio hiện</tspan>
+    <tspan x="1463.125" y="548.4625" font-weight="400">có</tspan>
+  </text>
+  <ellipse cx="1463.125" cy="686.7625" rx="197.01" ry="51.75899999999999" fill="#fff5e7" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1463.125" y="681.1625" font-weight="700">Nhập và lưu nội dung thủ</tspan>
+    <tspan x="1463.125" y="705.9625" font-weight="400">công</tspan>
+  </text>
+  <ellipse cx="1463.125" cy="844.2625" rx="204.0795" ry="51.75899999999999" fill="#fff5e7" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1463.125" y="838.6625" font-weight="700">Dịch và lưu bản dịch qua</tspan>
+    <tspan x="1463.125" y="863.4625" font-weight="400">Chrome</tspan>
+  </text>
+  <ellipse cx="2072.25" cy="529.2625" rx="215.87400000000002" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="2072.25" y="523.6625" font-weight="700">Chuẩn bị nguồn và revision</tspan>
+    <tspan x="2072.25" y="548.4625" font-weight="400">đích</tspan>
+  </text>
+  <ellipse cx="2072.25" cy="686.7625" rx="182.0385" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="2072.25" y="681.1625" font-weight="700">Tải mô hình khi cần và</tspan>
+    <tspan x="2072.25" y="705.9625" font-weight="400">dịch tại máy</tspan>
+  </text>
+  <ellipse cx="2072.25" cy="844.2625" rx="215.856" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="2072.25" y="838.6625" font-weight="700">Đối chiếu, sửa và chọn bản</tspan>
+    <tspan x="2072.25" y="863.4625" font-weight="400">lưu</tspan>
+  </text>
+  <ellipse cx="2072.25" cy="1001.7625" rx="191.49749999999997" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="2072.25" y="996.1625" font-weight="700">Xác nhận thay thế và lưu</tspan>
+    <tspan x="2072.25" y="1020.9625" font-weight="400">transaction</tspan>
+  </text>
+  <ellipse cx="1463.125" cy="999.2625" rx="162.0" ry="49.5" fill="#fff5e7" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1463.125" y="1006.0625" font-weight="700">Yêu cầu TTS từ lời đã lưu</tspan>
+  </text>
+  <ellipse cx="2072.25" cy="1159.2625" rx="182.853" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="2072.25" y="1153.6625" font-weight="700">Theo dõi tác vụ và nghe</tspan>
+    <tspan x="2072.25" y="1178.4624999999999" font-weight="400">thử</tspan>
+  </text>
+  <ellipse cx="1463.125" cy="1154.2625" rx="192.33" ry="51.75899999999999" fill="#fff5e7" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1463.125" y="1148.6625" font-weight="700">Phát hành snapshot audio</tspan>
+    <tspan x="1463.125" y="1173.4624999999999" font-weight="400">mới</tspan>
+  </text>
+  <text x="65" y="1654.0" fill="#344054" font-family="Arial, sans-serif" font-size="20" text-anchor="start" font-weight="400">
+    <tspan x="65" y="1561.6">LUỒNG CHÍNH: Chọn POI/ngôn ngữ → lưu thủ công hoặc Chrome preview/đối chiếu/xác nhận → admin yêu cầu TTS từng ngôn ngữ → nghe thử → phát hành gói mới khi cần.</tspan>
+    <tspan x="65" y="1586.3999999999999">A1 — Nhập/sửa thủ công, có thể chỉ lưu văn bản</tspan>
+    <tspan x="65" y="1611.1999999999998">A2 — Theo dõi hoặc tạo lại audio, nghe thử khi Completed</tspan>
+    <tspan x="65" y="1636.0">A3 — Chrome desktop: lưu nguồn → chuẩn bị preview → bấm dịch →</tspan>
+    <tspan x="65" y="1660.8">E1 — Browser/cặp ngôn ngữ không hỗ trợ hoặc tải mô hình lỗi: nhập</tspan>
+    <tspan x="65" y="1685.6">E2 — Preview hết hạn hoặc nguồn/đích đổi: từ chối 409, chuẩn bị mới</tspan>
+    <tspan x="65" y="1710.3999999999999">E3 — TTS lỗi: báo Failed và admin chủ động yêu cầu lại</tspan>
+    <tspan x="65" y="1735.1999999999998">GHI CHÚ: 6 ngôn ngữ tổng cộng, tối đa 5 đích. Không Cloud API key. Redis giữ nguồn/revision 30 phút; bản dịch mới ở bộ nhớ React trước commit. Lưu lời đổi vô hiệu audio; POI active cho đọc ngay sau lưu. TTS không tự chạy do</tspan>
+    <tspan x="65" y="1760.0">bấm dịch. Gói cũ không tự cập nhật.</tspan>
+  </text>
+  <text x="65" y="1828.5" fill="#667085" font-family="Arial, sans-serif" font-size="18" text-anchor="start" font-weight="400">
+    <tspan x="65" y="1834.62">Nét đứt/mũi tên mở: «include» hoặc «extend» · Tam giác rỗng: chuyên biệt → khái quát · Phạm vi hiện hành; A/E xem đặc tả đi kèm.</tspan>
+  </text>
+</svg>

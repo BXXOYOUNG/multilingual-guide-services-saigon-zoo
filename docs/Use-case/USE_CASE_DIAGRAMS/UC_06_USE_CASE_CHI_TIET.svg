@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1696" height="1369" viewBox="0 0 1696 1369" role="img">
+  <title>UC-06 — USE CASE DIAGRAM CHI TIẾT</title>
+  <desc>Hiện hành 09/11/2026 · fb1b0b8: Khám phá và nghe thuyết minh offline</desc>
+  <rect x="0" y="0" width="1696" height="1369" fill="white" />
+  <text x="60" y="47.5" fill="#182230" font-family="Arial, sans-serif" font-size="30" text-anchor="start" font-weight="700">
+    <tspan x="60" y="57.7">UC-06 — USE CASE DIAGRAM CHI TIẾT</tspan>
+  </text>
+  <text x="60" y="97.5" fill="#475467" font-family="Arial, sans-serif" font-size="20" text-anchor="start" font-weight="400">
+    <tspan x="60" y="104.3">Hiện hành 09/11/2026 · fb1b0b8: Khám phá và nghe thuyết minh offline</tspan>
+  </text>
+  <rect x="317.254" y="170" width="1313.3245000000002" height="913.7625" fill="#fcfdff" stroke="#344054" stroke-width="2" />
+  <g />
+  <text x="973.9162500000001" y="205.0" fill="#182230" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" font-weight="700">
+    <tspan x="973.9162500000001" y="212.14">HỆ THỐNG THUYẾT MINH ĐA NGÔN NGỮ THẢO CẦM VIÊN</tspan>
+  </text>
+  <text x="973.9162500000001" y="251.0" fill="#315f91" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" font-weight="400">
+    <tspan x="973.9162500000001" y="258.14">Phạm vi: UC-06 · Khám phá và nghe thuyết minh offline</tspan>
+  </text>
+  <polyline points="206.25,651.76 270.86,686.76 310.51,686.76 351.74,686.76 351.74,686.76" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <polyline points="749.12,624.59 829.46,589.66 913.74,553.01 1171.40,450.51 1210.30,435.81 1254.48,419.11 1266.42,414.60" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1257.67,425.39 1266.42,414.60 1252.73,412.29" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="859.4499999999999" y="451.5375" width="310" height="28" fill="white" />
+  <text x="1014.4499999999999" y="465.5375" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1014.4499999999999" y="471.3175">«include»</tspan>
+  </text>
+  <polyline points="814.45,644.35 939.36,618.91 1096.09,587.01 1212.80,563.25 1225.04,560.75" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1214.68,570.01 1225.04,560.75 1211.88,556.29" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="859.4499999999999" y="560.95" width="310" height="28" fill="white" />
+  <text x="1014.4499999999999" y="574.95" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1014.4499999999999" y="580.73">«include»</tspan>
+  </text>
+  <polyline points="815.48,728.71 947.29,755.11 1114.20,788.56 1232.20,812.20 1244.54,814.67" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1231.40,819.18 1244.54,814.67 1234.15,805.45" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="859.4499999999999" y="726.625" width="310" height="28" fill="white" />
+  <text x="1014.4499999999999" y="740.625" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1014.4499999999999" y="746.405">«include»</tspan>
+  </text>
+  <polyline points="1218.58,996.70 1163.34,997.54 1115.15,998.26 913.74,998.26 777.29,860.09 686.14,767.79 677.46,759.01" fill="none" stroke="#8a5b22" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="690.88,762.62 677.46,759.01 680.92,772.47" fill="none" stroke="#8a5b22" stroke-width="1.6" />
+  <rect x="859.4499999999999" y="953.7625" width="310" height="50" fill="white" />
+  <text x="1014.4499999999999" y="978.7625" fill="#8a5b22" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1014.4499999999999" y="974.0025">«extend»</tspan>
+    <tspan x="1014.4499999999999" y="995.0825000000001">[chọn đối tượng khác]</tspan>
+  </text>
+  <polyline points="1264.60,730.29 1216.41,748.50 1171.40,765.51 1115.15,947.01 913.74,947.01 789.91,842.25 699.39,765.66 690.17,757.88" fill="none" stroke="#8a5b22" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="703.86,760.28 690.17,757.88 694.82,770.97" fill="none" stroke="#8a5b22" stroke-width="1.6" />
+  <rect x="859.4499999999999" y="902.5125" width="310" height="50" fill="white" />
+  <text x="1014.4499999999999" y="927.5125" fill="#8a5b22" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1014.4499999999999" y="922.7525">«extend»</tspan>
+    <tspan x="1014.4499999999999" y="943.8325000000001">[có metadata POI đã cache]</tspan>
+  </text>
+  <circle cx="164.25" cy="601.7624999999999" r="22" fill="white" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="623.7624999999999" x2="164.25" y2="694.7624999999999" stroke="#182230" stroke-width="2.4" />
+  <line x1="122.25" y1="651.7624999999999" x2="206.25" y2="651.7624999999999" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="694.7624999999999" x2="127.25" y2="751.7624999999999" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="694.7624999999999" x2="201.25" y2="751.7624999999999" stroke="#182230" stroke-width="2.4" />
+  <text x="164.25" y="791.2624999999999" fill="#182230" font-family="Arial, sans-serif" font-size="23" text-anchor="middle" font-weight="700">
+    <tspan x="164.25" y="799.0825">Người tham quan</tspan>
+  </text>
+  <ellipse cx="604.875" cy="686.7624999999999" rx="252.621" ry="75.096" fill="#e9f2ff" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="23" text-anchor="middle">
+    <tspan x="604.875" y="666.0625" font-weight="700">UC-06</tspan>
+    <tspan x="604.875" y="694.5825" font-weight="400">Khám phá và nghe thuyết minh</tspan>
+    <tspan x="604.875" y="723.1025" font-weight="400">offline</tspan>
+  </text>
+  <ellipse cx="1381.0" cy="371.76249999999993" rx="200.9475" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1381.0" y="366.16249999999997" font-weight="700">Xem danh sách bản thu đã</tspan>
+    <tspan x="1381.0" y="390.9625" font-weight="400">tải</tspan>
+  </text>
+  <ellipse cx="1381.0" cy="529.2624999999999" rx="195.42149999999998" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1381.0" y="523.6624999999999" font-weight="700">Tìm audio đã lưu theo đối</tspan>
+    <tspan x="1381.0" y="548.4624999999999" font-weight="400">tượng</tspan>
+  </text>
+  <ellipse cx="1381.0" cy="686.7624999999999" rx="209.57850000000002" ry="51.75899999999999" fill="#fff5e7" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1381.0" y="681.1624999999999" font-weight="700">Xem metadata POI đã cache</tspan>
+    <tspan x="1381.0" y="705.9624999999999" font-weight="400">khi có</tspan>
+  </text>
+  <ellipse cx="1381.0" cy="841.7624999999999" rx="162.0" ry="49.5" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1381.0" y="848.5624999999999" font-weight="700">Phát audio ngoại tuyến</tspan>
+  </text>
+  <ellipse cx="1381.0" cy="994.2624999999999" rx="162.0" ry="49.5" fill="#fff5e7" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1381.0" y="1001.0624999999999" font-weight="700">Chọn đối tượng khác</tspan>
+  </text>
+  <text x="65" y="1199.0" fill="#344054" font-family="Arial, sans-serif" font-size="20" text-anchor="start" font-weight="400">
+    <tspan x="65" y="1156.2">LUỒNG CHÍNH: Xem danh sách → chọn đối tượng → tìm audio cục bộ → hiển thị thông tin → nghe không cần Internet.</tspan>
+    <tspan x="65" y="1181.0">A1 — Mở rộng tại điểm đang xem/nghe: đổi đối tượng, dừng audio cũ</tspan>
+    <tspan x="65" y="1205.8">E1 — Chưa có bản thu phù hợp hoặc dữ liệu cục bộ lỗi:</tspan>
+    <tspan x="65" y="1230.6000000000001">GHI CHÚ: Điều kiện: mở app và tải audio trước trên cùng origin/browser. Không cần gọi server để phát Blob đã tải. Ảnh, metadata và nền map chỉ có theo dữ</tspan>
+    <tspan x="65" y="1255.4">liệu đã cache; không bắt UC-05 chạy lại ở mỗi lần nghe.</tspan>
+  </text>
+  <text x="65" y="1321.5" fill="#667085" font-family="Arial, sans-serif" font-size="18" text-anchor="start" font-weight="400">
+    <tspan x="65" y="1327.62">Nét đứt/mũi tên mở: «include» hoặc «extend» · Tam giác rỗng: chuyên biệt → khái quát · Phạm vi hiện hành; A/E xem đặc tả đi kèm.</tspan>
+  </text>
+</svg>

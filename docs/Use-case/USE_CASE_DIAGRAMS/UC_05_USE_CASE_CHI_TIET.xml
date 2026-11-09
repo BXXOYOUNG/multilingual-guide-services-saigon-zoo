@@ -1,0 +1,160 @@
+<mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2226" pageHeight="1374" math="0" shadow="0" background="#ffffff">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    <mxCell id="title" value="UC-05 — USE CASE DIAGRAM CHI TIẾT" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=30;fontColor=#182230;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="60" y="25" width="2106" height="45" as="geometry" />
+    </mxCell>
+    <mxCell id="subtitle" value="Hiện hành 09/11/2026 · fb1b0b8: Tải gói audio thuyết minh offline" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#475467;fontStyle=0;" vertex="1" parent="1">
+      <mxGeometry x="60" y="80" width="2106" height="35" as="geometry" />
+    </mxCell>
+    <mxCell id="boundary" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#fcfdff;strokeColor=#344054;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="317.2505000000001" y="170" width="1842.9325" height="918.5250000000001" as="geometry" />
+    </mxCell>
+    <mxCell id="system_name" value="HỆ THỐNG THUYẾT MINH ĐA NGÔN NGỮ THẢO CẦM VIÊN" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=center;verticalAlign=middle;fontSize=21;fontColor=#182230;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="337.2505000000001" y="185" width="1802.9325" height="40" as="geometry" />
+    </mxCell>
+    <mxCell id="scope" value="Phạm vi: UC-05 · Tải gói audio thuyết minh offline" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=center;verticalAlign=middle;fontSize=21;fontColor=#315f91;fontStyle=0;" vertex="1" parent="1">
+      <mxGeometry x="337.2505000000001" y="232" width="1802.9325" height="38" as="geometry" />
+    </mxCell>
+    <mxCell id="actor_main" value="" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;strokeColor=#47627d;fontColor=#47627d;strokeWidth=1.6;labelBackgroundColor=#ffffff;startArrow=none;endArrow=none;endFill=0;exitPerimeter=0;entryPerimeter=0;exitX=1;exitY=0.4186046511627907;entryX=0;entryY=0.5;" edge="1" source="actor" target="main" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="206.25" y="649.26" />
+          <mxPoint x="271.25" y="684.26" />
+          <mxPoint x="311.14" y="684.26" />
+          <mxPoint x="351.79" y="684.26" />
+          <mxPoint x="351.79" y="684.26" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="r0" value="«include»" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;strokeColor=#47627d;fontColor=#47627d;strokeWidth=1.6;labelBackgroundColor=#ffffff;startArrow=none;endArrow=open;endFill=0;exitPerimeter=0;entryPerimeter=0;exitX=0.7583159744066508;exitY=0.06855225311601183;entryX=0.22239916528536943;entryY=0.9204582777874379;dashed=1;" edge="1" source="main" target="qr" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="677.70" y="619.46" />
+          <mxPoint x="794.71" y="550.29" />
+          <mxPoint x="963.47" y="450.51" />
+          <mxPoint x="1003.46" y="436.05" />
+          <mxPoint x="1049.16" y="419.53" />
+          <mxPoint x="1060.89" y="415.29" />
+        </Array>
+        <mxPoint x="7.277640538705327" y="-33.93054138804132" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="r1" value="«include»" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;strokeColor=#47627d;fontColor=#47627d;strokeWidth=1.6;labelBackgroundColor=#ffffff;startArrow=none;endArrow=open;endFill=0;exitPerimeter=0;entryPerimeter=0;exitX=0.9075270170140779;exitY=0.20770746777458204;entryX=0.12877471860647702;entryY=0.8397959775111584;dashed=1;" edge="1" source="main" target="state" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="741.74" y="640.36" />
+          <mxPoint x="832.54" y="617.41" />
+          <mxPoint x="942.62" y="589.58" />
+          <mxPoint x="1029.91" y="567.51" />
+          <mxPoint x="1042.07" y="564.44" />
+        </Array>
+        <mxPoint x="-19.456273761615535" y="-10.037594053920998" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="r2" value="«include»" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;strokeColor=#47627d;fontColor=#47627d;strokeWidth=1.6;labelBackgroundColor=#ffffff;startArrow=none;endArrow=open;endFill=0;exitPerimeter=0;entryPerimeter=0;exitX=1;exitY=0.5;entryX=0;entryY=0.5;dashed=1;" edge="1" source="main" target="download" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="781.68" y="684.26" />
+          <mxPoint x="855.51" y="684.26" />
+          <mxPoint x="937.31" y="684.26" />
+          <mxPoint x="1007.56" y="684.26" />
+          <mxPoint x="1020.09" y="684.26" />
+        </Array>
+        <mxPoint x="-28.43125000000009" y="-9.75" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="r3" value="«include»" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;strokeColor=#47627d;fontColor=#47627d;strokeWidth=1.6;labelBackgroundColor=#ffffff;startArrow=none;endArrow=open;endFill=0;exitPerimeter=0;entryPerimeter=0;exitX=0.9075270170140779;exitY=0.792292532225418;entryX=0.13918311456935636;entryY=0.15042311482061108;dashed=1;" edge="1" source="main" target="verify" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="741.74" y="728.16" />
+          <mxPoint x="831.19" y="750.78" />
+          <mxPoint x="939.35" y="778.12" />
+          <mxPoint x="1026.00" y="800.03" />
+          <mxPoint x="1038.08" y="803.08" />
+        </Array>
+        <mxPoint x="-17.455325978952487" y="-22.884905898757438" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="r4" value="«include»" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;strokeColor=#47627d;fontColor=#47627d;strokeWidth=1.6;labelBackgroundColor=#ffffff;startArrow=none;endArrow=open;endFill=0;exitPerimeter=0;entryPerimeter=0;exitX=0.7583159744066508;exitY=0.9314477468839881;entryX=0.20836303596406783;entryY=0.08845321586583917;dashed=1;" edge="1" source="main" target="save" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="677.70" y="749.06" />
+          <mxPoint x="794.71" y="818.25" />
+          <mxPoint x="963.47" y="918.01" />
+          <mxPoint x="1004.81" y="932.96" />
+          <mxPoint x="1051.47" y="949.84" />
+          <mxPoint x="1063.42" y="954.16" />
+        </Array>
+        <mxPoint x="6.118340533750029" y="-21.387049974086494" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="r5" value="«extend»&#10;[Storage Estimate API khả&#10;dụng]" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;strokeColor=#8a5b22;fontColor=#8a5b22;strokeWidth=1.6;labelBackgroundColor=#ffffff;startArrow=none;endArrow=open;endFill=0;exitPerimeter=0;entryPerimeter=0;exitX=0.2183245299248687;exitY=0.9159904557661472;entryX=0.9440200617283956;entryY=0.7353535353535361;dashed=1;" edge="1" source="capacity" target="download" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1824.71" y="649.83" />
+          <mxPoint x="1780.48" y="668.21" />
+          <mxPoint x="1738.86" y="685.51" />
+          <mxPoint x="1682.61" y="729.01" />
+          <mxPoint x="1457.71" y="729.01" />
+          <mxPoint x="1400.76" y="719.71" />
+          <mxPoint x="1338.79" y="709.59" />
+          <mxPoint x="1326.34" y="707.56" />
+        </Array>
+        <mxPoint x="-15.520155465267408" y="-29.25" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="r6" value="«extend»&#10;[người dùng hủy hoặc tải lỗi]" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;strokeColor=#8a5b22;fontColor=#8a5b22;strokeWidth=1.6;labelBackgroundColor=#ffffff;startArrow=none;endArrow=open;endFill=0;exitPerimeter=0;entryPerimeter=0;exitX=0.013525065160502324;exitY=0.6195444270561644;entryX=0.8329861111111112;entryY=0.8772727272727275;dashed=1;" edge="1" source="cancel" target="download" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1743.98" y="776.64" />
+          <mxPoint x="1708.75" y="779.01" />
+          <mxPoint x="1682.61" y="780.76" />
+          <mxPoint x="1457.71" y="780.76" />
+          <mxPoint x="1401.46" y="760.51" />
+          <mxPoint x="1353.33" y="743.65" />
+          <mxPoint x="1302.31" y="725.79" />
+          <mxPoint x="1290.36" y="721.61" />
+        </Array>
+        <mxPoint x="57.960645814839154" y="-19.5" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="actor" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;fillColor=#ffffff;strokeColor=#182230;strokeWidth=2.4;" vertex="1" parent="1">
+      <mxGeometry x="122.25" y="577.2625" width="84" height="172" as="geometry" />
+    </mxCell>
+    <mxCell id="actor_label" value="Người tham quan" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=center;verticalAlign=middle;fontSize=23;fontColor=#182230;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="44.25" y="761.2625" width="240" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="main" value="UC-05&#10;Tải gói audio thuyết minh&#10;offline" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#e9f2ff;strokeColor=#315f91;strokeWidth=1.8;fontSize=23;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="352.2505000000001" y="609.1665" width="429.174" height="150.192" as="geometry" />
+    </mxCell>
+    <mxCell id="qr" value="Chọn gói bằng QR, mã hoặc&#10;liên kết" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#f4f8fc;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="963.478" y="320.0035000000001" width="437.99399999999997" height="103.51799999999999" as="geometry" />
+    </mxCell>
+    <mxCell id="state" value="Lấy manifest và kiểm tra&#10;gói" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#f4f8fc;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="993.3715" y="477.50350000000003" width="378.207" height="103.51799999999999" as="geometry" />
+    </mxCell>
+    <mxCell id="download" value="Tải các asset trong gói" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#f4f8fc;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="1020.4749999999999" y="634.7625" width="324.0" height="99.0" as="geometry" />
+    </mxCell>
+    <mxCell id="capacity" value="Ước tính dung lượng khi&#10;browser hỗ trợ" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#fff5e7;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="1743.4925" y="555.0035" width="372.015" height="103.51799999999999" as="geometry" />
+    </mxCell>
+    <mxCell id="verify" value="Kiểm tra size và checksum&#10;khi có" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#f4f8fc;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="982.3734999999999" y="787.5035" width="400.203" height="103.51799999999999" as="geometry" />
+    </mxCell>
+    <mxCell id="save" value="Lưu Blob audio và metadata&#10;gói" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#f4f8fc;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="978.3684999999999" y="945.0060000000001" width="408.213" height="103.51799999999999" as="geometry" />
+    </mxCell>
+    <mxCell id="cancel" value="Hủy tải và khôi phục dữ&#10;liệu trước tải" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#fff5e7;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="1738.817" y="712.5035" width="381.366" height="103.51799999999999" as="geometry" />
+    </mxCell>
+    <mxCell id="notes" value="LUỒNG CHÍNH: Chọn gói → lấy manifest → tải/kiểm tra từng bản thu → lưu IndexedDB → báo hoàn tất.&#10;A1 — Gói đã tải vẫn có thể được tải lại; client giữ dữ&#10;A2 — Manifest chưa xác minh toàn bộ checksum cần người dùng xác nhận&#10;E1 — Thiếu dung lượng, checksum/size sai, lỗi mạng hoặc hủy: không ghi nhận&#10;GHI CHÚ: Một gói/một ngôn ngữ, không phải ZIP. Chỉ kiểm tra checksum khi có SHA-256 hợp lệ; không cam kết đủ dung lượng nếu browser không cung cấp estimate. Mô hình Chrome dịch không thuộc gói audio." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#344054;fontStyle=0;" vertex="1" parent="1">
+      <mxGeometry x="65" y="1124" width="2096" height="160" as="geometry" />
+    </mxCell>
+    <mxCell id="legend" value="Nét đứt/mũi tên mở: «include» hoặc «extend» · Tam giác rỗng: chuyên biệt → khái quát · Phạm vi hiện hành; A/E xem đặc tả đi kèm." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=18;fontColor=#667085;fontStyle=0;" vertex="1" parent="1">
+      <mxGeometry x="65" y="1309" width="2096" height="35" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>
