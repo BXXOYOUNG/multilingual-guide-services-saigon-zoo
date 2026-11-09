@@ -862,7 +862,7 @@ Nếu muốn thử sửa/lưu nội dung, chọn một POI thử nghiệm và gh
 
 ### Bổ sung 09/11/2026 — cấu hình dịch nội dung admin
 
-Bản dịch được hỗ trợ bằng Google Cloud Translation Basic v2 theo luồng nguồn đã lưu → xem trước/chỉnh sửa → xác nhận lưu → admin tạo audio từng ngôn ngữ. Máy mới cần cài lại `backend/requirements.txt` và cấu hình `GOOGLE_TRANSLATE_API_KEY` trong **môi trường backend**; key không nằm trong bản backup MongoDB/SeaweedFS và không tự đi theo Git. Chưa có key vẫn nhập nội dung thủ công được. Xem [hướng dẫn cấu hình chi tiết](docs/ADMIN_AUTO_TRANSLATION.md). Không cần seed lại hoặc thay thư mục dự án; không tự đọc `.env` khi chạy launcher.
+Bản dịch dùng Translator API của **Chrome trên máy tính**: lưu nguồn → chuẩn bị preview → bấm dịch/tải mô hình tại trình duyệt → xem/sửa → xác nhận lưu → admin tạo audio từng ngôn ngữ. Không cần Google Cloud, billing hoặc API key; backend không gọi dịch vụ dịch tính phí. Máy mới cần Chrome cập nhật, mở localhost/HTTPS và Internet cho lần tải mô hình đầu. Mô hình thuộc Chrome profile, không nằm trong backup MongoDB/SeaweedFS hoặc Git. Điện thoại/trình duyệt không hỗ trợ vẫn nhập bản dịch thủ công. Xem [hướng dẫn chi tiết](docs/ADMIN_AUTO_TRANSLATION.md). Không cần seed lại hoặc thay thư mục dự án; không cần thêm container.
 
 ### Tài liệu tham khảo chính thức
 

@@ -12,12 +12,12 @@ Audit nền 21/10/2026, cập nhật luồng admin/dịch 09/11/2026 theo bổ s
 | UC-06 Nghe offline | Danh sách audio đã tải theo ngôn ngữ, phát lại, xóa gói; map dùng POI/recording đã lưu | Cần mở/tải trước cùng origin; URL tunnel mới không mang theo cache cũ; không hứa có nền bản đồ đầy đủ |
 | UC-07 Admin | Cookie HTTP-only, Redis session, role/permission, đổi mật khẩu | Chưa có UI quản lý tài khoản/role; tạo admin bằng script |
 | UC-08 POI | Tạo, sửa, ẩn; ảnh upload/URL và nghe thử; search/filter, QR; cấu hình geofence tròn, cập nhật tâm theo POI | Chưa có UI vẽ polygon; tọa độ demo cần admin kiểm tra; thêm POI không tự tạo 6 bản dịch |
-| UC-09 Nội dung/dịch | Nhập thủ công hoặc Google Cloud Basic v2: dịch nguồn đã lưu → preview/sửa/đối chiếu → chọn/xác nhận lưu; bảo vệ revision, nhắc rà soát khi nguồn đổi; admin yêu cầu TTS từng ngôn ngữ, tạo snapshot mới | Dịch máy cần API key/quota/Internet, chưa gọi thật trong đợt này; không tự tạo audio đồng loạt; TTS chạy trong process API; nội dung sau lưu không có kho nháp tách khỏi visitor |
+| UC-09 Nội dung/dịch | Nhập thủ công hoặc Chrome Translator: lưu nguồn → chuẩn bị revision → admin bấm dịch tại máy → preview/sửa/đối chiếu → chọn/xác nhận lưu; chống ghi đè, nhắc rà soát nguồn; admin yêu cầu TTS và phát hành snapshot | Tự dịch cần Chrome desktop hỗ trợ từng cặp ngôn ngữ, localhost/HTTPS và tải mô hình lần đầu; điện thoại dùng nhập thủ công; không tự tạo audio đồng loạt; TTS chạy trong API; nội dung đã lưu của POI active có thể đọc ngay |
 | UC-10 Analytics | Thu sự kiện, thiết bị 5 phút, visits, page/QR/audio, ngôn ngữ, xếp hạng POI | Không có heatmap/lịch sử tuyến đường; chưa có queue đồng bộ analytics offline hay consent UI; dashboard dùng UTC |
 
 ## Những mô tả không được dùng như “đã có”
 
-- Backend đã đóng gói Docker; PMTiles đã tải offline; Redis là TTS queue; adapter dịch đã cấu hình/nghiệm thu chỉ vì có mã nguồn.
+- Backend đã đóng gói Docker; PMTiles đã tải offline; Redis là TTS queue; mọi trình duyệt đều hỗ trợ dịch hoặc mô hình đã sẵn sàng chỉ vì có mã nguồn.
 - Khách thiếu audio sẽ luôn được TTS tạo ngay; sửa bản dịch là có audio mới tự động.
 - Analytics ghi nhận đầy đủ hoạt động khi mất mạng; mọi khách đã bấm đồng ý tracking.
 - Tất cả quan hệ thể hiện trong ảnh ERD cũ đã tồn tại đúng như ảnh.

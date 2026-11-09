@@ -1,10 +1,8 @@
-"""Explicit preview/edit/commit; preview drafts expire in Redis, never public Mongo content."""
-import asyncio
+"""Prepare revision snapshots, then commit administrator-reviewed browser translations."""
 import json
 import secrets
 from datetime import datetime, timezone
 
-import httpx
 from bson import ObjectId
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field, field_validator
@@ -14,7 +12,7 @@ from backend.database.mongodb import get_database
 from backend.database.redis_client import get_redis_client
 from backend.services.admin_auth import require_permission
 from backend.services.admin_translation import (
-    GoogleTranslator, LANGUAGES, TranslationError, content_hash, revision,
+    LANGUAGES, PROVIDER, content_hash, revision,
 )
 
 router = APIRouter(prefix='/api/admin', tags=['admin-translation'])
@@ -76,8 +74,7 @@ async def saved_source(db, oid, data, session=None):
 
 @router.get('/translation-settings')
 async def translation_settings(_=Depends(require_permission('content:write'))):
-    translator = GoogleTranslator()
-    return {'configured': bool(translator.key), 'provider': translator.provider,
+    return {'provider': PROVIDER, 'execution': 'browser', 'requires_api_key': False,
             'languages': list(LANGUAGES), 'preview_ttl_seconds': PREVIEW_TTL}
 
 
@@ -91,31 +88,21 @@ async def preview(poi_id: str, data: PreviewInput,
     ):
         raise HTTPException(422, 'Choose unique target languages different from the source')
     await saved_source(db, oid, data)
-    translator = GoogleTranslator()
-    if not translator.key:
-        raise HTTPException(503, 'Automatic translation is not configured. Set GOOGLE_TRANSLATE_API_KEY on the backend; manual editing remains available.')
-    # Shared Redis limit survives backend restarts; one batch per admin per 30 seconds.
-    if not await redis.set(f'admin-translation-limit:{user["_id"]}', '1', nx=True, ex=30):
-        raise HTTPException(429, 'Wait 30 seconds between translation requests.')
+    # Only snapshot preparation hits the API; model download and translation happen in Chrome.
+    if not await redis.set(f'admin-translation-prepare-limit:{user["_id"]}', '1', nx=True, ex=3):
+        raise HTTPException(429, 'Wait three seconds between preview preparation requests.')
     baselines = {}
     for language in data.targets:
         doc = await db['poi_localizations'].find_one({'poi_id': oid, 'language_code': language})
         baselines[language] = {'revision': revision(doc), 'existing': bool(doc),
                                'existing_title': doc.get('title', '') if doc else '',
                                'existing_description': doc.get('description', '') if doc else ''}
-    async with httpx.AsyncClient(timeout=35, follow_redirects=False, trust_env=False) as client:
-        async def translate(language):
-            try:
-                return {'language_code': language, **baselines[language],
-                        **await translator.translate(client, data.source_language, language, data.title, data.description)}
-            except TranslationError as error:
-                return {'language_code': language, 'error': str(error)}
-        results = await asyncio.gather(*(translate(language) for language in data.targets))
+    results = [{'language_code': language, **baselines[language]} for language in data.targets]
     token = secrets.token_urlsafe(24)
     document = {'user_id': str(user['_id']), 'poi_id': poi_id, 'source': data.model_dump(exclude={'targets'}),
-                'provider': translator.provider, 'results': {row['language_code']: row for row in results if 'error' not in row}}
+                'provider': PROVIDER, 'results': {row['language_code']: row for row in results}}
     await redis.setex(f'admin-translation-preview:{token}', PREVIEW_TTL, json.dumps(document))
-    return {'preview_id': token, 'expires_in': PREVIEW_TTL, 'provider': translator.provider, 'results': results}
+    return {'preview_id': token, 'expires_in': PREVIEW_TTL, 'provider': PROVIDER, 'results': results}
 
 
 @router.post('/pois/{poi_id}/translations/commit')
@@ -127,11 +114,13 @@ async def commit(poi_id: str, data: CommitInput,
     if not raw:
         raise HTTPException(409, 'Translation preview expired. Request a new preview.')
     draft = json.loads(raw)
+    if draft.get('provider') != PROVIDER:
+        raise HTTPException(409, 'This preview uses an older translation workflow. Prepare a new preview.')
     if draft['user_id'] != str(user['_id']) or draft['poi_id'] != poi_id:
         raise HTTPException(403, 'This preview belongs to another administrator or POI')
     languages = [item.language_code for item in data.items]
     if len(set(languages)) != len(languages) or any(language not in draft['results'] for language in languages):
-        raise HTTPException(422, 'Only successful languages in this preview can be saved once per request')
+        raise HTTPException(422, 'Choose unique target languages from the prepared preview')
     now = datetime.now(timezone.utc)
     source_data = SourceText(**draft['source'])
     source_digest = content_hash(source_data.title, source_data.description)
@@ -162,6 +151,7 @@ async def commit(poi_id: str, data: CommitInput,
                     values = {'title': item.title, 'description': item.description, 'updated_at': now,
                               'translation': {'source_language': source_data.source_language,
                                               'source_hash': source_digest, 'provider': draft['provider'],
+                                              'origin': 'browser_assisted_admin_reviewed',
                                               'translated_at': now, 'review_status': 'reviewed_by_admin'}}
                     if not previous or previous.get('title') != item.title or previous.get('description') != item.description:
                         values.update({'audio_url': None, 'tts_status': 'draft', 'tts_task_id': None,

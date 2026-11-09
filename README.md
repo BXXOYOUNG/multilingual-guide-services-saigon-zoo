@@ -841,7 +841,7 @@ flowchart TD
 ## Summary
 Quản trị viên quản lý nội dung thuyết minh của các điểm thuyết minh (POI) và nội dung theo từng ngôn ngữ. Hệ thống cho phép cập nhật nội dung văn bản và quản lý audio tương ứng với từng POI và ngôn ngữ. Dữ liệu bản dịch và audio được liên kết với POI và ngôn ngữ tương ứng.
 
-**Bổ sung được chấp thuận 09/11/2026:** admin có thể dịch tiêu đề/lời nguồn đã lưu sang 5 ngôn ngữ còn lại bằng Google Cloud Translation Basic v2 khi backend đã cấu hình API key. Luồng là **dịch → xem trước/chỉnh sửa → chọn và xác nhận thay thế → lưu → admin yêu cầu tạo audio từng ngôn ngữ**. Không tự ghi đè bản cũ hoặc tự tạo audio khi bấm dịch. Chi tiết: [ADMIN_AUTO_TRANSLATION.md](docs/ADMIN_AUTO_TRANSLATION.md).
+**Bổ sung được chấp thuận 09/11/2026:** admin có thể dịch tiêu đề/lời nguồn đã lưu sang 5 ngôn ngữ còn lại bằng Translator API tích hợp trong Chrome trên máy tính, không cần Cloud API key. Luồng là **dịch → xem trước/chỉnh sửa → chọn và xác nhận thay thế → lưu → admin yêu cầu tạo audio từng ngôn ngữ**. Không tự ghi đè bản cũ hoặc tự tạo audio khi bấm dịch. Chi tiết: [ADMIN_AUTO_TRANSLATION.md](docs/ADMIN_AUTO_TRANSLATION.md).
 
 ## Basic Course of Events
 
@@ -901,13 +901,13 @@ Quản trị viên quản lý nội dung thuyết minh của các điểm thuy�
 ## Luồng bổ sung A3 — Dịch tự động có đối chiếu (09/11/2026)
 
 1. Admin chọn POI và một trong 6 ngôn ngữ nguồn, nhập và lưu tiêu đề/lời nguồn.
-2. Admin yêu cầu dịch sang 5 ngôn ngữ khác; hệ thống kiểm tra quyền `content:write`, cấu hình dịch và giới hạn tần suất.
-3. Hệ thống trả bản xem trước/lỗi theo ngôn ngữ; preview giữ trong Redis 30 phút, chưa ghi nội dung công khai.
+2. Admin bấm chuẩn bị preview; backend kiểm tra quyền `content:write`, nguồn đã lưu và giữ revision của 5 ngôn ngữ đích trong Redis 30 phút.
+3. Admin bấm dịch các ngôn ngữ đang chờ hoặc từng ngôn ngữ. Chrome tải mô hình khi cần rồi dịch tại máy; hiện tiến độ/lỗi theo ngôn ngữ. Bản dịch mới chỉ ở trình duyệt đến khi xác nhận lưu.
 4. Admin đọc, chỉnh sửa, đối chiếu bản đích hiện có, chọn bản muốn lưu và xác nhận thay thế nếu đã có nội dung.
 5. Hệ thống kiểm tra nguồn/bản đích chưa đổi rồi lưu theo transaction của từng nhóm preview. Xung đột hoặc hết hạn thì từ chối nhóm đó, yêu cầu preview mới.
 6. Lời mới làm audio hiện tại của ngôn ngữ tương ứng mất hiệu lực; admin tự chọn từng ngôn ngữ, yêu cầu tạo audio và nghe thử trước khi phát hành gói mới.
 
-Thiếu key hoặc dịch vụ lỗi vẫn có thể nhập bản dịch thủ công. Lỗi một ngôn ngữ không làm mất preview thành công; có thể thử lại các bản lỗi. POI đang hiển thị có thể được khách đọc ngay sau xác nhận lưu; chưa có kho nháp văn bản đã lưu tách biệt. Gói audio đã phát hành không tự đổi theo bản dịch mới.
+Trình duyệt không hỗ trợ, cặp ngôn ngữ không sẵn sàng hoặc tải mô hình lỗi thì vẫn nhập bản dịch thủ công. Lỗi một ngôn ngữ không làm mất preview thành công; có thể thử lại các bản lỗi. POI đang hiển thị có thể được khách đọc ngay sau xác nhận lưu; chưa có kho nháp văn bản đã lưu tách biệt. Gói audio đã phát hành không tự đổi theo bản dịch mới.
 
 ## Diagram
 
@@ -939,7 +939,8 @@ flowchart TD
     %% Alternative Path A2
     G -- Quản lý audio --> A2[A2: Quản lý audio có sẵn]
     G -- Dịch tự động --> T1[Lưu nguồn rồi yêu cầu dịch]
-    T1 --> T2[Preview và lỗi theo ngôn ngữ; Redis TTL 30 phút]
+    T1 --> T0[Backend giữ nguồn và revision đích trong Redis 30 phút]
+    T0 --> T2[Admin bấm dịch: Chrome tải mô hình và dịch tại máy]
     T2 --> T3[Admin đối chiếu, sửa, chọn lưu và xác nhận thay thế]
     T3 --> T4{Nguồn, bản đích và preview còn hợp lệ?}
     T4 -- Không --> T5[Báo lỗi hoặc xung đột; tạo preview mới]
