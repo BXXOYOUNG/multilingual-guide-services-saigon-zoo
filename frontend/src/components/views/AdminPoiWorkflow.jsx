@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from '../../features/localization/useTranslation';
 import { adminApi as api, uploadPoiImage } from '../../services/adminApi';
+import AdminTranslationPanel from './AdminTranslationPanel';
+import translationMessages from '../../features/localization/translationMessages';
 
 const LANGUAGE_NAMES = { vi: 'Tiếng Việt', en: 'English', fr: 'Français', 'zh-Hans': '简体中文', ja: '日本語', ko: '한국어' };
 
@@ -150,6 +152,9 @@ export function PoiWorkflowEditor({ poi = null, language, onSaved, onClose }) {
         <small>{t('map.demoCoordinateNotice')}</small>
       </fieldset>
       {poiId && !poi && <NarrationPanel key={poiId} poiId={poiId} language={language} controllerRef={narrationRef} onChanged={onSaved} onBusyChange={setNarrationBusy} />}
+      {poiId && !poi && <AdminTranslationPanel key={`translations-${poiId}`} poiId={poiId} sourceLanguage={language}
+        title={form.title} description={form.description} disabled={working || generating}
+        sourceReady={form.title === lastSavedContent.current.title && form.description === lastSavedContent.current.description} onSaved={onSaved} />}
       <div className="admin-workflow-actions"><button type="submit" className="btn" disabled={working || generating} onClick={() => { actionRef.current = 'save'; }}>{working ? t('admin.processing') : t('admin.save')}</button>
         {!poi && <button type="submit" className="btn" disabled={working || generating || narrationBusy} onClick={() => { actionRef.current = 'generate'; }}>{t('workflow.generate')}</button>}
         <button type="button" className="btn btn-secondary" disabled={working} onClick={onClose}>{t('admin.close')}</button></div>
@@ -159,7 +164,7 @@ export function PoiWorkflowEditor({ poi = null, language, onSaved, onClose }) {
 }
 
 export function LocalizationWorkflowEditor({ poi, language, onSaved, onClose }) {
-  const { t } = useTranslation();
+  const { t, language: interfaceLanguage } = useTranslation();
   const [title, setTitle] = useState(poi.title || '');
   const [description, setDescription] = useState(poi.description || '');
   const [working, setWorking] = useState(false);
@@ -184,6 +189,10 @@ export function LocalizationWorkflowEditor({ poi, language, onSaved, onClose }) 
   return <div className="card"><h2>{t('admin.translationTitle', { name: poi.name, language: LANGUAGE_NAMES[language] })}</h2><form className="admin-form" onSubmit={save}>
     <label>{t('admin.newPoiTitle')}<input value={title} onChange={(event) => setTitle(event.target.value)} required maxLength={180} /></label>
     <label>{t('admin.content')}<textarea rows={8} value={description} onChange={(event) => setDescription(event.target.value)} required maxLength={10000} /></label>
+    {poi.translation_review_status === 'needs_review' && !saved && <p role="status" className="admin-translation-notice">{(translationMessages[interfaceLanguage] || translationMessages.vi).needsReview}</p>}
+    <AdminTranslationPanel poiId={poi.id} sourceLanguage={language} title={title} description={description}
+      sourceReady={(poi.has_localization || saved) && title === original.current.title && description === original.current.description}
+      disabled={working} onSaved={onSaved} />
     <NarrationPanel poiId={poi.id} language={language} initialTaskId={poi.tts_task_id} initialStatus={poi.tts_status} controllerRef={panel} onChanged={onSaved} onBusyChange={setNarrationBusy} />
     <div className="admin-workflow-actions"><button className="btn btn-secondary" disabled={working} onClick={() => { action.current = 'save'; }}>{t('admin.saveDraft')}</button><button className="btn" disabled={working || narrationBusy} onClick={() => { action.current = 'generate'; }}>{t('workflow.generate')}</button><button type="button" className="btn btn-secondary" onClick={onClose}>{t('admin.close')}</button></div>
     {saved && <p role="status">{t('workflow.saved')}</p>}

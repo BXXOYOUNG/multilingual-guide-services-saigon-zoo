@@ -50,6 +50,7 @@ The backend reads configuration from its process environment:
 
 - `MONGODB_URI` and `MONGODB_DATABASE` configure MongoDB and must be set together.
 - `REDIS_URL` configures Redis.
+- Optional `GOOGLE_TRANSLATE_API_KEY` enables admin translation previews using Google Cloud Translation Basic v2. The backend reads process environment, not `.env` automatically. No key means manual localization remains available. See [ADMIN_AUTO_TRANSLATION.md](ADMIN_AUTO_TRANSLATION.md) for setup, preview/commit semantics and transaction requirements.
 - `AUDIO_STORAGE_ENDPOINT_URL`, `AUDIO_STORAGE_BUCKET`, `AUDIO_STORAGE_ACCESS_KEY_ID`, and `AUDIO_STORAGE_SECRET_ACCESS_KEY` configure S3-compatible audio storage.
 
 Do not commit real credentials or `.env` files.

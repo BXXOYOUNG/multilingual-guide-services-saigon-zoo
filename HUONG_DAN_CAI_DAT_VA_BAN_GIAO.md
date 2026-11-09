@@ -860,6 +860,10 @@ Nếu muốn thử sửa/lưu nội dung, chọn một POI thử nghiệm và gh
 - Bản sao database chứa dữ liệu tới thời điểm backup; source và database giữa hai máy không tự đồng bộ.
 - Đây là hướng dẫn môi trường demo/phát triển local. Không coi cấu hình này là triển khai production.
 
+### Bổ sung 09/11/2026 — cấu hình dịch nội dung admin
+
+Bản dịch được hỗ trợ bằng Google Cloud Translation Basic v2 theo luồng nguồn đã lưu → xem trước/chỉnh sửa → xác nhận lưu → admin tạo audio từng ngôn ngữ. Máy mới cần cài lại `backend/requirements.txt` và cấu hình `GOOGLE_TRANSLATE_API_KEY` trong **môi trường backend**; key không nằm trong bản backup MongoDB/SeaweedFS và không tự đi theo Git. Chưa có key vẫn nhập nội dung thủ công được. Xem [hướng dẫn cấu hình chi tiết](docs/ADMIN_AUTO_TRANSLATION.md). Không cần seed lại hoặc thay thư mục dự án; không tự đọc `.env` khi chạy launcher.
+
 ### Tài liệu tham khảo chính thức
 
 - [Docker Desktop trên Windows](https://docs.docker.com/desktop/setup/install/windows-install/)

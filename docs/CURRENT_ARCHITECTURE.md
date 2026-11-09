@@ -1,6 +1,6 @@
 # Kiến trúc và mô hình dữ liệu đang triển khai
 
-Cập nhật luồng admin ngày 04/11/2026; audit nền ngày 21/10/2026. Đây là mô tả **as-built** của bản demo, không phải đề xuất đổi kiến trúc. Hướng dẫn thao tác: [ADMIN_POI_WORKFLOW.md](ADMIN_POI_WORKFLOW.md).
+Cập nhật luồng admin/dịch ngày 09/11/2026; audit nền ngày 21/10/2026. Đây là mô tả **as-built** của bản demo. Hướng dẫn: [ADMIN_POI_WORKFLOW.md](ADMIN_POI_WORKFLOW.md), [ADMIN_AUTO_TRANSLATION.md](ADMIN_AUTO_TRANSLATION.md). Adapter dịch cần API key riêng; chưa nghiệm thu gọi dịch thật trong lần bổ sung này.
 
 ## Thứ tự đọc và giải quyết khác biệt
 
@@ -34,18 +34,23 @@ flowchart LR
     Repos[Repository và truy cập MongoDB]
     Storage[S3 audio storage adapter]
     TTS[Admin narration: FastAPI BackgroundTasks]
+    MT[Admin translation: preview và xác nhận lưu]
     Routes --> Repos
     Routes --> Storage
     Routes --> TTS
+    Routes --> MT
+    MT --> Repos
     TTS --> Repos
     TTS --> Storage
     Auth --> Routes
   end
   Visitor --> Routes
   Admin --> Auth
-  Auth --> Redis[(Redis: session, rate limit, khóa TTS có TTL)]
+  Auth --> Redis[(Redis: session, rate limit, khóa TTS và preview dịch có TTL)]
   TTS --> Redis
   TTS --> Edge[Edge TTS online]
+  MT --> Google[Google Cloud Translation Basic v2: cần API key]
+  MT --> Redis
   Repos --> Mongo[(MongoDB rs0)]
   Storage --> S3[(SeaweedFS: MP3 và ảnh POI tải lên)]
   Seed[Script tạo dữ liệu và Edge TTS] --> Mongo
@@ -59,7 +64,7 @@ flowchart LR
 - Admin có thể lưu nội dung rồi yêu cầu tạo TTS cho từng ngôn ngữ; tác vụ chạy trong process FastAPI bằng `BackgroundTasks`, dùng Redis khóa trùng 5 phút. Không có worker/queue bền vững và không tự tạo TTS khi khách gặp audio thiếu. Script seed vẫn có thể chuẩn bị dữ liệu ban đầu.
 - Ảnh JPEG/PNG/WebP được kiểm tra phía server, tối đa 5 MB/16 megapixel, lưu SeaweedFS và phục vụ qua `/api/media/pois/...`; không lưu binary ảnh trong MongoDB.
 - Admin lưu vùng geofence tròn với bán kính 5–500 m. Gói tạo qua giao diện admin mới là snapshot các bản thu sẵn sàng của POI đang hiển thị, một ngôn ngữ/gói; tạo lại TTS không sửa membership/file của snapshot cũ.
-- Chưa có adapter dịch tự động; nội dung 6 ngôn ngữ được nạp trước và sửa qua admin.
+- Adapter dịch Google Cloud Basic v2 dịch title/description nguồn đã lưu sang 5 ngôn ngữ khác. Preview Redis 30 phút, admin xem/sửa/chọn/xác nhận trước commit; kiểm tra nguồn và revision bản đích trong transaction MongoDB. Cần `GOOGLE_TRANSLATE_API_KEY`; chưa cấu hình vẫn nhập thủ công. Không tự gọi dịch khi khách xem POI hoặc khi chạy TTS.
 - Geofence được xét ở browser từ tọa độ GPS và vòng tròn server cung cấp. Không có dịch vụ theo dõi vị trí liên tục ở backend.
 - Không có background sync/push notification hoặc PMTiles trong bản hiện tại.
 
@@ -74,6 +79,7 @@ flowchart TB
   FastAPI -->|127.0.0.1:27018| Mongo[Docker: MongoDB 6 / rs0]
   FastAPI -->|127.0.0.1:6379| Redis[Docker: Redis 7]
   FastAPI -->|127.0.0.1:8333 S3| Seaweed[Docker: SeaweedFS mini]
+  FastAPI -->|HTTPS khi admin yêu cầu; API key backend| Google[Google Cloud Translation Basic v2]
   Mongo --> DBVolume[Volume MongoDB]
   Seaweed --> MediaVolume[Volume audio]
 ```
@@ -122,6 +128,13 @@ erDiagram
 - `audio_tasks` có thêm `voice`, `source_title`, `source_text`, `error_message`. Trạng thái: Pending → Processing → Completed/Failed. Tác vụ gián đoạn được nhận diện khi admin truy vấn trạng thái sau 5 phút; phải yêu cầu tạo lại.
 - `audio_assets.source_task_id` tham chiếu tác vụ TTS; bản thu gốc có `package_id=null`. Gói snapshot sao chép metadata asset với ObjectId riêng, cùng file bất biến, `is_snapshot=true`; `audio_packages.is_snapshot=true` chặn gán lại membership qua API cũ.
 - Snapshot cố định **audio**, không đóng băng toàn bộ tên/mô tả/ảnh POI; client tải metadata POI tại thời điểm tải gói. Gói legacy vẫn được đọc bình thường.
+
+### Mở rộng dịch tự động 09/11/2026
+
+- Không thêm collection/quan hệ hoặc đổi ObjectId. Metadata tùy chọn `poi_localizations.translation` gồm `source_language`, `source_hash`, `provider`, `translated_at`, `review_status`; nguồn có `translation_guard` phục vụ write conflict trong transaction. Chi tiết nằm trong hướng dẫn dịch.
+- Preview chỉ ở Redis, gắn admin/POI, TTL 30 phút; mỗi admin tối đa một batch dịch/30 giây. Các bản thành công có thể lưu trước, lỗi có thể thử lại. Mỗi nhóm preview commit toàn bộ hoặc không commit; các nhóm từ retry được lưu tuần tự.
+- Commit bảo đảm index unique `(poi_id,language_code)`; tạo index nếu chưa có, từ chối nếu dữ liệu trùng thay vì tự xóa. Transaction cần replica set hiện tại. So khớp nguồn, revision và xác nhận thay thế để tránh ghi đè nội dung mới của admin khác.
+- Sửa nguồn đánh dấu bản dịch phụ thuộc `needs_review`; không tự đổi lời hoặc audio đích. Khi lưu thay đổi lời đích mới vô hiệu audio của đích. Preview chưa công khai; sau xác nhận lưu, POI active có thể được khách đọc ngay. Audio/gói offline vẫn theo luồng cũ.
 
 Không có collection visitor `users`. `user_id` ẩn danh không phải foreign key tới tài khoản quản trị. `audit_logs`, `analytics_metrics`, `runtime_location`, collection `languages` trong thiết kế gốc chưa có đường ghi/sử dụng runtime đầy đủ; không mô tả chúng như đã triển khai.
 
