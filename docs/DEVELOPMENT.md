@@ -50,6 +50,7 @@ The backend reads configuration from its process environment:
 
 - `MONGODB_URI` and `MONGODB_DATABASE` configure MongoDB and must be set together.
 - `REDIS_URL` configures Redis.
+- Admin translation uses desktop Chrome’s native `Translator` API on localhost/HTTPS; no Cloud account or API key. Models download after a user click when needed. FastAPI only prepares source/target revision snapshots and commits administrator-reviewed text. Manual editing remains available on unsupported browsers. See [ADMIN_AUTO_TRANSLATION.md](ADMIN_AUTO_TRANSLATION.md) for setup, limits and transaction requirements.
 - `AUDIO_STORAGE_ENDPOINT_URL`, `AUDIO_STORAGE_BUCKET`, `AUDIO_STORAGE_ACCESS_KEY_ID`, and `AUDIO_STORAGE_SECRET_ACCESS_KEY` configure S3-compatible audio storage.
 
 Do not commit real credentials or `.env` files.

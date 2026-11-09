@@ -1,6 +1,6 @@
 # Đối chiếu PRD / Use case / implementation
 
-Audit nền 21/10/2026, cập nhật luồng admin 04/11/2026. Không thay yêu cầu gốc để khiến code có vẻ hoàn tất. Bảng này chỉ ra phần đạt và khoảng cách cần ghi trong báo cáo/đợt triển khai tiếp theo.
+Audit nền 21/10/2026, cập nhật luồng admin/dịch 09/11/2026 theo bổ sung được người dùng chấp thuận. Bảng này chỉ ra implementation và khoảng cách; code bổ sung không thay thế kết quả nghiệm thu dịch vụ thật.
 
 | Use case | Hiện có | Giới hạn / phần chưa đạt trọn vẹn PRD |
 |---|---|---|
@@ -12,12 +12,12 @@ Audit nền 21/10/2026, cập nhật luồng admin 04/11/2026. Không thay yêu 
 | UC-06 Nghe offline | Danh sách audio đã tải theo ngôn ngữ, phát lại, xóa gói; map dùng POI/recording đã lưu | Cần mở/tải trước cùng origin; URL tunnel mới không mang theo cache cũ; không hứa có nền bản đồ đầy đủ |
 | UC-07 Admin | Cookie HTTP-only, Redis session, role/permission, đổi mật khẩu | Chưa có UI quản lý tài khoản/role; tạo admin bằng script |
 | UC-08 POI | Tạo, sửa, ẩn; ảnh upload/URL và nghe thử; search/filter, QR; cấu hình geofence tròn, cập nhật tâm theo POI | Chưa có UI vẽ polygon; tọa độ demo cần admin kiểm tra; thêm POI không tự tạo 6 bản dịch |
-| UC-09 Nội dung/dịch | Sửa theo ngôn ngữ; lưu và tạo TTS, chọn giọng, trạng thái/retry; lời mới vô hiệu hóa audio cũ; phát hành snapshot audio | Không dịch máy; TTS cần mạng, chạy trong process API, chưa có durable worker; draft không phải kho nháp tách khỏi nội dung visitor |
+| UC-09 Nội dung/dịch | Nhập thủ công hoặc Chrome Translator: lưu nguồn → chuẩn bị revision → admin bấm dịch tại máy → preview/sửa/đối chiếu → chọn/xác nhận lưu; chống ghi đè, nhắc rà soát nguồn; admin yêu cầu TTS và phát hành snapshot | Tự dịch cần Chrome desktop hỗ trợ từng cặp ngôn ngữ, localhost/HTTPS và tải mô hình lần đầu; điện thoại dùng nhập thủ công; không tự tạo audio đồng loạt; TTS chạy trong API; nội dung đã lưu của POI active có thể đọc ngay |
 | UC-10 Analytics | Thu sự kiện, thiết bị 5 phút, visits, page/QR/audio, ngôn ngữ, xếp hạng POI | Không có heatmap/lịch sử tuyến đường; chưa có queue đồng bộ analytics offline hay consent UI; dashboard dùng UTC |
 
 ## Những mô tả không được dùng như “đã có”
 
-- Backend đã đóng gói Docker; PMTiles đã tải offline; Redis là TTS queue; external translation adapter đang chạy.
+- Backend đã đóng gói Docker; PMTiles đã tải offline; Redis là TTS queue; mọi trình duyệt đều hỗ trợ dịch hoặc mô hình đã sẵn sàng chỉ vì có mã nguồn.
 - Khách thiếu audio sẽ luôn được TTS tạo ngay; sửa bản dịch là có audio mới tự động.
 - Analytics ghi nhận đầy đủ hoạt động khi mất mạng; mọi khách đã bấm đồng ý tracking.
 - Tất cả quan hệ thể hiện trong ảnh ERD cũ đã tồn tại đúng như ảnh.
@@ -26,6 +26,8 @@ Audit nền 21/10/2026, cập nhật luồng admin 04/11/2026. Không thay yêu 
 ## Các bổ sung đã được người dùng yêu cầu sau PRD gốc
 
 Homepage ảnh và chi tiết loài; logo; menu chữ; Tải audio; lộ trình gợi ý; hướng dẫn sử dụng và quyền riêng tư; dashboard quản trị riêng; giao diện responsive. Lộ trình là gợi ý theo danh sách điểm, không phải routing tìm đường tối ưu hoặc dữ liệu lối đi đã xác minh.
+
+Ngày 09/11/2026: UC-09 bổ sung dịch tự động có xem trước và xác nhận lưu theo [ADMIN_AUTO_TRANSLATION.md](ADMIN_AUTO_TRANSLATION.md). TTS tiếp tục dùng lời đã lưu; luồng visitor/QR/offline không tự gọi dịch máy.
 
 ## Gate kết thúc
 

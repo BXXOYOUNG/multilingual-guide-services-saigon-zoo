@@ -5,6 +5,8 @@ Bản hiện tại là demo mô phỏng với 11 POI, 6 ngôn ngữ, 66 bản th
 - [Cài đặt, bật/tắt và bàn giao máy mới](HUONG_DAN_CAI_DAT_VA_BAN_GIAO.md)
 - [Kiến trúc và dữ liệu đang triển khai](docs/CURRENT_ARCHITECTURE.md)
 - [Đối chiếu yêu cầu với implementation](docs/REQUIREMENTS_TRACEABILITY.md)
+- [Dịch tự động POI: cấu hình và luồng admin UC-09](docs/ADMIN_AUTO_TRANSLATION.md)
+- [Bộ UC/DFD hiện hành và kết quả rà soát sơ đồ](docs/Use-case/README.md)
 - [File cũ đã dọn/lưu trữ và thành phần cần giữ](docs/CLEANUP_REVIEW.md)
 - [Kết quả audit và kiểm thử](docs/AUDIT_REPORT_2026-10-21.md)
 
@@ -840,6 +842,8 @@ flowchart TD
 ## Summary
 Quản trị viên quản lý nội dung thuyết minh của các điểm thuyết minh (POI) và nội dung theo từng ngôn ngữ. Hệ thống cho phép cập nhật nội dung văn bản và quản lý audio tương ứng với từng POI và ngôn ngữ. Dữ liệu bản dịch và audio được liên kết với POI và ngôn ngữ tương ứng.
 
+**Bổ sung được chấp thuận 09/11/2026:** admin có thể dịch tiêu đề/lời nguồn đã lưu sang 5 ngôn ngữ còn lại bằng Translator API tích hợp trong Chrome trên máy tính, không cần Cloud API key. Luồng là **dịch → xem trước/chỉnh sửa → chọn và xác nhận thay thế → lưu → admin yêu cầu tạo audio từng ngôn ngữ**. Không tự ghi đè bản cũ hoặc tự tạo audio khi bấm dịch. Chi tiết: [ADMIN_AUTO_TRANSLATION.md](docs/ADMIN_AUTO_TRANSLATION.md).
+
 ## Basic Course of Events
 
 | Step | User | System |
@@ -849,7 +853,7 @@ Quản trị viên quản lý nội dung thuyết minh của các điểm thuy�
 | 3 | Quản trị viên chọn ngôn ngữ cần quản lý. | Hệ thống hiển thị nội dung theo ngôn ngữ được chọn. |
 | 4 | Quản trị viên nhập hoặc cập nhật nội dung thuyết minh. | Hệ thống tiếp nhận nội dung được cập nhật. |
 | 5 | Quản trị viên gửi yêu cầu lưu. | Hệ thống lưu nội dung thuyết minh theo POI và ngôn ngữ. |
-| 6 | — | Hệ thống xử lý audio tương ứng với nội dung nếu cần. |
+| 6 | Quản trị viên có thể chọn lưu và tạo audio. | Hệ thống tạo audio từ lời đã lưu khi admin yêu cầu; chỉ lưu văn bản thì chưa tạo audio. |
 | 7 | — | Hệ thống cập nhật nội dung và trạng thái audio. |
 | 8 | — | Use Case kết thúc. |
 
@@ -860,7 +864,7 @@ Quản trị viên quản lý nội dung thuyết minh của các điểm thuy�
 2. Quản trị viên chọn ngôn ngữ.
 3. Quản trị viên nhập hoặc chỉnh sửa nội dung thuyết minh.
 4. Hệ thống lưu nội dung theo POI và ngôn ngữ.
-5. Hệ thống xử lý audio tương ứng với nội dung.
+5. Nếu admin chọn tạo audio, hệ thống tạo từ nội dung đã lưu; nếu chỉ lưu văn bản thì kết thúc mà không gọi TTS.
 6. Hệ thống cập nhật trạng thái nội dung và audio.
 7. Use Case kết thúc.
 
@@ -895,6 +899,17 @@ Quản trị viên quản lý nội dung thuyết minh của các điểm thuy�
 3. Hệ thống thông báo chưa có nội dung cho POI và ngôn ngữ được chọn.
 4. Quản trị viên có thể thực hiện thêm nội dung mới.
 
+## Luồng bổ sung A3 — Dịch tự động có đối chiếu (09/11/2026)
+
+1. Admin chọn POI và một trong 6 ngôn ngữ nguồn, nhập và lưu tiêu đề/lời nguồn.
+2. Admin bấm chuẩn bị preview; backend kiểm tra quyền `content:write`, nguồn đã lưu và giữ revision của 5 ngôn ngữ đích trong Redis 30 phút.
+3. Admin bấm dịch các ngôn ngữ đang chờ hoặc từng ngôn ngữ. Chrome tải mô hình khi cần rồi dịch tại máy; hiện tiến độ/lỗi theo ngôn ngữ. Bản dịch mới chỉ ở trình duyệt đến khi xác nhận lưu.
+4. Admin đọc, chỉnh sửa, đối chiếu bản đích hiện có, chọn bản muốn lưu và xác nhận thay thế nếu đã có nội dung.
+5. Hệ thống kiểm tra nguồn/bản đích chưa đổi rồi lưu theo transaction của từng nhóm preview. Xung đột hoặc hết hạn thì từ chối nhóm đó, yêu cầu preview mới.
+6. Lời mới làm audio hiện tại của ngôn ngữ tương ứng mất hiệu lực; admin tự chọn từng ngôn ngữ, yêu cầu tạo audio và nghe thử trước khi phát hành gói mới.
+
+Trình duyệt không hỗ trợ, cặp ngôn ngữ không sẵn sàng hoặc tải mô hình lỗi thì vẫn nhập bản dịch thủ công. Lỗi một ngôn ngữ không làm mất preview thành công; có thể thử lại các bản lỗi. POI đang hiển thị có thể được khách đọc ngay sau xác nhận lưu; chưa có kho nháp văn bản đã lưu tách biệt. Gói audio đã phát hành không tự đổi theo bản dịch mới.
+
 ## Diagram
 
 ```mermaid
@@ -924,6 +939,15 @@ flowchart TD
 
     %% Alternative Path A2
     G -- Quản lý audio --> A2[A2: Quản lý audio có sẵn]
+    G -- Dịch tự động --> T1[Lưu nguồn rồi yêu cầu dịch]
+    T1 --> T0[Backend giữ nguồn và revision đích trong Redis 30 phút]
+    T0 --> T2[Admin bấm dịch: Chrome tải mô hình và dịch tại máy]
+    T2 --> T3[Admin đối chiếu, sửa, chọn lưu và xác nhận thay thế]
+    T3 --> T4{Nguồn, bản đích và preview còn hợp lệ?}
+    T4 -- Không --> T5[Báo lỗi hoặc xung đột; tạo preview mới]
+    T5 --> X
+    T4 -- Có --> T6[Lưu nhóm bản dịch bằng transaction]
+    T6 --> L
     A2 --> A2A[Hiển thị audio tương ứng]
     A2A --> A2B[Quản trị viên thực hiện thao tác quản lý audio]
     A2B --> I{Cập nhật audio thành công?}
@@ -945,7 +969,9 @@ flowchart TD
     E1A --> X
 
     K -- Có --> L[Cập nhật nội dung theo POI và ngôn ngữ]
-    L --> M[Thực hiện xử lý audio nếu cần]
+    L --> Q{Admin yêu cầu tạo audio?}
+    Q -- Không --> Y
+    Q -- Có --> M[Tạo audio từ lời đã lưu đúng ngôn ngữ]
 
     M --> N{Xử lý audio thành công?}
 

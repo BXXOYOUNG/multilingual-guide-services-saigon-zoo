@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1628" height="1411" viewBox="0 0 1628 1411" role="img">
+  <title>UC-10 — USE CASE DIAGRAM CHI TIẾT</title>
+  <desc>Hiện hành 09/11/2026 · fb1b0b8: Xem dữ liệu phân tích</desc>
+  <rect x="0" y="0" width="1628" height="1411" fill="white" />
+  <text x="60" y="47.5" fill="#182230" font-family="Arial, sans-serif" font-size="30" text-anchor="start" font-weight="700">
+    <tspan x="60" y="57.7">UC-10 — USE CASE DIAGRAM CHI TIẾT</tspan>
+  </text>
+  <text x="60" y="97.5" fill="#475467" font-family="Arial, sans-serif" font-size="20" text-anchor="start" font-weight="400">
+    <tspan x="60" y="104.3">Hiện hành 09/11/2026 · fb1b0b8: Xem dữ liệu phân tích</tspan>
+  </text>
+  <rect x="317.25" y="170" width="1245.3274999999999" height="929.0125" fill="#fcfdff" stroke="#344054" stroke-width="2" />
+  <g />
+  <text x="939.9137499999999" y="205.0" fill="#182230" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" font-weight="700">
+    <tspan x="939.9137499999999" y="212.14">HỆ THỐNG THUYẾT MINH ĐA NGÔN NGỮ THẢO CẦM VIÊN</tspan>
+  </text>
+  <text x="939.9137499999999" y="251.0" fill="#315f91" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" font-weight="400">
+    <tspan x="939.9137499999999" y="258.14">Phạm vi: UC-10 · Xem dữ liệu phân tích</tspan>
+  </text>
+  <polyline points="206.25,726.76 271.45,761.76 311.45,761.76 351.90,761.76 351.90,761.76" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <polyline points="641.39,700.41 716.34,646.56 813.50,576.76 1108.16,450.51 1151.61,433.90 1198.59,415.94 1209.94,411.60" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1201.23,422.42 1209.94,411.60 1196.23,409.34" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="777.7125" y="450.9125000000001" width="310" height="28" fill="white" />
+  <text x="932.7125" y="464.9125000000001" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="932.7125" y="470.69250000000005">«include»</tspan>
+  </text>
+  <polyline points="702.05,714.96 760.17,696.35 813.50,679.26 1021.24,617.01 1169.08,572.73 1180.95,569.16" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1171.47,579.32 1180.95,569.16 1167.44,565.91" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="777.7125" y="585.0125" width="310" height="28" fill="white" />
+  <text x="932.7125" y="599.0125" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="932.7125" y="604.7925">«include»</tspan>
+  </text>
+  <polyline points="748.77,742.05 872.16,729.44 1030.58,713.25 1148.31,701.21 1161.03,699.91" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1149.80,708.10 1161.03,699.91 1148.38,694.17" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="777.7125" y="687.7875000000001" width="310" height="28" fill="white" />
+  <text x="932.7125" y="701.7875000000001" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="932.7125" y="707.5675000000001">«include»</tspan>
+  </text>
+  <polyline points="748.77,781.48 865.49,793.40 1013.56,808.54 1128.89,820.33 1141.36,821.60" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1128.71,827.34 1141.36,821.60 1130.14,813.42" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="777.7125" y="765.2875000000001" width="310" height="28" fill="white" />
+  <text x="932.7125" y="779.2875000000001" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="932.7125" y="785.0675000000001">«include»</tspan>
+  </text>
+  <polyline points="1184.17,1026.35 1118.24,1042.64 1051.91,1059.01 813.50,1059.01 696.96,924.48 620.68,836.43 612.51,827.00" fill="none" stroke="#8a5b22" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="625.66,831.49 612.51,827.00 615.08,840.65" fill="none" stroke="#8a5b22" stroke-width="1.6" />
+  <rect x="777.7125" y="993.7625" width="310" height="72" fill="white" />
+  <text x="932.7125" y="1029.7625" fill="#8a5b22" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="932.7125" y="1014.4625">«extend»</tspan>
+    <tspan x="932.7125" y="1035.5425">[admin làm mới hoặc chu kỳ 60</tspan>
+    <tspan x="932.7125" y="1056.6225">giây]</tspan>
+  </text>
+  <circle cx="164.25" cy="676.7625" r="22" fill="white" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="698.7625" x2="164.25" y2="769.7625" stroke="#182230" stroke-width="2.4" />
+  <line x1="122.25" y1="726.7625" x2="206.25" y2="726.7625" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="769.7625" x2="127.25" y2="826.7625" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="769.7625" x2="201.25" y2="826.7625" stroke="#182230" stroke-width="2.4" />
+  <text x="164.25" y="866.2625" fill="#182230" font-family="Arial, sans-serif" font-size="23" text-anchor="middle" font-weight="700">
+    <tspan x="164.25" y="874.0825000000001">Quản trị viên</tspan>
+  </text>
+  <ellipse cx="554.75" cy="761.7625" rx="202.5" ry="67.5" fill="#e9f2ff" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="23" text-anchor="middle">
+    <tspan x="554.75" y="755.3225000000001" font-weight="700">UC-10</tspan>
+    <tspan x="554.75" y="783.8425000000001" font-weight="400">Xem dữ liệu phân tích</tspan>
+  </text>
+  <ellipse cx="1315.375" cy="371.7625000000001" rx="162.0" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1315.375" y="366.16250000000014" font-weight="700">Kiểm tra quyền</tspan>
+    <tspan x="1315.375" y="390.96250000000015" font-weight="400">analytics:read</tspan>
+  </text>
+  <ellipse cx="1315.375" cy="529.2625" rx="207.2025" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1315.375" y="523.6625" font-weight="700">Lấy dữ liệu sự kiện đã ghi</tspan>
+    <tspan x="1315.375" y="548.4625" font-weight="400">nhận</tspan>
+  </text>
+  <ellipse cx="1315.375" cy="684.2625" rx="162.0" ry="49.5" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1315.375" y="691.0625" font-weight="700">Tổng hợp KPI theo UTC</tspan>
+  </text>
+  <ellipse cx="1315.375" cy="839.2625" rx="184.419" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1315.375" y="833.6625" font-weight="700">Hiển thị KPI, thời gian,</tspan>
+    <tspan x="1315.375" y="858.4625" font-weight="400">ngôn ngữ và POI</tspan>
+  </text>
+  <ellipse cx="1315.375" cy="994.2625" rx="170.766" ry="49.5" fill="#fff5e7" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1315.375" y="1001.0625" font-weight="700">Làm mới số liệu dashboard</tspan>
+  </text>
+  <text x="65" y="1228.0" fill="#344054" font-family="Arial, sans-serif" font-size="20" text-anchor="start" font-weight="400">
+    <tspan x="65" y="1172.8">LUỒNG CHÍNH: Mở dashboard → kiểm tra quyền → tổng hợp từ sự kiện đã nhận → xem thiết bị, phiên, audio, ngôn ngữ và điểm nổi bật.</tspan>
+    <tspan x="65" y="1197.6">A1 — Làm mới theo nút hoặc tự động mỗi 60 giây</tspan>
+    <tspan x="65" y="1222.3999999999999">E1 — Hết phiên/thiếu quyền/API lỗi: báo lỗi, không giả số liệu</tspan>
+    <tspan x="65" y="1247.2">E2 — Chưa có sự kiện: hiển thị trạng thái trống/0</tspan>
+    <tspan x="65" y="1272.0">GHI CHÚ: Thiết bị hoạt động: có sự kiện 5 phút gần nhất; visits là phiên bắt đầu, không phải người thật. Mốc ngày/giờ UTC; ngôn ngữ theo sự kiện.</tspan>
+    <tspan x="65" y="1296.8">Chưa có heatmap, lịch sử tuyến hoặc queue đồng bộ analytics offline.</tspan>
+  </text>
+  <text x="65" y="1363.5" fill="#667085" font-family="Arial, sans-serif" font-size="18" text-anchor="start" font-weight="400">
+    <tspan x="65" y="1369.62">Nét đứt/mũi tên mở: «include» hoặc «extend» · Tam giác rỗng: chuyên biệt → khái quát · Phạm vi hiện hành; A/E xem đặc tả đi kèm.</tspan>
+  </text>
+</svg>

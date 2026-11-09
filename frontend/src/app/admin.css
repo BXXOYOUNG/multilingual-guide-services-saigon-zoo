@@ -134,3 +134,15 @@
   .admin-toolbar { padding: 12px; gap: 10px; }
   .admin-login { margin-top: 16px !important; padding: 25px !important; }
 }
+.admin-translation-panel { padding: 1.25rem; border: 1px solid #c7d9cf; border-radius: 18px; background: #f3f8f5; min-width: 0; }
+.admin-translation-panel header { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.5rem; justify-content: space-between; }
+.admin-translation-panel h3 { margin: 0; }
+.admin-translation-panel p { font-size: .88rem; line-height: 1.6; }
+.admin-translation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1rem; margin: 1rem 0; }
+.admin-form .admin-translation-grid fieldset { display: flex; flex-direction: column; gap: .8rem; padding: 1rem; border: 1px solid #d5e1d9; background: white; min-width: 0; border-radius: 12px; }
+.admin-translation-grid legend { font-weight: 700; padding: 0 .4rem; }
+.admin-translation-grid details { font-size: .85rem; }
+.admin-translation-grid summary { cursor: pointer; color: #17634c; margin-bottom: .5rem; }
+.admin-translation-existing { white-space: pre-wrap; max-height: 180px; overflow: auto; overflow-wrap: anywhere; }
+.admin-translation-badge { font-size: .75rem; color: #326249; }
+.admin-translation-notice { padding: .7rem .9rem; border-radius: 8px; background: #fff3dc; color: #70501c; }

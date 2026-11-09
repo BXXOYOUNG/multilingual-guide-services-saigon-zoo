@@ -10,6 +10,7 @@ from backend.database.mongodb import get_database
 from backend.services.admin_auth import require_permission
 from backend.api.audio import get_audio_storage_provider
 from backend.services.audio_storage import AudioStorageProvider
+from backend.services.admin_translation import content_hash
 
 router = APIRouter(prefix="/api/admin", tags=["admin"])
 LANGUAGES = {"vi", "en", "zh-Hans", "ja", "ko", "fr"}
@@ -86,6 +87,7 @@ async def list_pois(language: str = Query("vi"), _=Depends(require_permission("p
         "geofence_radius": zone_by_poi.get(poi['_id'], {}).get('radius', 35),
         "geofence_active": zone_by_poi.get(poi['_id'], {}).get('is_active', False),
         "has_localization": poi["_id"] in localized,
+        "translation_review_status": localized.get(poi["_id"], {}).get('translation', {}).get('review_status'),
         "audio_url": localized.get(poi["_id"], {}).get("audio_url"),
         "tts_status": localized.get(poi["_id"], {}).get("tts_status", "draft"),
         "tts_task_id": str(localized[poi['_id']]['tts_task_id']) if localized.get(poi['_id'], {}).get('tts_task_id') else None,
@@ -150,11 +152,19 @@ async def save_localization(poi_id: str, language: str, data: LocalizationInput,
         values.update({"audio_url": None, "tts_status": "draft", "tts_task_id": None, "audio_status": "STALE_REQUIRES_REGENERATION"})
     else:
         values.pop('tts_status', None)
+    if previous and previous.get('translation'):
+        values['translation.review_status'] = 'edited_by_admin' if changed else 'reviewed_by_admin'
     await db["poi_localizations"].update_one(
         {"poi_id": oid, "language_code": language},
         {"$set": values, "$setOnInsert": {"poi_id": oid, "language_code": language}},
         upsert=True,
     )
+    if changed:
+        await db['poi_localizations'].update_many(
+            {'poi_id': oid, 'translation.source_language': language,
+             'translation.source_hash': {'$ne': content_hash(data.title, data.description)}},
+            {'$set': {'translation.review_status': 'needs_review'}},
+        )
     return {"saved": True, "content_status": "draft"}
 
 

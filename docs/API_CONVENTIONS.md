@@ -170,3 +170,23 @@ IDs on the wire are 24-character ObjectId strings; stored references remain BSON
 | `GET /audio/packages` | Public | Nonempty offline packages, newest first; `{id,name,language_code,asset_count}[]` |
 
 Generation uses in-process FastAPI BackgroundTasks with a 5-minute Redis lease, not a durable job queue. Audio is published to the current localization only if task ID and source text/title still match. Jobs interrupted by a restart become Failed when queried after five minutes. New snapshot package/asset membership cannot be reassigned through the legacy assignment API. Existing legacy packages remain readable.
+
+## 9. Admin browser translation (2026-11-09)
+
+All endpoints require the existing cookie and `content:write`. Languages: `vi`, `en`, `fr`, `zh-Hans`, `ja`, `ko`. Chrome translates locally; FastAPI does not call Cloud Translation and does not need a translation API key. The browser maps `zh-Hans` to native `zh` only; Mongo/API keep `zh-Hans`.
+
+| Endpoint | Request | Response |
+|---|---|---|
+| `GET /api/admin/translation-settings` | None | `{provider:"chrome-translator",execution:"browser",requires_api_key:false,languages,preview_ttl_seconds:1800}`; does not assert browser support |
+| `POST /api/admin/pois/{id}/translations/preview` | `{source_language,title,description,targets:[code,...]}`; 1–5 unique targets excluding source; source must match saved content | `{preview_id,expires_in:1800,provider:"chrome-translator",results:[{language_code,existing,existing_title,existing_description,revision}]}`; prepares snapshots, does not generate text |
+| `POST /api/admin/pois/{id}/translations/commit` | `{preview_id,items:[{language_code,title,description,replace_existing:false}]}`; 1–5 unique targets from that preview | `{saved:[code,...],audio_generation_required:true}`; reminder to generate audio when text changed, not proof every unchanged target needs regeneration |
+
+Title: 1–180 characters; description: 1–10000; whitespace-only input rejected. Snapshot preparation is limited to one request/admin/3 seconds (429 otherwise). No translation calls, billing quota, or provider errors occur in this endpoint. Source mismatch 409; invalid languages/fields 422; missing POI 404.
+
+The browser checks secure context, native API and per-pair `availability()`. Preparation occurs before a second click starts `Translator.create()` so user activation can authorize model downloads. The UI shows download progress, chunks long narration into small segments and exposes retry/cancel. Translation failure is local to each language; retry uses the same token and expiry. Generated/edited text remains in browser memory until commit. A reload/closed form loses unsaved text. Native models are managed by Chrome, not by PWA offline audio packages.
+
+Redis holds source text and existing-target revisions for 30 minutes, bound to admin/POI. Commit accepts administrator-reviewed text for those target languages; server validates content, permissions and revisions, but cannot certify a native browser model produced the submitted text. New metadata uses `provider:"chrome-translator"` and `origin:"browser_assisted_admin_reviewed"`. Previews from the superseded Cloud provider are rejected with 409.
+
+Existing targets require `replace_existing:true`. Expired preview, changed source/target revision, missing replacement confirmation or transaction failure returns 409. Another admin/POI preview returns 403. Commit ensures a unique `(poi_id,language_code)` index, refusing duplicate data without deleting records, and requires MongoDB replica set. A source write guard and target revision checks protect concurrent edits. All selected items in one request commit in one transaction; subsequent saves of other items are separate requests. If a network error leaves outcome unknown, reload before retrying.
+
+`GET /api/admin/pois?language=...` returns optional `translation_review_status` (`null`, `needs_review`, `edited_by_admin`, `reviewed_by_admin`). Source edits mark dependent translations for review without changing their text/audio. Explicit manual saving acknowledges review. Target title/description changes invalidate current audio/task pointers. TTS and package publication remain explicit, separate actions. Saved text of active POIs is immediately readable; only unsaved browser previews are private. See [ADMIN_AUTO_TRANSLATION.md](ADMIN_AUTO_TRANSLATION.md).

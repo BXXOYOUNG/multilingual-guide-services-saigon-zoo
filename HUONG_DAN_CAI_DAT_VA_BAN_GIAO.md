@@ -860,6 +860,10 @@ Nếu muốn thử sửa/lưu nội dung, chọn một POI thử nghiệm và gh
 - Bản sao database chứa dữ liệu tới thời điểm backup; source và database giữa hai máy không tự đồng bộ.
 - Đây là hướng dẫn môi trường demo/phát triển local. Không coi cấu hình này là triển khai production.
 
+### Bổ sung 09/11/2026 — cấu hình dịch nội dung admin
+
+Bản dịch dùng Translator API của **Chrome trên máy tính**: lưu nguồn → chuẩn bị preview → bấm dịch/tải mô hình tại trình duyệt → xem/sửa → xác nhận lưu → admin tạo audio từng ngôn ngữ. Không cần Google Cloud, billing hoặc API key; backend không gọi dịch vụ dịch tính phí. Máy mới cần Chrome cập nhật, mở localhost/HTTPS và Internet cho lần tải mô hình đầu. Mô hình thuộc Chrome profile, không nằm trong backup MongoDB/SeaweedFS hoặc Git. Điện thoại/trình duyệt không hỗ trợ vẫn nhập bản dịch thủ công. Xem [hướng dẫn chi tiết](docs/ADMIN_AUTO_TRANSLATION.md). Không cần seed lại hoặc thay thư mục dự án; không cần thêm container.
+
 ### Tài liệu tham khảo chính thức
 
 - [Docker Desktop trên Windows](https://docs.docker.com/desktop/setup/install/windows-install/)

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2232" height="1217" viewBox="0 0 2232 1217" role="img">
+  <title>UC-04 — USE CASE DIAGRAM CHI TIẾT</title>
+  <desc>Hiện hành 09/11/2026 · fb1b0b8: Kích hoạt thuyết minh bằng QR Code</desc>
+  <rect x="0" y="0" width="2232" height="1217" fill="white" />
+  <text x="60" y="47.5" fill="#182230" font-family="Arial, sans-serif" font-size="30" text-anchor="start" font-weight="700">
+    <tspan x="60" y="57.7">UC-04 — USE CASE DIAGRAM CHI TIẾT</tspan>
+  </text>
+  <text x="60" y="97.5" fill="#475467" font-family="Arial, sans-serif" font-size="20" text-anchor="start" font-weight="400">
+    <tspan x="60" y="104.3">Hiện hành 09/11/2026 · fb1b0b8: Kích hoạt thuyết minh bằng QR Code</tspan>
+  </text>
+  <rect x="317.2535" y="170" width="1849.6215" height="761.2625" fill="#fcfdff" stroke="#344054" stroke-width="2" />
+  <g />
+  <text x="1242.06425" y="205.0" fill="#182230" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" font-weight="700">
+    <tspan x="1242.06425" y="212.14">HỆ THỐNG THUYẾT MINH ĐA NGÔN NGỮ THẢO CẦM VIÊN</tspan>
+  </text>
+  <text x="1242.06425" y="251.0" fill="#315f91" font-family="Arial, sans-serif" font-size="21" text-anchor="middle" font-weight="400">
+    <tspan x="1242.06425" y="258.14">Phạm vi: UC-04 · Kích hoạt thuyết minh bằng QR Code</tspan>
+  </text>
+  <polyline points="206.25,568.25 270.75,603.25 310.34,603.25 351.77,603.25 351.77,603.25" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <polyline points="784.57,543.66 896.03,503.03 1041.14,450.11 1142.04,413.32 1153.50,409.15" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1144.62,419.83 1153.50,409.15 1139.83,406.68" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="823.5625" y="441.6875" width="310" height="28" fill="white" />
+  <text x="978.5625" y="455.6875" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="978.5625" y="461.4675">«include»</tspan>
+  </text>
+  <polyline points="865.80,573.20 934.90,564.71 1009.00,555.61 1074.22,547.60 1086.71,546.06" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1075.66,554.48 1086.71,546.06 1073.95,540.58" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="823.5625" y="533.0749999999999" width="310" height="28" fill="white" />
+  <text x="978.5625" y="547.0749999999999" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="978.5625" y="552.8549999999999">«include»</tspan>
+  </text>
+  <polyline points="865.80,633.30 937.21,642.07 1013.96,651.50 1080.72,659.71 1093.08,661.23" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1080.31,666.71 1093.08,661.23 1082.01,652.82" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="823.5625" y="621.2375" width="310" height="28" fill="white" />
+  <text x="978.5625" y="635.2375" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="978.5625" y="641.0174999999999">«include»</tspan>
+  </text>
+  <polyline points="783.75,663.17 894.65,704.05 1039.19,757.31 1140.26,794.55 1151.75,798.79" fill="none" stroke="#47627d" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1138.07,801.20 1151.75,798.79 1142.92,788.07" fill="none" stroke="#47627d" stroke-width="1.6" />
+  <rect x="823.5625" y="704.7125000000001" width="310" height="28" fill="white" />
+  <text x="978.5625" y="718.7125000000001" fill="#47627d" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="978.5625" y="724.4925000000001">«include»</tspan>
+  </text>
+  <polyline points="1859.28,407.50 1803.69,427.74 1746.65,448.50 1513.60,448.50 1455.45,430.04 1395.36,410.97 1383.38,407.15" fill="none" stroke="#8a5b22" stroke-width="1.6" stroke-dasharray="7 5" />
+  <polyline points="1396.94,404.13 1383.38,407.15 1392.68,417.47" fill="none" stroke="#8a5b22" stroke-width="1.6" />
+  <rect x="1475.125" y="404.0" width="310" height="50" fill="white" />
+  <text x="1630.125" y="429.0" fill="#8a5b22" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" font-weight="400">
+    <tspan x="1630.125" y="424.23999999999995">«extend»</tspan>
+    <tspan x="1630.125" y="445.31999999999994">[người dùng chọn quét camera]</tspan>
+  </text>
+  <circle cx="164.25" cy="518.25" r="22" fill="white" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="540.25" x2="164.25" y2="611.25" stroke="#182230" stroke-width="2.4" />
+  <line x1="122.25" y1="568.25" x2="206.25" y2="568.25" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="611.25" x2="127.25" y2="668.25" stroke="#182230" stroke-width="2.4" />
+  <line x1="164.25" y1="611.25" x2="201.25" y2="668.25" stroke="#182230" stroke-width="2.4" />
+  <text x="164.25" y="707.75" fill="#182230" font-family="Arial, sans-serif" font-size="23" text-anchor="middle" font-weight="700">
+    <tspan x="164.25" y="715.57">Người tham quan</tspan>
+  </text>
+  <ellipse cx="619.9" cy="603.25" rx="267.6465" ry="75.096" fill="#e9f2ff" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="23" text-anchor="middle">
+    <tspan x="619.9" y="582.5500000000001" font-weight="700">UC-04</tspan>
+    <tspan x="619.9" y="611.07" font-weight="400">Kích hoạt thuyết minh bằng QR</tspan>
+    <tspan x="619.9" y="639.59" font-weight="400">Code</tspan>
+  </text>
+  <ellipse cx="1263.475" cy="369.49999999999994" rx="180.981" ry="49.5" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1263.475" y="376.29999999999995" font-weight="700">Nhận và xác thực mã QR POI</tspan>
+  </text>
+  <ellipse cx="1263.475" cy="524.5" rx="193.88250000000002" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1263.475" y="518.9" font-weight="700">Xác định ngôn ngữ đang</tspan>
+    <tspan x="1263.475" y="543.6999999999999" font-weight="400">chọn</tspan>
+  </text>
+  <ellipse cx="1263.475" cy="682.0" rx="185.202" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1263.475" y="676.4" font-weight="700">Tra bản thu đã tải hoặc</tspan>
+    <tspan x="1263.475" y="701.1999999999999" font-weight="400">resolve online</tspan>
+  </text>
+  <ellipse cx="1263.475" cy="839.5024999999999" rx="178.146" ry="51.75899999999999" fill="#f4f8fc" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1263.475" y="833.9024999999999" font-weight="700">Phát audio đúng POI và</tspan>
+    <tspan x="1263.475" y="858.7024999999999" font-weight="400">ngôn ngữ</tspan>
+  </text>
+  <ellipse cx="1964.875" cy="369.49999999999994" rx="162.0" ry="49.5" fill="#fff5e7" stroke="#315f91" stroke-width="1.8" />
+  <text fill="#182230" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <tspan x="1964.875" y="376.29999999999995" font-weight="700">Quét mã bằng camera</tspan>
+  </text>
+  <text x="65" y="1047.0" fill="#344054" font-family="Arial, sans-serif" font-size="20" text-anchor="start" font-weight="400">
+    <tspan x="65" y="1004.1999999999999">LUỒNG CHÍNH: Quét hoặc nhập TCV-POI:ObjectId → kiểm tra định dạng → tìm bản thu đúng ngôn ngữ → phát.</tspan>
+    <tspan x="65" y="1029.0">A1 — Ưu tiên bản đã tải để nghe ngoại tuyến; nếu không có</tspan>
+    <tspan x="65" y="1053.8">A2 — TCV-PACKAGE:ObjectId chuyển sang tải gói UC-05, không bị hiểu thành POI</tspan>
+    <tspan x="65" y="1078.6">E1 — Mã sai/camera không có quyền/audio thiếu: thông báo; không tự gọi TTS</tspan>
+    <tspan x="65" y="1103.3999999999999">GHI CHÚ: Không cần GPS. Camera cần secure context và quyền; nhập mã thủ công vẫn dùng được. Không tự chọn audio khác ngôn ngữ hoặc dịch máy cho khách.</tspan>
+  </text>
+  <text x="65" y="1169.5" fill="#667085" font-family="Arial, sans-serif" font-size="18" text-anchor="start" font-weight="400">
+    <tspan x="65" y="1175.62">Nét đứt/mũi tên mở: «include» hoặc «extend» · Tam giác rỗng: chuyên biệt → khái quát · Phạm vi hiện hành; A/E xem đặc tả đi kèm.</tspan>
+  </text>
+</svg>

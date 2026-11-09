@@ -1,6 +1,6 @@
 # Quản lý POI, ảnh, giọng đọc và gói ngoại tuyến
 
-Cập nhật 04/11/2026. Dùng cho bản mô phỏng phục vụ kiểm chứng chức năng của đồ án.
+Cập nhật 09/11/2026. Dùng cho bản mô phỏng phục vụ kiểm chứng chức năng của đồ án.
 
 ## 1. Chuẩn bị và chạy
 
@@ -26,7 +26,8 @@ Việc lưu POI, upload ảnh và lưu geofence là các bước API riêng. N�
 
 - **Sửa POI**: đổi ảnh/tọa độ/thông tin chung/trạng thái và bán kính geofence. Sửa mô tả hệ thống tại đây không tự thay lời thuyết minh của từng ngôn ngữ.
 - **Sửa nội dung**: chọn ngôn ngữ, nhập tiêu đề và lời thuyết minh, chọn giọng rồi **Lưu và tạo audio**. Có thể chỉ lưu nháp trước. Hệ thống hỗ trợ Việt, Anh, Pháp, Trung giản thể, Nhật, Hàn; mỗi ngôn ngữ có hai lựa chọn giọng.
-- Admin phải cung cấp nội dung cho từng ngôn ngữ; chức năng này **không tự dịch**. Chưa có bản dịch thì POI không xuất hiện ở ngôn ngữ đó.
+- Có thể nhập từng ngôn ngữ hoặc dùng **Dịch tự động**: lưu nguồn → chuẩn bị preview → bấm dịch bằng Chrome sang các ngôn ngữ còn lại → đọc/sửa/đối chiếu → chọn và xác nhận lưu. Nếu đã có bản đích, phải đồng ý thay thế. Dùng Chrome mới trên máy tính, localhost/HTTPS; không cần API key. Lần đầu có thể phải tải mô hình dịch. Xem [điều kiện và luồng đầy đủ](ADMIN_AUTO_TRANSLATION.md). Chưa có bản ngôn ngữ được lưu thì POI không xuất hiện ở ngôn ngữ đó.
+- Bấm dịch chưa tạo audio. Sau khi lưu bản dịch, chọn từng ngôn ngữ và dùng **Lưu và tạo audio**. Nguồn thay đổi có thể đánh dấu bản dịch phụ thuộc cần rà soát; không tự dịch/ghi đè các bản đó.
 - Lưu nguyên lời không làm mất audio đang có. Thay tiêu đề/lời sẽ bỏ liên kết audio hiện tại để tránh phát sai nội dung; cần tạo lại audio. Nội dung đã lưu của POI đang hiển thị có thể được khách đọc ngay, không có kho nháp riêng.
 - Mỗi POI/ngôn ngữ chỉ có một lượt tạo đang chạy. Có thể đóng form; mở lại để xem trạng thái. Đổi lời lúc đang tạo sẽ khiến kết quả từ lời cũ không được gắn vào bản hiện tại.
 - Tạo giọng cần Internet tới Edge TTS. Khi Failed, kiểm tra mạng, tải lại form rồi thử lại. Tác vụ chạy trong backend hiện tại, không có worker bền vững: tắt backend giữa chừng cần chờ khoảng 5 phút, mở lại trạng thái và yêu cầu tạo lại. Không sửa thủ công status trong MongoDB để giả lập thành công.

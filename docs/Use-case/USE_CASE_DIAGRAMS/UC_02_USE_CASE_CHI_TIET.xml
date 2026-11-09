@@ -1,0 +1,112 @@
+<mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2318" pageHeight="1080" math="0" shadow="0" background="#ffffff">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    <mxCell id="title" value="UC-02 — USE CASE DIAGRAM CHI TIẾT" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=30;fontColor=#182230;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="60" y="25" width="2198" height="45" as="geometry" />
+    </mxCell>
+    <mxCell id="subtitle" value="Hiện hành 09/11/2026 · fb1b0b8: Xem bản đồ và các điểm thuyết minh" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#475467;fontStyle=0;" vertex="1" parent="1">
+      <mxGeometry x="60" y="80" width="2198" height="35" as="geometry" />
+    </mxCell>
+    <mxCell id="boundary" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#fcfdff;strokeColor=#344054;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="317.2539999999999" y="170" width="1935.0170000000003" height="624.7625" as="geometry" />
+    </mxCell>
+    <mxCell id="system_name" value="HỆ THỐNG THUYẾT MINH ĐA NGÔN NGỮ THẢO CẦM VIÊN" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=center;verticalAlign=middle;fontSize=21;fontColor=#182230;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="337.2539999999999" y="185" width="1895.0170000000003" height="40" as="geometry" />
+    </mxCell>
+    <mxCell id="scope" value="Phạm vi: UC-02 · Xem bản đồ và các điểm thuyết minh" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=center;verticalAlign=middle;fontSize=21;fontColor=#315f91;fontStyle=0;" vertex="1" parent="1">
+      <mxGeometry x="337.2539999999999" y="232" width="1895.0170000000003" height="38" as="geometry" />
+    </mxCell>
+    <mxCell id="actor_main" value="" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;strokeColor=#47627d;fontColor=#47627d;strokeWidth=1.6;labelBackgroundColor=#ffffff;startArrow=none;endArrow=none;endFill=0;exitPerimeter=0;entryPerimeter=0;exitX=1;exitY=0.4186046511627907;entryX=0;entryY=0.5;" edge="1" source="actor" target="main" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="206.25" y="566.76" />
+          <mxPoint x="270.81" y="601.76" />
+          <mxPoint x="310.29" y="601.76" />
+          <mxPoint x="351.64" y="601.76" />
+          <mxPoint x="351.64" y="601.76" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="r0" value="«include»" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;strokeColor=#47627d;fontColor=#47627d;strokeWidth=1.6;labelBackgroundColor=#ffffff;startArrow=none;endArrow=open;endFill=0;exitPerimeter=0;entryPerimeter=0;exitX=0.8303508409269099;exitY=0.1214844998402044;entryX=0.15872272754295236;entryY=0.87020202020202;dashed=1;" edge="1" source="main" target="data" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="798.12" y="544.91" />
+          <mxPoint x="925.69" y="503.73" />
+          <mxPoint x="1095.07" y="449.05" />
+          <mxPoint x="1209.09" y="412.25" />
+          <mxPoint x="1220.97" y="408.41" />
+        </Array>
+        <mxPoint x="-2.210544496702255" y="-27.006442577774692" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="r1" value="«include»" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;strokeColor=#47627d;fontColor=#47627d;strokeWidth=1.6;labelBackgroundColor=#ffffff;startArrow=none;endArrow=open;endFill=0;exitPerimeter=0;entryPerimeter=0;exitX=0.9673704343097436;exitY=0.3191481570256737;entryX=0.03195018043587961;entryY=0.6801767676767675;dashed=1;" edge="1" source="main" target="show" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="871.70" y="574.60" />
+          <mxPoint x="966.15" y="564.33" />
+          <mxPoint x="1071.59" y="552.86" />
+          <mxPoint x="1157.95" y="543.46" />
+          <mxPoint x="1170.55" y="542.10" />
+        </Array>
+        <mxPoint x="-13.787336304613632" y="-14.310982526220414" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="r2" value="«extend»&#10;[không lấy được POI từ máy&#10;chủ]" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;strokeColor=#8a5b22;fontColor=#8a5b22;strokeWidth=1.6;labelBackgroundColor=#ffffff;startArrow=none;endArrow=open;endFill=0;exitPerimeter=0;entryPerimeter=0;exitX=0.21002108403662384;exitY=0.9117641376378984;entryX=0.8179433446287382;entryY=0.8896464646464639;dashed=1;" edge="1" source="cached" target="data" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1943.25" y="414.39" />
+          <mxPoint x="1882.36" y="441.01" />
+          <mxPoint x="1815.48" y="470.26" />
+          <mxPoint x="1602.36" y="470.26" />
+          <mxPoint x="1546.11" y="448.01" />
+          <mxPoint x="1502.01" y="431.93" />
+          <mxPoint x="1454.33" y="414.54" />
+          <mxPoint x="1442.75" y="410.34" />
+        </Array>
+        <mxPoint x="15.480028952478278" y="-29.250000000000057" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="r3" value="«extend»&#10;[GPS khả dụng]" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=17;strokeColor=#8a5b22;fontColor=#8a5b22;strokeWidth=1.6;labelBackgroundColor=#ffffff;startArrow=none;endArrow=open;endFill=0;exitPerimeter=0;entryPerimeter=0;exitX=0.08600770218228458;exitY=0.7848538418439304;entryX=0.7991105598668076;entryY=0.9026595957174812;dashed=1;" edge="1" source="locate" target="main" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1161.64" y="708.75" />
+          <mxPoint x="1111.12" y="717.36" />
+          <mxPoint x="1069.21" y="724.51" />
+          <mxPoint x="945.46" y="724.51" />
+          <mxPoint x="870.56" y="696.09" />
+          <mxPoint x="792.84" y="666.60" />
+          <mxPoint x="781.35" y="662.24" />
+        </Array>
+        <mxPoint x="40.88548437700058" y="-19.5" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="actor" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;fillColor=#ffffff;strokeColor=#182230;strokeWidth=2.4;" vertex="1" parent="1">
+      <mxGeometry x="122.25" y="494.76250000000005" width="84" height="172" as="geometry" />
+    </mxCell>
+    <mxCell id="actor_label" value="Người tham quan" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=center;verticalAlign=middle;fontSize=23;fontColor=#182230;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="44.25" y="678.7625" width="240" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="main" value="UC-02&#10;Xem bản đồ và các điểm thuyết&#10;minh" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#e9f2ff;strokeColor=#315f91;strokeWidth=1.8;fontSize=23;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="352.2539999999999" y="526.6665" width="536.9670000000001" height="150.192" as="geometry" />
+    </mxCell>
+    <mxCell id="data" value="Lấy dữ liệu POI khả dụng" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#f4f8fc;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="1167.5774999999999" y="322.26250000000005" width="336.42" height="99.0" as="geometry" />
+    </mxCell>
+    <mxCell id="show" value="Hiển thị bản đồ và các POI" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#f4f8fc;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="1159.2704999999999" y="474.76250000000005" width="353.03400000000005" height="99.0" as="geometry" />
+    </mxCell>
+    <mxCell id="cached" value="Sử dụng dữ liệu POI&#10;offline" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#fff5e7;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="1871.729" y="320.00350000000003" width="340.54200000000003" height="103.51799999999999" as="geometry" />
+    </mxCell>
+    <mxCell id="locate" value="Hiển thị vị trí và POI gần&#10;nhất" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#fff5e7;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="1125.4575" y="627.5035" width="420.66" height="103.51799999999999" as="geometry" />
+    </mxCell>
+    <mxCell id="notes" value="LUỒNG CHÍNH: Mở bản đồ → lấy dữ liệu POI → hiển thị POI → lấy vị trí và làm nổi bật điểm gần nhất khi có GPS.&#10;A1 — Không có GPS: vẫn hiển thị POI, không thực hiện phần mở&#10;A2 — Mở rộng việc lấy dữ liệu bằng dữ liệu POI đã lưu&#10;E1 — API lỗi và không có cache đúng ngôn ngữ: hiển thị lỗi&#10;GHI CHÚ: POI chỉ hiển thị khi active và có bản đúng ngôn ngữ. Cache tách ngôn ngữ; nền OSM online không được bảo đảm ngoại tuyến. GPS không bắt buộc để xem POI." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#344054;fontStyle=0;" vertex="1" parent="1">
+      <mxGeometry x="65" y="830" width="2188" height="160" as="geometry" />
+    </mxCell>
+    <mxCell id="legend" value="Nét đứt/mũi tên mở: «include» hoặc «extend» · Tam giác rỗng: chuyên biệt → khái quát · Phạm vi hiện hành; A/E xem đặc tả đi kèm." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=18;fontColor=#667085;fontStyle=0;" vertex="1" parent="1">
+      <mxGeometry x="65" y="1015" width="2188" height="35" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>
