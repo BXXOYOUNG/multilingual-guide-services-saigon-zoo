@@ -1,0 +1,24 @@
+{
+  "created_at_utc": "2026-10-21T14:06:14.631959+00:00",
+  "database": "saigon_zoo_tcv_dataset_dev",
+  "collection_counts": {
+    "admin_users": 3,
+    "analytics_devices": 14,
+    "analytics_events": 174,
+    "analytics_sessions": 18,
+    "audio_assets": 66,
+    "audio_packages": 6,
+    "audio_tasks": 66,
+    "geofence_zones": 11,
+    "location_events": 5,
+    "playback_history": 2,
+    "poi": 11,
+    "poi_localizations": 66,
+    "roles": 1
+  },
+  "seaweed_image": "saigon-zoo-handoff/seaweedfs:20261021",
+  "seaweed_image_id": "sha256:4e61d15fd35994cb1e43e1e553dff106794841fd9a99ade2fc8c8bfce4d7872d",
+  "source_branch": "feature/dataset-six-language-seed",
+  "source_base_commit": "fea8c2282155e766ee5dc1c417df6ccf0bc3d1f2",
+  "source_note": "Includes uncommitted staged changes when source.zip is added; see SOURCE_STATE.txt."
+}

@@ -1,0 +1,8 @@
+{
+  "branch": "feature/dataset-six-language-seed",
+  "base_commit": "fea8c2282155e766ee5dc1c417df6ccf0bc3d1f2",
+  "staged_tree": "1d673f0a71bb24a908e8ff0a6ac2faf8572ab6d5",
+  "committed": false,
+  "pushed": false,
+  "note": "source.zip is the exact staged tree. No database or storage credentials are part of that tree."
+}

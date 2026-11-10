@@ -1,0 +1,7 @@
+Mình gửi bộ bàn giao app thuyết minh Thảo Cầm Viên: source hiện tại, MongoDB và kho audio SeaweedFS.
+
+Nếu file bị chia thành nhiều phần .part001/.part002..., tải đủ các phần cùng JOIN_BACKUP.ps1 và TRANSFER_MANIFEST.json vào một thư mục. Chạy JOIN_BACKUP.ps1 theo hướng dẫn kèm tin nhắn để ghép ZIP rồi giải nén.
+
+Đọc README_NHAN_BAN_GIAO.md trước, sau đó làm phần 7 trong HUONG_DAN_CAI_DAT_VA_BAN_GIAO.md của source. Dùng thư mục Git đang có cũng được, không cần tạo thêm dự án ở ổ C. Nếu Git chưa có source mới thì dùng source.zip kèm gói, tránh ghi đè code cũ chưa lưu.
+
+Bản backup đã thử restore thành công và kiểm tra đủ 66 file audio. Đây là dữ liệu mô phỏng phục vụ demo đồ án. Thông tin đăng nhập mình gửi riêng; đừng đưa backup hoặc seaweed.env lên Git nhé.

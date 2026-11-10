@@ -6,7 +6,9 @@ import {
   Marker,
   Popup,
   setWorkerUrl,
+  addProtocol,
 } from 'maplibre-gl';
+import { Protocol } from 'pmtiles';
 import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
@@ -19,6 +21,17 @@ import AnimalImageCredit from '../../components/AnimalImageCredit';
 import { useTranslation } from '../localization/useTranslation';
 
 setWorkerUrl(maplibreWorkerUrl);
+
+// Register PMTiles protocol for offline vector basemaps (UC-02)
+let protocolRegistered = false;
+function ensurePmtilesProtocol() {
+  if (!protocolRegistered) {
+    const protocol = new Protocol();
+    addProtocol('pmtiles', protocol.tile);
+    protocolRegistered = true;
+  }
+}
+ensurePmtilesProtocol();
 
 // Saigon Zoo coordinates: ~10.7875° N, 106.7053° E
 export const DEFAULT_CENTER = [106.7066, 10.78805];
@@ -68,6 +81,10 @@ export default function InteractiveMap({ language = 'vi' }) {
   const geofenceAudioRef = useRef(null);
   const activeGeofenceRef = useRef(null);
   const triggeredPoisRef = useRef(new Set());
+  // Cooldown & Hysteresis tracking for geofence triggers (UC-03)
+  const poiLastPlayedRef = useRef(new Map()); // poiId -> timestamp
+  const GEOFENCE_COOLDOWN_MS = 180000; // 3 minutes cooldown before auto-triggering same POI
+  const HYSTERESIS_BUFFER_METERS = 5; // Exit threshold requires 5m extra distance beyond radius
 
   const [pois, setPois] = useState([]);
   const [dataSource, setDataSource] = useState(null); // 'server' | 'offline'
@@ -149,6 +166,7 @@ export default function InteractiveMap({ language = 'vi' }) {
     setDemoLocationOverride(simulatedCoords);
     setAutoNarrationEnabled(true);
     triggeredPoisRef.current.add(poi.id);
+    poiLastPlayedRef.current.set(poi.id, Date.now());
     activeGeofenceRef.current = poi;
     geofenceAudioRef.current?.pause();
     manualAudioRef.current?.pause();
@@ -173,21 +191,44 @@ export default function InteractiveMap({ language = 'vi' }) {
   useEffect(() => {
     if (!autoNarrationEnabled || demoLocationOverride || !currentCoords || !pois.length || !geofenceZones.length) return;
     const poiById = new Map(pois.map((poi) => [poi.id, poi]));
-    const current = geofenceZones.map((zone) => {
+    const now = Date.now();
+
+    // Check zones with distances
+    const candidateZones = geofenceZones.map((zone) => {
       const poi = poiById.get(zone.poi_id);
       const point = zone.geometry?.coordinates;
       if (!poi || !Array.isArray(point)) return null;
       return { poi, zone, distance: calculateDistanceMeters(currentCoords.latitude, currentCoords.longitude, point[1], point[0]) };
-    }).filter((item) => item && item.distance <= item.zone.radius).sort((a, b) => a.distance - b.distance)[0];
+    }).filter(Boolean);
+
+    // Hysteresis exit check: previous active zone must exceed radius + buffer to trigger exit
     const previous = activeGeofenceRef.current;
-    if (previous && (!current || current.poi.id !== previous.id)) {
-      geofenceAudioRef.current?.pause();
-      trackEvent({ event_type: 'geofence_exit', poi_id: previous.id, language_code: language, latitude: currentCoords.latitude, longitude: currentCoords.longitude });
-      activeGeofenceRef.current = null;
+    if (previous) {
+      const activeZone = candidateZones.find((item) => item.poi.id === previous.id);
+      const exitThreshold = (activeZone?.zone?.radius || 20) + HYSTERESIS_BUFFER_METERS;
+      if (!activeZone || activeZone.distance > exitThreshold) {
+        geofenceAudioRef.current?.pause();
+        trackEvent({ event_type: 'geofence_exit', poi_id: previous.id, language_code: language, latitude: currentCoords.latitude, longitude: currentCoords.longitude });
+        activeGeofenceRef.current = null;
+      }
     }
-    if (!current || activeGeofenceRef.current || triggeredPoisRef.current.has(current.poi.id)) return;
+
+    // Find nearest POI within its enter radius
+    const current = candidateZones
+      .filter((item) => item.distance <= item.zone.radius)
+      .sort((a, b) => a.distance - b.distance)[0];
+
+    if (!current || activeGeofenceRef.current) return;
+
+    // Check cooldown: has this POI been played within GEOFENCE_COOLDOWN_MS?
+    const lastPlayed = poiLastPlayedRef.current.get(current.poi.id) || 0;
+    if (now - lastPlayed < GEOFENCE_COOLDOWN_MS) {
+      return;
+    }
+
     activeGeofenceRef.current = current.poi;
     triggeredPoisRef.current.add(current.poi.id);
+    poiLastPlayedRef.current.set(current.poi.id, now);
     trackEvent({ event_type: 'geofence_enter', poi_id: current.poi.id, language_code: language, latitude: currentCoords.latitude, longitude: currentCoords.longitude });
     setAutoNarrationMessage(t('map.autoFinding', { name: current.poi.name }));
     fetch(`/audio/assets/resolve?poi_id=${current.poi.id}&language_code=${encodeURIComponent(language)}`)

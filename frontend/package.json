@@ -12,6 +12,7 @@
   "dependencies": {
     "@zxing/browser": "^0.2.1",
     "maplibre-gl": "^6.14.0",
+    "pmtiles": "^4.5.0",
     "qrcode": "^1.5.4",
     "qrcode.react": "^4.2.0",
     "react": "^18.3.1",

@@ -5,7 +5,7 @@
  */
 
 const DB_NAME = 'saigon_zoo_guide';
-const DB_VERSION = 3;
+const DB_VERSION = 4;
 
 export const STORES = {
   APP_STATE: 'app_state',
@@ -13,6 +13,7 @@ export const STORES = {
   PACKAGES: 'packages',
   TEST: 'test_store',
   OFFLINE_AUDIO: 'offline_audio',
+  PENDING_EVENTS: 'pending_events',
 };
 
 let openDbPromise = null;
@@ -61,6 +62,10 @@ export function openDatabase() {
 
       if (!db.objectStoreNames.contains(STORES.OFFLINE_AUDIO)) {
         db.createObjectStore(STORES.OFFLINE_AUDIO, { keyPath: 'id' });
+      }
+
+      if (!db.objectStoreNames.contains(STORES.PENDING_EVENTS)) {
+        db.createObjectStore(STORES.PENDING_EVENTS, { autoIncrement: true });
       }
     };
 

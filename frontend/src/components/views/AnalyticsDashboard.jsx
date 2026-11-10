@@ -37,8 +37,8 @@ export default function AnalyticsDashboard() {
     {data && <>
       <div className="dashboard-updated">Cập nhật lúc {updatedAt?.toLocaleTimeString('vi-VN')} · tự làm mới mỗi phút · thời gian thống kê theo UTC</div>
       <div className="dashboard-kpis">
-        <article className="dashboard-kpi live"><span>Thiết bị hoạt động</span><strong>{data.active_devices}</strong><small>Có sự kiện trong 5 phút gần nhất</small></article>
-        <article className="dashboard-kpi"><span>Lượt truy cập hôm nay</span><strong>{data.visits_today}</strong><small>Phiên mới trong ngày UTC</small></article>
+        <article className="dashboard-kpi live"><span>Thiết bị hoạt động</span><strong>{data.active_devices }</strong><small>Có sự kiện trong 5 phút gần nhất</small></article>
+        <article className="dashboard-kpi"><span>Lượt truy cập hôm nay</span><strong>{data.visits_today }</strong><small>Phiên mới trong ngày UTC</small></article>
         <article className="dashboard-kpi"><span>Tổng lượt truy cập</span><strong>{data.visits_total}</strong><small>Từ khi bật ghi nhận truy cập</small></article>
         <article className="dashboard-kpi"><span>Sự kiện hôm nay</span><strong>{data.events_today}</strong><small>{data.total_events} sự kiện toàn thời gian</small></article>
         <article className="dashboard-kpi"><span>Lượt bắt đầu nghe</span><strong>{data.audio_starts_today}</strong><small>Hoàn tất {data.audio_completions_today} · tỷ lệ {data.audio_completion_rate_today}%</small></article>

@@ -1,0 +1,21 @@
+{
+  "mongodb_restore": "passed",
+  "collection_counts": {
+    "admin_users": 3,
+    "analytics_devices": 14,
+    "analytics_events": 174,
+    "analytics_sessions": 18,
+    "audio_assets": 66,
+    "audio_packages": 6,
+    "audio_tasks": 66,
+    "geofence_zones": 11,
+    "location_events": 5,
+    "playback_history": 2,
+    "poi": 11,
+    "poi_localizations": 66,
+    "roles": 1
+  },
+  "seaweedfs_restore": "passed",
+  "audio_sha256_verified": 66,
+  "verification": "isolated temporary Docker resources, source volumes untouched"
+}

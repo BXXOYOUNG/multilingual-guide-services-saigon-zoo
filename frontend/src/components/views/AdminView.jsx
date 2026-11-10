@@ -142,3 +142,5 @@ function PasswordForm({ onClose, onSaved }) {
   }
   return <div className="card"><h2>{t('admin.changePassword')}</h2><form className="admin-form" onSubmit={submit}><label>{t('admin.passwordCurrent')}<input type="password" autoComplete="current-password" value={current} onChange={(event) => setCurrent(event.target.value)} required /></label><label>{t('admin.passwordNew')}<input type="password" autoComplete="new-password" minLength={12} value={next} onChange={(event) => setNext(event.target.value)} required /></label><div><button className="btn">{t('admin.update')}</button> <button type="button" className="btn btn-secondary" onClick={onClose}>{t('admin.close')}</button></div>{error && <p role="alert">{error}</p>}</form></div>;
 }
+
+
