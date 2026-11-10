@@ -1,5 +1,17 @@
 # Rà soát UC, DFD và sơ đồ kiến trúc
 
+## Cập nhật DFD ngày 10/11/2026
+
+DFD hiện có **12 sơ đồ**: một ngữ cảnh, một mức 0, sáu mức 1 và bốn mức 2. Mức 0 dùng một kho logic **D1 — Dữ liệu hệ thống**; mức 1/2 chỉ phân biệt **D1.1 — Dữ liệu dùng chung** và **D1.2 — Dữ liệu trên thiết bị** khi cần. Bản bố cục cuối chỉ vẽ một ký hiệu cho mỗi kho/tác nhân/tiến trình trong từng sơ đồ; đường nối vuông góc, không có dòng cập nhật hoặc chú thích dài trên ảnh. Nhóm các luồng cùng chiều đọc/ghi chung kho, giữ nội dung đầy đủ trong bảng đối chiếu, đưa collection/công nghệ sang [bảng kỹ thuật riêng](DFD_XML/KHO_DU_LIEU_DOI_CHIEU.md).
+
+Thêm mức 2 cho **3.3 — Xác định vùng kích hoạt** và **4.3 — Tải, kiểm tra và lưu gói**. Giữ hai phân rã TTS/Chrome. Không bổ sung tiến trình chỉ để các nhánh sâu bằng nhau; không đổi code hoặc dữ liệu. [Bộ mã/ảnh mới](DFD_XML/README.md) và [báo cáo DFD](BAO_CAO_DFD_HE_THONG.md) là bản dùng hiện tại.
+
+**Kiểm tra tài liệu ngày 10/11:** 12 bộ XML/SVG/PNG đọc được; ID và đầu nối hợp lệ, mỗi tiến trình có dữ liệu vào/ra; XML nhúng trong PNG khớp nguồn. Chiều trao đổi qua ranh giới của sáu sơ đồ mức 1 và bốn sơ đồ mức 2 khớp mức cha sau ánh xạ D1.1/D1.2 về D1. Bảng luồng giữ đủ nhãn dữ liệu và số luồng; các liên kết Markdown trong thư mục UC/DFD hợp lệ. Đã xem ảnh mẫu mức 0 và mức 2. Đây là kiểm tra tài liệu, không chạy lại kiểm thử ứng dụng.
+
+Các mục bên dưới ghi lại lần rà soát **09/11/2026**, trước khi giản lược kho và bổ sung hai sơ đồ ngày 10/11. Số đếm 10 DFD và mã D1–D9 bên dưới chỉ thuộc phiên bản lịch sử đó.
+
+---
+
 **Ngày:** 09/11/2026. **Code đối chiếu:** `fb1b0b8`, nhánh `feature/admin-auto-translation`. Người dùng đã xác nhận nghiệm thu luồng dịch Chrome. Lần rà soát này chỉnh tài liệu và hình, không thay code nghiệp vụ hoặc dữ liệu database, không commit/push.
 
 ## 1. Kết quả và các chỗ đã sửa
