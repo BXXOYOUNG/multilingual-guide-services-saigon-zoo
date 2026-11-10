@@ -1,12 +1,9 @@
-<mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1200" background="#ffffff" math="0" shadow="0">
+<mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1035" background="#ffffff" math="0" shadow="0">
   <root>
     <mxCell id="0" />
     <mxCell id="1" parent="0" />
-    <mxCell id="title" value="SƠ ĐỒ NGỮ CẢNH — HIỆN HÀNH 09/11/2026" style="fontFamily=Arial;fontColor=#182230;html=0;whiteSpace=wrap;text;align=left;fontSize=28;fontStyle=1;" vertex="1" parent="1">
+    <mxCell id="title" value="SƠ ĐỒ NGỮ CẢNH" style="fontFamily=Arial;fontColor=#182230;html=0;whiteSpace=wrap;text;align=left;fontSize=28;fontStyle=1;" vertex="1" parent="1">
       <mxGeometry x="50" y="30" width="1700" height="55" as="geometry" />
-    </mxCell>
-    <mxCell id="subtitle" value="Ranh giới: mã React PWA + FastAPI và các kho do đồ án quản lý. Native Chrome/GPS/camera nằm ngoài mã ứng dụng." style="fontFamily=Arial;fontColor=#182230;html=0;whiteSpace=wrap;text;align=left;fontSize=19;fontColor=#475467;" vertex="1" parent="1">
-      <mxGeometry x="50" y="90" width="1700" height="55" as="geometry" />
     </mxCell>
     <mxCell id="S" value="Hệ thống thuyết minh&#10;đa ngôn ngữ&#10;Thảo Cầm Viên" style="fontFamily=Arial;fontColor=#182230;html=0;whiteSpace=wrap;ellipse;fillColor=#eaf3ff;strokeColor=#245b91;strokeWidth=2;fontSize=24;align=center;" vertex="1" parent="1">
       <mxGeometry x="560" y="395" width="340" height="340" as="geometry" />
@@ -124,9 +121,6 @@
         </Array>
         <mxPoint x="78.64" y="42.0" as="offset" />
       </mxGeometry>
-    </mxCell>
-    <mxCell id="note" value="E6 là API native của Chrome, không phải Cloud Translation. Không cần API key; chỉ admin chủ động dịch.&#10;Các kho MongoDB, Redis, SeaweedFS và dữ liệu PWA nằm trong hệ thống nên không vẽ riêng ở sơ đồ ngữ cảnh." style="fontFamily=Arial;fontColor=#182230;html=0;whiteSpace=wrap;text;align=left;fontSize=18;fontColor=#475467;" vertex="1" parent="1">
-      <mxGeometry x="50" y="1120" width="1690" height="65" as="geometry" />
     </mxCell>
   </root>
 </mxGraphModel>

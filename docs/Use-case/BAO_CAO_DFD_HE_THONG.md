@@ -1,6 +1,6 @@
 # BÁO CÁO PHÂN TÍCH LUỒNG DỮ LIỆU HỆ THỐNG THUYẾT MINH ĐA NGÔN NGỮ THẢO CẦM VIÊN
 
-**Ngày đối chiếu:** 09/11/2026
+**Ngày cập nhật trình bày:** 10/11/2026; logic Chrome đối chiếu 09/11/2026, bổ sung mức 2 đối chiếu mã hiện tại
 
 **Phiên bản code tham chiếu:** `fb1b0b8` — nhánh `feature/admin-auto-translation`; người dùng đã nghiệm thu luồng Chrome
 
@@ -17,7 +17,7 @@ Báo cáo đặc tả dữ liệu đi vào, được xử lý, lưu trữ và tr
 | Sơ đồ ngữ cảnh | Toàn hệ thống là một tiến trình; thể hiện trao đổi với bên ngoài | `Hệ thống thuyết minh đa ngôn ngữ Thảo Cầm Viên` |
 | Mức 0 | Phân rã hệ thống thành các tiến trình nghiệp vụ chính và kho dữ liệu | `1.0` đến `6.0` |
 | Mức 1 | Phân rã một tiến trình của mức 0 | Ví dụ `5.1` đến `5.7` thuộc `5.0` |
-| Mức 2 | Phân rã một tiến trình của mức 1 khi cần chi tiết | `5.5.1`–`5.5.5` thuộc TTS; `5.7.1`–`5.7.4` thuộc dịch Chrome |
+| Mức 2 | Phân rã một tiến trình của mức 1 khi cần chi tiết | `3.3.1`–`3.3.3` xét vùng; `4.3.1`–`4.3.4` tải gói; `5.5.1`–`5.5.5` TTS; `5.7.1`–`5.7.4` dịch Chrome |
 
 Trong báo cáo này, sơ đồ ngữ cảnh được trình bày riêng trước mức 0. Mỗi sơ đồ mức 1 phải ghi rõ tiến trình cha; mỗi sơ đồ mức 2 phải ghi rõ tiến trình cha của mức 1.
 
@@ -75,25 +75,19 @@ flowchart TB
 
 Ở sơ đồ ngữ cảnh, các kho MongoDB, Redis, SeaweedFS và bộ nhớ trình duyệt được bao hàm trong tiến trình hệ thống.
 
-## 4. Danh mục kho dữ liệu
+## 4. Kho dữ liệu khái quát
 
-Đây là các **kho logic** phục vụ DFD. Một kho logic có thể nhóm nhiều collection cùng mục đích; việc nhóm không thay đổi schema hoặc tạo database mới.
+| Mã | Kho logic | Phạm vi |
+|---|---|---|
+| D1 | Dữ liệu hệ thống | Kho chung trên sơ đồ mức 0, bao gồm dữ liệu dùng chung và dữ liệu trên thiết bị |
+| D1.1 | Dữ liệu dùng chung | Nội dung, tài nguyên, quản trị, dữ liệu tạm và hoạt động do hệ thống quản lý |
+| D1.2 | Dữ liệu trên thiết bị | Lựa chọn ngôn ngữ, định danh, cache POI/ảnh, gói và audio đã tải |
 
-| Mã | Kho logic | Thành phần đang triển khai | Dữ liệu chủ yếu |
-|---|---|---|---|
-| D1 | Điểm tham quan và vùng kích hoạt | MongoDB `poi`, `geofence_zones` | Tên hệ thống, thông tin loài, tọa độ, GeoJSON, đường dẫn ảnh, trạng thái hiển thị; tâm/bán kính/trạng thái vùng tròn |
-| D2 | Nội dung theo ngôn ngữ | MongoDB `poi_localizations` | `poi_id`, `language_code`, tiêu đề, lời thuyết minh, liên kết audio, trạng thái/task hiện tại; metadata nguồn/review của bản dịch |
-| D3 | Tác vụ tạo audio | MongoDB `audio_tasks` | POI/ngôn ngữ, giọng, nội dung nguồn, trạng thái, file kết quả, thông báo lỗi, thời điểm |
-| D4 | Metadata audio và gói | MongoDB `audio_assets`, `audio_packages` | Object key, checksum, duration, size, ngôn ngữ, POI, thành viên gói, cờ snapshot |
-| D5 | Tệp hình ảnh và âm thanh | SeaweedFS qua adapter S3; ảnh seed trong `frontend/public/images` | Binary MP3 và ảnh; MongoDB giữ liên kết/metadata |
-| D6 | Tài khoản và vai trò quản trị | MongoDB `admin_users`, `roles` | Tài khoản, password hash, vai trò, quyền, trạng thái |
-| D7 | Phiên và dữ liệu tạm phía server | Redis | Phiên admin, bộ đếm rate limit, khóa chống tạo TTS trùng; token/nguồn/revision preview gắn admin/POI, TTL 30 phút |
-| D8 | Hoạt động sử dụng | MongoDB `analytics_devices`, `analytics_sessions`, `analytics_events`, `playback_history`, `location_events` | Định danh ẩn danh, sự kiện trang/QR/audio/geofence, thời điểm, ngôn ngữ, lịch sử nghe |
-| D9 | Bộ nhớ trên thiết bị | IndexedDB, localStorage, sessionStorage, Cache Storage | Ngôn ngữ; định danh ẩn danh; snapshot POI; gói và Blob audio; shell/ảnh/asset đã cache |
+Ở mức 0 chỉ dùng **D1**. Mức 1 và mức 2 chỉ hiện **D1.1/D1.2** khi tiến trình cần sử dụng. Không liệt kê collection, trường hay công nghệ trong ký hiệu kho. Mỗi kho chỉ xuất hiện một lần trong từng hình; các tiến trình cùng nối đến ký hiệu kho đó. Việc tách D1 thành D1.1/D1.2 là phân nhóm logic, không tạo hay đổi database.
 
-Các ảnh seed và ảnh upload có đường phục vụ khác nhau, cùng được nhóm vào D5 vì đều cung cấp nội dung hình ảnh. Cache của các nội dung đã truy cập nằm trong D9.
+Chi tiết MongoDB, Redis, SeaweedFS và lưu trữ trình duyệt nằm trong [bảng đối chiếu kỹ thuật riêng](DFD_XML/KHO_DU_LIEU_DOI_CHIEU.md). Việc tách bộ nhớ thiết bị giúp giải thích nghe offline; dữ liệu dịch chưa xác nhận chỉ ở bộ nhớ làm việc của form, không phải gói ngoại tuyến.
 
-MongoDB dùng BSON ObjectId cho khóa và tham chiếu nội bộ; API truyền chuỗi hex 24 ký tự. Visitor ẩn danh có định danh riêng, không dùng tài khoản admin để ghi lịch sử nghe.
+MongoDB dùng BSON ObjectId cho khóa và tham chiếu nội bộ; API truyền chuỗi hex 24 ký tự. Khách sử dụng định danh ẩn danh riêng.
 
 ## 5. DFD mức 0 — Hệ thống thuyết minh đa ngôn ngữ Thảo Cầm Viên
 
@@ -114,37 +108,26 @@ Phần phát Blob ngoại tuyến được quy về 3.0 để thống nhất tr�
 
 ```mermaid
 flowchart TB
-    D5[("D5. Tệp ảnh và MP3")]
+    P5(("5.0 Quản trị nội dung và audio"))
     E1["E1. Khách tham quan"]
-    E4["E4. Dịch vụ bản đồ"]
-    D4[("D4. Metadata audio và gói")]
-    D3[("D3. Tác vụ audio")]
-    D9[("D9. Bộ nhớ thiết bị")]
-    E2["E2. Quản trị viên"]
     E5["E5. GPS và camera"]
     E3["E3. Edge TTS"]
-    D2[("D2. Nội dung ngôn ngữ")]
-    D6[("D6. Tài khoản và vai trò")]
-    P1(("1.0 Quản lý ngôn ngữ"))
-    D8[("D8. Hoạt động sử dụng")]
-    P6(("6.0 Ghi nhận và thống kê"))
-    D1[("D1. POI và geofence")]
-    D7[("D7. Phiên và dữ liệu tạm")]
-    P3(("3.0 Xử lý nghe và tự phát"))
-    P5(("5.0 Quản trị nội dung và audio"))
-    P2(("2.0 Cung cấp POI, bản đồ, lộ trình"))
+    E4["E4. Dịch vụ bản đồ"]
+    E2["E2. Quản trị viên"]
     P4(("4.0 Tải và quản lý audio ngoại tuyến"))
+    P2(("2.0 Cung cấp POI, bản đồ, lộ trình"))
+    P1(("1.0 Quản lý ngôn ngữ"))
     E6["E6. Chrome Translator API tại máy"]
+    P3(("3.0 Xử lý nghe và tự phát"))
+    P6(("6.0 Ghi nhận và thống kê"))
+    DA[("D1. Dữ liệu hệ thống")]
     E1 -->|"Lựa chọn ngôn ngữ"| P1
     P1 -->|"Nhãn giao diện và kết quả lựa chọn"| E1
-    D9 -->|"Ngôn ngữ đã lưu"| P1
-    P1 -->|"Ngôn ngữ được chọn"| D9
+    DA -->|"Ngôn ngữ đã lưu"| P1
+    P1 -->|"Ngôn ngữ được chọn"| DA
     E1 -->|"Yêu cầu xem điểm, bản đồ, lộ trình, hướng dẫn"| P2
-    D1 -->|"POI và vị trí"| P2
-    D2 -->|"Nội dung đúng ngôn ngữ"| P2
-    D5 -->|"Ảnh loài vật"| P2
-    D9 -->|"POI và ảnh đã cache"| P2
-    P2 -->|"Snapshot POI và ảnh đã truy cập"| D9
+    DA -->|"Thông tin POI, nội dung, ảnh và cache"| P2
+    P2 -->|"Thông tin POI và ảnh đã truy cập"| DA
     P2 -->|"Thông tin điểm, bản đồ, lộ trình, hướng dẫn"| E1
     P2 -->|"Thông số ô bản đồ"| E4
     E4 -->|"Ảnh nền bản đồ"| P2
@@ -153,45 +136,23 @@ flowchart TB
     E1 -->|"Yêu cầu nghe, quét QR, bật tự phát hoặc mô phỏng"| P3
     P3 -->|"Yêu cầu camera"| E5
     E5 -->|"Khung hình và trạng thái camera"| P3
-    D1 -->|"Vùng kích hoạt và POI"| P3
-    D2 -->|"Liên kết audio hiện tại"| P3
-    D4 -->|"Thông tin asset sẵn sàng"| P3
-    D5 -->|"Dữ liệu MP3"| P3
-    D9 -->|"Bản thu đã tải và định danh thiết bị"| P3
+    DA -->|"Vùng kích hoạt, bản thu và định danh thiết bị"| P3
     P3 -->|"Âm thanh, thông tin và lỗi phát"| E1
     E1 -->|"Yêu cầu xem, tải hoặc xóa gói"| P4
-    D4 -->|"Danh sách gói, manifest và checksum"| P4
-    D5 -->|"Các tệp MP3 của gói"| P4
-    D9 -->|"Gói và bản thu đã lưu"| P4
-    P4 -->|"Gói, Blob audio và dữ liệu sau xóa hoặc rollback"| D9
+    DA -->|"Thông tin gói, tệp audio và dữ liệu đã tải"| P4
+    P4 -->|"Gói, audio và dữ liệu sau xóa hoặc khôi phục"| DA
     P4 -->|"Danh sách, QR gói, tiến độ và kết quả tải hoặc xóa"| E1
-    E2 -->|"Xác thực; POI/nội dung; nguồn/đích; yêu cầu dịch; bản sửa và xác nhận lưu; TTS/phát hành"| P5
-    D6 -->|"Tài khoản, vai trò, quyền"| P5
-    P5 -->|"Password hash mới khi đổi mật khẩu"| D6
-    D7 -->|"Phiên, bộ đếm, khóa TTS; token/nguồn/revision preview"| P5
-    P5 -->|"Phiên, bộ đếm, lease; token/nguồn/revision đích có TTL"| D7
-    D1 -->|"POI và geofence hiện có"| P5
-    P5 -->|"POI và geofence cập nhật"| D1
-    D2 -->|"Nội dung và liên kết audio hiện có"| P5
-    P5 -->|"Nội dung, trạng thái và liên kết audio mới"| D2
-    D3 -->|"Trạng thái tác vụ"| P5
-    P5 -->|"Tác vụ và kết quả xử lý"| D3
-    D4 -->|"Metadata audio và gói hiện có"| P5
-    P5 -->|"Asset và snapshot gói mới"| D4
-    D5 -->|"Ảnh, audio nghe thử và metadata tệp"| P5
-    P5 -->|"Ảnh upload và MP3 tổng hợp"| D5
+    E2 -->|"Thông tin POI, nội dung và tài nguyên liên quan"| P5
+    DA -->|"Nội dung, tài nguyên và dữ liệu quản trị"| P5
+    P5 -->|"Nội dung, tài nguyên và dữ liệu quản trị cập nhật"| DA
     P5 -->|"Văn bản và mã giọng"| E3
     E3 -->|"MP3 hoặc kết quả lỗi"| P5
     P5 -->|"Kết quả quản trị; preview/bản đối chiếu; lỗi/xung đột; tác vụ/audio/QR"| E2
+    P5 -->|"Cặp ngôn ngữ; văn bản nguồn; yêu cầu tạo translator"| E6
+    E6 -->|"Bản dịch; khả năng hỗ trợ; tiến độ mô hình hoặc lỗi"| P5
     E1 -->|"Dữ liệu phiên, trang đang xem và hoạt động hiện diện"| P6
-    D9 -->|"Định danh ẩn danh đã lưu"| P6
-    P6 -->|"Định danh ẩn danh mới"| D9
-    D7 -->|"Phiên quản trị và bộ đếm sự kiện"| P6
-    P6 -->|"Bộ đếm rate limit"| D7
-    D6 -->|"Tài khoản, vai trò, quyền phân tích"| P6
-    P6 -->|"Sự kiện và lịch sử sử dụng"| D8
-    D8 -->|"Dữ liệu phục vụ tổng hợp"| P6
-    D1 -->|"Tên POI cho thống kê"| P6
+    DA -->|"Dữ liệu hoạt động, POI, định danh và quyền"| P6
+    P6 -->|"Định danh, hoạt động và dữ liệu phiên cập nhật"| DA
     E2 -->|"Yêu cầu dashboard kèm phiên"| P6
     P6 -->|"Số liệu dashboard hoặc lỗi xác thực"| E2
     P1 -->|"Mã ngôn ngữ hiện tại"| P2
@@ -204,25 +165,23 @@ flowchart TB
     P4 -->|"Bản thu ngoại tuyến được chọn"| P3
     P2 -->|"Sự kiện xem POI kèm ngôn ngữ"| P6
     P3 -->|"Sự kiện QR, audio và geofence kèm ngôn ngữ"| P6
-    P5 -->|"Cặp ngôn ngữ; văn bản nguồn; yêu cầu tạo translator"| E6
-    E6 -->|"Bản dịch; khả năng hỗ trợ; tiến độ mô hình hoặc lỗi"| P5
 ```
 
-Để bản vẽ dễ đọc trên giấy, có thể lặp lại ký hiệu một tác nhân/kho tại nhiều vị trí, giữ nguyên mã E/D và ghi ký hiệu lặp theo quy ước môn học. Các lần xuất hiện cùng mã vẫn chỉ cùng một đối tượng.
+Bộ hình hiện tại không lặp ký hiệu kho hoặc tác nhân trong cùng một sơ đồ. Các đường nối vuông góc được sắp lại để dùng chung kho; nhãn ngắn trên hình được giải thích đầy đủ trong bảng luồng riêng. Chỉ giữ tiêu đề và nội dung DFD trên ảnh, không chèn ngày cập nhật hoặc chú thích cuối hình.
 
 Trang chủ có thẻ QR gói: phần hiển thị được đặt tại trang chủ về mặt UI, nhưng dữ liệu gói/QR vẫn thuộc tiến trình 4.0. Nhãn giao diện và nội dung hướng dẫn tĩnh được lấy từ tài nguyên đóng gói của ứng dụng; chúng không cần collection bản dịch giao diện riêng.
 
 ## 6. DFD mức 1 — Phân rã sáu tiến trình mức 0
 
-Các bảng dưới đây là đặc tả đầy đủ để dựng sáu sơ đồ mức 1. Giữ nguyên E1–E6, D1–D9 khi cần dùng lại kho/tác nhân từ mức cha.
+Các bảng dưới đây là đặc tả đầy đủ để dựng sáu sơ đồ mức 1. Giữ nguyên E1–E6; D1 của mức cha được chi tiết thành D1.1/D1.2, chỉ hiện kho thực sự liên quan.
 
 ### 6.1. Phân rã 1.0 — Quản lý lựa chọn ngôn ngữ
 
 | Mã | Xử lý | Đầu vào và nơi đọc | Đầu ra và nơi nhận |
 |---|---|---|---|
-| 1.1 | Khôi phục lựa chọn | Ngôn ngữ từ D9 hoặc trạng thái chưa chọn | Mã ngôn ngữ khôi phục cho 1.2 |
+| 1.1 | Khôi phục lựa chọn | Ngôn ngữ từ D1.2 hoặc trạng thái chưa chọn | Mã ngôn ngữ khôi phục cho 1.2 |
 | 1.2 | Kiểm tra ngôn ngữ | Lựa chọn E1 hoặc mã từ 1.1; danh sách mã hỗ trợ trong ứng dụng | Ngôn ngữ hợp lệ cho 1.3/1.4; kết quả cần chọn lại cho E1 |
-| 1.3 | Lưu lựa chọn | Mã hợp lệ từ 1.2 | Giá trị lưu vào IndexedDB/localStorage thuộc D9; kết quả lưu cho E1 |
+| 1.3 | Lưu lựa chọn | Mã hợp lệ từ 1.2 | Giá trị lưu vào IndexedDB/localStorage thuộc D1.2; kết quả lưu cho E1 |
 | 1.4 | Cung cấp ngữ cảnh ngôn ngữ | Mã hợp lệ; tài nguyên nhãn giao diện đóng gói | Nhãn cho E1; mã hiện tại cho 2.0, 3.0, 4.0 |
 
 Sáu mã hiện có: `vi`, `en`, `fr`, `zh-Hans`, `ja`, `ko`. Đổi ngôn ngữ giao diện không tự tạo bản dịch hoặc MP3; các tiến trình đọc nội dung phải dùng mã ngôn ngữ tương ứng.
@@ -232,8 +191,8 @@ Sáu mã hiện có: `vi`, `en`, `fr`, `zh-Hans`, `ja`, `ko`. Đổi ngôn ngữ
 | Mã | Xử lý | Đầu vào và nơi đọc | Đầu ra và nơi nhận |
 |---|---|---|---|
 | 2.1 | Tiếp nhận nhu cầu tra cứu | Yêu cầu E1, ngôn ngữ từ 1.0; yêu cầu metadata từ 4.0 | Tiêu chí POI/ngôn ngữ cho 2.2; nhu cầu hiển thị cho 2.3/2.4 |
-| 2.2 | Tải và khôi phục dữ liệu POI | POI đang hiển thị D1, bản ngôn ngữ D2; snapshot D9 khi phù hợp | POI đúng ngôn ngữ cho 2.3/2.4 và 4.0; snapshot mới vào D9; lỗi cho E1 |
-| 2.3 | Cung cấp thông tin và bản đồ | Dữ liệu 2.2; ảnh D5/D9; tọa độ và trạng thái GPS từ E5; ảnh nền E4 | Nội dung/marker/điểm gần nhất cho E1; yêu cầu ô bản đồ tới E4; yêu cầu vị trí tới E5; ảnh đã truy cập vào D9; POI/tọa độ cho 3.0; sự kiện xem POI cho 6.0 |
+| 2.2 | Tải và khôi phục dữ liệu POI | POI đang hiển thị D1.1, bản ngôn ngữ D1.1; snapshot D1.2 khi phù hợp | POI đúng ngôn ngữ cho 2.3/2.4 và 4.0; snapshot mới vào D1.2; lỗi cho E1 |
+| 2.3 | Cung cấp thông tin và bản đồ | Dữ liệu 2.2; ảnh D1.1/D1.2; tọa độ và trạng thái GPS từ E5; ảnh nền E4 | Nội dung/marker/điểm gần nhất cho E1; yêu cầu ô bản đồ tới E4; yêu cầu vị trí tới E5; ảnh đã truy cập vào D1.2; POI/tọa độ cho 3.0; sự kiện xem POI cho 6.0 |
 | 2.4 | Cung cấp lộ trình gợi ý và hướng dẫn | POI 2.2; yêu cầu E1; cấu hình lộ trình/nội dung tĩnh trong ứng dụng | Danh sách điểm gợi ý, liên kết tới bản đồ và hướng dẫn cho E1 |
 
 `/api/pois` và catalog lấy POI đang hiển thị có bản ngôn ngữ tương ứng. Hiện lộ trình chọn các điểm đầu danh sách với các cấu hình 3/5/8 điểm và ước tính thời gian; chưa tối ưu đường đi. POI đã cache có thể được khôi phục theo từng ngôn ngữ; nền bản đồ OSM phụ thuộc kết nối mạng.
@@ -244,35 +203,46 @@ Sáu mã hiện có: `vi`, `en`, `fr`, `zh-Hans`, `ja`, `ko`. Đổi ngôn ngữ
 |---|---|---|---|
 | 3.1 | Tiếp nhận yêu cầu nghe/quét | Yêu cầu E1; POI/tọa độ từ 2.0; ngôn ngữ 1.0; bản thu được chọn từ 4.0 | Yêu cầu camera tới E5; khung hình tới 3.2; yêu cầu xét vùng tới 3.3; yêu cầu tìm/phát tới 3.4/3.5 |
 | 3.2 | Giải mã và kiểm tra QR | Khung hình/trạng thái camera E5; payload QR | POI ID hợp lệ cho 3.4; gói ID hợp lệ cho 4.0; lỗi cho E1; dữ liệu QR POI hợp lệ đi cùng kết quả nghe để ghi sự kiện |
-| 3.3 | Xác định POI trong vùng kích hoạt | Tọa độ từ 2.0, trạng thái bật/mô phỏng từ E1, POI và geofence D1 | POI/ngôn ngữ cần phát cho 3.4; kết quả xét vùng cho E1; sự kiện vào/ra vùng cho 6.0 |
-| 3.4 | Xác định bản thu có thể phát | POI/ngôn ngữ từ 3.1/3.2/3.3; bản thu D9; liên kết D2; asset D4; MP3 D5 | Blob/URL cùng audio ID cho 3.5; lỗi thiếu audio cho E1 |
+| 3.3 | Xác định POI trong vùng kích hoạt | Tọa độ từ 2.0, trạng thái bật/mô phỏng từ E1, POI và geofence D1.1 | POI/ngôn ngữ cần phát cho 3.4; kết quả xét vùng cho E1; sự kiện vào/ra vùng cho 6.0 |
+| 3.4 | Xác định bản thu có thể phát | POI/ngôn ngữ từ 3.1/3.2/3.3; bản thu D1.2; liên kết D1.1; asset D1.1; MP3 D1.1 | Blob/URL cùng audio ID cho 3.5; lỗi thiếu audio cho E1 |
 | 3.5 | Phát audio và ghi nhận kết quả | Bản thu từ 3.4 hoặc 4.0; thao tác E1 | Âm thanh/trạng thái/lỗi cho E1; sự kiện QR POI khi nghe, bắt đầu/hoàn tất audio cho 6.0 |
 
 ```mermaid
-flowchart LR
-    E1["E1. Khách"] -->|"Yêu cầu nghe, quét, tự phát hoặc mô phỏng"| P31(("3.1 Tiếp nhận yêu cầu"))
-    P2["2.0"] -->|"POI và tọa độ"| P31
-    P1["1.0"] -->|"Ngôn ngữ"| P31
-    P31 -->|"Yêu cầu camera"| E5["E5. Camera"]
-    E5 -->|"Khung hình và trạng thái"| P32(("3.2 Giải mã QR"))
-    P31 -->|"Yêu cầu xét vùng và tọa độ"| P33(("3.3 Xác định vùng kích hoạt"))
-    D1[("D1. POI và geofence")] -->|"POI và vùng tròn"| P33
-    P31 -->|"POI và ngôn ngữ cần nghe"| P34(("3.4 Xác định bản thu"))
-    P32 -->|"POI ID hợp lệ"| P34
-    P32 -->|"Gói ID hợp lệ"| P4["4.0"]
+flowchart TB
+    E5["E5. Camera"]
+    P32(("3.2 Giải mã QR"))
+    E1["E1. Khách"]
+    P35(("3.5 Phát và ghi nhận kết quả"))
+    P6["6.0 Tiến trình tham chiếu"]
+    P31(("3.1 Tiếp nhận yêu cầu"))
+    P34(("3.4 Xác định bản thu"))
+    P4["4.0 Tiến trình tham chiếu"]
+    P2["2.0 Tiến trình tham chiếu"]
+    P33(("3.3 Xác định vùng kích hoạt"))
+    P1["1.0 Tiến trình tham chiếu"]
+    DL[("D1.2. Dữ liệu trên thiết bị")]
+    DS[("D1.1. Dữ liệu dùng chung")]
+    E1 -->|"Yêu cầu nghe, quét, tự phát hoặc mô phỏng"| P31
+    P2 -->|"POI và tọa độ"| P31
+    P1 -->|"Ngôn ngữ"| P31
+    P31 -->|"Yêu cầu camera"| E5
+    E5 -->|"Khung hình và trạng thái"| P32
+    P32 -->|"Gói ID hợp lệ"| P4
     P32 -->|"Lỗi QR hoặc camera"| E1
-    P33 -->|"POI và ngôn ngữ cần phát"| P34
+    DS -->|"POI và vùng tròn"| P33
     P33 -->|"Kết quả xét vùng"| E1
-    P33 -->|"Sự kiện vào hoặc ra vùng"| P6["6.0"]
-    D2[("D2. Nội dung ngôn ngữ")] -->|"Liên kết audio"| P34
-    D4[("D4. Metadata audio")] -->|"Asset sẵn sàng"| P34
-    D5[("D5. MP3")] -->|"Dữ liệu audio online"| P34
-    D9[("D9. Bộ nhớ thiết bị")] -->|"Bản thu đã tải; định danh ẩn danh"| P34
-    P34 -->|"Blob hoặc URL và audio ID"| P35(("3.5 Phát và ghi nhận kết quả"))
-    P4 -->|"Bản thu ngoại tuyến được chọn"| P35
+    P33 -->|"Sự kiện vào hoặc ra vùng"| P6
+    DS -->|"Liên kết audio; Asset sẵn sàng; Dữ liệu audio online"| P34
+    DL -->|"Bản thu đã tải; định danh ẩn danh"| P34
     P34 -->|"Lỗi thiếu bản thu"| E1
+    P4 -->|"Bản thu ngoại tuyến được chọn"| P35
     P35 -->|"Âm thanh và kết quả phát"| E1
     P35 -->|"Sự kiện QR và audio kèm ngôn ngữ"| P6
+    P31 -->|"Yêu cầu xét vùng và tọa độ"| P33
+    P31 -->|"POI và ngôn ngữ cần nghe"| P34
+    P32 -->|"POI ID hợp lệ"| P34
+    P33 -->|"POI và ngôn ngữ cần phát"| P34
+    P34 -->|"Blob hoặc URL và audio ID"| P35
 ```
 
 **Khác biệt phải giữ khi đối chiếu code:** nghe thủ công trên map/QR dùng `resolvePlayableAudio`, ưu tiên Blob tải sẵn. Nhánh tự phát theo GPS thật trong `InteractiveMap.jsx` hiện gọi API resolve/content trực tiếp; geofence cũng được tải từ server. Vì vậy chưa mô tả tự phát GPS thật như một luồng hoàn toàn ngoại tuyến. Mô phỏng đến POI dùng bản thu đã được chuẩn bị ở màn hình, không chứng minh khả năng GPS nền ngoài thực địa.
@@ -281,112 +251,106 @@ flowchart LR
 
 | Mã | Xử lý | Đầu vào và nơi đọc | Đầu ra và nơi nhận |
 |---|---|---|---|
-| 4.1 | Xác định gói cần sử dụng | Yêu cầu E1 hoặc gói ID từ 3.2; ngôn ngữ 1.0; danh sách gói D4 | Danh sách/QR gói cho E1; gói ID được chọn cho 4.2 |
-| 4.2 | Đọc manifest và chuẩn bị tải | Gói ID; package/asset/checksum D4; yêu cầu và kết quả metadata qua 2.0 | Danh sách asset cần tải và thông tin kiểm tra cho 4.3; lỗi gói cho E1 |
-| 4.3 | Tải, kiểm tra và lưu gói | Manifest 4.2; MP3 D5; bản ghi trước tải D9; yêu cầu hủy E1 | Blob và bản ghi gói vào D9; khôi phục dữ liệu cũ khi lỗi/hủy; tiến độ/kết quả cho E1 |
-| 4.4 | Tra cứu và xóa dữ liệu đã tải | Gói/bản thu D9; yêu cầu E1 | Danh sách cho E1; dữ liệu sau xóa vào D9; bản thu được chọn cho 3.5 |
+| 4.1 | Xác định gói cần sử dụng | Yêu cầu E1 hoặc gói ID từ 3.2; ngôn ngữ 1.0; danh sách gói D1.1 | Danh sách/QR gói cho E1; gói ID được chọn cho 4.2 |
+| 4.2 | Đọc manifest và chuẩn bị tải | Gói ID; package/asset/checksum D1.1; yêu cầu và kết quả metadata qua 2.0 | Danh sách asset cần tải và thông tin kiểm tra cho 4.3; lỗi gói cho E1 |
+| 4.3 | Tải, kiểm tra và lưu gói | Manifest 4.2; MP3 D1.1; bản ghi trước tải D1.2; yêu cầu hủy E1 | Blob và bản ghi gói vào D1.2; khôi phục dữ liệu cũ khi lỗi/hủy; tiến độ/kết quả cho E1 |
+| 4.4 | Tra cứu và xóa dữ liệu đã tải | Gói/bản thu D1.2; yêu cầu E1 | Danh sách cho E1; dữ liệu sau xóa vào D1.2; bản thu được chọn cho 3.5 |
 
 ```mermaid
-flowchart LR
-    E1["E1. Khách"] -->|"Yêu cầu xem hoặc tải gói"| P41(("4.1 Xác định gói"))
-    P1["1.0"] -->|"Ngôn ngữ"| P41
-    P32["3.2"] -->|"Gói ID từ QR"| P41
-    D4[("D4. Metadata audio và gói")] -->|"Danh sách gói"| P41
+flowchart TB
+    P1["1.0 Tiến trình tham chiếu"]
+    P32["3.2 Tiến trình tham chiếu"]
+    P41(("4.1 Xác định gói"))
+    P43(("4.3 Tải, kiểm tra, lưu"))
+    P44(("4.4 Tra cứu và xóa"))
+    E1["E1. Khách"]
+    P35["3.5 Tiến trình tham chiếu"]
+    P42(("4.2 Đọc manifest"))
+    P2["2.0 Tiến trình tham chiếu"]
+    DL[("D1.2. Dữ liệu trên thiết bị")]
+    DS[("D1.1. Dữ liệu dùng chung")]
+    E1 -->|"Yêu cầu xem hoặc tải gói"| P41
+    P1 -->|"Ngôn ngữ"| P41
+    P32 -->|"Gói ID từ QR"| P41
+    DS -->|"Danh sách gói"| P41
     P41 -->|"Danh sách và QR gói"| E1
-    P41 -->|"Gói ID được chọn"| P42(("4.2 Đọc manifest"))
-    D4 -->|"Manifest, checksum và size"| P42
-    P42 -->|"Yêu cầu metadata POI"| P2["2.0"]
+    DS -->|"Manifest, checksum và size"| P42
+    P42 -->|"Yêu cầu metadata POI"| P2
     P2 -->|"Metadata POI theo ngôn ngữ"| P42
-    P42 -->|"Danh sách asset và tiêu chí kiểm tra"| P43(("4.3 Tải, kiểm tra, lưu"))
-    D5[("D5. MP3")] -->|"Bytes audio"| P43
-    D9[("D9. Bộ nhớ thiết bị")] -->|"Dữ liệu trước tải"| P43
-    E1 -->|"Yêu cầu hủy tải"| P43
-    P43 -->|"Blob, gói hoặc dữ liệu được khôi phục"| D9
     P42 -->|"Lỗi gói"| E1
+    DS -->|"Bytes audio"| P43
+    DL -->|"Dữ liệu trước tải"| P43
+    E1 -->|"Yêu cầu hủy tải"| P43
+    P43 -->|"Blob, gói hoặc dữ liệu được khôi phục"| DL
     P43 -->|"Tiến độ và kết quả tải"| E1
-    E1 -->|"Yêu cầu xem, xóa hoặc chọn bản thu"| P44(("4.4 Tra cứu và xóa"))
-    D9 -->|"Gói và bản thu đã lưu"| P44
-    P44 -->|"Dữ liệu sau xóa"| D9
+    E1 -->|"Yêu cầu xem, xóa hoặc chọn bản thu"| P44
+    DL -->|"Gói và bản thu đã lưu"| P44
+    P44 -->|"Dữ liệu sau xóa"| DL
     P44 -->|"Danh sách và kết quả xóa"| E1
-    P44 -->|"Bản thu ngoại tuyến được chọn"| P35["3.5"]
+    P44 -->|"Bản thu ngoại tuyến được chọn"| P35
+    P41 -->|"Gói ID được chọn"| P42
+    P42 -->|"Danh sách asset và tiêu chí kiểm tra"| P43
 ```
 
-Gói là manifest cùng các asset, không phải file ZIP bắt buộc. Client kiểm tra kích thước và SHA-256 khi có checksum phù hợp; hỗ trợ hủy và khôi phục dữ liệu trước tải. Kho cục bộ gắn với origin/trình duyệt; đổi URL tunnel không chuyển cache sang URL mới. App shell được Service Worker phục vụ từ D9 khi đã cache; ảnh chỉ được bảo đảm theo những gì đã lưu, không mặc định mọi ảnh mới đều được tải cùng audio.
+Gói là manifest cùng các asset, không phải file ZIP bắt buộc. Client kiểm tra kích thước và SHA-256 khi có checksum phù hợp; hỗ trợ hủy và khôi phục dữ liệu trước tải. Kho cục bộ gắn với origin/trình duyệt; đổi URL tunnel không chuyển cache sang URL mới. App shell được Service Worker phục vụ từ D1.2 khi đã cache; ảnh chỉ được bảo đảm theo những gì đã lưu, không mặc định mọi ảnh mới đều được tải cùng audio.
 
 ### 6.5. Phân rã 5.0 — Quản trị nội dung và phát hành audio
 
 | Mã | Xử lý | Đầu vào và nơi đọc | Đầu ra và nơi nhận |
 |---|---|---|---|
-| 5.1 | Xác thực và kiểm tra quyền | Thông tin đăng nhập/phiên/yêu cầu đổi mật khẩu E2; tài khoản và quyền D6; phiên/bộ đếm D7 | Phiên và kết quả xác thực E2; phiên/bộ đếm D7; hash mới D6; thông tin quyền cho 5.2–5.7 |
-| 5.2 | Quản lý POI và geofence | Dữ liệu POI/tọa độ/bán kính/trạng thái E2; dữ liệu hiện có D1; quyền từ 5.1 | POI/geofence cập nhật D1; kết quả E2; ID và bản ngôn ngữ đầu tiên cho 5.4 khi tạo POI |
-| 5.3 | Kiểm tra và lưu ảnh | File ảnh hoặc URL E2; POI D1; quyền 5.1; ảnh hiện có D5 | File upload D5; `image_url` D1; ảnh xem trước/kết quả E2 |
-| 5.4 | Quản lý nội dung theo ngôn ngữ | Title/description/ngôn ngữ E2 hoặc từ 5.2; POI D1; bản hiện tại D2; quyền 5.1 | Nội dung D2; hủy liên kết audio/task hiện tại khi lời đổi; kết quả E2; đánh dấu bản dịch phụ thuộc cần rà soát; định danh đã lưu cho 5.5 khi admin yêu cầu TTS |
-| 5.5 | Tạo và theo dõi audio TTS | Yêu cầu tạo/giọng/truy vấn trạng thái E2; quyền 5.1; POI D1; nội dung D2; task D3; khóa D7; kết quả E3 | Yêu cầu văn bản/giọng E3; task/trạng thái D3; lease D7; MP3 D5; asset D4; liên kết audio hợp lệ D2; trạng thái/audio nghe thử E2 |
-| 5.6 | Phát hành gói audio và QR | Yêu cầu gói/ngôn ngữ hoặc QR POI E2; quyền 5.1; POI D1; nội dung D2; asset/gói D4; metadata tệp D5 | Snapshot gói/asset D4; QR POI/gói và kết quả E2 |
-| 5.7 | Dịch Chrome, đối chiếu và xác nhận lưu | Nguồn/đích, bản sửa và xác nhận E2; quyền 5.1; POI D1; nguồn/bản đích D2; token/revision D7; kết quả native E6 | Yêu cầu dịch E6; preview/kết quả/lỗi E2; token/nguồn/revision TTL 30 phút D7; transaction bản dịch/metadata và vô hiệu audio khi lời đổi D2 |
+| 5.1 | Xác thực và kiểm tra quyền | Thông tin đăng nhập/phiên/yêu cầu đổi mật khẩu E2; tài khoản và quyền D1.1; phiên/bộ đếm D1.1 | Phiên và kết quả xác thực E2; phiên/bộ đếm D1.1; hash mới D1.1; thông tin quyền cho 5.2–5.7 |
+| 5.2 | Quản lý POI và geofence | Dữ liệu POI/tọa độ/bán kính/trạng thái E2; dữ liệu hiện có D1.1; quyền từ 5.1 | POI/geofence cập nhật D1.1; kết quả E2; ID và bản ngôn ngữ đầu tiên cho 5.4 khi tạo POI |
+| 5.3 | Kiểm tra và lưu ảnh | File ảnh hoặc URL E2; POI D1.1; quyền 5.1; ảnh hiện có D1.1 | File upload D1.1; `image_url` D1.1; ảnh xem trước/kết quả E2 |
+| 5.4 | Quản lý nội dung theo ngôn ngữ | Title/description/ngôn ngữ E2 hoặc từ 5.2; POI D1.1; bản hiện tại D1.1; quyền 5.1 | Nội dung D1.1; hủy liên kết audio/task hiện tại khi lời đổi; kết quả E2; đánh dấu bản dịch phụ thuộc cần rà soát; định danh đã lưu cho 5.5 khi admin yêu cầu TTS |
+| 5.5 | Tạo và theo dõi audio TTS | Yêu cầu tạo/giọng/truy vấn trạng thái E2; quyền 5.1; POI D1.1; nội dung D1.1; task D1.1; khóa D1.1; kết quả E3 | Yêu cầu văn bản/giọng E3; task/trạng thái D1.1; lease D1.1; MP3 D1.1; asset D1.1; liên kết audio hợp lệ D1.1; trạng thái/audio nghe thử E2 |
+| 5.6 | Phát hành gói audio và QR | Yêu cầu gói/ngôn ngữ hoặc QR POI E2; quyền 5.1; POI D1.1; nội dung D1.1; asset/gói D1.1; metadata tệp D1.1 | Snapshot gói/asset D1.1; QR POI/gói và kết quả E2 |
+| 5.7 | Dịch Chrome, đối chiếu và xác nhận lưu | Nguồn/đích, bản sửa và xác nhận E2; quyền 5.1; POI D1.1; nguồn/bản đích D1.1; token/revision D1.1; kết quả native E6 | Yêu cầu dịch E6; preview/kết quả/lỗi E2; token/nguồn/revision TTL 30 phút D1.1; transaction bản dịch/metadata và vô hiệu audio khi lời đổi D1.1 |
 
 ```mermaid
 flowchart TB
-    P56(("5.6 Phát hành gói và QR"))
-    D2[("D2. Nội dung ngôn ngữ")]
-    P51(("5.1 Xác thực và quyền"))
-    E2["E2. Admin"]
-    D1[("D1. POI và geofence")]
-    D5[("D5. Tệp media")]
-    P52(("5.2 Quản lý POI và geofence"))
-    P55(("5.5 Tạo và theo dõi TTS"))
-    D4[("D4. Audio và gói")]
-    D7[("D7. Redis")]
-    P53(("5.3 Kiểm tra và lưu ảnh"))
     P54(("5.4 Quản lý nội dung"))
-    D6[("D6. Tài khoản và vai trò")]
-    D3[("D3. Tác vụ audio")]
-    E3["E3. Edge TTS"]
+    E2["E2. Admin"]
     P57(("5.7 Dịch Chrome, đối chiếu và xác nhận lưu"))
+    P53(("5.3 Kiểm tra và lưu ảnh"))
+    P55(("5.5 Tạo và theo dõi TTS"))
     E6["E6. Chrome Translator API tại máy"]
+    P52(("5.2 Quản lý POI và geofence"))
+    E3["E3. Edge TTS"]
+    P56(("5.6 Phát hành gói và QR"))
+    P51(("5.1 Xác thực và quyền"))
+    DS[("D1.1. Dữ liệu dùng chung")]
     E2 -->|"Đăng nhập, phiên hoặc đổi mật khẩu"| P51
-    D6 -->|"Tài khoản và quyền"| P51
-    P51 -->|"Hash mật khẩu mới"| D6
-    D7 -->|"Phiên và bộ đếm"| P51
-    P51 -->|"Phiên và bộ đếm cập nhật"| D7
+    DS -->|"Tài khoản và quyền; Phiên và bộ đếm"| P51
+    P51 -->|"Hash mật khẩu mới; Phiên và bộ đếm cập nhật"| DS
     P51 -->|"Kết quả xác thực"| E2
     E2 -->|"Dữ liệu POI và vùng"| P52
-    D1 -->|"Dữ liệu hiện có"| P52
-    P52 -->|"POI và vùng cập nhật"| D1
+    DS -->|"Dữ liệu hiện có"| P52
+    P52 -->|"POI và vùng cập nhật"| DS
     P52 -->|"Kết quả lưu"| E2
     E2 -->|"Ảnh hoặc URL ảnh"| P53
-    D1 -->|"POI cần gắn ảnh"| P53
-    P53 -->|"Liên kết ảnh"| D1
-    P53 -->|"Binary ảnh upload"| D5
-    D5 -->|"Ảnh hiện có"| P53
+    DS -->|"POI cần gắn ảnh; Ảnh hiện có"| P53
+    P53 -->|"Liên kết ảnh; Binary ảnh upload"| DS
     P53 -->|"Ảnh xem trước và kết quả"| E2
     E2 -->|"Nội dung theo ngôn ngữ"| P54
-    D1 -->|"POI hiện hữu"| P54
-    D2 -->|"Bản hiện tại"| P54
-    P54 -->|"Nội dung; vô hiệu audio khi lời đổi; đánh dấu bản phụ thuộc cần rà soát"| D2
+    DS -->|"POI hiện hữu; Bản hiện tại"| P54
+    P54 -->|"Nội dung; vô hiệu audio khi lời đổi; đánh dấu bản phụ thuộc cần rà soát"| DS
     P54 -->|"Kết quả lưu"| E2
     E2 -->|"Yêu cầu tạo, giọng, truy vấn trạng thái"| P55
-    D1 -->|"POI hiện hữu"| P55
-    D2 -->|"Văn bản và task hiện tại"| P55
-    D3 -->|"Trạng thái tác vụ"| P55
-    P55 -->|"Tác vụ và kết quả"| D3
-    D7 -->|"Khóa hiện có"| P55
-    P55 -->|"Khóa có TTL hoặc dữ liệu sau giải phóng"| D7
+    DS -->|"Nội dung, dữ liệu audio và trạng thái tác vụ"| P55
+    P55 -->|"Dữ liệu audio và thông tin liên quan"| DS
     P55 -->|"Văn bản và giọng"| E3
     E3 -->|"MP3 hoặc lỗi"| P55
-    P55 -->|"MP3 mới"| D5
-    D5 -->|"MP3 nghe thử"| P55
-    P55 -->|"Metadata asset"| D4
-    D4 -->|"Asset nghe thử hiện tại"| P55
-    P55 -->|"Liên kết audio và trạng thái hiện tại"| D2
     P55 -->|"ID, trạng thái, audio nghe thử hoặc lỗi"| E2
     E2 -->|"Yêu cầu phát hành hoặc xem QR"| P56
-    D1 -->|"POI đang hiển thị"| P56
-    D2 -->|"Liên kết audio đúng ngôn ngữ"| P56
-    D4 -->|"Asset và gói hiện có"| P56
-    D5 -->|"Size và checksum tệp"| P56
-    P56 -->|"Snapshot asset và gói mới"| D4
+    DS -->|"Thông tin POI, nội dung và tài nguyên liên quan"| P56
+    P56 -->|"Snapshot asset và gói mới"| DS
     P56 -->|"QR và kết quả phát hành"| E2
+    E2 -->|"Nguồn/đích đã lưu; thao tác dịch; bản chỉnh sửa; xác nhận thay thế/lưu"| P57
+    P57 -->|"Preview/đối chiếu; tiến độ; kết quả lưu hoặc lỗi/xung đột"| E2
+    DS -->|"Nguồn, bản dịch và thông tin xác nhận"| P57
+    P57 -->|"Bản dịch đã xác nhận; trạng thái nội dung và audio"| DS
+    P57 -->|"Cặp ngôn ngữ; văn bản nguồn; yêu cầu tạo translator"| E6
+    E6 -->|"Bản dịch; khả năng hỗ trợ; tiến độ mô hình hoặc lỗi"| P57
     P51 -->|"Thông tin quyền"| P52
     P51 -->|"Thông tin quyền"| P53
     P51 -->|"Thông tin quyền"| P54
@@ -394,16 +358,7 @@ flowchart TB
     P51 -->|"Thông tin quyền"| P56
     P52 -->|"ID và nội dung đầu tiên"| P54
     P54 -->|"Định danh nội dung đã lưu khi admin chọn tạo audio"| P55
-    E2 -->|"Nguồn/đích đã lưu; thao tác dịch; bản chỉnh sửa; xác nhận thay thế/lưu"| P57
-    P57 -->|"Preview/đối chiếu; tiến độ; kết quả lưu hoặc lỗi/xung đột"| E2
     P51 -->|"Thông tin quyền content:write"| P57
-    D1 -->|"POI hiện hữu"| P57
-    D2 -->|"Lời nguồn đã lưu; bản đích và revision hiện tại"| P57
-    D7 -->|"Token, nguồn/revision và bộ đếm chuẩn bị preview"| P57
-    P57 -->|"Token gắn admin/POI, nguồn và revision đích; TTL 30 phút"| D7
-    P57 -->|"Cặp ngôn ngữ; văn bản nguồn; yêu cầu tạo translator"| E6
-    E6 -->|"Bản dịch; khả năng hỗ trợ; tiến độ mô hình hoặc lỗi"| P57
-    P57 -->|"Transaction bản dịch đã xác nhận; metadata nguồn/review; vô hiệu audio khi lời đổi"| D2
 ```
 
 5.1 biểu diễn trách nhiệm kiểm tra quyền dùng chung. Các endpoint hiện tự gọi dependency kiểm tra quyền cho từng request; sơ đồ không yêu cầu frontend gọi một API kiểm tra quyền riêng trước mọi thao tác.
@@ -414,61 +369,60 @@ Lưu POI, upload ảnh và lưu geofence là các request riêng. Tạo POI kèm
 
 | Mã | Xử lý | Đầu vào và nơi đọc | Đầu ra và nơi nhận |
 |---|---|---|---|
-| 6.1 | Chuẩn bị định danh và dữ liệu sự kiện | Thao tác phiên/trang E1; sự kiện xem POI từ 2.0; QR/audio/geofence từ 3.0; định danh D9 | Định danh mới D9; payload gồm device/session/visitor, loại sự kiện, POI/audio, ngôn ngữ, thời điểm nhận phía server qua 6.2 |
-| 6.2 | Kiểm tra và ghi nhận hoạt động | Payload 6.1; bộ đếm rate limit D7 | Thiết bị/phiên/sự kiện D8; playback history khi nghe hoàn tất; location event khi có sự kiện vùng và tọa độ; bộ đếm D7; kết quả tiếp nhận/lỗi cho 6.1 |
-| 6.3 | Kiểm tra quyền xem phân tích | Yêu cầu dashboard kèm phiên E2; phiên D7; tài khoản/quyền D6 | Yêu cầu hợp lệ cho 6.4; lỗi xác thực/phân quyền E2 |
-| 6.4 | Tổng hợp và cung cấp dashboard | Yêu cầu hợp lệ 6.3; dữ liệu D8; tên POI D1 | KPI, biểu đồ và bảng thống kê cho E2 |
+| 6.1 | Chuẩn bị định danh và dữ liệu sự kiện | Thao tác phiên/trang E1; sự kiện xem POI từ 2.0; QR/audio/geofence từ 3.0; định danh D1.2 | Định danh mới D1.2; payload gồm device/session/visitor, loại sự kiện, POI/audio, ngôn ngữ, thời điểm nhận phía server qua 6.2 |
+| 6.2 | Kiểm tra và ghi nhận hoạt động | Payload 6.1; bộ đếm rate limit D1.1 | Thiết bị/phiên/sự kiện D1.1; playback history khi nghe hoàn tất; location event khi có sự kiện vùng và tọa độ; bộ đếm D1.1; kết quả tiếp nhận/lỗi cho 6.1 |
+| 6.3 | Kiểm tra quyền xem phân tích | Yêu cầu dashboard kèm phiên E2; phiên D1.1; tài khoản/quyền D1.1 | Yêu cầu hợp lệ cho 6.4; lỗi xác thực/phân quyền E2 |
+| 6.4 | Tổng hợp và cung cấp dashboard | Yêu cầu hợp lệ 6.3; dữ liệu D1.1; tên POI D1.1 | KPI, biểu đồ và bảng thống kê cho E2 |
 
 6.3 dùng cùng dịch vụ xác thực với 5.1; đây là trách nhiệm xác thực tại ranh giới chức năng analytics, không tạo hệ thống tài khoản thứ hai. Ngôn ngữ thống kê lấy từ sự kiện đang xét, không lấy mặc định từ ngôn ngữ đầu phiên. Thiết bị hoạt động được ước tính theo cửa sổ 5 phút; số lượt truy cập lấy các phiên bắt đầu, mốc ngày/giờ dashboard dùng UTC. Hiện không có hàng đợi gửi bù analytics khi offline.
 
-## 7. DFD mức 2 — Phân rã 5.5: Tạo và theo dõi audio TTS
+## 7. DFD mức 2 — Các tiến trình cần làm rõ
 
-### 7.1. Đặc tả tiến trình con
+### 7.1. Phân rã 5.5 — Tạo và theo dõi audio TTS
 
 | Mã | Tiến trình | Dữ liệu xử lý |
 |---|---|---|
-| 5.5.1 | Kiểm tra yêu cầu và nội dung | Đọc POI D1, bản ngôn ngữ D2; kiểm tra mã ngôn ngữ/giọng và lời đã lưu; nhận quyền từ 5.1; trả lỗi E2 hoặc chuyển bản nguồn hợp lệ sang 5.5.2 |
-| 5.5.2 | Đăng ký tác vụ và khóa trùng | Đọc/ghi khóa có TTL D7; lưu task Pending D3; gắn task ID hiện tại vào D2 bằng điều kiện khớp nội dung; trả ID/trạng thái ban đầu E2 và task cho 5.5.3 |
-| 5.5.3 | Tổng hợp giọng đọc | Ghi Processing D3/D2; gửi văn bản/giọng E3; nhận bytes MP3 hoặc lỗi; chuyển kết quả tới 5.5.4 hoặc 5.5.5 |
-| 5.5.4 | Kiểm tra và lưu bản thu | Tính checksum, xác định size/duration; lưu MP3 với object key mới D5; ghi asset D4; chuyển metadata kết quả sang 5.5.5 |
-| 5.5.5 | Cập nhật và cung cấp kết quả | Đối chiếu task ID/title/description D2 trước khi gắn audio; ghi Completed/Failed D3 và trạng thái phù hợp D2; giải phóng lease D7; cung cấp trạng thái và audio nghe thử từ D4/D5 cho E2 |
+| 5.5.1 | Kiểm tra yêu cầu và nội dung | Đọc POI D1.1, bản ngôn ngữ D1.1; kiểm tra mã ngôn ngữ/giọng và lời đã lưu; nhận quyền từ 5.1; trả lỗi E2 hoặc chuyển bản nguồn hợp lệ sang 5.5.2 |
+| 5.5.2 | Đăng ký tác vụ và khóa trùng | Đọc/ghi khóa có TTL D1.1; lưu task Pending D1.1; gắn task ID hiện tại vào D1.1 bằng điều kiện khớp nội dung; trả ID/trạng thái ban đầu E2 và task cho 5.5.3 |
+| 5.5.3 | Tổng hợp giọng đọc | Ghi Processing D1.1; gửi văn bản/giọng E3; nhận bytes MP3 hoặc lỗi; chuyển kết quả tới 5.5.4 hoặc 5.5.5 |
+| 5.5.4 | Kiểm tra và lưu bản thu | Tính checksum, xác định size/duration; lưu MP3 với object key mới D1.1; ghi asset D1.1; chuyển metadata kết quả sang 5.5.5 |
+| 5.5.5 | Cập nhật và cung cấp kết quả | Đối chiếu task ID/title/description D1.1 trước khi gắn audio; ghi Completed/Failed D1.1 và trạng thái phù hợp D1.1; giải phóng lease D1.1; cung cấp trạng thái và audio nghe thử từ D1.1 cho E2 |
 
 ### 7.2. Sơ đồ mức 2 của 5.5
 
 ```mermaid
 flowchart TB
-    E2["E2. Admin"] -->|"POI, ngôn ngữ, giọng và yêu cầu tạo"| P1(("5.5.1 Kiểm tra nội dung"))
-    P51["5.1"] -->|"Thông tin quyền"| P1
-    P54["5.4"] -->|"Định danh nội dung đã lưu"| P1
-    D1[("D1. POI")] -->|"POI hiện hữu"| P1
-    D2[("D2. Nội dung ngôn ngữ")] -->|"Title, description và task hiện tại"| P1
+    P5(("5.5.5 Cập nhật và cung cấp kết quả"))
+    E3["E3. Edge TTS"]
+    P4(("5.5.4 Kiểm tra và lưu bản thu"))
+    P2(("5.5.2 Đăng ký tác vụ"))
+    E2["E2. Admin"]
+    P1(("5.5.1 Kiểm tra nội dung"))
+    P51["5.1 Tiến trình tham chiếu"]
+    P54["5.4 Tiến trình tham chiếu"]
+    P3(("5.5.3 Tổng hợp giọng"))
+    DS[("D1.1. Dữ liệu dùng chung")]
+    E2 -->|"POI, ngôn ngữ, giọng và yêu cầu tạo"| P1
+    P51 -->|"Thông tin quyền"| P1
+    P54 -->|"Định danh nội dung đã lưu"| P1
+    DS -->|"POI hiện hữu; Title, description và task hiện tại"| P1
     P1 -->|"Lỗi đầu vào"| E2
-    P1 -->|"Bản nguồn và giọng hợp lệ"| P2(("5.5.2 Đăng ký tác vụ"))
-    D7[("D7. Lease Redis")] -->|"Khóa hiện có"| P2
-    P2 -->|"Khóa mới có TTL"| D7
-    P2 -->|"Task Pending"| D3[("D3. Tác vụ audio")]
-    P2 -->|"Task ID và trạng thái Pending"| D2
+    DS -->|"Khóa hiện có"| P2
+    P2 -->|"Khóa mới có TTL; Task Pending; Task ID và trạng thái Pending"| DS
     P2 -->|"ID và trạng thái ban đầu hoặc lỗi trùng"| E2
-    P2 -->|"Task và nội dung nguồn"| P3(("5.5.3 Tổng hợp giọng"))
-    P3 -->|"Trạng thái Processing"| D3
-    P3 -->|"Trạng thái Processing của bản hiện tại"| D2
-    P3 -->|"Văn bản và giọng"| E3["E3. Edge TTS"]
+    P3 -->|"Trạng thái Processing; Trạng thái Processing của bản hiện tại"| DS
+    P3 -->|"Văn bản và giọng"| E3
     E3 -->|"MP3 hoặc lỗi"| P3
-    P3 -->|"Bytes và thông tin audio"| P4(("5.5.4 Kiểm tra và lưu bản thu"))
-    P4 -->|"MP3 và checksum"| D5[("D5. Kho media")]
-    P4 -->|"Metadata asset"| D4[("D4. Asset")]
-    P4 -->|"Object key, checksum, size, duration và task ID"| P5(("5.5.5 Cập nhật và cung cấp kết quả"))
-    P3 -->|"Thông tin lỗi tổng hợp"| P5
-    P4 -->|"Thông tin lỗi lưu tệp hoặc metadata"| P5
-    D2 -->|"Nội dung và task hiện tại để đối chiếu"| P5
-    D3 -->|"Tác vụ và thời điểm cập nhật"| P5
+    P4 -->|"MP3 và checksum; Metadata asset"| DS
+    DS -->|"Nội dung, dữ liệu audio và trạng thái tác vụ"| P5
     E2 -->|"Yêu cầu trạng thái hoặc nghe thử"| P5
-    D4 -->|"Metadata asset nghe thử"| P5
-    D5 -->|"MP3 nghe thử"| P5
-    P5 -->|"Liên kết audio và trạng thái phù hợp"| D2
-    P5 -->|"Completed hoặc Failed và kết quả"| D3
-    P5 -->|"Dữ liệu sau giải phóng lease"| D7
+    P5 -->|"Dữ liệu audio và thông tin liên quan"| DS
     P5 -->|"Trạng thái, audio nghe thử hoặc lỗi"| E2
+    P1 -->|"Bản nguồn và giọng hợp lệ"| P2
+    P2 -->|"Task và nội dung nguồn"| P3
+    P3 -->|"Bytes và thông tin audio"| P4
+    P4 -->|"Nội dung, dữ liệu audio và trạng thái tác vụ"| P5
+    P3 -->|"Thông tin lỗi tổng hợp"| P5
 ```
 
 ### 7.3. Quy tắc xử lý cần thể hiện trong đặc tả code
@@ -493,40 +447,34 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-    P1(("5.7.1 Kiểm tra nguồn và chuẩn bị revision"))
-    P2(("5.7.2 Kiểm tra native API, tải mô hình và dịch"))
-    P3(("5.7.3 Đối chiếu, chỉnh sửa và chọn bản lưu"))
-    P4(("5.7.4 Kiểm tra xung đột và lưu transaction"))
-    P51["5.1 Xác thực và kiểm tra quyền"]
     E2["E2. Quản trị viên"]
+    P51["5.1 Xác thực và kiểm tra quyền"]
+    P1(("5.7.1 Kiểm tra nguồn và chuẩn bị revision"))
+    P4(("5.7.4 Kiểm tra xung đột và lưu transaction"))
     E6["E6. Chrome Translator API tại máy"]
-    D1[("D1. POI và geofence")]
-    D2[("D2. Nội dung theo ngôn ngữ")]
-    D7[("D7. Phiên và dữ liệu tạm Redis")]
+    P3(("5.7.3 Đối chiếu, chỉnh sửa và chọn bản lưu"))
+    P2(("5.7.2 Kiểm tra native API, tải mô hình và dịch"))
+    DS[("D1.1. Dữ liệu dùng chung")]
     E2 -->|"POI, ngôn ngữ nguồn/đích, title/description đã lưu; yêu cầu chuẩn bị"| P1
     P51 -->|"Thông tin quyền content:write"| P1
-    D1 -->|"POI hiện hữu"| P1
-    D2 -->|"Lời nguồn đã lưu; bản đích và revision"| P1
-    D7 -->|"Bộ đếm chuẩn bị preview"| P1
-    P1 -->|"Token gắn admin/POI; nguồn/revision đích; TTL 30 phút; bộ đếm 3 giây"| D7
+    DS -->|"Dữ liệu xác thực, phiên và thông tin xử lý"| P1
+    P1 -->|"Token gắn admin/POI; nguồn/revision đích; TTL 30 phút; bộ đếm 3 giây"| DS
     P1 -->|"Preview sẵn sàng và nội dung đối chiếu hoặc lỗi đầu vào"| E2
-    P1 -->|"Nguồn/đích và token chuẩn bị"| P2
     E2 -->|"Thao tác bấm dịch hoặc thử lại/hủy"| P2
     P2 -->|"Cặp ngôn ngữ; văn bản nguồn; yêu cầu tạo translator"| E6
     E6 -->|"Bản dịch; khả năng hỗ trợ; tiến độ mô hình hoặc lỗi"| P2
     P2 -->|"Tiến độ tải/dịch; lỗi từng ngôn ngữ hoặc trạng thái hủy"| E2
-    P2 -->|"Bản dịch mới trong bộ nhớ React; nguồn và token"| P3
-    P1 -->|"Nội dung đích hiện có để đối chiếu"| P3
     E2 -->|"Nội dung sửa; lựa chọn bản dịch; đồng ý thay thế"| P3
     P3 -->|"Các bản xem trước đã chỉnh; bản cũ để đối chiếu"| E2
-    P3 -->|"Token; các bản đã chọn/chỉnh; cờ replace_existing"| P4
     E2 -->|"Yêu cầu xác nhận lưu"| P4
     P51 -->|"Thông tin quyền content:write"| P4
-    D7 -->|"Token còn hạn, admin/POI, nguồn và revision đích chuẩn bị"| P4
-    D1 -->|"POI hiện hữu"| P4
-    D2 -->|"Nguồn, bản đích, revision và audio hiện tại"| P4
-    P4 -->|"Transaction bản dịch; guard nguồn; provenance/review; vô hiệu audio khi lời đổi"| D2
+    DS -->|"Nguồn, bản dịch và thông tin xác nhận"| P4
+    P4 -->|"Bản dịch đã xác nhận; trạng thái nội dung và audio"| DS
     P4 -->|"Ngôn ngữ đã lưu; nhắc tạo audio hoặc lỗi/xung đột 409"| E2
+    P1 -->|"Nguồn/đích và token chuẩn bị"| P2
+    P2 -->|"Bản dịch mới trong bộ nhớ React; nguồn và token"| P3
+    P1 -->|"Nội dung đích hiện có để đối chiếu"| P3
+    P3 -->|"Token; các bản đã chọn/chỉnh; cờ replace_existing"| P4
 ```
 
 Chrome desktop dùng localhost hoặc HTTPS, gồm HTTPS tunnel. Mobile hoặc cặp ngôn ngữ không hỗ trợ có đường nhập thủ công qua 5.4. Có sáu ngôn ngữ tổng cộng, tối đa năm đích; `zh-Hans` chỉ đổi thành `zh` khi gọi native API. Không cần Cloud Translation account/billing/key. Backend không chứng minh được mô hình Chrome tạo ra văn bản do admin gửi; metadata mô tả luồng hỗ trợ biên tập và xác nhận của admin.
@@ -534,6 +482,80 @@ Chrome desktop dùng localhost hoặc HTTPS, gồm HTTPS tunnel. Mobile hoặc c
 Chuẩn bị lại thay các bản xem trước trong form; đóng/tải lại mất phần chưa lưu. Retry không kéo dài TTL. Preview cũ của phương án Cloud bị từ chối. Mất mạng lúc commit có thể đã lưu: kiểm tra danh sách trước khi thử lại. Unique index `(poi_id,language_code)` được kiểm tra/tạo trước commit; dữ liệu trùng bị từ chối, không tự xóa.
 
 Nội dung đã lưu của POI active có thể được khách đọc ngay; không có kho nháp đã lưu riêng. Sửa nguồn đánh dấu bản dịch phụ thuộc `needs_review`, không tự đổi lời/audio đích chưa thay đổi. Để có audio mới, admin chọn từng ngôn ngữ rồi yêu cầu 5.5; gói đã phát hành vẫn giữ snapshot audio cũ, cần phát hành gói mới qua 5.6.
+
+### 7.5. Phân rã 3.3 — Xác định vùng kích hoạt
+
+| Mã | Xử lý | Quy tắc theo mã hiện tại |
+|---|---|---|
+| 3.3.1 | Tiếp nhận ngữ cảnh xét vùng | Tiếp nhận vị trí/ngôn ngữ và trạng thái bật hoặc mô phỏng. Nhánh GPS thật chỉ xét khi có tọa độ, POI và geofence; mô phỏng dùng vị trí POI và audio đã chuẩn bị từ thao tác bấm. |
+| 3.3.2 | Tính khoảng cách và chọn vùng | Đối chiếu vùng tròn của POI; GPS thật chọn vùng chứa vị trí có khoảng cách đến tâm nhỏ nhất. Kết quả có thể là ngoài mọi vùng. |
+| 3.3.3 | Đối chiếu trạng thái và đề nghị phát | So sánh vùng đang hoạt động và tập POI đã kích hoạt trong bộ nhớ component; ghi nhận vào/ra vùng, chuyển POI/ngôn ngữ cần phát cho 3.4. Khi rời/chuyển vùng thì dừng audio cũ. Không đọc lịch sử backend để tính cooldown. |
+
+```mermaid
+flowchart TB
+    A(("3.3.1 Tiếp nhận ngữ cảnh xét vùng"))
+    B(("3.3.2 Tính khoảng cách và chọn vùng"))
+    C(("3.3.3 Đối chiếu trạng thái và đề nghị phát"))
+    E1["E1. Khách"]
+    R31["3.1 Tiếp nhận yêu cầu"]
+    R34["3.4 Xác định bản thu"]
+    R6["6.0 Ghi nhận và thống kê"]
+    DS[("D1.1. Dữ liệu dùng chung")]
+    R31 -->|"Yêu cầu xét vùng và tọa độ"| A
+    A -->|"Tọa độ, ngôn ngữ và trạng thái bật hoặc mô phỏng"| B
+    DS -->|"POI và vùng tròn"| B
+    B -->|"Vùng gần nhất chứa vị trí hoặc kết quả ngoài vùng"| C
+    A -->|"Ngữ cảnh ngôn ngữ, bật hoặc mô phỏng"| C
+    C -->|"POI và ngôn ngữ cần phát"| R34
+    C -->|"Kết quả xét vùng"| E1
+    C -->|"Sự kiện vào hoặc ra vùng"| R6
+```
+
+Tập POI đã kích hoạt và vùng hiện tại là trạng thái làm việc của component, không tạo kho database mới. Khi đổi ngôn ngữ/ngữ cảnh, trạng thái được reset theo component. Mức 2 này chỉ phân rã **xét vùng**; resolve audio, phát và sự kiện playback vẫn thuộc 3.4/3.5. Nhánh GPS thật hiện cần API; không suy ra tự phát hoàn toàn offline hoặc GPS nền.
+
+### 7.6. Phân rã 4.3 — Tải, kiểm tra và lưu gói ngoại tuyến
+
+| Mã | Xử lý | Quy tắc theo mã hiện tại |
+|---|---|---|
+| 4.3.1 | Kiểm tra khả năng lưu trữ | Nhận manifest đã được 4.2 kiểm tra; ước lượng dung lượng, kiểm tra quota nếu API có; xin lưu bền nếu hỗ trợ; đọc bản ghi gói cũ. |
+| 4.3.2 | Tải và kiểm tra bản thu | Tải tuần tự, kiểm tra HTTP và Blob không rỗng; kiểm tra size khi có; SHA-256 khi checksum có dạng hợp lệ. Lặp cho các bản thu còn lại. |
+| 4.3.3 | Lưu bản thu và hoàn tất gói | Đọc/giữ bản thu cũ trước khi ghi, lưu Blob kèm POI/ngôn ngữ/asset; cập nhật tiến độ; chỉ ghi bản ghi gói hoàn tất sau khi tải hết. |
+| 4.3.4 | Khôi phục dữ liệu khi lỗi hoặc hủy | Hủy qua AbortSignal; với các bản thu đã ghi, cố gắng phục hồi bản cũ hoặc xóa bản mới; cố gắng giữ/khôi phục bản ghi gói cũ; trả lỗi hoặc hủy. |
+
+```mermaid
+flowchart TB
+    A(("4.3.1 Kiểm tra khả năng lưu trữ"))
+    B(("4.3.2 Tải và kiểm tra bản thu"))
+    C(("4.3.3 Lưu bản thu và hoàn tất gói"))
+    D(("4.3.4 Khôi phục dữ liệu khi lỗi hoặc hủy"))
+    E1["E1. Khách"]
+    R42["4.2 Đọc manifest"]
+    DL[("D1.2. Dữ liệu trên thiết bị")]
+    DS[("D1.1. Dữ liệu dùng chung")]
+    R42 -->|"Danh sách asset và tiêu chí kiểm tra"| A
+    A -->|"Danh sách bản thu và dung lượng dự kiến"| B
+    DL -->|"Dữ liệu trước tải"| A
+    DL -->|"Dữ liệu trước tải"| C
+    A -->|"Bản ghi gói và bản thu cũ được giữ để khôi phục"| C
+    A -->|"Lỗi chuẩn bị tải"| D
+    DS -->|"Bytes audio"| B
+    B -->|"Blob hợp lệ; định danh và metadata bản thu"| C
+    B -->|"Lỗi mạng, tệp rỗng, sai kích thước hoặc checksum"| D
+    C -->|"Danh sách bản thu còn lại"| B
+    C -->|"Blob, gói hoặc dữ liệu được khôi phục"| DL
+    C -->|"Lỗi lưu; bản ghi cũ và các bản thu đã ghi"| D
+    E1 -->|"Yêu cầu hủy tải"| D
+    D -->|"Blob, gói hoặc dữ liệu được khôi phục"| DL
+    A -->|"Tiến độ và kết quả tải"| E1
+    C -->|"Tiến độ và kết quả tải"| E1
+    D -->|"Tiến độ và kết quả tải"| E1
+```
+
+Đọc dữ liệu cũ và ghi dữ liệu mới được gộp tại ranh giới D1.2; chi tiết bản ghi được mô tả trong bảng luồng. Đây là rollback theo từng bản ghi với lỗi khôi phục có thể bị bỏ qua trong code, **không phải transaction IndexedDB toàn gói và không bảo đảm phục hồi nếu trình duyệt bị đóng đột ngột**. Snapshot POI được chuẩn bị qua 4.2/2.0; rollback audio không xóa cache POI. Phần tra cứu/chọn bản thu offline vẫn thuộc 4.4, phát Blob thuộc 3.5.
+
+### 7.7. Tiêu chí dừng phân rã
+
+Mỗi tiến trình được dừng khi đầu vào, biến đổi dữ liệu và đầu ra đã đủ rõ để đối chiếu mã. Không yêu cầu các nhánh sâu bằng nhau. Bốn sơ đồ mức 2 làm rõ xét vùng, tải/khôi phục dữ liệu, tạo audio và dịch có xác nhận; các tiến trình còn lại giữ ở mức 1 trong phạm vi báo cáo này. Điều kiện/vòng lặp là đặc tả xử lý, không vẽ thành nút quyết định của DFD.
 
 ## 8. Từ điển dòng dữ liệu và kiểm tra cân bằng
 
@@ -583,7 +605,7 @@ Nội dung đã lưu của POI active có thể được khách đọc ngay; kh�
 - Mức con có thể thêm các luồng nội bộ giữa tiến trình con; không tự thêm tác nhân ngoài mới mà chưa có dòng tương ứng ở các mức phía trên.
 - Các nhãn `2.0`, `3.5`, `5.1` trong sơ đồ mức con biểu diễn tiến trình ngoài phạm vi đang phân rã; khi vẽ chính thức dùng quy ước tham chiếu tiến trình của môn học, không đổi chúng thành tác nhân ngoài E mới.
 - Không nối trực tiếp E với D, D với D hoặc E với E trong sơ đồ hệ thống; dữ liệu phải đi qua tiến trình xử lý.
-- Kho được nhóm ở mức cao có thể tách thành các kho chi tiết ở mức thấp nếu lập bảng đối chiếu rõ ràng. Báo cáo hiện giữ nguyên D1–D9 để dễ truy vết.
+- Kho được nhóm ở mức cao có thể tách thành các kho chi tiết ở mức thấp nếu lập bảng đối chiếu rõ ràng. Báo cáo hiện giữ nguyên D1.1/D1.2 để dễ truy vết.
 
 ## 9. Bảng truy vết DFD → use case → code
 
@@ -597,13 +619,13 @@ Nội dung đã lưu của POI active có thể được khách đọc ngay; kh�
 | 2.3 | UC-02 | `frontend/src/components/views/HomeView.jsx`, `MapView.jsx`; `frontend/src/features/map/InteractiveMap.jsx`, `useGeolocation.js`, `geoUtils.js` |
 | 2.4 | Bổ sung sau PRD | `frontend/src/components/views/ItineraryView.jsx`, `GuideView.jsx` |
 | 3.1–3.2 | UC-04 | `frontend/src/features/qr/QrScanner.jsx`; `frontend/src/features/offline/audioPackages.js`: `parseQrPayload`; `ExploreView.jsx`: `onScan` |
-| 3.3 | UC-03 | `backend/api/geofences.py`: `list_active_geofences`; `InteractiveMap.jsx`: effect xét vùng, `simulateArrival`; `geoUtils.js`: `calculateDistanceMeters` |
+| 3.3; 3.3.1–3.3.3 | UC-03 | `backend/api/geofences.py`: `list_active_geofences`; `InteractiveMap.jsx`: effect xét vùng, `simulateArrival`; `geoUtils.js`: `calculateDistanceMeters` |
 | 3.4 | UC-03/04/06 | `audioPackages.js`: `resolvePlayableAudio`; `backend/api/audio.py`: `resolve_ready_audio_asset`, `stream_audio_asset`; `backend/repositories/audio.py`: `get_ready_asset` |
 | 3.5 | UC-03/04/06 | `InteractiveMap.jsx`: `preparePoiAudio`, `simulateArrival`, HTML audio callbacks; `ExploreView.jsx`: `onScan`, `playLocal`, `finishPlayback` |
 | 4.1–4.2 | UC-05 | `HomeView.jsx`: dữ liệu gói/QR; `backend/api/audio.py`: `list_available_packages`, `get_audio_package_manifest`; `backend/services/audio.py`: `get_package_manifest` |
-| 4.3 | UC-05 | `frontend/src/features/offline/audioPackages.js`: `downloadAudioPackage`; `frontend/src/db/indexedDB.js` |
+| 4.3; 4.3.1–4.3.4 | UC-05 | `frontend/src/features/offline/audioPackages.js`: `downloadAudioPackage`; `frontend/src/db/indexedDB.js` |
 | 4.4 | UC-06 | `ExploreView.jsx`: `refresh`, `removePackage`; `audioPackages.js`: `listOfflineAudio`; `frontend/src/db/indexedDB.js` |
-| Hỗ trợ shell/asset ngoại tuyến thuộc D9 | UC-06 | `frontend/src/sw/registerServiceWorker.js`; `frontend/vite.config.js`: Service Worker được sinh lúc build |
+| Hỗ trợ shell/asset ngoại tuyến thuộc D1.2 | UC-06 | `frontend/src/sw/registerServiceWorker.js`; `frontend/vite.config.js`: Service Worker được sinh lúc build |
 | 5.1 và 6.3 | UC-07 | `backend/api/admin_auth.py`; `backend/services/admin_auth.py`: `login_admin`, `require_admin`, `require_permission`; frontend `AdminView.jsx` |
 | 5.2 | UC-08 | `backend/api/admin.py`: `create_poi`, `update_poi`, `deactivate_poi`; `backend/api/admin_workflow.py`: `save_geofence`; frontend `AdminPoiWorkflow.jsx`: `PoiWorkflowEditor` |
 | 5.3 | UC-08 mở rộng | `backend/api/admin_workflow.py`: `validate_image`, `upload_image`, `read_image`; `frontend/src/services/adminApi.js`: `uploadPoiImage` |
@@ -622,7 +644,7 @@ Nội dung đã lưu của POI active có thể được khách đọc ngay; kh�
 Ví dụ yêu cầu sửa hành vi “đổi lời khi TTS đang chạy”:
 
 1. Xác định tiến trình liên quan: 5.4, 5.5.1, 5.5.2 và 5.5.5.
-2. Xác định dữ liệu ảnh hưởng: D2, D3, D7; kết quả audio tại D4/D5 có thể đã được tạo.
+2. Xác định dữ liệu ảnh hưởng trong D1.1: lời thuyết minh, tác vụ và liên kết audio; tệp/asset kết quả có thể đã được tạo.
 3. Tra code: `save_localization`, `AdminNarration.enqueue/generate/status`, `NarrationPanel`.
 4. Đối chiếu đặc tả: lời cũ không được gắn vào bản hiện tại; gói đã phát hành được giữ nguyên.
 5. Cập nhật đặc tả/DFD nếu thay đổi dòng dữ liệu hoặc trách nhiệm xử lý; cập nhật bảng truy vết khi đổi vị trí code.
@@ -651,6 +673,6 @@ Mã tiến trình DFD nên xuất hiện trong tài liệu đặc tả và danh 
 - [Quy ước và API](../API_CONVENTIONS.md).
 - [Kết quả kiểm tra luồng admin](../ADMIN_WORKFLOW_VERIFICATION_2026-11-04.md).
 
-**Bộ sơ đồ có thể dựng từ báo cáo:** 1 sơ đồ ngữ cảnh; 1 sơ đồ mức 0; 6 sơ đồ mức 1 tương ứng sáu tiến trình chính; 2 sơ đồ mức 2: TTS 5.5 và dịch Chrome 5.7. Có thể phân rã thêm 3.3 hoặc 4.3 nếu môn học yêu cầu chi tiết hơn, đồng thời giữ cân bằng với mức cha.
+**Bộ sơ đồ hiện hành:** 12 sơ đồ gồm 1 ngữ cảnh, 1 mức 0, 6 mức 1 và 4 mức 2: xét vùng 3.3, tải gói 4.3, TTS 5.5, dịch Chrome 5.7. Các sơ đồ con giữ cân bằng với ranh giới tiến trình cha.
 
-Mã XML draw.io được tách thành từng sơ đồ tại [DFD_XML/README.md](DFD_XML/README.md). Có thể mở hoặc dán mã từng file để chỉnh sửa và xuất ảnh riêng theo thứ tự 01–10.
+Mã XML draw.io được tách thành từng sơ đồ tại [DFD_XML/README.md](DFD_XML/README.md). Có thể mở hoặc dán mã từng file để chỉnh sửa và xuất ảnh riêng theo thứ tự 01–12.
