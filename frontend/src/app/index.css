@@ -8,16 +8,62 @@
 }
 
 ﻿:root {
-  --primary-color: #2e7d32;
-  --primary-dark: #1b5e20;
-  --primary-light: #4caf50;
-  --background: #f5f7f5;
-  --surface: #ffffff;
-  --text-main: #212121;
-  --text-muted: #666666;
-  --border-color: #e0e0e0;
-  --accent-color: #f57c00;
-  --max-width: 480px;
+  /* ==========================================================================
+     PHASE 3 DESIGN TOKENS - NATURE-INSPIRED EDITORIAL PALETTE
+     ========================================================================== */
+  --primary-color: #176b4b;
+  --primary-dark: #124d39;
+  --primary-deep: #0c2b1e;
+  --primary-light: #4c9a6b;
+  --primary-tint: #eaf3e9;
+
+  --accent-color: #e49d55;
+  --accent-terracotta: #c86a28;
+  --accent-tint: #fdf5ea;
+
+  --background: #f6f5ef;
+  --surface: #fffefa;
+  --surface-elevated: #ffffff;
+  --glass-surface: rgba(255, 254, 250, 0.94);
+  --border-color: #e7eae1;
+  --border-strong: #cdd7c8;
+
+  --text-main: #1c3028;
+  --text-title: #173a29;
+  --text-body: #334a3e;
+  --text-muted: #6a7a70;
+  --text-subtle: #8c9c92;
+
+  --max-width: 1240px;
+  --container-max-desktop: 1240px;
+  --container-content-narrow: 880px;
+
+  /* Spacing (8-pt scale) */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 72px;
+
+  /* Radii & Shadows */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 9999px;
+
+  --shadow-subtle: 0 2px 8px rgba(18, 45, 30, 0.04);
+  --shadow-card: 0 8px 24px rgba(23, 58, 41, 0.06);
+  --shadow-hover: 0 16px 36px rgba(23, 58, 41, 0.11);
+  --shadow-floating: 0 20px 60px rgba(12, 35, 23, 0.16);
+
+  /* Transitions */
+  --transition-fast: 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --transition-normal: 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --transition-smooth: 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
@@ -216,22 +262,9 @@ body {
 .package-qr svg { max-width: 100%; height: auto; }
 @media (max-width: 600px) { .admin-poi-row, .admin-session { align-items: flex-start; flex-direction: column; } .admin-actions { justify-content: flex-start; } }
 
-/* Home: warm editorial layout, optimized for a phone-sized visitor guide. */
-:root {
-  --primary-color: #176b4b;
-  --primary-dark: #124d39;
-  --primary-light: #4c9a6b;
-  --background: #f6f5ef;
-  --surface: #fffefa;
-  --text-main: #1c3028;
-  --text-muted: #6c7971;
-  --border-color: #e7e8df;
-  --accent-color: #e49d55;
-  --max-width: 760px;
-}
-
+/* Home: warm editorial layout, optimized for nature-inspired continuous scrolling. */
 body { background: #e9eee7; }
-.app-container { max-width: 760px; background: var(--background); box-shadow: 0 16px 60px rgba(22, 55, 39, .12); }
+.app-container { max-width: var(--max-width); background: var(--background); box-shadow: 0 16px 60px rgba(22, 55, 39, .12); }
 .app-header { background: rgba(255,254,250,.96); color: var(--text-main); border-bottom: 1px solid rgba(30,70,49,.08); padding: 13px 22px; backdrop-filter: blur(16px); }
 .app-header h1 { font-size: 1rem; letter-spacing: -.02em; }
 .app-header .app-badge { background: #e9f1e8; color: var(--primary-color); }
@@ -713,7 +746,8 @@ body { background: #e9eee7; }
 @media (max-width: 600px) { .dashboard-heading { align-items: flex-start; flex-direction: column; } .dashboard-kpis { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; } .dashboard-kpi { min-height: 118px; padding: 13px; } .dashboard-kpi strong { font-size: 1.7rem; } .dashboard-grid { grid-template-columns: 1fr; } .dashboard-panel { padding: 15px; } }
 
 /* Public site navigation and editorial landing pages */
-.site-header { position: sticky; top: 0; z-index: 150; display: grid; grid-template-columns: 190px minmax(0,1fr) auto; align-items: center; gap: 24px; min-height: 78px; padding: 12px clamp(20px,4vw,46px); border-bottom: 1px solid rgba(34,70,47,.08); background: rgba(255,254,250,.91); backdrop-filter: blur(18px); }
+.site-header { position: sticky; top: 0; z-index: 150; display: grid; grid-template-columns: 190px minmax(0,1fr) auto; align-items: center; gap: 24px; min-height: 74px; padding: 12px clamp(20px,4vw,46px); border-bottom: 1px solid rgba(34,70,47,.08); background: var(--glass-surface, rgba(255,254,250,.94)); backdrop-filter: blur(18px); }
+.scroll-progress-bar { position: absolute; bottom: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--primary-light, #4c9a6b), var(--primary-color, #176b4b)); z-index: 10; transition: width 0.1s ease-out; pointer-events: none; }
 .site-brand { display: inline-grid; justify-items: start; gap: 1px; color: #1d432f; text-decoration: none; }
 .site-brand > span { font-family: 'Zoo Sans', sans-serif; font-size: 1.08rem; font-weight: 700; letter-spacing: -.04em; }
 .site-brand > small { color: #7a8d7e; font-size: .49rem; font-weight: 750; letter-spacing: .16em; }
@@ -870,3 +904,268 @@ button, input, select, textarea { font-family: inherit; }
 
 .animal-image-credit { display: block; margin: 8px 0; color: #65746a; font-size: .64rem; line-height: 1.6; overflow-wrap: anywhere; }
 .animal-image-credit a { color: #286b4d; }
+
+/* ==========================================================================
+   PHASE 5 SCROLL INTERACTIONS & STICKY STORYTELLING
+   ========================================================================== */
+
+/* ==========================================================================
+   PHASE 6 RESPONSIVE DESIGN REFINEMENTS (360px - 1440px+)
+   ========================================================================== */
+
+/* Prevent any accidental horizontal overflow */
+html, body, #root, .app-container {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Touch-friendly buttons on mobile & tablet */
+@media (max-width: 768px) {
+  .btn, .site-nav-link, .language-chip, .carousel-controls button, .itinerary-start {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .home-hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .home-hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Embedded Map Mobile Ergonomics */
+  .home-embedded-map {
+    height: 420px !important;
+    border-radius: 18px !important;
+  }
+
+  /* Suggested Routes on Small Devices (360px - 390px) */
+  .itinerary-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .itinerary-card {
+    padding: 16px !important;
+  }
+
+  /* Offline QR items wrap cleanly */
+  .offline-qr-track {
+    grid-auto-columns: minmax(130px, 45%) !important;
+  }
+
+  /* Guide and FAQ touch areas */
+  .guide-faq details {
+    padding: 14px 16px;
+  }
+}
+
+/* Tablet Layout (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .home-hero-modern {
+    padding: 36px 32px;
+  }
+
+  .home-embedded-map {
+    height: 480px !important;
+  }
+
+  .itinerary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .species-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Desktop Wide Viewport (1280px - 1440px+) */
+@media (min-width: 1280px) {
+  .home-page {
+    padding: 28px 48px 0;
+  }
+
+  .home-hero-modern {
+    min-height: 540px;
+  }
+
+  .home-embedded-map {
+    height: 600px !important;
+  }
+
+  .itinerary-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 24px !important;
+  }
+}
+
+/* 5.1 Scroll-Triggered Reveal Animations */
+.scroll-reveal {
+  opacity: 1; /* Fallback for no-js or immediate rendering */
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+@media (min-width: 600px) {
+  .scroll-reveal:not(.in-view) {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  .scroll-reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 5.2 Animal Discovery Layout & Sticky Storytelling */
+.sticky-story-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.sticky-story-visual {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: clamp(210px, 48vw, 300px);
+  border-radius: var(--radius-lg, 18px);
+  overflow: hidden;
+  box-shadow: var(--shadow-card, 0 8px 24px rgba(23, 58, 41, 0.06));
+  border: 1px solid var(--border-color, #e7eae1);
+  background: linear-gradient(135deg, #dce9d7, #9bbba3);
+  margin-bottom: 8px;
+}
+
+.sticky-story-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.sticky-story-visual .visual-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 14px 18px;
+  background: linear-gradient(0deg, rgba(12, 43, 30, 0.92) 0%, rgba(12, 43, 30, 0) 100%);
+  color: #ffffff;
+}
+
+.sticky-story-visual .visual-caption h3 {
+  font-size: 1.15rem;
+  margin-bottom: 2px;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.sticky-story-visual .visual-caption p {
+  font-size: 0.8rem;
+  color: #e2ede5;
+  line-height: 1.4;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.sticky-story-feed {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 960px) {
+  .sticky-story-container {
+    display: grid;
+    grid-template-columns: minmax(320px, 0.85fr) minmax(0, 1.15fr);
+    gap: 32px;
+    align-items: start;
+    position: relative;
+    margin-top: 20px;
+  }
+
+  .sticky-story-visual {
+    position: sticky;
+    top: 96px;
+    height: 480px;
+    border-radius: var(--radius-xl, 28px);
+    margin-bottom: 0;
+  }
+
+  .sticky-story-visual .visual-caption {
+    padding: 24px;
+    background: linear-gradient(0deg, rgba(12, 43, 30, 0.88) 0%, rgba(12, 43, 30, 0) 100%);
+  }
+
+  .sticky-story-visual .visual-caption h3 {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+  }
+
+  .sticky-story-visual .visual-caption p {
+    font-size: 0.85rem;
+    line-height: 1.45;
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
+}
+
+/* 5.3 Active Navigation Indicator */
+.site-nav-link.is-active-section {
+  color: var(--primary-color, #176b4b) !important;
+  font-weight: 700;
+}
+
+.site-nav-link.is-active-section:after {
+  position: absolute;
+  right: 0;
+  bottom: 1px;
+  left: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--primary-color, #176b4b);
+  content: '';
+}
+
+/* 5.4 Controlled Scroll Snap for Cards */
+.animal-carousel, .offline-qr-track {
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+}
+
+/* 5.5 Accessibility & Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .sticky-story-visual {
+    position: static !important;
+    height: auto !important;
+  }
+}
