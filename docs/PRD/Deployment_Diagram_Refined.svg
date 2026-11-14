@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1450" viewBox="0 0 1800 1450" role="img" aria-labelledby="title desc">
+<title id="title">DEPLOYMENT DIAGRAM  /  Thuyết minh đa ngôn ngữ Thảo Cầm Viên</title><desc id="desc">Hạ tầng demo hiện tại • Node / runtime / artifact / lưu trữ • Mũi tên: bên khởi tạo kết nối; phản hồi đi ngược lại • 13/11/2026</desc>
+<rect width="100%" height="100%" fill="white"/>
+<text x="40" y="68" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#203B45">DEPLOYMENT DIAGRAM  /  Thuyết minh đa ngôn ngữ Thảo Cầm Viên</text>
+<text x="40" y="99" font-family="Arial, sans-serif" font-size="17" font-weight="400" fill="#536D78">Hạ tầng demo hiện tại • Node / runtime / artifact / lưu trữ • Mũi tên: bên khởi tạo kết nối; phản hồi đi ngược lại • 13/11/2026</text>
+<rect x="40" y="150" width="390" height="310" rx="4" fill="#F3F8F7" stroke="#277765" stroke-width="1.5"/>
+<text x="60" y="186" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#277765">THIẾT BỊ TỪ XA</text>
+<text x="60" y="212" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">«device» Điện thoại / máy tính khách hoặc admin</text>
+<rect x="60" y="225" width="350" height="90" rx="4" fill="white" stroke="#277765" stroke-width="1.5"/>
+<polyline points="388,225 388,240 410,240" fill="none" stroke="#277765" stroke-width="2" stroke-linejoin="round"/>
+<text x="76" y="253" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#203B45">«browser» React PWA</text>
+<text x="76" y="279" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#536D78">Camera · GPS · HTML Audio</text>
+<text x="76" y="302" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#536D78">Chrome desktop: native Translator</text>
+<rect x="60" y="355" width="350" height="85" rx="4" fill="white" stroke="#277765" stroke-width="1.5"/>
+<text x="76" y="382" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#203B45">«local storage»</text>
+<text x="76" y="408" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">IndexedDB: POI / ngôn ngữ / MP3 / gói</text>
+<text x="76" y="431" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">Cache Storage: shell / JS / CSS / ảnh</text>
+<polyline points="230,315 230,355" fill="none" stroke="#277765" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="230,355 235.0,345.0 225.0,345.0" fill="#277765"/>
+<rect x="500" y="190" width="270" height="120" rx="4" fill="white" stroke="#346B97" stroke-width="1.5"/>
+<polyline points="748,190 748,205 770,205" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<text x="516" y="217" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#203B45">Cloudflare</text>
+<text x="516" y="243" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">Quick Tunnel · HTTPS :443</text>
+<text x="516" y="266" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">*.trycloudflare.com</text>
+<text x="516" y="289" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">URL tạm thời</text>
+<rect x="820" y="150" width="940" height="1180" rx="4" fill="#F3F8F7" stroke="#277765" stroke-width="1.5"/>
+<text x="840" y="186" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#277765">MÁY HOST WINDOWS</text>
+<text x="840" y="212" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">«device» Một bản hệ thống · frontend / backend trên host; dependency trong Docker</text>
+<rect x="850" y="245" width="260" height="125" rx="4" fill="white" stroke="#346B97" stroke-width="1.5"/>
+<polyline points="1088,245 1088,260 1110,260" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<text x="866" y="272" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#203B45">«container» cloudflared</text>
+<text x="866" y="298" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">Docker Desktop / Linux</text>
+<text x="866" y="321" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">Connector mở tunnel đi ra</text>
+<text x="866" y="344" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">host.docker.internal:3000</text>
+<rect x="1180" y="245" width="540" height="145" rx="4" fill="white" stroke="#277765" stroke-width="1.5"/>
+<polyline points="1698,245 1698,260 1720,260" fill="none" stroke="#277765" stroke-width="2" stroke-linejoin="round"/>
+<text x="1196" y="273" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#203B45">«execution environment» Node.js / Vite</text>
+<text x="1196" y="299" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#536D78">Preview bind 0.0.0.0:3000</text>
+<text x="1196" y="322" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#536D78">«artifact» frontend/dist · manifest.json · sw.js</text>
+<text x="1196" y="345" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#536D78">Proxy /api/* và /audio/* → 127.0.0.1:8000</text>
+<rect x="850" y="480" width="260" height="210" rx="4" fill="white" stroke="#277765" stroke-width="1.5"/>
+<polyline points="1088,480 1088,495 1110,495" fill="none" stroke="#277765" stroke-width="2" stroke-linejoin="round"/>
+<text x="866" y="507" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#203B45">«browser» Local</text>
+<text x="866" y="533" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">http://localhost:3000</text>
+<text x="866" y="556" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">React PWA khách / admin</text>
+<text x="866" y="579" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">IndexedDB + Cache Storage</text>
+<text x="866" y="602" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">ID ẩn danh: local/session</text>
+<text x="866" y="625" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">Native Translator (Chrome)</text>
+<text x="866" y="648" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">Model trong Chrome profile</text>
+<rect x="1180" y="480" width="540" height="210" rx="4" fill="white" stroke="#277765" stroke-width="1.5"/>
+<polyline points="1698,480 1698,495 1720,495" fill="none" stroke="#277765" stroke-width="2" stroke-linejoin="round"/>
+<text x="1196" y="508" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#203B45">«execution environment» Python / Uvicorn</text>
+<text x="1196" y="534" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#536D78">FastAPI · bind 127.0.0.1:8000</text>
+<text x="1196" y="557" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#536D78">«artifact» backend.main:app</text>
+<text x="1196" y="580" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#536D78">POI / geofence / audio / visitor / admin / analytics</text>
+<text x="1196" y="603" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#536D78">Auth cookie HTTP-only + RBAC</text>
+<text x="1196" y="626" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#536D78">Dịch: preview / commit; TTS: BackgroundTasks</text>
+<rect x="850" y="825" width="870" height="310" rx="4" fill="#F3F7FC" stroke="#346B97" stroke-width="1.5"/>
+<text x="1165" y="1061" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#346B97">DOCKER DESKTOP</text>
+<text x="1165" y="1089" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">Linux containers</text>
+<text x="1165" y="1114" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">Cổng host: 127.0.0.1</text>
+<rect x="870" y="865" width="260" height="160" rx="4" fill="white" stroke="#346B97" stroke-width="1.5"/>
+<polyline points="1108,865 1108,880 1130,880" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<text x="886" y="891" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#203B45">«container» MongoDB 6</text>
+<text x="886" y="917" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#536D78">mongod :27018 · replica set rs0</text>
+<text x="886" y="940" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#536D78">saigon-zoo-t10-replset</text>
+<text x="886" y="963" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#536D78">DB: saigon_zoo_tcv_dataset_dev</text>
+<text x="886" y="986" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#536D78">Metadata / nội dung / analytics</text>
+<rect x="1150" y="865" width="260" height="160" rx="4" fill="white" stroke="#346B97" stroke-width="1.5"/>
+<polyline points="1388,865 1388,880 1410,880" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<text x="1166" y="891" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#203B45">«container» Redis 7</text>
+<text x="1166" y="917" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#536D78">:6379 · redis:7.0-alpine</text>
+<text x="1166" y="940" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#536D78">saigon-zoo-redis</text>
+<text x="1166" y="963" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#536D78">Session / rate limit / TTS lease</text>
+<text x="1166" y="986" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#536D78">Nguồn &amp; revision preview dịch</text>
+<rect x="1430" y="865" width="270" height="160" rx="4" fill="white" stroke="#346B97" stroke-width="1.5"/>
+<polyline points="1678,865 1678,880 1700,880" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<text x="1446" y="891" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#203B45">«container» SeaweedFS</text>
+<text x="1446" y="917" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#536D78">mini -dir=/data · S3 HTTP :8333</text>
+<text x="1446" y="940" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#536D78">saigon-zoo-t10-seaweedfs</text>
+<text x="1446" y="963" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#536D78">Bucket MP3 / ảnh POI</text>
+<text x="1446" y="986" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#536D78">Truy cập qua backend</text>
+<rect x="870" y="1060" width="260" height="55" rx="4" fill="white" stroke="#346B97" stroke-width="1.5"/>
+<text x="886" y="1086" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#203B45">«volume» DB + config</text>
+<text x="885" y="1102" font-family="Arial, sans-serif" font-size="12" font-weight="400" fill="#536D78">/data/db · /data/configdb</text>
+<rect x="1430" y="1060" width="270" height="55" rx="4" fill="white" stroke="#346B97" stroke-width="1.5"/>
+<text x="1446" y="1086" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#203B45">«volume» Media</text>
+<text x="1445" y="1102" font-family="Arial, sans-serif" font-size="12" font-weight="400" fill="#536D78">/data · MP3 / ảnh / storage metadata</text>
+<polyline points="1000,1025 1000,1060" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="1000,1060 1005.0,1050.0 995.0,1050.0" fill="#346B97"/>
+<polyline points="1565,1025 1565,1060" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="1565,1060 1570.0,1050.0 1560.0,1050.0" fill="#346B97"/>
+<rect x="850" y="1200" width="870" height="100" rx="4" fill="white" stroke="#9A6926" stroke-width="1.5"/>
+<text x="866" y="1227" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#203B45">«artifact» Công cụ vận hành trên host</text>
+<text x="866" y="1253" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">start_demo.ps1 / stop_demo.ps1: điều khiển Vite, Uvicorn và tunnel</text>
+<text x="866" y="1276" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#536D78">Python scripts + data/dataset/: seed / admin / Edge TTS / upload / backup / kiểm tra phục hồi</text>
+<polyline points="1285,1200 1285,1135" fill="none" stroke="#9A6926" stroke-width="2" stroke-dasharray="7 5" stroke-linejoin="round"/>
+<polygon points="1285,1135 1280.0,1145.0 1290.0,1145.0" fill="#9A6926"/>
+<text x="1300" y="1169" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#9A6926">seed / backup dữ liệu &amp; media</text>
+<rect x="40" y="540" width="390" height="110" rx="4" fill="white" stroke="#346B97" stroke-width="1.5"/>
+<polyline points="408,540 408,555 430,555" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<text x="56" y="568" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#203B45">«external» OpenStreetMap</text>
+<text x="56" y="594" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#536D78">tile.openstreetmap.org · HTTPS</text>
+<text x="56" y="617" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#536D78">Client tải raster tiles trực tiếp</text>
+<rect x="40" y="1260" width="720" height="95" rx="4" fill="white" stroke="#346B97" stroke-width="1.5"/>
+<polyline points="738,1260 738,1275 760,1275" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<text x="56" y="1288" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#203B45">«external» Edge TTS</text>
+<text x="56" y="1314" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#536D78">Internet khi tạo MP3 · backend hoặc script gọi</text>
+<text x="56" y="1337" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#536D78">Tác vụ admin chạy trong process FastAPI</text>
+<polyline points="430,260 500,260" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="500,260 490.0,255.0 490.0,265.0" fill="#346B97"/>
+<text x="437" y="235" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#346B97">HTTPS</text>
+<polyline points="850,290 770,290" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="770,290 780.0,295.0 780.0,285.0" fill="#346B97"/>
+<text x="777" y="333" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#346B97">Tunnel</text>
+<polyline points="1110,285 1180,285" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="1180,285 1170.0,280.0 1170.0,290.0" fill="#346B97"/>
+<text x="1117" y="268" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#346B97">HTTP</text>
+<polyline points="1110,530 1145,530 1145,355 1180,355" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="1180,355 1170.0,350.0 1170.0,360.0" fill="#346B97"/>
+<text x="1100" y="421" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#346B97">HTTP</text>
+<polyline points="1450,390 1450,480" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="1450,480 1455.0,470.0 1445.0,470.0" fill="#346B97"/>
+<text x="1465" y="434" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#346B97">HTTP :8000 · REST JSON / audio / media</text>
+<polyline points="1240,690 1240,720 1000,720 1000,865" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="1000,865 1005.0,855.0 995.0,855.0" fill="#346B97"/>
+<text x="850" y="758" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#346B97">MongoDB TCP :27018</text>
+<polyline points="1450,690 1450,750 1280,750 1280,865" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="1280,865 1285.0,855.0 1275.0,855.0" fill="#346B97"/>
+<text x="1150" y="758" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#346B97">Redis TCP :6379</text>
+<polyline points="1660,690 1660,720 1565,720 1565,865" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="1565,865 1570.0,855.0 1560.0,855.0" fill="#346B97"/>
+<text x="1580" y="758" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#346B97">S3 HTTP :8333</text>
+<polyline points="1720,570 1740,570 1740,1345 780,1345 780,1305 760,1305" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="760,1305 770.0,1310.0 770.0,1300.0" fill="#346B97"/>
+<text x="1200" y="1322" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#346B97">Internet · tạo MP3 qua Edge TTS</text>
+<polyline points="230,460 230,540" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="230,540 235.0,530.0 225.0,530.0" fill="#346B97"/>
+<text x="245" y="504" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#346B97">HTTPS tiles</text>
+<polyline points="850,610 790,610 790,590 430,590" fill="none" stroke="#346B97" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="430,590 440.0,595.0 440.0,585.0" fill="#346B97"/>
+<text x="505" y="572" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#346B97">HTTPS tiles từ browser local</text>
+<text x="40" y="758" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#203B45">LUỒNG RUNTIME</text>
+<text x="40" y="790" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#536D78">1. Khách từ xa → HTTPS Cloudflare → tunnel → Vite.</text>
+<text x="40" y="816" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#536D78">   cloudflared mở kết nối mã hóa đi ra Cloudflare.</text>
+<text x="40" y="842" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#536D78">2. Vite trả frontend build; /api và /audio được proxy sang FastAPI.</text>
+<text x="40" y="868" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#536D78">3. FastAPI dùng MongoDB, Redis, S3 qua cổng loopback của host.</text>
+<text x="40" y="894" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#536D78">4. TTS: admin yêu cầu → FastAPI gọi Edge TTS → MP3 vào S3;</text>
+<text x="40" y="920" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#536D78">   metadata và trạng thái vào MongoDB; Redis giữ lease tạm.</text>
+<text x="40" y="946" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#536D78">5. Dịch: API giữ preview → Chrome dịch → admin duyệt → API</text>
+<text x="40" y="972" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#536D78">   commit transaction MongoDB. Mô hình thuộc Chrome profile.</text>
+<text x="40" y="1048" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#203B45">NGOẠI TUYẾN &amp; PHẠM VI TRIỂN KHAI</text>
+<text x="40" y="1080" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#536D78">Dùng POI / gói / audio đã tải và shell đã cache trên cùng origin.</text>
+<text x="40" y="1106" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#536D78">Đổi URL tunnel tạo origin khác; OSM vẫn cần mạng.</text>
+<text x="40" y="1132" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#536D78">GPS / camera cần quyền browser và localhost hoặc HTTPS.</text>
+<text x="40" y="1158" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#536D78">Native translation tùy Chrome desktop / cặp ngôn ngữ;</text>
+<text x="40" y="1184" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#536D78">không hỗ trợ thì nhập tay. Tải model lần đầu cần Internet.</text>
+<text x="40" y="1210" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#536D78">Backup DB / media tách khỏi Git; mỗi máy chạy bản riêng.</text>
+<text x="40" y="1236" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#536D78">Script chuẩn bị có thể gọi Edge TTS trực tiếp như backend.</text>
+<text x="40" y="1378" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#203B45">Ký hiệu UML &amp; ranh giới</text>
+<text x="40" y="1410" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#536D78">«device»: máy vật lý · «execution environment» / «container» / «browser»: môi trường thực thi · «artifact»: bản build / mã triển khai.</text>
+<text x="40" y="1436" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#536D78">Đường liền: kết nối runtime / lưu trữ; nét đứt: vận hành. Frontend và FastAPI ở host; dữ liệu không công khai qua tunnel. Không có worker TTS bền vững.</text>
+</svg>

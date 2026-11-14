@@ -1,4 +1,17 @@
-# Sơ đồ kiến trúc đối chiếu runtime 09/11/2026
+# Sơ đồ kiến trúc hệ thống
+
+## Bản tinh gọn — 13/11/2026
+
+Vẽ lại từ hai ảnh có sẵn, đối chiếu tài liệu và mã nguồn hiện tại. Component thể hiện cấu trúc mã nguồn; deployment thể hiện node, runtime, artifact, lưu trữ và kết nối. Đường nối vuông góc dùng làn riêng; các quan hệ dùng chung được gom theo biên package.
+
+| Sơ đồ | SVG | PNG | Nguồn chỉnh sửa |
+|---|---|---|---|
+| Component | [SVG](Component_Diagram_Refined.svg) | [PNG](Component_Diagram_Refined.png) | [drawio](Component_Diagram_Refined.drawio) |
+| Deployment | [SVG](Deployment_Diagram_Refined.svg) | [PNG](Deployment_Diagram_Refined.png) | [drawio](Deployment_Diagram_Refined.drawio) |
+
+Xem [thuyết minh, đối chiếu component với code, kết nối triển khai và cách xuất lại](DIAGRAMS_REFINED.md). Nguồn sinh ảnh: [render_refined_diagrams.py](render_refined_diagrams.py). Hai ảnh mới không thay đổi kiến trúc hệ thống.
+
+## Bản tham chiếu giữ nguyên — 09/11/2026
 
 | Sơ đồ | Mã PlantUML thuần | SVG | PNG |
 |---|---|---|---|
