@@ -1,4 +1,4 @@
-﻿import React, { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLanguage } from '../../features/localization/LanguageContext';
 import { useTranslation } from '../../features/localization/useTranslation';
 import { useSearchParams } from 'react-router-dom';
@@ -129,7 +129,26 @@ export default function ExploreView() {
     <div className="card">
       <h2>{t('explore.title')}</h2>
       <p>{t('explore.description')}</p>
-      <button className="btn" disabled={busy} onClick={() => { setMessage(''); setScanning(true); }}>{t('explore.scan')}</button>
+      <div className="explore-scan-action-box">
+        <button
+          type="button"
+          className="btn btn-qr-scan"
+          disabled={busy}
+          onClick={() => { setMessage(''); setScanning(true); }}
+        >
+          <span className="qr-btn-icon-shape" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 7V5a2 2 0 0 1 2-2h2" />
+              <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+              <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+              <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+              <rect x="7" y="7" width="10" height="10" rx="1.5" />
+            </svg>
+          </span>
+          <span className="qr-btn-label">{t('explore.scan')}</span>
+          <span className="qr-btn-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
       {busy && <p role="status">{t('explore.loading', { progress: progress ? `${progress.completed}/${progress.total}` : t('explore.downloading') })}</p>}
       {downloadAbortRef.current && <button className="btn btn-secondary" onClick={() => downloadAbortRef.current?.abort()}>{t('explore.cancel')}</button>}
       {message && <p role="status">{message}</p>}
