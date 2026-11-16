@@ -24,7 +24,36 @@ const browserRows = {
   ja: ['プレビューを準備', '再準備（プレビューを置換）', '未処理の言語を翻訳', '翻訳／言語パックを取得', '翻訳を再試行', '現在の操作を中止', '中止しました。再試行できます。', '翻訳モデルを取得中：', 'パソコンのChromeを使用しAPIキーは不要です。準備後に翻訳を押して初回のモデル取得を許可します。初回はネット接続が必要で、保存確認までは訳文はブラウザ内にあります。', 'この言語ペアは利用できません。内容編集で手動入力してください。', 'この言語の翻訳ボタンを押してモデル取得を許可してください。', 'Chromeの入力上限を超えました。原文を短くするか手動入力してください。', '訳文が空、またはタイトル180字・本文10000字の上限を超えました。原文を短くするか手動入力してください。', '翻訳失敗。接続、ブラウザの設定と空き容量を確認し、言語ごとに再試行してください。', '5分を超過しました。取得状況を確認して再試行してください。', '30分で期限切れです。翻訳・保存の前に再準備してください。'],
   ko: ['미리보기 준비', '다시 준비 (미리보기 교체)', '대기 중인 언어 번역', '번역 / 언어 팩 다운로드', '번역 다시 시도', '현재 작업 취소', '취소되었습니다. 다시 시도할 수 있습니다.', '번역 모델 다운로드 중:', '컴퓨터의 Chrome을 사용하며 API 키가 필요 없습니다. 준비 후 번역을 눌러 최초 모델 다운로드를 허용하세요. 처음에는 인터넷이 필요하며 저장 확인 전까지 번역문은 브라우저에만 있습니다.', '이 기기에서 해당 언어 쌍을 사용할 수 없습니다. 내용 편집에서 직접 입력하세요.', '해당 언어의 번역 버튼을 눌러 모델 다운로드를 허용하세요.', 'Chrome 입력 한도를 초과했습니다. 원문을 줄이거나 직접 번역을 입력하세요.', '번역문이 비어 있거나 제목 180자 / 본문 10000자 한도를 초과했습니다. 원문을 줄이거나 직접 입력하세요.', '번역 실패. 인터넷, 브라우저 정책 및 디스크 여유 공간을 확인하고 언어별로 다시 시도하세요.', '5분을 초과했습니다. 모델 다운로드를 확인한 후 다시 시도하세요.', '미리보기가 30분 후 만료되었습니다. 번역이나 저장 전에 다시 준비하세요.'],
 };
+const batchLabels = {
+  vi: ['Dịch sang tất cả 5 ngôn ngữ còn lại', 'Dịch lại tất cả (thay bản xem trước)'],
+  en: ['Translate into all 5 other languages', 'Translate all again (replace preview)'],
+  fr: ['Traduire vers les 5 autres langues', 'Tout retraduire (remplacer l’aperçu)'],
+  'zh-Hans': ['翻译为其他全部5种语言', '重新翻译全部（替换预览）'],
+  ja: ['他の5言語すべてに翻訳', 'すべて再翻訳（プレビューを置換）'],
+  ko: ['나머지 5개 언어 모두 번역', '모두 다시 번역 (미리보기 교체)'],
+};
+const batchInfo = {
+  vi: 'Dịch bằng Chrome trên máy tính, không cần API key. Bấm một lần để chuẩn bị và dịch sang cả 5 ngôn ngữ còn lại; lần đầu cần Internet để tải mô hình. Đọc và chỉnh sửa trước khi xác nhận lưu.',
+  en: 'Uses desktop Chrome; no API key. One click prepares and translates into all 5 other languages. Internet is needed for initial model downloads. Review and edit before confirming save.',
+  fr: 'Chrome sur ordinateur, sans clé API. Un clic prépare et traduit vers les 5 autres langues. Internet est nécessaire au premier téléchargement des modèles. Relisez avant de confirmer l’enregistrement.',
+  'zh-Hans': '使用电脑版Chrome，无需API密钥。点击一次即可准备并翻译为其他全部5种语言。首次下载模型需要联网。请审核和编辑后再确认保存。',
+  ja: 'パソコンのChromeを使用しAPIキーは不要です。1回のクリックで準備し、他の5言語すべてに翻訳します。初回のモデル取得にはネット接続が必要です。確認・編集してから保存してください。',
+  ko: '컴퓨터의 Chrome을 사용하며 API 키는 필요 없습니다. 한 번 클릭하면 준비 후 나머지 5개 언어로 모두 번역합니다. 최초 모델 다운로드에는 인터넷이 필요합니다. 검토하고 수정한 뒤 저장을 확인하세요.',
+};
+const confirmationKeys = ['selectAll', 'saving', 'saveComplete', 'saveSuccess', 'saveFailed', 'refreshFailed'];
+const confirmationRows = {
+  vi: ['Tôi đã kiểm tra và xác nhận tất cả bản dịch sẵn sàng, đồng ý thay thế nội dung đã có', 'Đang xác nhận lưu bản dịch…', 'Đã xác nhận lưu', 'Đã xác nhận lưu thành công {count} bản dịch.', 'Chưa xác nhận lưu thành công. Vui lòng kiểm tra lỗi và thử lại.', 'Bản dịch đã được lưu, nhưng chưa tải lại được danh sách. Vui lòng làm mới trang để kiểm tra.'],
+  en: ['I reviewed and confirm all ready translations, including replacing existing content', 'Confirming and saving translations…', 'Save confirmed', 'Successfully saved {count} translations.', 'Save was not confirmed. Check the error and retry.', 'Translations were saved, but the list could not refresh. Reload the page to check.'],
+  fr: ['J’ai vérifié et confirme toutes les traductions prêtes, y compris le remplacement du contenu existant', 'Confirmation et enregistrement…', 'Enregistrement confirmé', '{count} traductions enregistrées avec succès.', 'Enregistrement non confirmé. Vérifiez l’erreur et réessayez.', 'Les traductions sont enregistrées, mais la liste n’a pas pu être actualisée. Rechargez la page.'],
+  'zh-Hans': ['我已审核并确认所有就绪译文，同意替换已有内容', '正在确认保存译文…', '已确认保存', '已成功保存{count}份译文。', '尚未确认保存成功，请检查错误并重试。', '译文已保存，但列表刷新失败，请重新加载页面查看。'],
+  ja: ['準備済みのすべての翻訳を確認し、既存の内容の置換に同意します', '翻訳の保存を確認中…', '保存確認済み', '{count}件の翻訳を保存しました。', '保存を確認できませんでした。エラーを確認して再試行してください。', '翻訳は保存されましたが一覧を更新できませんでした。ページを再読み込みしてください。'],
+  ko: ['준비된 모든 번역을 검토하고 확인했으며 기존 내용 교체에 동의합니다', '번역 저장 확인 중…', '저장 확인 완료', '번역 {count}개를 성공적으로 저장했습니다.', '저장이 확인되지 않았습니다. 오류를 확인한 뒤 다시 시도하세요.', '번역은 저장되었지만 목록을 새로고침하지 못했습니다. 페이지를 새로고침하여 확인하세요.'],
+};
 export default Object.fromEntries(Object.entries(rows).map(([language, values]) => [language,
   { ...Object.fromEntries(keys.map((key, index) => [key, values[index]])), configure: configure[language],
-    ...Object.fromEntries(browserKeys.map((key, index) => [key, browserRows[language][index]])) },
+    ...Object.fromEntries(browserKeys.map((key, index) => [key, browserRows[language][index]])),
+    translateAll: batchLabels[language][0], translateAllAgain: batchLabels[language][1],
+    browserInfo: batchInfo[language],
+    ...Object.fromEntries(confirmationKeys.map((key, index) => [key, confirmationRows[language][index]])),
+  },
 ]));
