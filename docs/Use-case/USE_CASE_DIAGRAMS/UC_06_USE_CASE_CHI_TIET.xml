@@ -2,12 +2,6 @@
   <root>
     <mxCell id="0" />
     <mxCell id="1" parent="0" />
-    <mxCell id="title" value="UC-06 — USE CASE DIAGRAM CHI TIẾT" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=30;fontColor=#182230;fontStyle=1;" vertex="1" parent="1">
-      <mxGeometry x="60" y="25" width="1576" height="45" as="geometry" />
-    </mxCell>
-    <mxCell id="subtitle" value="Hiện hành 09/11/2026 · fb1b0b8: Khám phá và nghe thuyết minh offline" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#475467;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="60" y="80" width="1576" height="35" as="geometry" />
-    </mxCell>
     <mxCell id="boundary" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#fcfdff;strokeColor=#344054;strokeWidth=2;" vertex="1" parent="1">
       <mxGeometry x="317.254" y="170" width="1313.3245000000002" height="913.7625" as="geometry" />
     </mxCell>
@@ -118,12 +112,6 @@
     </mxCell>
     <mxCell id="change" value="Chọn đối tượng khác" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#fff5e7;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="1219.0" y="944.7624999999999" width="324.0" height="99.0" as="geometry" />
-    </mxCell>
-    <mxCell id="notes" value="LUỒNG CHÍNH: Xem danh sách → chọn đối tượng → tìm audio cục bộ → hiển thị thông tin → nghe không cần Internet.&#10;A1 — Mở rộng tại điểm đang xem/nghe: đổi đối tượng, dừng audio cũ&#10;E1 — Chưa có bản thu phù hợp hoặc dữ liệu cục bộ lỗi:&#10;GHI CHÚ: Điều kiện: mở app và tải audio trước trên cùng origin/browser. Không cần gọi server để phát Blob đã tải. Ảnh, metadata và nền map chỉ có theo dữ&#10;liệu đã cache; không bắt UC-05 chạy lại ở mỗi lần nghe." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#344054;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="65" y="1119" width="1566" height="160" as="geometry" />
-    </mxCell>
-    <mxCell id="legend" value="Nét đứt/mũi tên mở: «include» hoặc «extend» · Tam giác rỗng: chuyên biệt → khái quát · Phạm vi hiện hành; A/E xem đặc tả đi kèm." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=18;fontColor=#667085;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="65" y="1304" width="1566" height="35" as="geometry" />
     </mxCell>
   </root>
 </mxGraphModel>

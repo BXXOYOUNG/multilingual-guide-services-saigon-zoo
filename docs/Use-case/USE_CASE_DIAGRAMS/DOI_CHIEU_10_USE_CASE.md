@@ -4,7 +4,7 @@ Ngày 09/11/2026 — code fb1b0b8. Giữ 10 mã UC gốc; mô tả phần đang 
 
 ## UC-01 — Thiết lập ngôn ngữ thuyết minh
 
-[PNG](../USE_CASE_DIAGRAMS_IMG/UC_01_USE_CASE_CHI_TIET.drawio.png) · [SVG](UC_01_USE_CASE_CHI_TIET.svg) · [XML](UC_01_USE_CASE_CHI_TIET.xml)
+[PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_01.drawio.png) · [XML](UC_01_USE_CASE_CHI_TIET.xml)
 
 **Luồng chính:** Mở ứng dụng → kiểm tra lựa chọn đã lưu → chọn và lưu nếu chưa có → áp dụng ngôn ngữ.
 
@@ -77,7 +77,7 @@ Không đọc/lưu được lựa chọn: báo lỗi hoặc mở chọn lại; k
 
 ## UC-02 — Xem bản đồ và các điểm thuyết minh
 
-[PNG](../USE_CASE_DIAGRAMS_IMG/UC_02_USE_CASE_CHI_TIET.drawio.png) · [SVG](UC_02_USE_CASE_CHI_TIET.svg) · [XML](UC_02_USE_CASE_CHI_TIET.xml)
+[PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_02.drawio.png) · [XML](UC_02_USE_CASE_CHI_TIET.xml)
 
 **Luồng chính:** Mở bản đồ → lấy dữ liệu POI → hiển thị POI → lấy vị trí và làm nổi bật điểm gần nhất khi có GPS.
 
@@ -151,7 +151,7 @@ POI chỉ hiển thị khi active và có bản đúng ngôn ngữ. Cache tách 
 
 ## UC-03 — Nhận thuyết minh tự động theo vị trí
 
-[PNG](../USE_CASE_DIAGRAMS_IMG/UC_03_USE_CASE_CHI_TIET.drawio.png) · [SVG](UC_03_USE_CASE_CHI_TIET.svg) · [XML](UC_03_USE_CASE_CHI_TIET.xml)
+[PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_03.drawio.png) · [XML](UC_03_USE_CASE_CHI_TIET.xml)
 
 **Luồng chính:** Bật tự phát → nhận vị trí → xét vùng tròn → chọn bản thu đúng ngôn ngữ → phát nếu trình duyệt cho phép.
 
@@ -234,7 +234,7 @@ Không có TTS fallback cho khách, không đọc playback_history để đặt 
 
 ## UC-04 — Kích hoạt thuyết minh bằng QR Code
 
-[PNG](../USE_CASE_DIAGRAMS_IMG/UC_04_USE_CASE_CHI_TIET.drawio.png) · [SVG](UC_04_USE_CASE_CHI_TIET.svg) · [XML](UC_04_USE_CASE_CHI_TIET.xml)
+[PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_04.drawio.png) · [XML](UC_04_USE_CASE_CHI_TIET.xml)
 
 **Luồng chính:** Quét hoặc nhập TCV-POI:ObjectId → kiểm tra định dạng → tìm bản thu đúng ngôn ngữ → phát.
 
@@ -310,7 +310,7 @@ Không cần GPS. Camera cần secure context và quyền; nhập mã thủ côn
 
 ## UC-05 — Tải gói audio thuyết minh offline
 
-[PNG](../USE_CASE_DIAGRAMS_IMG/UC_05_USE_CASE_CHI_TIET.drawio.png) · [SVG](UC_05_USE_CASE_CHI_TIET.svg) · [XML](UC_05_USE_CASE_CHI_TIET.xml)
+[PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_05.drawio.png) · [XML](UC_05_USE_CASE_CHI_TIET.xml)
 
 **Luồng chính:** Chọn gói → lấy manifest → tải/kiểm tra từng bản thu → lưu IndexedDB → báo hoàn tất.
 
@@ -391,7 +391,7 @@ Một gói/một ngôn ngữ, không phải ZIP. Chỉ kiểm tra checksum khi c
 
 ## UC-06 — Khám phá và nghe thuyết minh offline
 
-[PNG](../USE_CASE_DIAGRAMS_IMG/UC_06_USE_CASE_CHI_TIET.drawio.png) · [SVG](UC_06_USE_CASE_CHI_TIET.svg) · [XML](UC_06_USE_CASE_CHI_TIET.xml)
+[PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_06.drawio.png) · [XML](UC_06_USE_CASE_CHI_TIET.xml)
 
 **Luồng chính:** Xem danh sách → chọn đối tượng → tìm audio cục bộ → hiển thị thông tin → nghe không cần Internet.
 
@@ -463,7 +463,7 @@ Chưa có bản thu phù hợp hoặc dữ liệu cục bộ lỗi: báo chưa c
 
 ## UC-07 — Đăng nhập quản trị
 
-[PNG](../USE_CASE_DIAGRAMS_IMG/UC_07_USE_CASE_CHI_TIET.drawio.png) · [SVG](UC_07_USE_CASE_CHI_TIET.svg) · [XML](UC_07_USE_CASE_CHI_TIET.xml)
+[PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_07.drawio.png) · [XML](UC_07_USE_CASE_CHI_TIET.xml)
 
 **Luồng chính:** Kiểm tra phiên → nếu cần, nhập thông tin và xác thực → tạo phiên → vào khu vực quản trị.
 
@@ -541,7 +541,7 @@ Cookie HTTP-only; session Redis 8 giờ; backend kiểm tra role/permission cho 
 
 ## UC-08 — Quản lý POI
 
-[PNG](../USE_CASE_DIAGRAMS_IMG/UC_08_USE_CASE_CHI_TIET.drawio.png) · [SVG](UC_08_USE_CASE_CHI_TIET.svg) · [XML](UC_08_USE_CASE_CHI_TIET.xml)
+[PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_08.drawio.png) · [XML](UC_08_USE_CASE_CHI_TIET.xml)
 
 **Luồng chính:** Xem danh sách → thêm/sửa/ẩn → lưu POI → lưu ảnh và vùng bằng request riêng khi cần.
 
@@ -626,7 +626,7 @@ Tạo POI kèm bản ngôn ngữ đầu tiên, mặc định ẩn.
 
 ## UC-09 — Quản lý nội dung thuyết minh và bản dịch
 
-[PNG](../USE_CASE_DIAGRAMS_IMG/UC_09_USE_CASE_CHI_TIET.drawio.png) · [SVG](UC_09_USE_CASE_CHI_TIET.svg) · [XML](UC_09_USE_CASE_CHI_TIET.xml)
+[PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_09.drawio.png) · [XML](UC_09_USE_CASE_CHI_TIET.xml)
 
 **Luồng chính:** Chọn POI/ngôn ngữ → lưu thủ công hoặc Chrome preview/đối chiếu/xác nhận → admin yêu cầu TTS từng ngôn ngữ → nghe thử → phát hành gói mới khi cần.
 
@@ -730,7 +730,7 @@ TTS lỗi: báo Failed và admin chủ động yêu cầu lại.
 
 ## UC-10 — Xem dữ liệu phân tích
 
-[PNG](../USE_CASE_DIAGRAMS_IMG/UC_10_USE_CASE_CHI_TIET.drawio.png) · [SVG](UC_10_USE_CASE_CHI_TIET.svg) · [XML](UC_10_USE_CASE_CHI_TIET.xml)
+[PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_10.drawio.png) · [XML](UC_10_USE_CASE_CHI_TIET.xml)
 
 **Luồng chính:** Mở dashboard → kiểm tra quyền → tổng hợp từ sự kiện đã nhận → xem thiết bị, phiên, audio, ngôn ngữ và điểm nổi bật.
 

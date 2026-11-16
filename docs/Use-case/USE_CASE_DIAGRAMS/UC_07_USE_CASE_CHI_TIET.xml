@@ -2,12 +2,6 @@
   <root>
     <mxCell id="0" />
     <mxCell id="1" parent="0" />
-    <mxCell id="title" value="UC-07 — USE CASE DIAGRAM CHI TIẾT" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=30;fontColor=#182230;fontStyle=1;" vertex="1" parent="1">
-      <mxGeometry x="60" y="25" width="2214" height="45" as="geometry" />
-    </mxCell>
-    <mxCell id="subtitle" value="Hiện hành 09/11/2026 · fb1b0b8: Đăng nhập quản trị" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#475467;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="60" y="80" width="2214" height="35" as="geometry" />
-    </mxCell>
     <mxCell id="boundary" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#fcfdff;strokeColor=#344054;strokeWidth=2;" vertex="1" parent="1">
       <mxGeometry x="317.25" y="170" width="1950.875" height="543.75" as="geometry" />
     </mxCell>
@@ -124,12 +118,6 @@
     </mxCell>
     <mxCell id="create" value="Tạo phiên đăng nhập" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#f4f8fc;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="1904.125" y="498.5" width="324.0" height="99.0" as="geometry" />
-    </mxCell>
-    <mxCell id="notes" value="LUỒNG CHÍNH: Kiểm tra phiên → nếu cần, nhập thông tin và xác thực → tạo phiên → vào khu vực quản trị.&#10;A1 — Biến thể “Sử dụng phiên hợp lệ” truy cập khu vực quản&#10;E1 — Sai tài khoản/mật khẩu, phiên hết hạn hoặc tài khoản không hoạt&#10;E2 — Backend/Redis lỗi hoặc rate limit: báo lỗi và cho thử lại sau&#10;GHI CHÚ: Cookie HTTP-only; session Redis 8 giờ; backend kiểm tra role/permission cho từng request. Hết phiên hoặc không đủ quyền thì không mở chức năng quản trị; chưa có UI quản lý tài khoản/role." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#344054;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="65" y="749" width="2204" height="160" as="geometry" />
-    </mxCell>
-    <mxCell id="legend" value="Nét đứt/mũi tên mở: «include» hoặc «extend» · Tam giác rỗng: chuyên biệt → khái quát · Phạm vi hiện hành; A/E xem đặc tả đi kèm." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=18;fontColor=#667085;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="65" y="934" width="2204" height="35" as="geometry" />
     </mxCell>
   </root>
 </mxGraphModel>

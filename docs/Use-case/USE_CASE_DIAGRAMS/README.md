@@ -4,18 +4,18 @@
 
 ## 1. Mã và ảnh hiện hành
 
-| UC | Tên | PNG có mã draw.io | SVG | XML chỉnh sửa |
-|---|---|---|---|---|
-| UC-01 | Thiết lập ngôn ngữ thuyết minh | [PNG](../USE_CASE_DIAGRAMS_IMG/UC_01_USE_CASE_CHI_TIET.drawio.png) | [SVG](UC_01_USE_CASE_CHI_TIET.svg) | [XML](UC_01_USE_CASE_CHI_TIET.xml) |
-| UC-02 | Xem bản đồ và các điểm thuyết minh | [PNG](../USE_CASE_DIAGRAMS_IMG/UC_02_USE_CASE_CHI_TIET.drawio.png) | [SVG](UC_02_USE_CASE_CHI_TIET.svg) | [XML](UC_02_USE_CASE_CHI_TIET.xml) |
-| UC-03 | Nhận thuyết minh tự động theo vị trí | [PNG](../USE_CASE_DIAGRAMS_IMG/UC_03_USE_CASE_CHI_TIET.drawio.png) | [SVG](UC_03_USE_CASE_CHI_TIET.svg) | [XML](UC_03_USE_CASE_CHI_TIET.xml) |
-| UC-04 | Kích hoạt thuyết minh bằng QR Code | [PNG](../USE_CASE_DIAGRAMS_IMG/UC_04_USE_CASE_CHI_TIET.drawio.png) | [SVG](UC_04_USE_CASE_CHI_TIET.svg) | [XML](UC_04_USE_CASE_CHI_TIET.xml) |
-| UC-05 | Tải gói audio thuyết minh offline | [PNG](../USE_CASE_DIAGRAMS_IMG/UC_05_USE_CASE_CHI_TIET.drawio.png) | [SVG](UC_05_USE_CASE_CHI_TIET.svg) | [XML](UC_05_USE_CASE_CHI_TIET.xml) |
-| UC-06 | Khám phá và nghe thuyết minh offline | [PNG](../USE_CASE_DIAGRAMS_IMG/UC_06_USE_CASE_CHI_TIET.drawio.png) | [SVG](UC_06_USE_CASE_CHI_TIET.svg) | [XML](UC_06_USE_CASE_CHI_TIET.xml) |
-| UC-07 | Đăng nhập quản trị | [PNG](../USE_CASE_DIAGRAMS_IMG/UC_07_USE_CASE_CHI_TIET.drawio.png) | [SVG](UC_07_USE_CASE_CHI_TIET.svg) | [XML](UC_07_USE_CASE_CHI_TIET.xml) |
-| UC-08 | Quản lý POI | [PNG](../USE_CASE_DIAGRAMS_IMG/UC_08_USE_CASE_CHI_TIET.drawio.png) | [SVG](UC_08_USE_CASE_CHI_TIET.svg) | [XML](UC_08_USE_CASE_CHI_TIET.xml) |
-| UC-09 | Quản lý nội dung thuyết minh và bản dịch | [PNG](../USE_CASE_DIAGRAMS_IMG/UC_09_USE_CASE_CHI_TIET.drawio.png) | [SVG](UC_09_USE_CASE_CHI_TIET.svg) | [XML](UC_09_USE_CASE_CHI_TIET.xml) |
-| UC-10 | Xem dữ liệu phân tích | [PNG](../USE_CASE_DIAGRAMS_IMG/UC_10_USE_CASE_CHI_TIET.drawio.png) | [SVG](UC_10_USE_CASE_CHI_TIET.svg) | [XML](UC_10_USE_CASE_CHI_TIET.xml) |
+| UC | Tên | PNG có mã draw.io | XML chỉnh sửa |
+|---|---|---|---|
+| UC-01 | Thiết lập ngôn ngữ thuyết minh | [PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_01.drawio.png) | [XML](UC_01_USE_CASE_CHI_TIET.xml) |
+| UC-02 | Xem bản đồ và các điểm thuyết minh | [PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_02.drawio.png) | [XML](UC_02_USE_CASE_CHI_TIET.xml) |
+| UC-03 | Nhận thuyết minh tự động theo vị trí | [PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_03.drawio.png) | [XML](UC_03_USE_CASE_CHI_TIET.xml) |
+| UC-04 | Kích hoạt thuyết minh bằng QR Code | [PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_04.drawio.png) | [XML](UC_04_USE_CASE_CHI_TIET.xml) |
+| UC-05 | Tải gói audio thuyết minh offline | [PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_05.drawio.png) | [XML](UC_05_USE_CASE_CHI_TIET.xml) |
+| UC-06 | Khám phá và nghe thuyết minh offline | [PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_06.drawio.png) | [XML](UC_06_USE_CASE_CHI_TIET.xml) |
+| UC-07 | Đăng nhập quản trị | [PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_07.drawio.png) | [XML](UC_07_USE_CASE_CHI_TIET.xml) |
+| UC-08 | Quản lý POI | [PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_08.drawio.png) | [XML](UC_08_USE_CASE_CHI_TIET.xml) |
+| UC-09 | Quản lý nội dung thuyết minh và bản dịch | [PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_09.drawio.png) | [XML](UC_09_USE_CASE_CHI_TIET.xml) |
+| UC-10 | Xem dữ liệu phân tích | [PNG](../USE_CASE_DIAGRAMS_IMG/USE_CASE_DIAGRAM_10.drawio.png) | [XML](UC_10_USE_CASE_CHI_TIET.xml) |
 
 ## 2. Cách đọc
 
@@ -33,6 +33,6 @@
 
 ## 4. Dùng trong báo cáo
 
-Mở XML bằng draw.io hoặc dán toàn bộ `<mxGraphModel>` vào **Extras → Edit Diagram**. PNG trong thư mục `_IMG` đã được xuất lại và nhúng cùng XML hiện hành; có thể mở bằng draw.io để chỉnh. SVG nằm cạnh XML để chèn báo cáo không mất nét. Sau mọi chỉnh sửa nguồn, xuất lại cả ảnh để tránh lệch phiên bản.
+Mở XML bằng draw.io hoặc dán toàn bộ `<mxGraphModel>` vào **Extras → Edit Diagram**. Bộ PNG trong thư mục `_IMG` dùng tên `USE_CASE_DIAGRAM_01.drawio.png` đến `USE_CASE_DIAGRAM_10.drawio.png`. Đã bỏ tiêu đề, dòng phiên bản, đặc tả và chú giải ngoài khung trong XML; các đối tượng, actor và quan hệ UML được giữ nguyên. SVG đã được loại bỏ. Sau mọi chỉnh sửa nguồn, xuất lại PNG bằng draw.io để tránh lệch phiên bản.
 
 Đọc cùng [kiến trúc](../../CURRENT_ARCHITECTURE.md), [đối chiếu yêu cầu](../../REQUIREMENTS_TRACEABILITY.md) và [luồng Chrome](../../ADMIN_AUTO_TRANSLATION.md).

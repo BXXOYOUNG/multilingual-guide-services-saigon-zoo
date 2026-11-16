@@ -2,12 +2,6 @@
   <root>
     <mxCell id="0" />
     <mxCell id="1" parent="0" />
-    <mxCell id="title" value="UC-09 — USE CASE DIAGRAM CHI TIẾT" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=30;fontColor=#182230;fontStyle=1;" vertex="1" parent="1">
-      <mxGeometry x="60" y="25" width="2274" height="45" as="geometry" />
-    </mxCell>
-    <mxCell id="subtitle" value="Hiện hành 09/11/2026 · fb1b0b8: Quản lý nội dung thuyết minh và bản dịch" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#475467;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="60" y="80" width="2274" height="35" as="geometry" />
-    </mxCell>
     <mxCell id="boundary" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#fcfdff;strokeColor=#344054;strokeWidth=2;" vertex="1" parent="1">
       <mxGeometry x="317.24850000000004" y="170" width="2010.8754999999996" height="1316.5125" as="geometry" />
     </mxCell>
@@ -216,12 +210,6 @@
     </mxCell>
     <mxCell id="package" value="Phát hành snapshot audio&#10;mới" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#fff5e7;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="1270.795" y="1102.5035" width="384.66" height="103.51799999999999" as="geometry" />
-    </mxCell>
-    <mxCell id="notes" value="LUỒNG CHÍNH: Chọn POI/ngôn ngữ → lưu thủ công hoặc Chrome preview/đối chiếu/xác nhận → admin yêu cầu TTS từng ngôn ngữ → nghe thử → phát hành gói mới khi cần.&#10;A1 — Nhập/sửa thủ công, có thể chỉ lưu văn bản&#10;A2 — Theo dõi hoặc tạo lại audio, nghe thử khi Completed&#10;A3 — Chrome desktop: lưu nguồn → chuẩn bị preview → bấm dịch →&#10;E1 — Browser/cặp ngôn ngữ không hỗ trợ hoặc tải mô hình lỗi: nhập&#10;E2 — Preview hết hạn hoặc nguồn/đích đổi: từ chối 409, chuẩn bị mới&#10;E3 — TTS lỗi: báo Failed và admin chủ động yêu cầu lại&#10;GHI CHÚ: 6 ngôn ngữ tổng cộng, tối đa 5 đích. Không Cloud API key. Redis giữ nguồn/revision 30 phút; bản dịch mới ở bộ nhớ React trước commit. Lưu lời đổi vô hiệu audio; POI active cho đọc ngay sau lưu. TTS không tự chạy do&#10;bấm dịch. Gói cũ không tự cập nhật." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#344054;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="65" y="1522" width="2264" height="264" as="geometry" />
-    </mxCell>
-    <mxCell id="legend" value="Nét đứt/mũi tên mở: «include» hoặc «extend» · Tam giác rỗng: chuyên biệt → khái quát · Phạm vi hiện hành; A/E xem đặc tả đi kèm." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=18;fontColor=#667085;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="65" y="1811" width="2264" height="35" as="geometry" />
     </mxCell>
   </root>
 </mxGraphModel>

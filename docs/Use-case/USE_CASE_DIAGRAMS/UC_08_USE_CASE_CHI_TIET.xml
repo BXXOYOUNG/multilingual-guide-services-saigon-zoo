@@ -2,12 +2,6 @@
   <root>
     <mxCell id="0" />
     <mxCell id="1" parent="0" />
-    <mxCell id="title" value="UC-08 — USE CASE DIAGRAM CHI TIẾT" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=30;fontColor=#182230;fontStyle=1;" vertex="1" parent="1">
-      <mxGeometry x="60" y="25" width="2041" height="45" as="geometry" />
-    </mxCell>
-    <mxCell id="subtitle" value="Hiện hành 09/11/2026 · fb1b0b8: Quản lý POI" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#475467;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="60" y="80" width="2041" height="35" as="geometry" />
-    </mxCell>
     <mxCell id="boundary" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#fcfdff;strokeColor=#344054;strokeWidth=2;" vertex="1" parent="1">
       <mxGeometry x="317.25" y="170" width="1777.9099999999999" height="1092.75" as="geometry" />
     </mxCell>
@@ -214,12 +208,6 @@
     </mxCell>
     <mxCell id="fence" value="Cấu hình geofence tròn" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#fff5e7;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="1112.225" y="625.0" width="324.0" height="99.0" as="geometry" />
-    </mxCell>
-    <mxCell id="notes" value="LUỒNG CHÍNH: Xem danh sách → thêm/sửa/ẩn → lưu POI → lưu ảnh và vùng bằng request riêng khi cần.&#10;A1 — Tạo POI kèm bản ngôn ngữ đầu tiên, mặc định ẩn&#10;A2 — Đổi ảnh/tọa độ/bán kính/trạng thái; tọa độ POI cập nhật tâm vùng&#10;A3 — Ẩn POI, giữ dữ liệu/audio/gói cũ; không xóa cứng&#10;GHI CHÚ: Ảnh upload JPEG/PNG/WebP ≤5 MB, ≤16 MP. Bán kính 5–500 m. Không vẽ polygon. Các bước form không chung một transaction. Thêm POI không tự tạo đủ bản dịch/audio; tiếp tục UC-09." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#344054;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="65" y="1298" width="2031" height="160" as="geometry" />
-    </mxCell>
-    <mxCell id="legend" value="Nét đứt/mũi tên mở: «include» hoặc «extend» · Tam giác rỗng: chuyên biệt → khái quát · Phạm vi hiện hành; A/E xem đặc tả đi kèm." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=18;fontColor=#667085;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="65" y="1483" width="2031" height="35" as="geometry" />
     </mxCell>
   </root>
 </mxGraphModel>

@@ -2,12 +2,6 @@
   <root>
     <mxCell id="0" />
     <mxCell id="1" parent="0" />
-    <mxCell id="title" value="UC-02 — USE CASE DIAGRAM CHI TIẾT" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=30;fontColor=#182230;fontStyle=1;" vertex="1" parent="1">
-      <mxGeometry x="60" y="25" width="2198" height="45" as="geometry" />
-    </mxCell>
-    <mxCell id="subtitle" value="Hiện hành 09/11/2026 · fb1b0b8: Xem bản đồ và các điểm thuyết minh" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#475467;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="60" y="80" width="2198" height="35" as="geometry" />
-    </mxCell>
     <mxCell id="boundary" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#fcfdff;strokeColor=#344054;strokeWidth=2;" vertex="1" parent="1">
       <mxGeometry x="317.2539999999999" y="170" width="1935.0170000000003" height="624.7625" as="geometry" />
     </mxCell>
@@ -101,12 +95,6 @@
     </mxCell>
     <mxCell id="locate" value="Hiển thị vị trí và POI gần&#10;nhất" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#fff5e7;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="1125.4575" y="627.5035" width="420.66" height="103.51799999999999" as="geometry" />
-    </mxCell>
-    <mxCell id="notes" value="LUỒNG CHÍNH: Mở bản đồ → lấy dữ liệu POI → hiển thị POI → lấy vị trí và làm nổi bật điểm gần nhất khi có GPS.&#10;A1 — Không có GPS: vẫn hiển thị POI, không thực hiện phần mở&#10;A2 — Mở rộng việc lấy dữ liệu bằng dữ liệu POI đã lưu&#10;E1 — API lỗi và không có cache đúng ngôn ngữ: hiển thị lỗi&#10;GHI CHÚ: POI chỉ hiển thị khi active và có bản đúng ngôn ngữ. Cache tách ngôn ngữ; nền OSM online không được bảo đảm ngoại tuyến. GPS không bắt buộc để xem POI." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#344054;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="65" y="830" width="2188" height="160" as="geometry" />
-    </mxCell>
-    <mxCell id="legend" value="Nét đứt/mũi tên mở: «include» hoặc «extend» · Tam giác rỗng: chuyên biệt → khái quát · Phạm vi hiện hành; A/E xem đặc tả đi kèm." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=18;fontColor=#667085;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="65" y="1015" width="2188" height="35" as="geometry" />
     </mxCell>
   </root>
 </mxGraphModel>
