@@ -14,6 +14,20 @@ export async function translationAvailability(source, target) {
   return globalThis.Translator.availability(pair(source, target));
 }
 
+// Start every model request in the original click, before awaiting the preview
+// request. A failed language must not discard successful translations.
+export function startBrowserTranslations({ targets, onProgress, ...options }) {
+  return Promise.all(targets.map(async (target) => {
+    try {
+      const value = await startBrowserTranslation({ ...options, target,
+        onProgress: (progress) => onProgress?.(target, progress) });
+      return { language_code: target, value };
+    } catch (reason) {
+      return { language_code: target, error: translationErrorKey(reason) };
+    }
+  }));
+}
+
 function contentError() {
   const error = new Error('Translation output exceeds content limits.');
   error.name = 'TranslationContentError';
