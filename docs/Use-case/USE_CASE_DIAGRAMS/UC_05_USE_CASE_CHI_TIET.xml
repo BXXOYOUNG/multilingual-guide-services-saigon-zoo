@@ -2,12 +2,6 @@
   <root>
     <mxCell id="0" />
     <mxCell id="1" parent="0" />
-    <mxCell id="title" value="UC-05 — USE CASE DIAGRAM CHI TIẾT" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=30;fontColor=#182230;fontStyle=1;" vertex="1" parent="1">
-      <mxGeometry x="60" y="25" width="2106" height="45" as="geometry" />
-    </mxCell>
-    <mxCell id="subtitle" value="Hiện hành 09/11/2026 · fb1b0b8: Tải gói audio thuyết minh offline" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#475467;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="60" y="80" width="2106" height="35" as="geometry" />
-    </mxCell>
     <mxCell id="boundary" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#fcfdff;strokeColor=#344054;strokeWidth=2;" vertex="1" parent="1">
       <mxGeometry x="317.2505000000001" y="170" width="1842.9325" height="918.5250000000001" as="geometry" />
     </mxCell>
@@ -149,12 +143,6 @@
     </mxCell>
     <mxCell id="cancel" value="Hủy tải và khôi phục dữ&#10;liệu trước tải" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#fff5e7;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="1738.817" y="712.5035" width="381.366" height="103.51799999999999" as="geometry" />
-    </mxCell>
-    <mxCell id="notes" value="LUỒNG CHÍNH: Chọn gói → lấy manifest → tải/kiểm tra từng bản thu → lưu IndexedDB → báo hoàn tất.&#10;A1 — Gói đã tải vẫn có thể được tải lại; client giữ dữ&#10;A2 — Manifest chưa xác minh toàn bộ checksum cần người dùng xác nhận&#10;E1 — Thiếu dung lượng, checksum/size sai, lỗi mạng hoặc hủy: không ghi nhận&#10;GHI CHÚ: Một gói/một ngôn ngữ, không phải ZIP. Chỉ kiểm tra checksum khi có SHA-256 hợp lệ; không cam kết đủ dung lượng nếu browser không cung cấp estimate. Mô hình Chrome dịch không thuộc gói audio." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#344054;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="65" y="1124" width="2096" height="160" as="geometry" />
-    </mxCell>
-    <mxCell id="legend" value="Nét đứt/mũi tên mở: «include» hoặc «extend» · Tam giác rỗng: chuyên biệt → khái quát · Phạm vi hiện hành; A/E xem đặc tả đi kèm." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=18;fontColor=#667085;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="65" y="1309" width="2096" height="35" as="geometry" />
     </mxCell>
   </root>
 </mxGraphModel>

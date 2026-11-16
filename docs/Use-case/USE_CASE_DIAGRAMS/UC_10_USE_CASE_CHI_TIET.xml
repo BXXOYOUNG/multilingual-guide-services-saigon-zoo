@@ -2,12 +2,6 @@
   <root>
     <mxCell id="0" />
     <mxCell id="1" parent="0" />
-    <mxCell id="title" value="UC-10 — USE CASE DIAGRAM CHI TIẾT" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=30;fontColor=#182230;fontStyle=1;" vertex="1" parent="1">
-      <mxGeometry x="60" y="25" width="1508" height="45" as="geometry" />
-    </mxCell>
-    <mxCell id="subtitle" value="Hiện hành 09/11/2026 · fb1b0b8: Xem dữ liệu phân tích" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#475467;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="60" y="80" width="1508" height="35" as="geometry" />
-    </mxCell>
     <mxCell id="boundary" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#fcfdff;strokeColor=#344054;strokeWidth=2;" vertex="1" parent="1">
       <mxGeometry x="317.25" y="170" width="1245.3274999999999" height="929.0125" as="geometry" />
     </mxCell>
@@ -116,12 +110,6 @@
     </mxCell>
     <mxCell id="refresh" value="Làm mới số liệu dashboard" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#fff5e7;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="1144.609" y="944.7625" width="341.532" height="99.0" as="geometry" />
-    </mxCell>
-    <mxCell id="notes" value="LUỒNG CHÍNH: Mở dashboard → kiểm tra quyền → tổng hợp từ sự kiện đã nhận → xem thiết bị, phiên, audio, ngôn ngữ và điểm nổi bật.&#10;A1 — Làm mới theo nút hoặc tự động mỗi 60 giây&#10;E1 — Hết phiên/thiếu quyền/API lỗi: báo lỗi, không giả số liệu&#10;E2 — Chưa có sự kiện: hiển thị trạng thái trống/0&#10;GHI CHÚ: Thiết bị hoạt động: có sự kiện 5 phút gần nhất; visits là phiên bắt đầu, không phải người thật. Mốc ngày/giờ UTC; ngôn ngữ theo sự kiện.&#10;Chưa có heatmap, lịch sử tuyến hoặc queue đồng bộ analytics offline." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#344054;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="65" y="1135" width="1498" height="186" as="geometry" />
-    </mxCell>
-    <mxCell id="legend" value="Nét đứt/mũi tên mở: «include» hoặc «extend» · Tam giác rỗng: chuyên biệt → khái quát · Phạm vi hiện hành; A/E xem đặc tả đi kèm." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=18;fontColor=#667085;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="65" y="1346" width="1498" height="35" as="geometry" />
     </mxCell>
   </root>
 </mxGraphModel>

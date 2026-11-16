@@ -2,12 +2,6 @@
   <root>
     <mxCell id="0" />
     <mxCell id="1" parent="0" />
-    <mxCell id="title" value="UC-03 — USE CASE DIAGRAM CHI TIẾT" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=30;fontColor=#182230;fontStyle=1;" vertex="1" parent="1">
-      <mxGeometry x="60" y="25" width="1632" height="45" as="geometry" />
-    </mxCell>
-    <mxCell id="subtitle" value="Hiện hành 09/11/2026 · fb1b0b8: Nhận thuyết minh tự động theo vị trí" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#475467;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="60" y="80" width="1632" height="35" as="geometry" />
-    </mxCell>
     <mxCell id="boundary" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#fcfdff;strokeColor=#344054;strokeWidth=2;" vertex="1" parent="1">
       <mxGeometry x="317.2555" y="170" width="1368.938" height="1381.025" as="geometry" />
     </mxCell>
@@ -167,12 +161,6 @@
     </mxCell>
     <mxCell id="record" value="Gửi sự kiện nghe và vùng&#10;theo kết nối" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#fff5e7;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="1231.775" y="1407.506" width="398.7" height="103.51799999999999" as="geometry" />
-    </mxCell>
-    <mxCell id="notes" value="LUỒNG CHÍNH: Bật tự phát → nhận vị trí → xét vùng tròn → chọn bản thu đúng ngôn ngữ → phát nếu trình duyệt cho phép.&#10;A1 — Mô phỏng tại POI dùng audio đã chuẩn bị, không đòi hỏi&#10;A2 — Rời vùng/đổi POI dừng audio tự phát&#10;E1 — Thiếu audio, GPS/quyền/API lỗi hoặc autoplay bị chặn: thông báo và cho&#10;GHI CHÚ: Không có TTS fallback cho khách, không đọc playback_history để đặt cooldown. Nhánh GPS thật resolve audio qua API online; nghe thủ công/mô phỏng có thể&#10;dùng bản đã tải. Autoplay và tab nền phụ thuộc browser." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#344054;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="65" y="1587" width="1622" height="186" as="geometry" />
-    </mxCell>
-    <mxCell id="legend" value="Nét đứt/mũi tên mở: «include» hoặc «extend» · Tam giác rỗng: chuyên biệt → khái quát · Phạm vi hiện hành; A/E xem đặc tả đi kèm." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=18;fontColor=#667085;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="65" y="1798" width="1622" height="35" as="geometry" />
     </mxCell>
   </root>
 </mxGraphModel>

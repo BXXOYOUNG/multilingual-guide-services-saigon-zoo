@@ -14,4 +14,4 @@ Logic Chrome đối chiếu ngày **09/11/2026**, code `fb1b0b8`. DFD được c
 
 Bộ hình này mô tả **implementation hiện hành**, gồm luồng admin dịch bằng Chrome và xác nhận lưu. README ở gốc vẫn chứa yêu cầu mục tiêu; đọc [đối chiếu yêu cầu](../REQUIREMENTS_TRACEABILITY.md) để phân biệt phần chưa triển khai.
 
-PNG trong `DFD_IMG` và `USE_CASE_DIAGRAMS_IMG` đã nhúng XML tương ứng và được xuất lại trong lần rà soát này. SVG đặt cạnh XML. Mở mã hoặc PNG bằng draw.io để sửa, rồi xuất lại ảnh sau khi thay đổi nguồn.
+Với use case, mở XML trong `USE_CASE_DIAGRAMS` bằng draw.io để chỉnh sửa; bộ ảnh PNG nằm trong `USE_CASE_DIAGRAMS_IMG`, dùng tên `USE_CASE_DIAGRAM_01.drawio.png` đến `USE_CASE_DIAGRAM_10.drawio.png`. Đã bỏ các phần tiêu đề và thuyết minh ngoài khung trong XML, đồng thời loại bỏ SVG của use case. Sau khi sửa XML, xuất lại PNG bằng draw.io để tránh lệch phiên bản.

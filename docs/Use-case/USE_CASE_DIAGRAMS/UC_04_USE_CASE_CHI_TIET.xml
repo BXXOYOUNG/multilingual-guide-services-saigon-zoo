@@ -2,12 +2,6 @@
   <root>
     <mxCell id="0" />
     <mxCell id="1" parent="0" />
-    <mxCell id="title" value="UC-04 — USE CASE DIAGRAM CHI TIẾT" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=30;fontColor=#182230;fontStyle=1;" vertex="1" parent="1">
-      <mxGeometry x="60" y="25" width="2112" height="45" as="geometry" />
-    </mxCell>
-    <mxCell id="subtitle" value="Hiện hành 09/11/2026 · fb1b0b8: Kích hoạt thuyết minh bằng QR Code" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#475467;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="60" y="80" width="2112" height="35" as="geometry" />
-    </mxCell>
     <mxCell id="boundary" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#fcfdff;strokeColor=#344054;strokeWidth=2;" vertex="1" parent="1">
       <mxGeometry x="317.2535" y="170" width="1849.6215" height="761.2625" as="geometry" />
     </mxCell>
@@ -113,12 +107,6 @@
     </mxCell>
     <mxCell id="camera" value="Quét mã bằng camera" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;ellipse;fillColor=#fff5e7;strokeColor=#315f91;strokeWidth=1.8;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="1802.875" y="319.99999999999994" width="324.0" height="99.0" as="geometry" />
-    </mxCell>
-    <mxCell id="notes" value="LUỒNG CHÍNH: Quét hoặc nhập TCV-POI:ObjectId → kiểm tra định dạng → tìm bản thu đúng ngôn ngữ → phát.&#10;A1 — Ưu tiên bản đã tải để nghe ngoại tuyến; nếu không có&#10;A2 — TCV-PACKAGE:ObjectId chuyển sang tải gói UC-05, không bị hiểu thành POI&#10;E1 — Mã sai/camera không có quyền/audio thiếu: thông báo; không tự gọi TTS&#10;GHI CHÚ: Không cần GPS. Camera cần secure context và quyền; nhập mã thủ công vẫn dùng được. Không tự chọn audio khác ngôn ngữ hoặc dịch máy cho khách." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=20;fontColor=#344054;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="65" y="967" width="2102" height="160" as="geometry" />
-    </mxCell>
-    <mxCell id="legend" value="Nét đứt/mũi tên mở: «include» hoặc «extend» · Tam giác rỗng: chuyên biệt → khái quát · Phạm vi hiện hành; A/E xem đặc tả đi kèm." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;align=left;verticalAlign=middle;fontSize=18;fontColor=#667085;fontStyle=0;" vertex="1" parent="1">
-      <mxGeometry x="65" y="1152" width="2102" height="35" as="geometry" />
     </mxCell>
   </root>
 </mxGraphModel>
