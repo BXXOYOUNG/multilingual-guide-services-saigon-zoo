@@ -123,6 +123,7 @@ const messages = {
     "map.autoNoAudio": "{name} \uc624\ub514\uc624\uac00 \uc5c6\uc2b5\ub2c8\ub2e4.",
     "map.simulateArrival": "\uc774 \uc9c0\uc810\uc73c\ub85c GPS \ub3c4\ucc29 \uc2dc\ubbac\ub808\uc774\uc158",
   },
+  es: siteMessages.en,
 };
 
 export function translate(language, key, values = {}) {
