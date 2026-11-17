@@ -841,6 +841,13 @@ body { background: #e9eee7; }
 .subpage-hero h1 { margin-top: 10px; color: #1c422e; font-family: 'Zoo Sans', sans-serif; font-size: clamp(2rem,4.5vw,3.4rem); font-weight: 500; letter-spacing: -.025em; }
 .subpage-hero p { max-width: 660px; margin: 10px 0 20px; color: #617368; font-size: .9rem; line-height: 1.65; }
 .subpage-hero .btn { border-radius: 999px; }
+.poi-distance { margin: 0 clamp(14px,4vw,48px) 24px; padding: clamp(18px,3vw,28px); border: 1px solid #e3e9df; border-radius: 20px; background: #fffefa; }
+.poi-distance h2 { color: #294735; font-size: 1.35rem; }
+.poi-distance > p { margin-top: 10px; line-height: 1.6; color: #566a5d; }
+.poi-distance-fields { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,240px),1fr)); gap: 16px; margin-top: 18px; }
+.poi-distance-fields label { display: grid; gap: 8px; min-width: 0; color: #294735; }
+.poi-distance-fields select { width: 100%; min-width: 0; padding: 12px; border: 1px solid #b8cabd; border-radius: 10px; background: #fff; color: #23372b; font: inherit; }
+.poi-distance .poi-distance-result { padding: 14px; border-radius: 10px; background: #eaf1e7; color: #294735; font-weight: 600; overflow-wrap: anywhere; }
 .itinerary-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 15px; padding: 0 clamp(18px,4vw,48px); }
 .itinerary-card { display: flex; flex-direction: column; padding: 21px; border: 1px solid #e3e9df; border-radius: 20px; background: #fffefa; box-shadow: 0 8px 24px rgba(27,57,40,.045); animation: soft-rise .55s both; }
 .itinerary-card-2 { animation-delay: .08s; }.itinerary-card-3 { animation-delay: .16s; }
