@@ -1,0 +1,496 @@
+<mxGraphModel dx="2000" dy="3830" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="3830" math="0" shadow="0" background="#ffffff">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    <mxCell id="title" value="SD-09 · Dịch hàng loạt và xác nhận tất cả" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=24;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="30" y="15" width="1940" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="frame_1" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=none;strokeColor=#667085;strokeWidth=1.4;" vertex="1" parent="1" fragment="loop">
+      <mxGeometry x="35" y="357" width="1930" height="230" as="geometry" />
+    </mxCell>
+    <mxCell id="frame_kind_1" value="loop" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#eef2f6;strokeColor=#667085;align=center;fontSize=17;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="35" y="357" width="85" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="frame_guard_1" value="[năm đích; khởi tạo trong cùng thao tác bấm]" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;align=left;fontSize=16;" vertex="1" parent="1">
+      <mxGeometry x="135" y="364" width="1815" height="38" as="geometry" />
+    </mxCell>
+    <mxCell id="frame_2" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=none;strokeColor=#667085;strokeWidth=1.4;" vertex="1" parent="1" fragment="alt">
+      <mxGeometry x="35" y="1019" width="1930" height="2691" as="geometry" />
+    </mxCell>
+    <mxCell id="frame_kind_2" value="alt" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#eef2f6;strokeColor=#667085;align=center;fontSize=17;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="35" y="1019" width="85" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="frame_guard_2" value="[nguồn / yêu cầu hợp lệ]" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;align=left;fontSize=16;" vertex="1" parent="1">
+      <mxGeometry x="135" y="1026" width="1815" height="38" as="geometry" />
+    </mxCell>
+    <mxCell id="frame_divider_2_1" value="" style="html=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=none;strokeColor=#98a2b3;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="35" y="3413" as="sourcePoint" />
+        <mxPoint x="1965" y="3413" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="branch_guard_2_1" value="[chuẩn bị preview bị từ chối]" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;align=left;fontSize=16;" vertex="1" parent="1">
+      <mxGeometry x="135" y="3423" width="1815" height="38" as="geometry" />
+    </mxCell>
+    <mxCell id="frame_3" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=none;strokeColor=#667085;strokeWidth=1.4;" vertex="1" parent="1" fragment="loop">
+      <mxGeometry x="49" y="1327" width="1902" height="340" as="geometry" />
+    </mxCell>
+    <mxCell id="frame_kind_3" value="loop" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#eef2f6;strokeColor=#667085;align=center;fontSize=17;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="49" y="1327" width="85" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="frame_guard_3" value="[mỗi đích; một cách xen kẽ hợp lệ với chuẩn bị preview]" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;align=left;fontSize=16;" vertex="1" parent="1">
+      <mxGeometry x="149" y="1334" width="1787" height="38" as="geometry" />
+    </mxCell>
+    <mxCell id="frame_4" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=none;strokeColor=#667085;strokeWidth=1.4;" vertex="1" parent="1" fragment="alt">
+      <mxGeometry x="49" y="2400" width="1902" height="979" as="geometry" />
+    </mxCell>
+    <mxCell id="frame_kind_4" value="alt" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#eef2f6;strokeColor=#667085;align=center;fontSize=17;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="49" y="2400" width="85" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="frame_guard_4" value="[token hợp lệ; nguồn và revision còn khớp]" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;align=left;fontSize=16;" vertex="1" parent="1">
+      <mxGeometry x="149" y="2407" width="1787" height="38" as="geometry" />
+    </mxCell>
+    <mxCell id="frame_divider_4_1" value="" style="html=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=none;strokeColor=#98a2b3;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="49" y="3138" as="sourcePoint" />
+        <mxPoint x="1951" y="3138" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="branch_guard_4_1" value="[hết hạn / xung đột / lỗi commit]" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;align=left;fontSize=16;" vertex="1" parent="1">
+      <mxGeometry x="149" y="3148" width="1787" height="38" as="geometry" />
+    </mxCell>
+    <mxCell id="frame_5" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=none;strokeColor=#667085;strokeWidth=1.4;" vertex="1" parent="1" fragment="critical">
+      <mxGeometry x="63" y="2464" width="1874" height="380" as="geometry" />
+    </mxCell>
+    <mxCell id="frame_kind_5" value="critical" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#eef2f6;strokeColor=#667085;align=center;fontSize=17;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="63" y="2464" width="85" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="frame_guard_5" value="[transaction MongoDB rs0 cho nhóm được chọn]" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;align=left;fontSize=16;" vertex="1" parent="1">
+      <mxGeometry x="163" y="2471" width="1759" height="38" as="geometry" />
+    </mxCell>
+    <mxCell id="participant_user" value="Quản trị viên" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;align=center;labelWidth=220;fontSize=17;strokeColor=#344054;strokeWidth=1.6;fillColor=#ffffff;" vertex="1" parent="1">
+      <mxGeometry x="140" y="100" width="60" height="90" as="geometry" />
+    </mxCell>
+    <mxCell id="lifeline_user" value="" style="shape=rectangle;fillColor=none;strokeColor=none;opacity=0;" vertex="1" parent="1" participant="user">
+      <mxGeometry x="169.5" y="225" width="1" height="3565" as="geometry" />
+    </mxCell>
+    <mxCell id="lifeline_visible_user" value="" style="html=0;startArrow=none;endArrow=none;dashed=1;dashPattern=6 5;strokeColor=#98a2b3;strokeWidth=1.2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="170" y="225" as="sourcePoint" />
+        <mxPoint x="170" y="3790" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="participant_ui" value="«boundary»&#10;AdminTranslationPanel" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#edf4ec;strokeColor=#344054;strokeWidth=1.5;fontSize=16;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="372" y="110" width="216" height="84" as="geometry" />
+    </mxCell>
+    <mxCell id="lifeline_ui" value="" style="shape=rectangle;fillColor=none;strokeColor=none;opacity=0;" vertex="1" parent="1" participant="ui">
+      <mxGeometry x="479.5" y="225" width="1" height="3565" as="geometry" />
+    </mxCell>
+    <mxCell id="lifeline_visible_ui" value="" style="html=0;startArrow=none;endArrow=none;dashed=1;dashPattern=6 5;strokeColor=#98a2b3;strokeWidth=1.2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="225" as="sourcePoint" />
+        <mxPoint x="480" y="3790" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="participant_chrome" value="«external»&#10;Chrome Translator" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#f1edfa;strokeColor=#344054;strokeWidth=1.5;fontSize=16;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="682" y="110" width="216" height="84" as="geometry" />
+    </mxCell>
+    <mxCell id="lifeline_chrome" value="" style="shape=rectangle;fillColor=none;strokeColor=none;opacity=0;" vertex="1" parent="1" participant="chrome">
+      <mxGeometry x="789.5" y="225" width="1" height="3565" as="geometry" />
+    </mxCell>
+    <mxCell id="lifeline_visible_chrome" value="" style="html=0;startArrow=none;endArrow=none;dashed=1;dashPattern=6 5;strokeColor=#98a2b3;strokeWidth=1.2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="790" y="225" as="sourcePoint" />
+        <mxPoint x="790" y="3790" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="participant_api" value="«control»&#10;Translation API" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#edf3fa;strokeColor=#344054;strokeWidth=1.5;fontSize=16;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="992" y="110" width="216" height="84" as="geometry" />
+    </mxCell>
+    <mxCell id="lifeline_api" value="" style="shape=rectangle;fillColor=none;strokeColor=none;opacity=0;" vertex="1" parent="1" participant="api">
+      <mxGeometry x="1099.5" y="225" width="1" height="3565" as="geometry" />
+    </mxCell>
+    <mxCell id="lifeline_visible_api" value="" style="html=0;startArrow=none;endArrow=none;dashed=1;dashPattern=6 5;strokeColor=#98a2b3;strokeWidth=1.2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1100" y="225" as="sourcePoint" />
+        <mxPoint x="1100" y="3790" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="participant_redis" value="«database»&#10;Redis" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#fff5e7;strokeColor=#344054;strokeWidth=1.5;fontSize=16;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="1302" y="110" width="216" height="84" as="geometry" />
+    </mxCell>
+    <mxCell id="lifeline_redis" value="" style="shape=rectangle;fillColor=none;strokeColor=none;opacity=0;" vertex="1" parent="1" participant="redis">
+      <mxGeometry x="1409.5" y="225" width="1" height="3565" as="geometry" />
+    </mxCell>
+    <mxCell id="lifeline_visible_redis" value="" style="html=0;startArrow=none;endArrow=none;dashed=1;dashPattern=6 5;strokeColor=#98a2b3;strokeWidth=1.2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1410" y="225" as="sourcePoint" />
+        <mxPoint x="1410" y="3790" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="participant_db" value="«database»&#10;MongoDB rs0" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#fff5e7;strokeColor=#344054;strokeWidth=1.5;fontSize=16;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="1612" y="110" width="216" height="84" as="geometry" />
+    </mxCell>
+    <mxCell id="lifeline_db" value="" style="shape=rectangle;fillColor=none;strokeColor=none;opacity=0;" vertex="1" parent="1" participant="db">
+      <mxGeometry x="1719.5" y="225" width="1" height="3565" as="geometry" />
+    </mxCell>
+    <mxCell id="lifeline_visible_db" value="" style="html=0;startArrow=none;endArrow=none;dashed=1;dashPattern=6 5;strokeColor=#98a2b3;strokeWidth=1.2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1720" y="225" as="sourcePoint" />
+        <mxPoint x="1720" y="3790" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="activation_ui_0" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#e6edf5;strokeColor=#667085;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="473" y="323" width="14" height="1426" as="geometry" />
+    </mxCell>
+    <mxCell id="activation_ui_1" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#e6edf5;strokeColor=#667085;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="473" y="1843" width="14" height="1249" as="geometry" />
+    </mxCell>
+    <mxCell id="activation_api_0" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#e6edf5;strokeColor=#667085;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="1093" y="650" width="14" height="643" as="geometry" />
+    </mxCell>
+    <mxCell id="activation_api_1" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#e6edf5;strokeColor=#667085;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="1093" y="2197" width="14" height="710" as="geometry" />
+    </mxCell>
+    <mxCell id="activation_redis_0" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#e6edf5;strokeColor=#667085;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="1403" y="835" width="14" height="26" as="geometry" />
+    </mxCell>
+    <mxCell id="activation_redis_1" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#e6edf5;strokeColor=#667085;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="1403" y="1143" width="14" height="75" as="geometry" />
+    </mxCell>
+    <mxCell id="activation_redis_2" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#e6edf5;strokeColor=#667085;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="1403" y="2291" width="14" height="75" as="geometry" />
+    </mxCell>
+    <mxCell id="activation_db_0" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#e6edf5;strokeColor=#667085;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="1713" y="910" width="14" height="75" as="geometry" />
+    </mxCell>
+    <mxCell id="activation_db_1" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#e6edf5;strokeColor=#667085;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="1713" y="2569" width="14" height="75" as="geometry" />
+    </mxCell>
+    <mxCell id="activation_db_2" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;rounded=0;fillColor=#e6edf5;strokeColor=#667085;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="1713" y="2719" width="14" height="75" as="geometry" />
+    </mxCell>
+    <mxCell id="message_1" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=block;endFill=1;dashed=0;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.02748948;exitPerimeter=0;entryX=0.5;entryY=0.02748948;entryPerimeter=0;" edge="1" parent="1" source="lifeline_user" target="lifeline_ui" messageType="call">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="170" y="323" as="sourcePoint" />
+        <mxPoint x="480" y="323" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_1" value="1. Nguồn đã lưu; bấm dịch năm ngôn ngữ" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_1">
+      <mxGeometry x="182" y="290" width="286" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_2" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=open;endFill=0;dashed=0;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.06647966;exitPerimeter=0;entryX=0.5;entryY=0.06647966;entryPerimeter=0;" edge="1" parent="1" source="lifeline_ui" target="lifeline_chrome" messageType="async">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="462" as="sourcePoint" />
+        <mxPoint x="790" y="462" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_2" value="2. Translator.create(source, target)" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_2">
+      <mxGeometry x="492" y="429" width="286" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_3" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=open;endFill=0;dashed=1;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.08751753;exitPerimeter=0;entryX=0.5;entryY=0.08751753;entryPerimeter=0;" edge="1" parent="1" source="lifeline_chrome" target="lifeline_ui" messageType="return">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="790" y="537" as="sourcePoint" />
+        <mxPoint x="480" y="537" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_3" value="3. Promise; tải mô hình nếu cần" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_3">
+      <mxGeometry x="492" y="504" width="286" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_4" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=block;endFill=1;dashed=0;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.11921459;exitPerimeter=0;entryX=0.5;entryY=0.11921459;entryPerimeter=0;" edge="1" parent="1" source="lifeline_ui" target="lifeline_api" messageType="call">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="650" as="sourcePoint" />
+        <mxPoint x="1100" y="650" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_4" value="4. POST translations/preview" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_4">
+      <mxGeometry x="492" y="617" width="596" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_5" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=block;endFill=1;dashed=0;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.14558205;exitPerimeter=0;entryX=0.5;entryY=0.15343619;entryPerimeter=0;" edge="1" parent="1" source="lifeline_api" target="lifeline_api" messageType="call">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1100" y="744" as="sourcePoint" />
+        <mxPoint x="1100" y="772" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="1310" y="744" />
+          <mxPoint x="1310" y="772" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_5" value="5. Kiểm tra content:write&#10;/ nguồn / cặp đích" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_5">
+      <mxGeometry x="1112" y="692" width="194" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="message_6" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=block;endFill=1;dashed=0;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.17110799;exitPerimeter=0;entryX=0.5;entryY=0.17110799;entryPerimeter=0;" edge="1" parent="1" source="lifeline_api" target="lifeline_redis" messageType="call">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1100" y="835" as="sourcePoint" />
+        <mxPoint x="1410" y="835" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_6" value="6. Giới hạn chuẩn bị ba giây/admin" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_6">
+      <mxGeometry x="1112" y="802" width="286" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_7" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=block;endFill=1;dashed=0;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.19214586;exitPerimeter=0;entryX=0.5;entryY=0.19214586;entryPerimeter=0;" edge="1" parent="1" source="lifeline_api" target="lifeline_db" messageType="call">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1100" y="910" as="sourcePoint" />
+        <mxPoint x="1720" y="910" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_7" value="7. Đọc nguồn đã lưu và revision các đích" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_7">
+      <mxGeometry x="1112" y="877" width="596" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_8" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=open;endFill=0;dashed=1;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.21318373;exitPerimeter=0;entryX=0.5;entryY=0.21318373;entryPerimeter=0;" edge="1" parent="1" source="lifeline_db" target="lifeline_api" messageType="return">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1720" y="985" as="sourcePoint" />
+        <mxPoint x="1100" y="985" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_8" value="8. Nguồn và baseline đích" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_8">
+      <mxGeometry x="1112" y="952" width="596" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_9" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=block;endFill=1;dashed=0;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.25750351;exitPerimeter=0;entryX=0.5;entryY=0.25750351;entryPerimeter=0;" edge="1" parent="1" source="lifeline_api" target="lifeline_redis" messageType="call">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1100" y="1143" as="sourcePoint" />
+        <mxPoint x="1410" y="1143" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_9" value="9. setex preview: token / admin / POI /&#10;revision" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_9">
+      <mxGeometry x="1112" y="1091" width="286" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="message_10" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=open;endFill=0;dashed=1;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.27854137;exitPerimeter=0;entryX=0.5;entryY=0.27854137;entryPerimeter=0;" edge="1" parent="1" source="lifeline_redis" target="lifeline_api" messageType="return">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1410" y="1218" as="sourcePoint" />
+        <mxPoint x="1100" y="1218" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_10" value="10. TTL 30 phút" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_10">
+      <mxGeometry x="1112" y="1185" width="286" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_11" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=open;endFill=0;dashed=1;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.29957924;exitPerimeter=0;entryX=0.5;entryY=0.29957924;entryPerimeter=0;" edge="1" parent="1" source="lifeline_api" target="lifeline_ui" messageType="return">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1100" y="1293" as="sourcePoint" />
+        <mxPoint x="480" y="1293" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_11" value="11. preview_id / baseline / expires_in" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_11">
+      <mxGeometry x="492" y="1260" width="596" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_12" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=open;endFill=0;dashed=0;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.33856942;exitPerimeter=0;entryX=0.5;entryY=0.33856942;entryPerimeter=0;" edge="1" parent="1" source="lifeline_ui" target="lifeline_chrome" messageType="async">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="1432" as="sourcePoint" />
+        <mxPoint x="790" y="1432" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_12" value="12. translate(title / các đoạn lời)" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_12">
+      <mxGeometry x="492" y="1399" width="286" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_13" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=open;endFill=0;dashed=1;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.35960729;exitPerimeter=0;entryX=0.5;entryY=0.35960729;entryPerimeter=0;" edge="1" parent="1" source="lifeline_chrome" target="lifeline_ui" messageType="return">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="790" y="1507" as="sourcePoint" />
+        <mxPoint x="480" y="1507" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_13" value="13. Tiến độ / bản dịch hoặc lỗi từng đích" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_13">
+      <mxGeometry x="492" y="1474" width="286" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_14" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=block;endFill=1;dashed=0;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.38597475;exitPerimeter=0;entryX=0.5;entryY=0.39382889;entryPerimeter=0;" edge="1" parent="1" source="lifeline_ui" target="lifeline_ui" messageType="call">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="1601" as="sourcePoint" />
+        <mxPoint x="480" y="1629" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="690" y="1601" />
+          <mxPoint x="690" y="1629" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_14" value="14. Giữ bản xem trước trong&#10;React; chưa commit" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_14">
+      <mxGeometry x="492" y="1549" width="194" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="message_15" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=open;endFill=0;dashed=1;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.42748948;exitPerimeter=0;entryX=0.5;entryY=0.42748948;entryPerimeter=0;" edge="1" parent="1" source="lifeline_ui" target="lifeline_user" messageType="return">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="1749" as="sourcePoint" />
+        <mxPoint x="170" y="1749" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_15" value="15. Hiển thị kết quả; giữ các bản thành&#10;công" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_15">
+      <mxGeometry x="182" y="1697" width="286" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="message_16" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=block;endFill=1;dashed=0;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.45385694;exitPerimeter=0;entryX=0.5;entryY=0.45385694;entryPerimeter=0;" edge="1" parent="1" source="lifeline_user" target="lifeline_ui" messageType="call">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="170" y="1843" as="sourcePoint" />
+        <mxPoint x="480" y="1843" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_16" value="16. Đọc / sửa; chọn riêng hoặc xác nhận&#10;tất cả" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_16">
+      <mxGeometry x="182" y="1791" width="286" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="message_17" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=block;endFill=1;dashed=0;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.48555400;exitPerimeter=0;entryX=0.5;entryY=0.49340813;entryPerimeter=0;" edge="1" parent="1" source="lifeline_ui" target="lifeline_ui" messageType="call">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="1956" as="sourcePoint" />
+        <mxPoint x="480" y="1984" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="690" y="1956" />
+          <mxPoint x="690" y="1984" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_17" value="17. Chọn bản hợp lệ chưa&#10;lưu; cờ&#10;replace_existing" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_17">
+      <mxGeometry x="492" y="1885" width="194" height="63" as="geometry" />
+    </mxCell>
+    <mxCell id="message_18" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=block;endFill=1;dashed=0;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.51107994;exitPerimeter=0;entryX=0.5;entryY=0.51107994;entryPerimeter=0;" edge="1" parent="1" source="lifeline_user" target="lifeline_ui" messageType="call">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="170" y="2047" as="sourcePoint" />
+        <mxPoint x="480" y="2047" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_18" value="18. Bấm xác nhận lưu" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_18">
+      <mxGeometry x="182" y="2014" width="286" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_19" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=open;endFill=0;dashed=1;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.53211781;exitPerimeter=0;entryX=0.5;entryY=0.53211781;entryPerimeter=0;" edge="1" parent="1" source="lifeline_ui" target="lifeline_user" messageType="return">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="2122" as="sourcePoint" />
+        <mxPoint x="170" y="2122" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_19" value="19. Hiển thị đang xác nhận lưu" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_19">
+      <mxGeometry x="182" y="2089" width="286" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_20" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=block;endFill=1;dashed=0;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.55315568;exitPerimeter=0;entryX=0.5;entryY=0.55315568;entryPerimeter=0;" edge="1" parent="1" source="lifeline_ui" target="lifeline_api" messageType="call">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="2197" as="sourcePoint" />
+        <mxPoint x="1100" y="2197" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_20" value="20. POST translations/commit: token / items" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_20">
+      <mxGeometry x="492" y="2164" width="596" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_21" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=block;endFill=1;dashed=0;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.57952314;exitPerimeter=0;entryX=0.5;entryY=0.57952314;entryPerimeter=0;" edge="1" parent="1" source="lifeline_api" target="lifeline_redis" messageType="call">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1100" y="2291" as="sourcePoint" />
+        <mxPoint x="1410" y="2291" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_21" value="21. Đọc preview, kiểm tra admin / POI /&#10;hạn" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_21">
+      <mxGeometry x="1112" y="2239" width="286" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="message_22" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=open;endFill=0;dashed=1;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.60056101;exitPerimeter=0;entryX=0.5;entryY=0.60056101;entryPerimeter=0;" edge="1" parent="1" source="lifeline_redis" target="lifeline_api" messageType="return">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1410" y="2366" as="sourcePoint" />
+        <mxPoint x="1100" y="2366" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_22" value="22. Nguồn / baseline hoặc không có token" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_22">
+      <mxGeometry x="1112" y="2333" width="286" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_23" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=block;endFill=1;dashed=0;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.65750351;exitPerimeter=0;entryX=0.5;entryY=0.65750351;entryPerimeter=0;" edge="1" parent="1" source="lifeline_api" target="lifeline_db" messageType="call">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1100" y="2569" as="sourcePoint" />
+        <mxPoint x="1720" y="2569" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_23" value="23. Bảo đảm unique POI/ngôn ngữ; kiểm tra revision" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_23">
+      <mxGeometry x="1112" y="2536" width="596" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_24" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=open;endFill=0;dashed=1;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.67854137;exitPerimeter=0;entryX=0.5;entryY=0.67854137;entryPerimeter=0;" edge="1" parent="1" source="lifeline_db" target="lifeline_api" messageType="return">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1720" y="2644" as="sourcePoint" />
+        <mxPoint x="1100" y="2644" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_24" value="24. Nguồn / đích còn khớp" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_24">
+      <mxGeometry x="1112" y="2611" width="596" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_25" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=block;endFill=1;dashed=0;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.69957924;exitPerimeter=0;entryX=0.5;entryY=0.69957924;entryPerimeter=0;" edge="1" parent="1" source="lifeline_api" target="lifeline_db" messageType="call">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1100" y="2719" as="sourcePoint" />
+        <mxPoint x="1720" y="2719" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_25" value="25. Lưu bản dịch + metadata; vô hiệu audio khi lời đổi" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_25">
+      <mxGeometry x="1112" y="2686" width="596" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_26" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=open;endFill=0;dashed=1;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.72061711;exitPerimeter=0;entryX=0.5;entryY=0.72061711;entryPerimeter=0;" edge="1" parent="1" source="lifeline_db" target="lifeline_api" messageType="return">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1720" y="2794" as="sourcePoint" />
+        <mxPoint x="1100" y="2794" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_26" value="26. Commit transaction" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_26">
+      <mxGeometry x="1112" y="2761" width="596" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_27" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=open;endFill=0;dashed=1;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.75231417;exitPerimeter=0;entryX=0.5;entryY=0.75231417;entryPerimeter=0;" edge="1" parent="1" source="lifeline_api" target="lifeline_ui" messageType="return">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1100" y="2907" as="sourcePoint" />
+        <mxPoint x="480" y="2907" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_27" value="27. Lưu nhóm thành công" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_27">
+      <mxGeometry x="492" y="2874" width="596" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_28" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=block;endFill=1;dashed=0;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.77868163;exitPerimeter=0;entryX=0.5;entryY=0.78653576;entryPerimeter=0;" edge="1" parent="1" source="lifeline_ui" target="lifeline_ui" messageType="call">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="3001" as="sourcePoint" />
+        <mxPoint x="480" y="3029" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="690" y="3001" />
+          <mxPoint x="690" y="3029" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_28" value="28. Đánh dấu các bản đã&#10;lưu; bỏ chọn" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_28">
+      <mxGeometry x="492" y="2949" width="194" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="message_29" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=open;endFill=0;dashed=1;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.80420757;exitPerimeter=0;entryX=0.5;entryY=0.80420757;entryPerimeter=0;" edge="1" parent="1" source="lifeline_ui" target="lifeline_user" messageType="return">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="3092" as="sourcePoint" />
+        <mxPoint x="170" y="3092" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_29" value="29. Đã xác nhận lưu N bản dịch" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_29">
+      <mxGeometry x="182" y="3059" width="286" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_30" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=open;endFill=0;dashed=1;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.84431978;exitPerimeter=0;entryX=0.5;entryY=0.84431978;entryPerimeter=0;" edge="1" parent="1" source="lifeline_api" target="lifeline_ui" messageType="return">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1100" y="3235" as="sourcePoint" />
+        <mxPoint x="480" y="3235" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_30" value="30. Lỗi; không báo thành công nhóm" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_30">
+      <mxGeometry x="492" y="3202" width="596" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_31" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=open;endFill=0;dashed=1;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.87068724;exitPerimeter=0;entryX=0.5;entryY=0.87068724;entryPerimeter=0;" edge="1" parent="1" source="lifeline_ui" target="lifeline_user" messageType="return">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="3329" as="sourcePoint" />
+        <mxPoint x="170" y="3329" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_31" value="31. Hiện lỗi; giữ lựa chọn để kiểm tra /&#10;thử lại" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_31">
+      <mxGeometry x="182" y="3277" width="286" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="message_32" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=open;endFill=0;dashed=1;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.92145863;exitPerimeter=0;entryX=0.5;entryY=0.92145863;entryPerimeter=0;" edge="1" parent="1" source="lifeline_api" target="lifeline_ui" messageType="return">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="1100" y="3510" as="sourcePoint" />
+        <mxPoint x="480" y="3510" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_32" value="32. Lỗi nguồn / quyền / giới hạn" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_32">
+      <mxGeometry x="492" y="3477" width="596" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_33" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=open;endFill=0;dashed=0;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.94249649;exitPerimeter=0;entryX=0.5;entryY=0.94249649;entryPerimeter=0;" edge="1" parent="1" source="lifeline_ui" target="lifeline_chrome" messageType="async">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="3585" as="sourcePoint" />
+        <mxPoint x="790" y="3585" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_33" value="33. Abort tác vụ theo signal" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_33">
+      <mxGeometry x="492" y="3552" width="286" height="25" as="geometry" />
+    </mxCell>
+    <mxCell id="message_34" value="" style="edgeStyle=none;rounded=0;html=0;startArrow=none;endArrow=open;endFill=0;dashed=1;strokeWidth=1.5;strokeColor=#344054;exitX=0.5;exitY=0.96353436;exitPerimeter=0;entryX=0.5;entryY=0.96353436;entryPerimeter=0;" edge="1" parent="1" source="lifeline_ui" target="lifeline_user" messageType="return">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="3660" as="sourcePoint" />
+        <mxPoint x="170" y="3660" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="message_label_34" value="34. Thông báo; không lưu bản dịch" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontColor=#182230;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;labelBackgroundColor=#ffffff;" vertex="1" parent="1" messageRef="message_34">
+      <mxGeometry x="182" y="3627" width="286" height="25" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>
