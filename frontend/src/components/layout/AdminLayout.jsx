@@ -3,6 +3,7 @@ import { Outlet, Link, NavLink } from 'react-router-dom';
 import BrandLogo from './BrandLogo';
 import { useLanguage } from '../../features/localization/LanguageContext';
 import { useTranslation } from '../../features/localization/useTranslation';
+import AdminPasswordGate from './AdminPasswordGate';
 
 export default function AdminLayout() {
   const { currentLanguageInfo, isLoadingLanguage, openLanguageSelector } = useLanguage();
@@ -16,6 +17,6 @@ export default function AdminLayout() {
       </div>
     </header>
     <div className="demo-mode-banner">{t('app.demoBanner')}</div>
-    <div className="admin-workspace"><aside className="admin-sidebar"><span className="eyebrow">WORKSPACE</span><nav aria-label={t('admin.title')}><NavLink to="/admin" end>{t('admin.poiContent')}</NavLink><NavLink to="/admin/analytics">{t('admin.analytics')}</NavLink><Link to="/guide#content-manager">{t('nav.help')}</Link></nav><div className="admin-sidebar-note"><span>TCV / AUDIO GUIDE</span><p>{t('admin.subtitle')}</p></div></aside><main className="admin-main"><Outlet /></main></div>
+    <div className="admin-workspace"><aside className="admin-sidebar"><span className="eyebrow">WORKSPACE</span><nav aria-label={t('admin.title')}><NavLink to="/admin" end>{t('admin.poiContent')}</NavLink><NavLink to="/admin/analytics">{t('admin.analytics')}</NavLink><Link to="/guide#content-manager">{t('nav.help')}</Link></nav><div className="admin-sidebar-note"><span>TCV / AUDIO GUIDE</span><p>{t('admin.subtitle')}</p></div></aside><main className="admin-main"><AdminPasswordGate><Outlet /></AdminPasswordGate></main></div>
   </div>;
 }

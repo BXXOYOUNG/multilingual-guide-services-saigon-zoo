@@ -2,7 +2,13 @@ export async function adminApi(url, options = {}) {
   const response = await fetch(url, { credentials: 'same-origin', ...options, headers: { 'Content-Type': 'application/json', ...(options.headers || {}) } });
   if (!response.ok) {
     const body = await response.json().catch(() => ({}));
-    throw new Error(body.error?.message || body.detail || `Request failed (${response.status})`);
+    if (response.status === 428) window.dispatchEvent(new Event('admin-password-expired'));
+    const error = new Error(body.error?.message || body.detail || `Request failed (${response.status})`);
+    error.status = response.status;
+    throw error;
+  }
+  if (['/api/admin/auth/login', '/api/admin/auth/logout', '/api/admin/auth/password'].includes(url) && options.method === 'POST') {
+    window.dispatchEvent(new Event('admin-auth-changed'));
   }
   return response.status === 204 ? null : response.json();
 }
