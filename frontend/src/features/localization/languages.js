@@ -14,6 +14,13 @@ export const SUPPORTED_LANGUAGES = [
   },
   { code: 'ja', name: 'Japanese', nativeName: '日本語', flag: '🇯🇵' },
   { code: 'ko', name: 'Korean', nativeName: '한국어', flag: '🇰🇷' },
+  // Thêm vào trong mảng SUPPORTED_LANGUAGES:
+  {
+    code: 'es',             
+    name: 'Spanish',        
+    nativeName: 'Español',   
+    flag: '🇪🇸',              
+  },
 ];
 
 export const DEFAULT_LANGUAGE = 'vi';
