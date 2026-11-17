@@ -12,7 +12,7 @@ from backend.database.redis_client import get_redis_client
 
 SESSION_COOKIE = "tcv_admin_session"
 SESSION_TTL_SECONDS = 8 * 60 * 60
-PASSWORD_MAX_AGE_SECONDS = 5 * 60
+PASSWORD_MAX_AGE_SECONDS = 60
 
 
 def password_status(user: dict[str, Any]) -> dict[str, Any]:
@@ -27,7 +27,7 @@ def password_status(user: dict[str, Any]) -> dict[str, Any]:
 
 
 async def initialize_password_age(user: dict[str, Any]) -> None:
-    # Existing accounts receive one five-minute grace period, persisted across logins.
+    # Existing accounts receive a one-minute grace period, persisted across logins.
     if user.get("password_changed_at") is None:
         from pymongo import ReturnDocument
         saved = await get_database()["admin_users"].find_one_and_update(
@@ -114,7 +114,7 @@ async def require_admin_session(request: Request) -> dict[str, Any]:
 
 async def require_admin(user: dict[str, Any] = Depends(require_admin_session)) -> dict[str, Any]:
     if password_status(user)["password_change_required"]:
-        raise HTTPException(status_code=428, detail="Mật khẩu đã hết hạn sau 5 phút. Vui lòng đổi mật khẩu để tiếp tục.")
+        raise HTTPException(status_code=428, detail="Mật khẩu đã hết hạn sau 1 phút. Vui lòng đổi mật khẩu để tiếp tục.")
     return user
 
 

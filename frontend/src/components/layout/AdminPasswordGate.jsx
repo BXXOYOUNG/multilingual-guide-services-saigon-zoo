@@ -83,12 +83,12 @@ export default function AdminPasswordGate({ children }) {
 
   if (loading) return <div className="card" role="status">{t('admin.processing')}</div>;
   if (!session?.password_change_required) return <>
-    {session?.password_expires_at && <p className="admin-notice">Mật khẩu cần được đổi trước {new Date(session.password_expires_at).toLocaleTimeString('vi-VN')} (chu kỳ 5 phút).</p>}
+    {session?.password_expires_at && <p className="admin-notice">Mật khẩu cần được đổi trước {new Date(session.password_expires_at).toLocaleTimeString('vi-VN')} (chu kỳ 1 phút).</p>}
     {children}
   </>;
   return <section className="card admin-login">
     <h2>Bắt buộc đổi mật khẩu</h2>
-    <p role="alert">Mật khẩu đã hết hạn sau 5 phút. Hãy đổi mật khẩu để tiếp tục quản trị.</p>
+    <p role="alert">Mật khẩu đã hết hạn sau 1 phút. Hãy đổi mật khẩu để tiếp tục quản trị.</p>
     <form className="admin-form" onSubmit={submit}>
       <label>{t('admin.passwordCurrent')}<input type="password" autoComplete="current-password" value={current} onChange={(event) => setCurrent(event.target.value)} required /></label>
       <label>{t('admin.passwordNew')}<input type="password" autoComplete="new-password" minLength={12} maxLength={256} value={next} onChange={(event) => setNext(event.target.value)} required /></label>
