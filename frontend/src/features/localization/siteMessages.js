@@ -47,4 +47,16 @@
   },
 };
 
+const distanceKeys = ['distanceTitle', 'distanceHint', 'distanceFrom', 'distanceTo', 'distanceChoose', 'distanceResult', 'distanceChooseBoth', 'distanceNotEnough'];
+const distanceMessages = {
+  vi: ['Khoảng cách giữa hai điểm tham quan', 'Chọn hai điểm để xem khoảng cách trực tiếp theo tọa độ, chưa tính theo lối đi bộ thực tế.', 'Điểm bắt đầu', 'Điểm kết thúc', 'Chọn điểm tham quan', '{from} → {to}: khoảng {distance}', 'Chọn đủ hai điểm để xem khoảng cách.', 'Cần ít nhất hai điểm có tọa độ để tính khoảng cách.'],
+  en: ['Distance between two stops', 'Choose two stops to see their direct coordinate distance, rather than a walking route.', 'Starting stop', 'Ending stop', 'Choose a stop', '{from} → {to}: approximately {distance}', 'Choose both stops to see the distance.', 'At least two stops with coordinates are needed.'],
+  fr: ['Distance entre deux points', 'Choisissez deux points pour estimer la distance directe entre leurs coordonnées, sans suivre les allées.', 'Point de départ', 'Point d’arrivée', 'Choisir un point', '{from} → {to} : environ {distance}', 'Choisissez les deux points pour voir la distance.', 'Au moins deux points avec coordonnées sont nécessaires.'],
+  'zh-Hans': ['两个景点之间的距离', '选择两个景点，查看按坐标计算的直线距离，并非实际步行路线距离。', '起点', '终点', '选择景点', '{from} → {to}：约 {distance}', '请选择两个景点以查看距离。', '至少需要两个有坐标的景点。'],
+  ja: ['2つのスポット間の距離', '2つのスポットを選ぶと座標から直線距離を計算します。実際の徒歩経路の距離ではありません。', '出発地点', '到着地点', 'スポットを選択', '{from} → {to}：約 {distance}', '距離を表示するには両方の地点を選択してください。', '座標を持つスポットが2つ以上必要です。'],
+  ko: ['두 지점 사이의 거리', '두 지점을 선택하면 좌표로 직선거리를 계산합니다. 실제 도보 경로의 거리는 아닙니다.', '출발 지점', '도착 지점', '지점 선택', '{from} → {to}: 약 {distance}', '거리를 보려면 두 지점을 모두 선택하세요.', '좌표가 있는 지점이 두 개 이상 필요합니다.'],
+};
+for (const [language, values] of Object.entries(distanceMessages)) {
+  distanceKeys.forEach((key, index) => { siteMessages[language][`itinerary.${key}`] = values[index]; });
+}
 export default siteMessages;
